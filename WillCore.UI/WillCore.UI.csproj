@@ -42,4 +42,16 @@
     <Folder Include="wwwroot\css\img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\stockManaging\loginPage\view.bindings.js" />
+    <None Include="wwwroot\stockManaging\loginPage\view.collections.js" />
+    <None Include="wwwroot\stockManaging\loginPage\view.events.js" />
+    <None Include="wwwroot\stockManaging\loginPage\view.js" />
+    <None Include="wwwroot\stockManaging\loginPage\view.logic.js" />
+    <None Include="wwwroot\stockManaging\loginPage\view.meta.js" />
+    <None Include="wwwroot\stockManaging\loginPage\view.sources.js" />
+    <None Include="wwwroot\stockManaging\loginPage\view.targets.js" />
+    <None Include="wwwroot\stockManaging\loginPage\view.traps.js" />
+  </ItemGroup>
+
 </Project>
