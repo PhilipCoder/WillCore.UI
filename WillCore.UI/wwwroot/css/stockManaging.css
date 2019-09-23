@@ -1,0 +1,22 @@
+﻿.flex-1 {
+    flex: 1;
+}
+
+.login-input {
+    flex-basis: 400px;
+}
+
+.login-btn {
+    flex-basis: 200px;
+}
+
+.is-invalid {
+    border-color: #d9534f;
+    padding-right: calc(1.5em + 1.5rem);
+    border-width: 1px;
+    border-style:solid;
+}
+
+.view-container{
+    padding-top:20px;
+}

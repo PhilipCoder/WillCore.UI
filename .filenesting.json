@@ -1,0 +1,27 @@
+{
+  //"help": "https://go.microsoft.com/fwlink/?linkid=866610",
+  "dependentFileProviders": {
+    "add": {
+      "addedExtension": {},
+      "pathSegment": {
+        "add": {
+          ".*": [
+            ".js",
+            ".html",
+            ".htm"
+          ]
+        }
+      },
+      "extensionToExtension": {
+        "add": {
+          ".js": [
+            ".html"
+          ],
+          ".*.js": [
+            ".js"
+          ]
+        }
+      }
+    }
+  }
+}
