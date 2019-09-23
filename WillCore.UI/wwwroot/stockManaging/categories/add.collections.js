@@ -4,6 +4,7 @@
  */
 var collections = async (view, configuration) => {
     view.formData = { name: "", description: "", picture: null };
+    view.categoryRequestResult = {};
 };
 
 export { collections };

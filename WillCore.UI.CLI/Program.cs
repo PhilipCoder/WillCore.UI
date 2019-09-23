@@ -22,8 +22,9 @@ namespace WillCore.UI.CLI
                                                 
                                                 
 ");
-            Console.WriteLine("WillCore.UI Version: 0.9");
-            Console.WriteLine("WillCore.UI Version: 0.9");
+            Console.WriteLine("WillCore.UI      Version: 0.9");
+            Console.WriteLine("WillCore.UI CLI  Version: 0.9");
+            Console.WriteLine("Copyright: Philip Schoeman. License: MIT");
             Console.WriteLine();
             Console.WriteLine("For info on using the CLI, please see WillCore.UI documentation.");
             getFolderDir();

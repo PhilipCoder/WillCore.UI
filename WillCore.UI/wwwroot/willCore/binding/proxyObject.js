@@ -40,7 +40,7 @@ function setUpdateValue(target, property, value, update, validateFunc, viewManag
 function updateValue(target, property, value, update, validateFunc, viewManager, receiver) {
     var canUpdate = true;
     if (target.trap) {
-        canUpdate = target.trap(property, property, value, target[property], receiver);
+        canUpdate = target.trap(property, value, target[property], receiver);
     }
     if (canUpdate)
         setUpdateValue(target, property, value, update, validateFunc, viewManager, receiver);
