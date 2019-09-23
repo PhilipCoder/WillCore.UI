@@ -5,10 +5,8 @@
  * @param {view} view
  * @param {object} configuration
  */
-var logic = (view, configuration) => {
-    return
-        {
-        }
-};
+var logic = (view, configuration) => ({
+  
+});
 
 export { logic };

@@ -18,9 +18,9 @@ const configuration = {
  */
 var view = async (view) => {
     collections(view, configuration);
-    providers(view, configuration);
+    sources(view, configuration);
     traps(view, configuration);
-    pipes(view, configuration);
+    targets(view, configuration);
     bindings(view);
     let logicInstance = logic(view, configuration);
     events(view, logicInstance);
