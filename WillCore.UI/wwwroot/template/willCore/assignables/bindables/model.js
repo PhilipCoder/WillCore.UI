@@ -36,29 +36,22 @@ class model extends bindable {
     setValueProps(receiver, property) {
         if (!this.element || typeof this.targetValue == "undefined") return;
         var that = this;
-        if (that.element.type == "checkbox" || that.element.type == "radio") {
-            this.element.onclick = function (event) {
-                receiver[property] = that.element.checked;
-                return true;
-            };
-        } else if (that.element.type == "file")
-            this.element.onchange = function (event) {
-                var value = "";
+        this.element.oninput = function (event) {
+            var value = "";
+            if (that.element.type == "checkbox" || that.element.type == "radio") {
+                value = that.element.checked;
+            } else if (that.element.type == "file") {
                 that.loadFileBytes(receiver, property);
                 return true;
-            };
-        else {
-            this.element.oninput = function (event) {
-                var value = "";
-                if ("value" in that.element) {
-                    value = that.element.value;
-                } else {
-                    throw "This type of model binding is not supported (yet)";
-                }
-                receiver[property] = value;
-                return true;
-            };
-        }
+            }
+            else if ("value" in that.element) {
+                value = that.element.value;
+            } else {
+                throw "This type of model binding is not supported (yet)";
+            }
+            receiver[property] = value;
+            return true;
+        };
     }
 
     loadFileBytes(receiver, property) {

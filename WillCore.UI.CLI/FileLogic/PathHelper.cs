@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using WillCore.UI.CLI.Properties;
 
@@ -35,5 +36,26 @@ namespace WillCore.UI.CLI.FileLogic
             if (fileName.Contains(".")) fileName = fileName.Substring(0,fileName.IndexOf("."));
             return Path.Combine(Path.GetDirectoryName(filePath), $"{fileName}.meta.js");
         }
+
+        public static string GetSolutionDirectory(string workingDirectory)
+        {
+            while (workingDirectory != null)
+            {
+                if (Directory.EnumerateFiles(workingDirectory, "*.sln").Any()) return workingDirectory;
+                workingDirectory = Directory.GetParent(workingDirectory).FullName;
+            }
+            return null;
+        }
+
+        public static string GetRelativePathToWorkingDirectory(string filePath)
+        {
+            var fileDirectory = Path.GetDirectoryName(filePath);
+            var path = Path.GetRelativePath(Settings.WorkingDirectory, fileDirectory).Replace("\\", "/");
+            if (path.StartsWith(".")) path = path.Substring(1);
+            if (!path.EndsWith("/")) path = $"{path}/";
+            if (!path.StartsWith("/")) path = $"/{path}";
+            return path;
+        }
+
     }
 }

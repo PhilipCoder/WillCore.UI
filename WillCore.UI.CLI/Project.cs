@@ -17,18 +17,18 @@ namespace WillCore.UI.CLI
     public class Project
     {
         private const int changeTimer = 1000;
-        private string _projectPath;
         private Dictionary<string, System.Timers.Timer> _files;
         private FileSystemWatcher watcher;
         private String _indexFile = null;
         public Project(string projectPath)
         {
-            _projectPath = projectPath;
+            Settings.WorkingDirectory = projectPath;
+            Settings.SolutionDirectory = PathHelper.GetSolutionDirectory(projectPath);
+            JSCreator.WriteNestingConfig();
             _files = Directory
                 .EnumerateFiles(projectPath, "*")
                 .Where(PathHelper.Allowed)
                 .ToDictionary(a => a, getTimer);
-
             _indexFile = _files.Any(x => Path.GetFileNameWithoutExtension(x.Key) == "index") ? _files.FirstOrDefault(x => Path.GetFileNameWithoutExtension(x.Key) == "index").Key : null;
             init();
 
@@ -48,20 +48,18 @@ namespace WillCore.UI.CLI
         private void init()
         {
             watcher = new FileSystemWatcher();
-            watcher.Path = _projectPath;
+            watcher.Path = Settings.WorkingDirectory;
             watcher.IncludeSubdirectories = true;
             watcher.NotifyFilter =
                 NotifyFilters.CreationTime |
                 NotifyFilters.FileName |
+                NotifyFilters.DirectoryName |
                 NotifyFilters.LastWrite;
-
             watcher.Filter = "";
-
             watcher.Changed += handleOnChange;
             watcher.Created += handleOnCreate;
-
+            watcher.Renamed += handleOnRenamed;
             watcher.EnableRaisingEvents = true;
-
             Console.WriteLine("Directory file listener initiated...");
         }
 
@@ -72,21 +70,17 @@ namespace WillCore.UI.CLI
                 var viewName = Path.GetFileNameWithoutExtension(fileName);
                 if (viewName.ToLower() != "index")
                 {
-                    Console.WriteLine(fileName + " changed");
                     HTMLComments.ProcessHTML(fileName);
                 }
             }
             else
             {
-                Console.WriteLine("Javascript file changed");
                 if (fileName.Contains(".collections"))
                 {
                     CollectionComments.ProcessCollectionJS(fileName);
                 }
             }
         }
-
-
 
         private void handleOnChange(object source, FileSystemEventArgs e)
         {
@@ -100,70 +94,65 @@ namespace WillCore.UI.CLI
 
         private void handleOnCreate(object source, FileSystemEventArgs e)
         {
-            if (!PathHelper.Allowed(e.FullPath)) return;
-            if (PathHelper.IsHtml(e.FullPath))
+            if (File.Exists(e.FullPath))
             {
-                if (!_files.ContainsKey(e.FullPath))
+                if (!PathHelper.Allowed(e.FullPath)) return;
+                if (PathHelper.IsHtml(e.FullPath))
                 {
-                    Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
-                    _files.Add(e.FullPath, getTimer(e.FullPath));
-                    var viewName = Path.GetFileNameWithoutExtension(e.FullPath);
-                    if (viewName.ToLower() == "index")
+                    if (!_files.ContainsKey(e.FullPath))
                     {
-                        createIndexView(e);
-                    }
-                    else if (viewName.StartsWith("_"))
-                    {
-                        createLayout(e, viewName);
-                    }
-                    else 
-                    {
-                        createView(e, viewName);
+                        _files.Add(e.FullPath, getTimer(e.FullPath));
+                        var viewName = Path.GetFileNameWithoutExtension(e.FullPath);
+                        if (viewName.ToLower() == "index")
+                        {
+                            Index.Create(e.FullPath);
+                            _indexFile = e.FullPath;
+                        }
+                        else if (viewName.StartsWith("_"))
+                        {
+                            JSCreator.CreateLayout(e.FullPath, viewName, _indexFile);
+                        }
+                        else
+                        {
+                            JSCreator.CreateView(e.FullPath, viewName, _indexFile);
+                        }
                     }
                 }
             }
-        }
-
-        private void createLayout(FileSystemEventArgs e, string viewName)
-        {
-            View.Create(e.FullPath);
-            var indexJS = Path.ChangeExtension(_indexFile, ".js");
-            if (_indexFile != null && File.Exists(indexJS))
+            else if (Directory.Exists(e.FullPath))
             {
-                var fileContents = File.ReadAllText(indexJS);
-                string path = getRelativePath(e.FullPath);
-                fileContents = $"{fileContents}\r\n//willCore.{viewName.Substring(1)} = [layout, \"{path}{viewName}.js\", \"{path}{viewName}.html\"];";
-                File.WriteAllText(indexJS, fileContents);
+                handleDownloads(e);
             }
         }
 
-        private void createView(FileSystemEventArgs e, string viewName)
+        private void handleOnRenamed(object source, RenamedEventArgs e)
         {
-            View.Create(e.FullPath);
-            var indexJS = Path.ChangeExtension(_indexFile, ".js");
-            if (_indexFile != null && File.Exists(indexJS))
+            if (File.Exists(e.FullPath))
             {
-                var fileContents = File.ReadAllText(indexJS);
-                string path = getRelativePath(e.FullPath);
-                fileContents = $"{fileContents}\r\n//willCore.{viewName} = [willCore.$elementID, url, \"{path}{viewName}.js\", url, \"{path}{viewName}.html\", route,\"/\", x=>true];";
-                File.WriteAllText(indexJS, fileContents);
+            }
+            else if (Directory.Exists(e.FullPath))
+            {
+                handleDownloads(e);
             }
         }
 
-        private string getRelativePath(string filePath)
+        private static void handleDownloads(FileSystemEventArgs e)
         {
-            var fileDirectory = Path.GetDirectoryName(filePath);
-            var path = Path.GetRelativePath(_projectPath, fileDirectory).Replace("\\", "/");
-            if (path.StartsWith(".")) path = path.Substring(1);
-            if (!path.EndsWith("/")) path = $"{path}/";
-            if (!path.StartsWith("/")) path = $"/{path}";
-            return path;
-        }
-
-        private void createIndexView(FileSystemEventArgs e)
-        {
-            Index.Create(e.FullPath);
-            _indexFile = e.FullPath;
+            var folderName = new DirectoryInfo(e.FullPath).Name.ToLower();
+            if (folderName == "willcore")
+            {
+                var tempFile = Path.Combine(e.FullPath, "willCore.zip");
+                Downloader.DownloadFile(Settings.WillCoreJSUrl, tempFile);
+                Downloader.ExtractZipArchive(tempFile, e.FullPath);
+                File.Delete(tempFile);
+            }
+            else if (folderName == "bootstrap")
+            {
+                var tempFile = Path.Combine(e.FullPath, "bootstrap.zip");
+                Downloader.DownloadFile(Settings.BootstrapURL, tempFile);
+                Downloader.ExtractZipArchive(tempFile, e.FullPath);
+                File.Delete(tempFile);
+            }
         }
     }
 }
