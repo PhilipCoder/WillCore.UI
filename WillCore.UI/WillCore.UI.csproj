@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Dist\" />
     <Folder Include="wwwroot\css\img\" />
   </ItemGroup>
 
