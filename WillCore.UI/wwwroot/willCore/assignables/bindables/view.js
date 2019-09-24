@@ -26,6 +26,7 @@ class partial extends bindable {
         this.setProxiesAsPartial(this.viewScope);
         var view = viewFactory.getView(new Date().getTime(), this.viewManager.coreProxy, this.viewScope, this.viewManager);
         this.view = view;
+        view._proxyTarget._isPartial = true;
         view.viewManager.element = this.element;
         view.viewManager.htmlURL = values.string[0].endsWith(".html") ? values.string[0] : values.string[1];
         view.viewManager.jsURL = values.string[0].endsWith(".js") ? values.string[0] : values.string[1];

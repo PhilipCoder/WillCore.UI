@@ -65,7 +65,7 @@ class model extends bindable {
         var reader = new FileReader();
         reader.onload = function () {
             var arrayBuffer = new Uint8Array(this.result);
-            receiver[property] = Array.from(arrayBuffer);
+            receiver[property] = Array.from(arrayBuffer.values());
         };
         reader.readAsArrayBuffer(this.element.files[0]);
     }

@@ -16,10 +16,8 @@ var bindings = async (view) => {
         (name = view.formData.name, description = view.formData.description, picture = view.formData.picture) =>
             name.length < 2 || description.length < 4 || !picture;
 
-    view.formData.trap =  (target, property, value) => {
-            console.log(value);
-            return true;
-        };
+    view.$pageHeading.innerHTML = () => view.route.id ? "Edit Category" : "Create Category";
+    view.$submitButton.innerHTML = () => view.route.id ? "Edit Category" : "Create Category";
 };
 
 export { bindings };

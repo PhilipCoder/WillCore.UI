@@ -24,7 +24,7 @@ class _viewLoader {
                 that.previousLayout = viewManager.layout;
                 await that.loadView(viewManager.layout, coreProxy);
                 that.isDefaultLayout = false;
-            } else if (!viewManager.layout && !viewManager.isLayout) {
+            } else if (!viewManager.layout && !viewManager.isLayout && !view._isPartial) {
                 that.bodyElement.innerHTML = this.defaultLayoutHTML;
                 that.isDefaultLayout = true;
                 that.previousLayout = null;

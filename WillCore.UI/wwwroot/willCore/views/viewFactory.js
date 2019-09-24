@@ -11,15 +11,9 @@ class viewFactory {
         //==============================bindingMethods===============================================
         //Method that creates a new proxy when an object is assigned to a view
         var handleProxy = (obj, prop, value, proxyInstance, propValue) => {
-            if (!propValue || !propValue.value) {
-                var oldValue = obj[prop];
-                var proxyValueTarget = { value: value._proxyTarget ? value._proxyTarget : value };
-                proxyValueTarget._proxyName = prop;
-                obj[prop] = obj.viewManager.collectionManager.getPoxyFromObject(prop, proxyValueTarget, obj);
-                obj.viewManager.collectionManager.valueChanged(obj, prop, value, obj.viewManager.collectionManager, oldValue);
-            } else if (typeof propValue.value == "object" && propValue.value._proxyTarget && typeof value == "function") {
+            if (typeof value == "function") {
                 var isSource = value.toString();
-                isSource = isSource.substring(1, isSource.indexOf(")")).trim().length == 0
+                isSource = isSource.substring(isSource.indexOf("(")+1, isSource.indexOf(")")).trim().length == 0
                 if (isSource) {
                     obj["_$Sources" + prop] = obj["_$Sources" + prop] || [];
                     obj["_$Sources" + prop].push(value);
@@ -34,11 +28,16 @@ class viewFactory {
                         }
                     }
                 } else {
-                    console.log(obj[prop])
                     obj["_$targets" + prop] = obj["_$targets" + prop] || [];
                     obj["_$targets" + prop].push(value);
                 }
-            }
+            } else if (!propValue || !propValue.value) {
+                var oldValue = obj[prop];
+                var proxyValueTarget = { value: value._proxyTarget ? value._proxyTarget : value };
+                proxyValueTarget._proxyName = prop;
+                obj[prop] = obj.viewManager.collectionManager.getPoxyFromObject(prop, proxyValueTarget, obj);
+                obj.viewManager.collectionManager.valueChanged(obj, prop, value, obj.viewManager.collectionManager, oldValue);
+            } 
             else {
                 propValue.value = value;
             }

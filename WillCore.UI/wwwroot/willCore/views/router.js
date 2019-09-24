@@ -44,6 +44,7 @@ class _router {
                     this.previousViewManager.unload();
                 }
                 viewLoader.loadView(viewToLoad, this.coreProxy);
+                viewToLoad.route = {};
                 viewToLoad.route.url = this.getUrl();
                 this.getURLParameters(viewToLoad.route);
                 if (viewToLoad.viewManager.layout) {

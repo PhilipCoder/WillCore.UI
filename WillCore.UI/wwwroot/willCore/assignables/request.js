@@ -43,7 +43,8 @@ class request extends assignable {
             }
             tokenObj[tokenName] = currentToken;
         }
-        this.target[this.name] = new Promise((resolve, reject) => {
+        delete this.proxy[this.name];
+        this.proxy[this.name] = new Promise((resolve, reject) => {
             var promiseCall = this.verb == "POST" || this.verb == "PUT" || this.verb == "PATCH" ?
                 this.PostRequest(this.url, this.verb, parameterObj, tokenObj) :
                 this.GetRequest(this.url, this.verb, parameterObj, tokenObj);

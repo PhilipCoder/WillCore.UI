@@ -1,10 +1,10 @@
 ﻿import { proxyObject } from "./proxyObject.js";
-
+import { assignable } from "./assignable.js";
 class collectionManager {
     constructor() {
         this.collections = {};
         this.originalHTMLBindings = new Map();
-        this.unbindedHTMLBindings = [];
+        this.unbindedHTMLBindings = new Map();
         this.dynamicHTMLBindings = new WeakMap();
         this.bindableBindings = new WeakMap();
         this.currentBindable = null;
@@ -12,22 +12,26 @@ class collectionManager {
     };
 
     deleteObject(curObj, moveToUnbinded, collectionManagerInstance) {
+        if (curObj instanceof assignable) return;
         if (moveToUnbinded) {
             var nodes = collectionManagerInstance.originalHTMLBindings.get(curObj);
             if (nodes && nodes.values) {
                 var values = Array.from(nodes.values());
                 if (values.length > 0) {
-                    values = Array.isArray(values[0]) ? values[0] : values;
-                    values.forEach(x => {
-                        collectionManagerInstance.unbindedHTMLBindings.push(x);
-                    });
+                    for (var valueCollectionIndex = 0; valueCollectionIndex < values.length; valueCollectionIndex++) {
+                        values[valueCollectionIndex].forEach(x => {
+                            collectionManagerInstance.unbindedHTMLBindings.set(x, true);
+                        });
+                    }
                 }
             }
         }
         collectionManagerInstance.originalHTMLBindings.delete(curObj);
-        if (typeof (curObj) == "object") {
+        if (typeof (curObj) == "object" && curObj !== null && curObj._isProxy && !curObj.then) {
             for (var key in curObj) {
-                collectionManagerInstance.deleteObject(curObj[key], moveToUnbinded, collectionManagerInstance);
+                if (typeof curObj[key] === "object") {
+                    collectionManagerInstance.deleteObject(curObj[key], moveToUnbinded, collectionManagerInstance);
+                }
             }
         }
     };
@@ -39,11 +43,19 @@ class collectionManager {
         }
         this.collections = {};
         this.originalHTMLBindings = new Map();
-        this.unbindedHTMLBindings = [];
+        this.unbindedHTMLBindings = new Map();
         this.dynamicHTMLBindings = new WeakMap();
         this.bindableBindings = new WeakMap();
         this.currentBindable = null;
         this.targetValue = null;
+        for (var key in proxy) {
+            if (key.startsWith("_$Sources") || key.startsWith("_$targets")) {
+                proxy._proxyTarget[key] = [];
+            }
+            if (key.startsWith("$")) {
+                delete proxy[key];
+            }
+        }
     }
 
     getPoxyFromObject(name, object, proxy) {
@@ -79,19 +91,20 @@ class collectionManager {
             collectionManagerInstance.updateElementDom(collectionManagerInstance, target, property);
         }
         //if assigned is an object, run all the bindings to check if any unassigned binding can be assigned
-        if (typeof target == "object" && !Array.isArray(target)) {
-            var unbindedNodes = [];
+        if (typeof target == "object" && !Array.isArray(target) && (!value || (!value.then && !(value instanceof assignable)))) {
+            var unbindedNodes = new Map();
             var that = this;
-            collectionManagerInstance.unbindedHTMLBindings.forEach(unbindedBinding => {
+            var bindings = Array.from(collectionManagerInstance.unbindedHTMLBindings.keys());
+            bindings.forEach(unbindedBinding => {
                 try {
-                    var targetValue = that.runBindingFunc(unbindedBinding.bindingMethod);
+                    var targetValue = collectionManagerInstance.runBindingFunc(unbindedBinding.bindingMethod);
                     collectionManagerInstance.listen(unbindedBinding, targetValue);
-                    that.runBindingFunc(unbindedBinding.bindingMethod);
+                    collectionManagerInstance.runBindingFunc(unbindedBinding.bindingMethod);
                     collectionManagerInstance.stopListen();
                     unbindedBinding.updateDom();
                 }
                 catch (e) {
-                    unbindedNodes.push(unbindedBinding);
+                    unbindedNodes.set(unbindedBinding, true);
                 };
             });
             collectionManagerInstance.unbindedHTMLBindings = unbindedNodes;
@@ -177,7 +190,7 @@ class collectionManager {
     };
 
     registerUnbinded() {
-        this.unbindedHTMLBindings.push(this.currentBindable);
+        this.unbindedHTMLBindings.set(this.currentBindable, true);
         this.currentBindable = null;
     }
 };

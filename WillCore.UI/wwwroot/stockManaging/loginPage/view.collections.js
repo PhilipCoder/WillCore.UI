@@ -6,7 +6,7 @@
  * @param {object} configuration
  */
 var collections = async (view, configuration) => {
-    view.userDetailCollection = { email: "", password: "", termsAndConditions: false };
+    view.userDetailCollection = { email: "test@gmail.com", password: "WillCore.UI", termsAndConditions: false };
     view.status = { countDown: configuration.countDownSeconds };
     view.validationResult = {};
 };

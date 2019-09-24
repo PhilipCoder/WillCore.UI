@@ -3,7 +3,7 @@ import { bindings } from "./add.bindings.js";
 import { logic } from "./add.logic.js";
 import { events } from "./add.events.js";
 import { sources } from "./add.sources.js";
-import { traps } from "./add.traps.js";
+import { targets } from "./add.targets.js";
 
 const configuration = {
 };
@@ -15,7 +15,7 @@ const configuration = {
 var view = async (view) => {
     collections(view, configuration);
     sources(view, configuration);
-    traps(view, configuration);
+    targets(view, configuration);
     bindings(view);
     let logicInstance = logic(view, configuration);
     events(view, logicInstance);

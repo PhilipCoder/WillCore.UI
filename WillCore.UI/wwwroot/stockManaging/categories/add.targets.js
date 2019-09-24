@@ -6,8 +6,11 @@
  * @param {view} view
  * @param {object} configuration
  */
-var traps = async (view, configuration) => {
-    view.categoryRequestResult.trap = (target, property, value) => { console.log(value)};
+var targets = async (view, configuration) => {
+    view.categoryRequestResult = (target, property, value) => {
+        view.formData = { name: value.name, description : value.desciption, picture: value.image};
+    }
 };
 
-export { traps };
+export { targets };
+

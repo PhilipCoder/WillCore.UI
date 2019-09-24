@@ -122,6 +122,7 @@ class repeat extends bindable {
     }
     updateDom() {
         var targetValue = this.bindingMethod();
+        if (targetValue.then) return targetValue;
         if (!this.element || typeof targetValue == "undefined") return;
         this.parentElement.innerHTML = "";;
         if (!Array.isArray(targetValue)) {

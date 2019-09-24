@@ -11,3 +11,4 @@ willCore.info = [willCore.mainLayout.$mainContentDiv, url, "/stockManaging/categ
 willCore("/");
 
 //willCore.view = [willCore.$elementID, url, "/stockManaging/loginPage/view.js", url, "/stockManaging/loginPage/view.html", route,"/", x=>true];
+//willCore.confirm = [willCore.$elementID, url, "/stockManaging/partials/confirm.js", url, "/stockManaging/partials/confirm.html", route,"/", x=>true];

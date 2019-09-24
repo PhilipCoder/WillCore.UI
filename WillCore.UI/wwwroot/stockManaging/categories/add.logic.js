@@ -3,7 +3,7 @@
 var logic = (view, configuration) => {
     return {
         submitForm: async () => {
-            view.submittionResult = [request, "POST", "/api/Category", { body: { Id: () => 0, Name: () => view.formData.name, Desciption: view.formData.description, Image: view.formData.picture } }, {}];
+            view._submittionResult();
             await view.submittionResult;
             willCore("/categories");
         }
