@@ -38,9 +38,15 @@ namespace WillCore.UI.CLI.FileLogic
                 if (indexFile != null && File.Exists(indexJS))
                 {
                     var fileContents = File.ReadAllText(indexJS);
-                    string path = PathHelper.GetRelativePathToWorkingDirectory(fullPath);
-                    fileContents = $"{fileContents}\r\n//willCore.{viewName} = [willCore.$elementID, url, \"{path}{viewName}.js\", url, \"{path}{viewName}.html\", route,\"/\", x=>true];";
-                    File.WriteAllText(indexJS, fileContents);
+                    if (fileContents.Contains("willCore(\"/\")")) {
+                        string path = PathHelper.GetRelativePathToWorkingDirectory(fullPath);
+                        fileContents = fileContents.Insert(fileContents.IndexOf("willCore(\"/\")"), $"\r\n//willCore.{viewName} = [willCore.$mainContentDiv, url, \"{path}{viewName}.js\", url, \"{path}{viewName}.html\", route,\"/\", x=>true];\r\n");
+                        File.WriteAllText(indexJS, fileContents);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid index file.");
+                    }
                 }
             }
             catch (Exception e)

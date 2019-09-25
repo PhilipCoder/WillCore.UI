@@ -82,6 +82,25 @@ namespace WillCore.UI.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;WillCore.UI Demo&lt;/title&gt;
+        ///    &lt;script type=&quot;module&quot; defer src=&quot;/index.js&quot;&gt;&lt;/script&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;div id=&quot;mainContentDiv&quot;&gt;
+        ///    &lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string index1 {
+            get {
+                return ResourceManager.GetString("index1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /**
         /// * Binds the HTML elements to the collections.
         /// * Binding module
@@ -242,11 +261,9 @@ namespace WillCore.UI.CLI.Properties {
         /// * @param {view} view
         /// * @param {object} configuration
         /// */
-        ///var logic = (view, configuration) =&gt; {
-        ///    return
-        ///        {
-        ///        }
-        ///};
+        ///var logic = (view, configuration) =&gt; ({
+        ///  
+        ///});
         ///
         ///export { logic };.
         /// </summary>

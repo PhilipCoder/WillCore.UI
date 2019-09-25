@@ -2,6 +2,7 @@
 <img src="WillCore.UI/Images/WillCoreLogo.png"  />
 <h1 align="center">WillCore.UI</h1>
 <h5 align="center">Simple, Fast And Powerfull Client-Side HTML UI Framework</h5>
+<h5 align="center" style="color:red">DOCUMENTATION IS A WORK IN  PROGRESS.</h5>
 </p>
 
 ___
@@ -149,3 +150,104 @@ var view = async (view) => {
 
 export { view };
 ```
+
+<br/>
+
+Open the website, you should see the following page:
+
+![Hello World Result](WillCore.UI/Images/setupNoCLIResult.PNG)
+
+
+_The source files for this example can be downloaded [here](https://github.com/PhilipCoder/WillCore.UI/tree/master/Example.WithoutCLI)._
+
+#### With CLI
+
+WillCore.UI has a CLI that can be used to create the index file, views, layouts and download the WillCore source files. It also provides intellise support for Visual Studio, configures the correct file nesting for a solution and enforces a good code structure.
+
+1. Download the CLI from [here](https://github.com/PhilipCoder/WillCore.UI/raw/master/WillCore.UI/Dist/CLI.zip) (*make sure you have the latest .NET Core Runtime installed*). Extract the zip file to a directory and run the .exe as administrator.
+2. You should see the following window:
+
+![Hello World Result](WillCore.UI/Images/CLIHome.PNG)
+
+3. Paste the path to the root directory of your website into the CLI and press enter. Keep the CLI open while you work.
+4. Create a new "index.html" file in the root of your website. The CLI should have created an index.js file.
+5. Create a new "home.html" file in the root of your website. The CLI should have created the following files:
+6. The CLI should have created the following files:
+
+![Hello World Result](WillCore.UI/Images/viewFilesCreated.PNG)
+
+7. Replace the content of the home.html file with the following:
+
+```html
+<!--- Inline CSS == "BAD". This is only for demo purposes. --->
+<div style="text-align:center">
+    <h1 id="greetingOutput"></h1>
+</div>
+```
+
+8. Next we need to define the data collection. Edit the home.collections.js file and add the following line to the collection function:
+
+```javascript
+ view.greeting = { message: "Hello World" };
+```
+
+The home.collections.js file should now look like this:
+
+```javascript
+/**
+ * Builds up the collections that are used by the view.
+ * 
+ * @typedef {import("./home.meta.js").viewMetaData} view
+ * @param {view} view
+ * @param {object} configuration
+ */
+var collections = async (view, configuration) => {
+    view.greeting = { message: "Hello World" };
+};
+
+export { collections };
+```
+
+9. To add the binding, edit home.bindings.js and add this line to the bindings function:
+
+```javascript
+    view.$greetingOutput.innerHTML = () => view.greeting.message;
+```
+
+The home.bindings.js file should now look like this:
+
+```javascript
+/**
+ * Binds the HTML elements to the collections.
+ * Binding module
+ * 
+ * @typedef {import("./home.meta.js").viewMetaData} view
+ * @param {view} view
+ */
+var bindings = async (view) => {
+    view.$greetingOutput.innerHTML = () => view.greeting.message;
+};
+
+export { bindings };
+```
+
+10. Uncomment the commented out line in index.js:
+
+```javascript
+import { willCore, url, route, layout } from "./willCore/WillCore.js";
+
+willCore.home = [willCore.$mainContentDiv, url, "/home.js", url, "/home.html", route, "/", x => true];
+
+willCore("/");
+```
+
+11. Now we need the WillCore.UI modules. Simply make a folder named "willCore" in the root of your website. The CLI should now have added the source files to the folder.
+
+<br/>
+
+Open the website, you should see the following page:
+
+![Hello World Result](WillCore.UI/Images/setupNoCLIResult.PNG)
+
+
+_The source files for this example can be downloaded [here](https://github.com/PhilipCoder/WillCore.UI/tree/master/Example.WithoutCLI)._

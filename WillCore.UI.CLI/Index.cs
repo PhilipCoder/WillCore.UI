@@ -14,7 +14,8 @@ namespace WillCore.UI.CLI
             Console.WriteLine($"Creating view {path}...");
             var fileName = Path.GetFileNameWithoutExtension(path);
             var fileDirectory = $"{Path.GetDirectoryName(path)}\\{fileName}";
-            File.WriteAllText($"{fileDirectory}.js",Resources.index);
+            File.WriteAllText($"{fileDirectory}.js", Resources.index);
+            File.WriteAllText(path, Resources.index1);
         }
     }
 }
