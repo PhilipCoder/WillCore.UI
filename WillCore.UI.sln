@@ -12,6 +12,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{18465088-D9C8-4EE8-8897-36ECF3F861E7}"
 	ProjectSection(SolutionItems) = preProject
 		.filenesting.json = .filenesting.json
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{D64D7B5A-8230-4EDF-B7B0-B7C0F9DD3FC5}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Downloads\WillCoreLogo.png = ..\..\..\Downloads\WillCoreLogo.png
 	EndProjectSection
 EndProject
 Global
@@ -34,6 +40,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D3C14E69-B9E7-4349-A561-FB55446CE924} = {91063F7C-7760-4950-834A-757C914C9D92}
+		{D64D7B5A-8230-4EDF-B7B0-B7C0F9DD3FC5} = {18465088-D9C8-4EE8-8897-36ECF3F861E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2973F878-7E49-44AE-8CF9-192C088205B8}
