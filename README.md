@@ -90,3 +90,62 @@ view.$elementId.attribute.style = () => ({ color: "red" });
 <br/>
 
 Examples 2,3 and 4 all do the same thing. Assignables are the core of WillCore.UI's API and all interaction with the framework is done via assignables.
+
+___
+> ### 2) Getting Started
+___
+
+A simple, "Hello World" application to demonstrate how to setup a WillCore.UI website.
+
+#### Without CLI
+
+1. Make a new website in your web server (IIS or Apache) and copy the willCore.UI modules [(from here)](https://github.com/PhilipCoder/WillCore.UI/tree/master/WillCore.UI/wwwroot/willCore) to a folder named willCore in the root of your website.
+2. First we have to create an index HTML page. This page servers as a main entry point to your application as well as a default layout page. Create a file, "index.html", in the root of the website with the following contents:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WillCore.UI Demo</title>
+    <script type="module" defer src="/index.js"></script>
+</head>
+<body>
+    <div id="mainContentDiv">
+    </div>
+</body>
+</html>
+```
+
+3. Next we have to create the index JavaScript module. This module defines views, layouts, authorization and routing to views. Create a file, "index.js", in the root of your website:
+
+```javascript
+import { willCore, url, route } from "./willCore/WillCore.js";
+//Define the home page view. The view should load into the div with ID "mainContentDiv", load when the route is "/" and users should always have access to it.
+willCore.loginPage = [willCore.$mainContentDiv, url, "/home.js", url, "/home.html", route, "/", x => true];
+//Navigate to the home page
+willCore("/");
+```
+
+4. We have now defined the view container of the SPA. Next we actually have to create the files for the home page view. Create a file home.html in the route of your website:
+
+```html
+<!--- Inline CSS == "BAD". This is only for demo purposes. --->
+<div style="text-align:center">
+    <h1 id="greetingOutput"></h1>
+</div>
+```
+
+5. Lastly we have to create the JS for the view. Create a file "home.js", also in the root of the website:
+
+```javascript
+//A view module must always export a function
+var view = async (view) => {
+    //Define a collection:
+    view.greeting = { message: "Hello World" };
+    //Binds the heading's inner HTML to the property on the collection:
+    view.$greetingOutput.innerHTML = () => view.greeting.message;
+};
+
+export { view };
+```
