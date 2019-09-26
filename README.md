@@ -23,7 +23,8 @@ ___
 2. [Getting Started](#gettingStarted)
    * [Without CLI]()
    * [With CLI]()
-2. [The Index File](#indexFile)
+3. [Architecture Overview]()
+4. [The Index File](#indexFile)
 3. [Views](#views)
 4. [Collections And Model Binding](#collections)
 5. [Events](#events)
@@ -98,7 +99,7 @@ ___
 
 A simple, "Hello World" application to demonstrate how to setup a WillCore.UI website.
 
-#### Without CLI
+>#### Without CLI
 
 1. Make a new website in your web server (IIS or Apache) and copy the willCore.UI modules [(from here)](https://github.com/PhilipCoder/WillCore.UI/tree/master/WillCore.UI/wwwroot/willCore) to a folder named willCore in the root of your website.
 2. First we have to create an index HTML page. This page servers as a main entry point to your application as well as a default layout page. Create a file, "index.html", in the root of the website with the following contents:
@@ -155,26 +156,31 @@ export { view };
 
 Open the website, you should see the following page:
 
-![Hello World Result](WillCore.UI/Images/setupNoCLIResult.PNG)
-
+<p align="center">
+<img src="WillCore.UI/Images/setupNoCLIResult.PNG"  />
+</p>
 
 _The source files for this example can be downloaded [here](https://github.com/PhilipCoder/WillCore.UI/tree/master/Example.WithoutCLI)._
 
-#### With CLI
+>#### With CLI
 
 WillCore.UI has a CLI that can be used to create the index file, views, layouts and download the WillCore source files. It also provides intellise support for Visual Studio, configures the correct file nesting for a solution and enforces a good code structure.
 
 1. Download the CLI from [here](https://github.com/PhilipCoder/WillCore.UI/raw/master/WillCore.UI/Dist/CLI.zip) (*make sure you have the latest .NET Core Runtime installed*). Extract the zip file to a directory and run the .exe as administrator.
 2. You should see the following window:
 
-![Hello World Result](WillCore.UI/Images/CLIHome.PNG)
+<p align="center">
+<img src="WillCore.UI/Images/CLIHome.PNG"  />
+</p>
 
 3. Paste the path to the root directory of your website into the CLI and press enter. Keep the CLI open while you work.
 4. Create a new "index.html" file in the root of your website. The CLI should have created an index.js file.
 5. Create a new "home.html" file in the root of your website. The CLI should have created the following files:
 6. The CLI should have created the following files:
 
-![Hello World Result](WillCore.UI/Images/viewFilesCreated.PNG)
+<p align="center">
+<img src="WillCore.UI/Images/viewFilesCreated.PNG"  />
+</p>
 
 7. Replace the content of the home.html file with the following:
 
@@ -247,7 +253,62 @@ willCore("/");
 
 Open the website, you should see the following page:
 
-![Hello World Result](WillCore.UI/Images/setupNoCLIResult.PNG)
-
+<p align="center">
+<img src="WillCore.UI/Images/setupNoCLIResult.PNG"  />
+</p>
 
 _The source files for this example can be downloaded [here](https://github.com/PhilipCoder/WillCore.UI/tree/master/Example.WithoutCLI)._
+
+___
+>### 3) Architecture Overview
+___
+
+<p align="center">
+<img src="WillCore.UI/Images/architectureOverview.svg"  />
+</p>
+
+Interfacing with the WillCore.UI API is done via only 2 objects. The WillCore instance that can be imported from the WillCore.js module and the view instance. The view instance gets passed to the JS file of a view via the function exported from the view. 
+
+>##### The WillCore Proxy 
+
+The WillCore proxy object can be imported from the main WillCore module. This object is used for 2 actions: define views (main views and layout views) and routing. This is done in the index.js file. To import the proxy:
+
+
+```javascript
+import { willCore } from "./willCore/WillCore.js";
+```
+
+<br/>
+
+>###### Accessing HTML Elements From The Index.html File
+
+Views can be loaded into HTML elements (divs) on the index.html file:
+
+```html
+<!--- index.html --->
+ <div id="containerElement"></div>
+```
+
+To access the element:
+
+```javascript
+//index.js
+import { willCore } from "./willCore/WillCore.js";
+willCore.$containerElement;
+```
+
+Element IDs are indicated by a leading dollar sign ($). To load a view into the div, see the section on views.
+
+>###### The View Proxy
+
+The view proxy is used for all view related operations. Model binding, HTML events and to define partial views. The view proxy is the first parameter of the exported function of a view:
+
+```javascript
+//homepage.js
+var view = async (view) => {
+
+};
+
+export { view };
+```
+
