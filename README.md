@@ -24,13 +24,12 @@ ___
    * [Without CLI]()
    * [With CLI]()
 3. [Architecture Overview]()
-4. [The Index File](#indexFile)
-3. [Views](#views)
-4. [Collections And Model Binding](#collections)
-5. [Events](#events)
-6. [View Layouts](#layouts)
+4. [Views](#views)
+5. [View Layouts](#layouts)
+6. [Collections And Model Binding](#collections)
 7. [Partial Views](#partials)
-8. [HTML DOM Binders In Detail](#dombinders)
+8. [Events](#events)
+9. [HTML DOM Binders In Detail](#dombinders)
 10. [HTTP requests](#requests)
 11. [Routing](#routing)
 12. [Collection Targets And Sources](#targetssources)
@@ -311,4 +310,53 @@ var view = async (view) => {
 
 export { view };
 ```
+
+___
+>### 4) Views
+___
+
+A willCore application must have at least one view. Views consist of a HTML file and at least one JS module.
+
+There are 3 types of views. Main views, partial views and layout views. They all expose the same API via the view proxy object, but are defined differently.
+
+>#### Main View
+
+Main views are activated via a change in the hash URL of the application. They are always activated by the framework and are defined in the index.js module. They require a HTML element to be loaded into, typically a DIV.
+
+>##### Defining A Main View
+
+A main view requires the following assignments to complete assignment:
+
+Type | Description
+------------ | -------------
+HTML Element | An instance of an HTML element the view will be loaded into. This can be from the index view or a layout view.
+HTML URL Assignable | An URL assignable pointing to the HTML file of the view.
+JS URL Assignable | An URL assignable pointing to the JavaScript file of the view.
+Route Assignable | A route to specify what hash URL should activate the view.
+Function | A function that should return a boolean to indicate if a user can access the view or not.
+
+To define a view:
+
+```javascript
+import { willCore, url, route } from "./willCore/WillCore.js";
+//Home Page
+willCore.homePage = [
+    willCore.$containerElement, //the view will load into element on the index.html page with ID containerElement
+    url, "/homepage.js", //URL of the view's JavaScript module
+    url, "/homepage.html", //URL of the view's HMTL file.
+    route, "/home", //The view will activate when a hash URL "#/home" is detected.
+    x => true //The view can always be accessed
+    ];
+
+//Navigate to the #/home hash URL and load the view.
+willCore("/home");
+```
+
+<br/>
+
+>#### A View's HTML File
+
+Since a view always load into a container element on a layout page or index page, it should not contain any 
+
+>#### The View Function
 
