@@ -1,7 +1,7 @@
 <p align="center">
 <img src="WillCore.UI/Images/WillCoreLogo.png"  />
 <h1 align="center">WillCore.UI</h1>
-<h5 align="center">Simple, Fast And Powerfull Client-Side HTML UI Framework</h5>
+<h5 align="center">Simple, Fast And Powerfull Client-Side HTML UI Framework - By Philip Schoeman</h5>
 <h5 align="center" style="color:red">DOCUMENTATION IS A WORK IN  PROGRESS.</h5>
 </p>
 
@@ -13,27 +13,33 @@ ___
 
 ### Why Another JavaScript Framework?
 
-KISS. Keep it simple stupid. With so many JS UI frameworks popping up, it is hard to keep up to date with all the new front-end libraries. Most of them are over complicated, requires pre-compilers, and take ages just to set them up. That is why WillCore.UI was born, a simple but yet powerful framework was needed to not only build websites, but also PWAs with offline functionality.
+With so many JS UI frameworks popping up, it is hard to keep up to date with all the new front-end libraries. Most of them are over complicated, requires pre-compilers, and take ages just to set them up. That is why WillCore.UI was born, a simple but yet powerful framework was needed to not only build websites, but also PWAs with offline functionality.
 
 ###### WillCore.UI has a simple API and can be learned in a day (disclaimer: excluding people with impaired cognitive functionality). 
 ___
 > ### Index
 ___
+
 1. [Assignable Introduction](#assignable)
 2. [Getting Started](#gettingStarted)
-   * [Without CLI]()
-   * [With CLI]()
-3. [Architecture Overview]()
+   1. [Without CLI](#withoutCLI)
+   2. [With CLI](#withCLI)
+3. [Architecture Overview](#architecture)
+   1. [The WillCore Proxy](#willCoreProxy)
+   2. [The View Proxy](#viewProxy)
 4. [Views](#views)
 5. [View Layouts](#layouts)
 6. [Collections And Model Binding](#collections)
-7. [Partial Views](#partials)
-8. [Events](#events)
-9. [HTML DOM Binders In Detail](#dombinders)
-10. [HTTP requests](#requests)
-11. [Routing](#routing)
-12. [Collection Targets And Sources](#targetssources)
-
+   1. [WillCore.UI Model Binding](#modelBindingIntro)
+   2. [Model](#model)
+   3. [Inner HTML](#innerHTML)
+   4. [Repeat](#repeat)
+   5. [Events](#events)
+   6. [Attributes](#attribute)
+   7. [Partial Views](#partials)
+7. [HTTP requests](#requests)
+8. [Routing](#routing)
+9. [Collection Targets And Sources](#targetssources)
 ___
 > ### 1) Assignable Introduction
 ___
@@ -291,7 +297,10 @@ Views can be loaded into HTML elements (divs) on the index.html file:
 To access the element:
 
 ```javascript
+//===================================================================
 //index.js
+//===================================================================
+
 import { willCore } from "./willCore/WillCore.js";
 willCore.$containerElement;
 ```
@@ -303,7 +312,10 @@ Element IDs are indicated by a leading dollar sign ($). To load a view into the 
 The view proxy is used for all view related operations. Model binding, HTML events and to define partial views. The view proxy is the first parameter of the exported function of a view:
 
 ```javascript
+//===================================================================
 //homepage.js
+//===================================================================
+
 var view = async (view) => {
 
 };
@@ -338,8 +350,11 @@ Function | A function that should return a boolean to indicate if a user can acc
 To define a view:
 
 ```javascript
+//===================================================================
+//home.js
+//===================================================================
 import { willCore, url, route } from "./willCore/WillCore.js";
-//Home Page
+
 willCore.homePage = [
     willCore.$containerElement, //the view will load into element on the index.html page with ID containerElement
     url, "/homepage.js", //URL of the view's JavaScript module
@@ -356,7 +371,365 @@ willCore("/home");
 
 >#### A View's HTML File
 
-Since a view always load into a container element on a layout page or index page, it should not contain any 
+Since a view always load into a container element on a layout page or index page, it should be thought of as a component rather than a HTML page. It should never contain any html,body or head tags.
 
->#### The View Function
+>#### The View Module
+
+The view module should export a function called "view". This function will be executed once the view is activated by the router.
+
+**A view can be created via the CLI's template engine by just creating a HTML file (example: home.html).**
+
+>#### View Layouts
+
+By default views are appended to a HTML element in index.html file. There are cases where more complicated or different layouts for views are needed. For example, a login page has no navigation bar, but a home page might have. This is where layouts come in.
+
+Unlike main views, layout views are not appended to HTML elements. They are instead appended to the body of the HTML document defined in the index.html file. When a layout is assigned to a view, it will be activated when the router activates the view using the layout.
+
+Unlike the default index.html layout, layouts supports all the functionality normal views support like model binding and events.
+
+Type | Description
+------------ | -------------
+layout Assignable | The layout module exported from the main willCore.js module.
+String | An string URL pointing to the HTML file of the layout view.
+String | An string URL pointing to the JavaScript file of the layout view.
+
+<br/>
+
+To define a layout:
+
+
+```javascript
+//===================================================================
+//index.js
+//===================================================================
+
+import { willCore, url, route, layout } from "./willCore/WillCore.js";
+//register view layout
+willCore.homeLayout = [layout, "/myLayout.js", "/myLayout.html"];
+//register a main view that uses the layout
+willCore.homePage = [willCore.homeLayout.$mainContentDiv, url, "/homepage.js", url, "/homepage.html", route, "/home", x => true, willCore.homeLayout];
+```
+
+<br/>
+
+The layout view files:
+
+```html
+<!--- myLayout.html --->
+<div class="row view-container" id="mainContentDiv">
+</div>
+```
+
+<br/>
+
+```javascript
+//===================================================================
+//myLayout.js
+//===================================================================
+
+var view = async (view) => {
+
+};
+
+export { view };
+```
+
+**A layout view can be created via the CLI's template engine by just creating a HTML file with a name starting with an underscore (example: _layout.html).**
+
+<br/>
+
+>#### 6) Collections And Model Binding
+
+WillCore.UI supports model binding between HTML elements and JavaScript state. A proxy engine is used instead of observables and instead of a virtual DOM, the DOM is accessed directly via HTML IDs. The lack of all this unnecessary complexity makes WillCore.UI fast, very fast.
+
+Every HTML file's HTML elements can only be accessed it's module. HTML IDs are unique for every HTML file, so even if the layout of a view and the view have a elements with the same ID, they won't clash. However, WillCore.UI will output an error if two elements with the same ID are detected in the same HTML file.
+
+In order to bind an element to a JavaScript variable, that variable should be on a collection. A collection is a proxy object that lives on an instance of a view. To bind an element's (with ID nameLabel) inner HTML to a string:
+
+```javascript
+var view = async (view) => {
+    //Create an collection with a bindable field.
+    view.someCollection = { userName : "John Doe" };
+    //Bind the inner HTML of the element to the field on the collection
+    view.$nameLabel.innerHTML = () => view.someCollection.userName;
+};
+
+export { view };
+```
+
+<br/>
+
+>**Collections should always be objects or arrays.** Fields can be functions that return values:
+
+```javascript
+const firstName = "John";
+const lastName = "Doe";
+
+var view = async (view) => {
+    //Create an collection with a function.
+    view.someCollection = { userName : ()=> `${firstName} ${lastName}` };
+    //Bind the inner HTML of the element to the field on the collection
+    view.$nameLabel.innerHTML = () => view.someCollection.userName;
+};
+
+export { view };
+```
+
+<br/>
+
+___
+>**___Binding To Conditional Results___**
+>
+>WillCore.UI bindings work by indexing collections to the binding functions. When a value changes on a collection, the framework knows exactly what HTML elements to update. When a binding is defined, all collections on the view is instructed to "start listening". The binding function is executed and the collections will then report when values are accessed on them. When the values are accessed the binding is indexed. This can cause some issues 
+>when conditional results are returned from the function. 
+>
+>Take a look at this statement **() => view.someCollection.isLoggedIn || view.someCollection.user ? "Hello" : "Bey";**. When isLoggedIn is true, only loggedInMessage will be accessed from the collection, so the binding will only be keyed on one key while there should be two. So the binding will only update when isLoggedIn changes and will ignore changes in the user field. They way to get around this limitation, is to use default parameters:
+>
+>**(isLoggedIn = view.someCollection.isLoggedIn, user = view.someCollection.user) => isLoggedIn || user ? "Hello" : "Bey";**
+
+___
+
+<br/>
+
+___
+>#### Different Bindings
+___
+
+>##### Model
+
+The model binding is an unique binding in the sense that it provides bi-directional model binding. An example of bi-directional model binding is when a string field is binded to an input. The property changes when the value of the input changes, and the input changes when the property changes. The input's value will always be the same as the property.
+
+_A model binding need the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+model (assignable) | The model assignable exported from the main willCore module. This can be used via single assignment, array assignment or dot notation.
+function | The binding function that should return the value of the property or properties the binding is binded to.
+
+_Using the model binding:_
+```javascript
+view.$elementId.model = () => view.someCollection.someProperty;
+```
+
+<br/>
+
+
+>##### Inner HTML
+
+The innerHTML binding binds an element's inner HTML to a field or function result. It a one way binding.
+
+_An innerHTML binding need the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+innerHTML (assignable) | The innerHTML assignable exported from the main willCore module. This can be used via single assignment, array assignment or dot notation.
+function | The binding function that should return the value of the property or properties the binding is binded to.
+
+_Using the model binding:_
+```javascript
+view.$elementId.innerHTML = () => view.someCollection.someProperty;
+```
+
+<br/>
+
+
+>##### Repeat
+
+The repeat binding binds an element to an array. The element with it's children will be duplicated for every item in the array. An iterator function can be used to bind the children of the element. A temporary proxy is passed to the iterator function that can be used for the binding of the child elements.
+
+_A repeat binding need the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+repeat (assignable) | The repeat assignable exported from the main willCore module. This can be used via single assignment, array assignment or dot notation.
+function | The binding function that should return the value of the property or properties the binding is binded to.
+
+The repeat function takes 2 parameters:
+
+Parameter | Description
+------------ | -------------
+elements |  A proxy instance that can be used to access the current instance of the repeated HTML element's child elements. Can be used the same way as a view, but no collections can be defined on it.
+row | As the iterator loops through the array, the row parameter will be the current item in the array.
+
+_HTML_
+```html
+<div id="categoryCard">
+    <h3 id="title"></h3>
+    <div id="desctiption"></div>
+    <hr />
+    <button id="editCategory">Edit</button>
+</div>
+```
+_Using the model binding:_
+```javascript
+//An array collection
+view.categories = [
+    {id: 1, name: "First Category", description: "Since it is the first category, it is the best."},
+    {id: 2, name: "Second Category", description: "This category is last. It sucks."}
+;
+//Define the repeat binding.
+view.$categoryCard.repeat = () => view.categories;
+//Initiate the repeat binding
+ view.$categoryCard.repeat((elements, row) => {
+        elements.$title.innerHTML = () => row.name;
+        elements.$desctiption.innerHTML = () => row.description;
+        elements.$editCategory.event.onclick = () => {
+            alert(`Item with ID ${row.id} clicked!`);
+        };
+    });
+```
+
+<br/>
+
+___
+>#### **Important!**
+>Array's size and order is immutable in willCore. Meaning it can not be changed.In order to sort an array collection, first make a shallow copy of the array, sort the copy of the array and then overwrite the collection with the instance of the array. Same goes for adding new items in an array collection.
+___
+
+
+>##### Events
+
+HTML events are all handled via the event assignable. The events have the same name than in vanilla JavaScript. For example, onclick.
+
+_An even binding need the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+event (assignable) | The event assignable exported from the main willCore module. This can be used via single assignment, array assignment or dot notation.
+string | The event name. For a list of events, see JavaScript HTML events by means of using Google.
+function | The function will be executed when the event is detected.
+
+_Using the model binding:_
+```javascript
+view.$elementId.event.onclick = () => alert("The item was clicked!");
+```
+
+<br/>
+
+>##### Attributes
+
+All attributes on a HTML element can be binded to values. Attribute bindings like, style, class, href, disabled etc. are all supported
+
+_An even binding need the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+attribute (assignable) | The attribute assignable exported from the main willCore module. This can be used via single assignment, array assignment or dot notation.
+string | The attribute name.
+function | The binding function used to get the values of the attribute. Depending on the attribute, this can either return a bool, string or object.
+
+_Using the attribute binding to bind a disabled state:_
+```javascript
+view.$elementId.attribute.disabled = () => view.userData.isLoggedIn;
+```
+
+<br/>
+
+_Using the attribute binding to bind a CSS classes:_
+```javascript
+view.$elementId.attribute.class = () => ({ "loggedIn": () => view.userData.isLoggedIn, "loggedOut": () => !view.userData.isLoggedIn });
+```
+
+<br/>
+
+_Using the attribute binding to bind a CSS styles:_
+```javascript
+view.$elementId.attribute.style = () => ({ "display": () => view.userData.isLoggedIn ? "block" : "none" });
+```
+
+<br/>
+
+>##### Partial Views
+
+Views can be loaded into a view as child or partial views. Partial views do not have to be declared in the index.js module. Collections can be assigned to a partial view from the parent view. After a partial view is loaded, it's collections can be accessed on the element that it has been assigned to.
+
+_An partial view binding need the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+event (assignable) | The event assignable exported from the main willCore module. This can be used via single assignment, array assignment or dot notation.
+string | The event name. For a list of events, see JavaScript HTML events by means of using Google.
+function | The function will be executed when the event is detected.
+
+_Using the model binding:_
+```javascript
+view.$viewDiv = [
+partial, 
+"/confirm.html", //the HTML file for the view
+"/confirm.js",  //the JS module of the view
+{//Properties on this object will be transfered to the partial view creating a collection for each. 
+    //This example will create a "info" collection in the partial.
+   info: { heading: "Please Confirm", message: "Are you sure you want to delete the category?", show: false }
+}];
+//After the view has been loaded, we can change the collections of the partial from the parent view
+view.$modal.info.show = true;
+```
+
+<br/>
+
+>#### 7) HTTP(s) requests
+
+Willcore.UI has built in support for HTTP(s) requests. PUT,POST,GETP,PATCH and DELETE verbs are supported. Request results are always loaded into collections. When a request is executed, the result will be a promise, so the collection will have to be awaited before the result can be accessed.
+
+**SINCE REQUESTS ARE ASSIGNED TO COLLECTIONS AND NOT ELEMENTS, DOT NOTATION CAN __NOT__ BE USED FOR REQUESTS**
+
+_A request need the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+request (assignable) | The event assignable exported from the main willCore module. This can be used via single assignment, array assignment or dot notation.
+string | The HTTP verb, can be: PUT,POST,GETP,PATCH or DELETE 
+string | The target URL of the requests. *This needs to be a absolute URL since WillCore.UI is using the fetch API.*
+object | The request data. Fields of simple type will be query parameters while objects will be the body of the request.
+object | Request headers.
+
+_Making A HTTP Request:_
+```javascript
+//A GET request with a URL parameter
+var id = 5;
+view.category = [request, "GET", `${window.location.origin}/api/Category/{id}`, {}, {}];
+await view.category; //the result must be awaited before used, turning the promise into an actual result.
+alert(`The category name that is returned from the server is ${view.category.name}`);
+
+//A GET request with a query parameter
+view.category = [request, "GET", `${window.location.origin}/api/Category/`, {id: id}, {}];
+await view.category; //the result must be awaited before used, turning the promise into an actual result.
+
+//A PUT request with a query parameter and body. 
+view.requestResult = [request, "PUT", `${window.location.origin}/api/Category/`, {id: id, body:{bodyValue: 2, bodyValueB: 3}}, {}];
+await view.requestResult; //the result must be awaited before used, turning the promise into an actual result.
+alert(`The result returned from the server is ${view.requestResult}`);
+```
+
+<br/>
+
+>#### 7) Collection Targets And Sources
+
+Collections can have targets and sources. A source is a function that will populate the collection, and a target is a function that will be executed when the collection changes. Collection sources are executed manually (by running a function with the same name as the collection, but with a leading underscore) and targets are fired by the framework. They are defined the same way, the only difference is target functions have parameters and sources don't.
+
+More than one source and target can be defined on a collection. When a source returns undefined, the next source will be executed.
+
+Defining sources and targets:
+
+```javascript
+//Define a source for the categories collection:
+view.categories = () => [request, "GET", window.location.origin + "/api/Category", {}, {}];
+//Populating the collection from the source (note the underscore):
+view._categories();
+
+//Define a target for the categories collection that will save the collection to localStorage when any value in the collection changes:
+view.categories = (target, property, value) => {
+        localStorage.setItem("categories", JSON.stringify(value));
+    }
+```
+
+<br/>
+
+The idea behind targets and collections are to provide easier implementation of off-line functionality in PWAs. Let's say you have a collection, userData, and this collection is loaded from the localStorage when a user is logged in, but from the server when a user is logged out. In this case you can:
+
+* Setup a source that returns the data from localStorage if found and undefined when the data is not found.
+* setup a source that returns the data from the server.
+* Setup a target that targets the localStorage.
+
+By setting the targets and collections up in this way, the initial source will try and get the data from the localStorage, if it is found, the collection will be populated from localStorage. If it is not found, the collection will be populated from the server via the HTTP request. When the target picks up the collection changed, it will automatically persist the data from the server to the localStorage of the browser.
 
