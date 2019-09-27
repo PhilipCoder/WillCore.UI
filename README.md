@@ -499,7 +499,7 @@ ___
 
 The model binding is an unique binding in the sense that it provides bi-directional model binding. An example of bi-directional model binding is when a string field is binded to an input. The property changes when the value of the input changes, and the input changes when the property changes. The input's value will always be the same as the property.
 
-_A model binding need the following assignments to complete assignment:_
+_A model binding needs the following assignments to complete assignment:_
 
 Type | Description
 ------------ | -------------
@@ -518,7 +518,7 @@ view.$elementId.model = () => view.someCollection.someProperty;
 
 The innerHTML binding binds an element's inner HTML to a field or function result. It a one way binding.
 
-_An innerHTML binding need the following assignments to complete assignment:_
+_An innerHTML binding needs the following assignments to complete assignment:_
 
 Type | Description
 ------------ | -------------
@@ -537,7 +537,7 @@ view.$elementId.innerHTML = () => view.someCollection.someProperty;
 
 The repeat binding binds an element to an array. The element with it's children will be duplicated for every item in the array. An iterator function can be used to bind the children of the element. A temporary proxy is passed to the iterator function that can be used for the binding of the child elements.
 
-_A repeat binding need the following assignments to complete assignment:_
+_A repeat binding needs the following assignments to complete assignment:_
 
 Type | Description
 ------------ | -------------
@@ -591,7 +591,7 @@ ___
 
 HTML events are all handled via the event assignable. The events have the same name than in vanilla JavaScript. For example, onclick.
 
-_An even binding need the following assignments to complete assignment:_
+_An even binding needs the following assignments to complete assignment:_
 
 Type | Description
 ------------ | -------------
@@ -610,7 +610,7 @@ view.$elementId.event.onclick = () => alert("The item was clicked!");
 
 All attributes on a HTML element can be binded to values. Attribute bindings like, style, class, href, disabled etc. are all supported
 
-_An even binding need the following assignments to complete assignment:_
+_An even binding needs the following assignments to complete assignment:_
 
 Type | Description
 ------------ | -------------
@@ -643,7 +643,7 @@ view.$elementId.attribute.style = () => ({ "display": () => view.userData.isLogg
 
 Views can be loaded into a view as child or partial views. Partial views do not have to be declared in the index.js module. Collections can be assigned to a partial view from the parent view. After a partial view is loaded, it's collections can be accessed on the element that it has been assigned to.
 
-_An partial view binding need the following assignments to complete assignment:_
+_An partial view binding needs the following assignments to complete assignment:_
 
 Type | Description
 ------------ | -------------
