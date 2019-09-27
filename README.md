@@ -480,7 +480,7 @@ export { view };
 ___
 >**___Binding To Conditional Results___**
 >
->WillCore.UI bindings work by indexing collections to the binding functions. When a value changes on a collection, the framework knows exactly what HTML elements to update. When a binding is defined, all collections on the view is instructed to "start listening". The binding function is executed and the collections will then report when values are accessed on them. When the values are accessed the binding is indexed. This can cause some issues 
+>WillCore.UI bindings work by indexing collections to the binding functions. When a value changes on a collection, the framework knows exactly what HTML elements to update. When a binding is defined, all collections on the view are instructed to "start listening". The binding function is executed and the collections will then report when values are accessed on them. When the values are accessed the binding is indexed. This can cause some issues 
 >when conditional results are returned from the function. 
 >
 >Take a look at this statement **() => view.someCollection.isLoggedIn || view.someCollection.user ? "Hello" : "Bey";**. When isLoggedIn is true, only loggedInMessage will be accessed from the collection, so the binding will only be keyed on one key while there should be two. So the binding will only update when isLoggedIn changes and will ignore changes in the user field. They way to get around this limitation, is to use default parameters:
