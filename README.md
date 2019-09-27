@@ -20,28 +20,28 @@ ___
 > ### Index
 ___
 
-1. [Assignable Introduction](#assignable)
-2. [Getting Started](#gettingStarted)
-   1. [Without CLI](#withoutCLI)
-   2. [With CLI](#withCLI)
-3. [Architecture Overview](#architecture)
-   1. [The WillCore Proxy](#willCoreProxy)
-   2. [The View Proxy](#viewProxy)
-4. [Views](#views)
-5. [View Layouts](#layouts)
-6. [Collections And Model Binding](#collections)
-   1. [WillCore.UI Model Binding](#modelBindingIntro)
-   2. [Model](#model)
-   3. [Inner HTML](#innerHTML)
-   4. [Repeat](#repeat)
-   5. [Events](#events)
-   6. [Attributes](#attribute)
-   7. [Partial Views](#partials)
-7. [HTTP requests](#requests)
-8. [Routing](#routing)
-9. [Collection Targets And Sources](#targetssources)
+1. [Assignable Introduction](#Assignable-Introduction)
+2. [Getting Started](#Getting-Started)
+   1. [Without CLI](#Without-CLI)
+   2. [With CLI](#With-CLI)
+3. [Architecture Overview](#Architecture-Overview)
+   1. [The WillCore Proxy](#The-WillCore-Proxy)
+   2. [The View Proxy](#The-View-Proxy)
+4. [Views](#Views)
+5. [View Layouts](#View-Layouts)
+6. [Collections And Model Binding](#Collections-And-Model-Binding)
+   1. [WillCore.UI Model Binding](#WillCore.UI-Model-Binding)
+   2. [Model](#Model)
+   3. [Inner HTML](#Inner-HTML)
+   4. [Repeat](#Repeat)
+   5. [Events](#Events)
+   6. [Attributes](#Attributes)
+   7. [Partial Views](#Partial-Views)
+7. [HTTP requests](#HTTP-requests)
+8. [Routing](#Routing)
+9. [Collection Targets And Sources](#Collection-Targets-And-Sources)
 ___
-> ### 1) Assignable Introduction
+> ### 1) Assignable-Introduction
 ___
 
 In order to make the API as simple as possible, WC.UI (WillCore.UI) uses the concept of assignables to instantiate and assign state to internal objects. The concept might be a bit weird at first, but it simplifies the API.
