@@ -137,6 +137,34 @@ class collectionManager {
 
     }
 
+    removeAllElementBindings(element) {
+        var keys = Array.from(this.originalHTMLBindings.keys());
+        keys.forEach(key => {
+            var targetObj = this.originalHTMLBindings.get(key);
+            if (targetObj) {
+                var fields = Array.from(targetObj.keys());
+                fields.forEach(field => {
+                    var bindingArray = targetObj.get(field);
+                    if (bindingArray && Array.isArray(bindingArray)) {
+                        bindingArray.forEach(binding => {
+                            if (binding.element.id === element.id) {
+                                binding.removed = true;
+                            }
+                        });
+                        bindingArray = bindingArray.filter(x => !x.removed);
+                        targetObj.set(field, bindingArray);
+                    }
+                });
+            }
+        });
+        var unbindedKeys = Array.from(this.unbindedHTMLBindings.keys());
+        unbindedKeys.forEach(binding => {
+            if (binding.element.id === element.id) {
+                this.unbindedHTMLBindings.delete(binding);
+            }
+        });
+    }
+
     listen(currentBindable, targetValue) {
         if (currentBindable) {
             this.currentBindable = currentBindable;

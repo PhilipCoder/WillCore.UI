@@ -33,6 +33,11 @@ class idManager {
 
         return newElement.innerHTML;
     }
+    removeElement(id) {
+        var element = this.getElement(id);
+        element.remove();
+        return element;
+    }
 }
 
 export { idManager };

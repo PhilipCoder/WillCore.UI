@@ -13,7 +13,7 @@ class viewFactory {
         var handleProxy = (obj, prop, value, proxyInstance, propValue) => {
             if (typeof value == "function") {
                 var isSource = value.toString();
-                isSource = isSource.substring(isSource.indexOf("(")+1, isSource.indexOf(")")).trim().length == 0
+                isSource = isSource.substring(isSource.indexOf("(") + 1, isSource.indexOf(")")).trim().length == 0
                 if (isSource) {
                     obj["_$Sources" + prop] = obj["_$Sources" + prop] || [];
                     obj["_$Sources" + prop].push(value);
@@ -37,7 +37,7 @@ class viewFactory {
                 proxyValueTarget._proxyName = prop;
                 obj[prop] = obj.viewManager.collectionManager.getPoxyFromObject(prop, proxyValueTarget, obj);
                 obj.viewManager.collectionManager.valueChanged(obj, prop, value, obj.viewManager.collectionManager, oldValue);
-            } 
+            }
             else {
                 propValue.value = value;
             }
@@ -93,7 +93,7 @@ class viewFactory {
                 if (!element) {
                     var result = document.createElement("div");
                     result.id = elementId;
-                    return result;
+                    return elementProxy(result, setTrap, target, prop, proxyInstance);;
                 }
                 else {
                     return elementProxy(element, setTrap, target, prop, proxyInstance);
@@ -142,6 +142,9 @@ class viewFactory {
             }
             if (!prop.startsWith("$")) {
                 target.viewManager.collectionManager.removeAllBindings(target[prop], target.viewManager.collectionManager, target, prop);
+            } else {
+                var element = new idManager(target.viewManager).removeElement(prop.replace("$", ""));
+                target.viewManager.collectionManager.removeAllElementBindings(element);
             }
             delete target[prop];
             return true;

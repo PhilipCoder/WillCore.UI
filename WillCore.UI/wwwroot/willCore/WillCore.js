@@ -6,6 +6,7 @@ import { url } from "./assignables/url.js";
 import { innerHTML } from "./assignables/bindables/innerHTML.js";
 import { model } from "./assignables/bindables/model.js";
 import { attribute } from "./assignables/bindables/attribute.js";
+import { create } from "./assignables/bindables/create.js";
 import { event } from "./assignables/bindables/event.js";
 import { partial } from "./assignables/bindables/view.js";
 import { repeat } from "./assignables/bindables/repeat.js";
@@ -74,4 +75,4 @@ var WillCoreInstance = {
 router.setCoreProxy(WillCoreInstance.willCore);
 
 var mainInstance = WillCoreInstance.willCore;
-export { mainInstance as willCore, route, url, innerHTML, model, attribute, repeat, event, request, partial, layout, source };
+export { mainInstance as willCore, route, url, innerHTML, model, attribute, repeat, event, request, partial, layout, source, create };

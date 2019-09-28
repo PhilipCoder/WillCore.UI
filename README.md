@@ -379,7 +379,7 @@ The view module should export a function called "view". This function will be ex
 
 **A view can be created via the CLI's template engine by just creating a HTML file (example: home.html).**
 
->#### View Layouts
+>### 5) View Layouts
 
 By default views are appended to a HTML element in index.html file. There are cases where more complicated or different layouts for views are needed. For example, a login page has no navigation bar, but a home page might have. This is where layouts come in.
 
@@ -438,7 +438,7 @@ export { view };
 
 <br/>
 
->#### 6) Collections And Model Binding
+>### 6) Collections And Model Binding
 
 WillCore.UI supports model binding between HTML elements and JavaScript state. A proxy engine is used instead of observables and instead of a virtual DOM, the DOM is accessed directly via HTML IDs. The lack of all this unnecessary complexity makes WillCore.UI fast, very fast.
 
@@ -703,7 +703,7 @@ alert(`The result returned from the server is ${view.requestResult}`);
 
 <br/>
 
->#### 7) Collection Targets And Sources
+>### 8) Collection Targets And Sources
 
 Collections can have targets and sources. A source is a function that will populate the collection, and a target is a function that will be executed when the collection changes. Collection sources are executed manually (by running a function with the same name as the collection, but with a leading underscore) and targets are fired by the framework. They are defined the same way, the only difference is target functions have parameters and sources don't.
 
@@ -733,3 +733,78 @@ The idea behind targets and collections are to provide easier implementation of 
 
 By setting the targets and collections up in this way, the initial source will try and get the data from the localStorage, if it is found, the collection will be populated from localStorage. If it is not found, the collection will be populated from the server via the HTTP request. When the target picks up the collection changed, it will automatically persist the data from the server to the localStorage of the browser.
 
+>### 9) Routing
+
+All views are activated via URL change events. A main view has to be defined with a URL that activates the view. Parameters can be passed to the view via the hash URL. 
+
+To define a view's activation URL:
+
+```javascript
+//Defining a view with an activation URL
+willCore.viewName = [willCore.viewId, url, "/view.js", url, "/view.html", route, "/someview" /*The activation route for the view*/ , x => true];
+```
+
+<br/>
+
+The view will be activated when the application navigates to "#!/someview". This can be either via a link or by calling willCore("/someView");
+
+>#### Parameters
+
+Parameters can be passed via the URL:
+_#!/someview?parameterName=parameterValue_
+
+Parameters and their values can be accessed in the view via the route collection:
+
+```javascript
+let parameterValue = view.route.parameterName;
+```
+
+<br/>
+
+When you have a navigation bar in a layout, bindings can be assigned to the route collection in order to highlight links to indicate the current active page.
+
+```javascript
+view.$allCategories.attribute.class = () => ({ active: view.route.url === "/categories" });
+view.$addCategory.attribute.class = () => ({ active: view.route.url === "/addcategory" });
+view.$info.attribute.class = () => ({ active: view.route.url === "/info" });
+```
+
+<br/>
+
+>### 10) Runtime Creation Of HTML DOM Elements
+
+Child DOM elements can easily be created via the create assignable. This is handy when a DOM structure is of a dynamic nature and can't be defined in a HTML template. The element type is the same as the node name of the element when it is created via "document.createElement". An unique ID has be provided.
+
+Type | Description
+------------ | -------------
+create (assignable) | The create assignable exported from the main willCore module. This can be used via single assignment, array assignment or dot notation.
+string | The node type. This is the same as the node name of the element when it is created via "document.createElement"
+object | An object containing all the default attribute values. This values will be directly assigned to the element. For example: { class: "classA classB", style: "border:0px" }
+
+_Using the create assignable to create DOM elements:_
+```javascript
+//Import the create assignable
+import { create } from "../../willCore/WillCore.js";
+var bindings = async (view) => {
+    //create a child element of type "span" on element buttonDiv with classes "alert alert-info"
+    view.$buttonDiv.$newElementId.create.span = {class:"alert alert-info"};
+    //Binds the inner HTML of the newly created element to the email field
+    view.$newElement.innerHTML = () => view.userDetailCollection.email;
+};
+
+export { bindings };
+```
+
+<br/>
+
+Elements can be created in loops as long as every element has a unique ID per view.
+
+>#### Deleting of elements
+
+Elements with all their bindings can be deleted from the document and the binding engine. The delete statement should be used. Never delete elements directly from the DOM since their bindings will still exist.
+
+
+```javascript
+    //Deleting an element from the DOM and removing all it's bindings:
+    delete view.$newElementId;
+```

@@ -10,7 +10,11 @@ var proxyHandler = {
             return elementProxy(target, target.setFunction, target._target, target.field, target.proxyInstance);
         } else if (prop in target) {
             return target[prop];
-        } else {
+        } else if (prop.startsWith && prop.startsWith("$")) {
+            target.tmpId = prop.replace("$", "");
+            return elementProxy(target, target.setFunction, target._target, target.field, target.proxyInstance);
+        }
+        else {
             return elementProxy(target, target.setFunction, target._target, target.field, target.proxyInstance);
         }
 
