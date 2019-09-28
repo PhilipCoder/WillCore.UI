@@ -38,8 +38,9 @@ ___
    6. [Attributes](#Attributes)
    7. [Partial Views](#Partial-Views)
 7. [HTTP requests](#HTTP-requests)
-8. [Routing](#Routing)
-9. [Collection Targets And Sources](#Collection-Targets-And-Sources)
+8. [Collection Targets And Sources](#Collection-Targets-And-Sources)
+9. [Routing](#Routing)
+10. [Runtime Creation Of HTML DOM Elements](#Runtime-Creation-Of-HTML-DOM-Elements)
 ___
 > ### 1) Assignable-Introduction
 ___
