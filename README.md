@@ -788,7 +788,7 @@ _Using the create assignable to create DOM elements:_
 import { create } from "../../willCore/WillCore.js";
 var bindings = async (view) => {
     //create a child element of type "span" on element buttonDiv with classes "alert alert-info"
-    view.$buttonDiv.$newElementId.create.span = {class:"alert alert-info"};
+    view.$buttonDiv.$newElement.create.span = {class:"alert alert-info"};
     //Binds the inner HTML of the newly created element to the email field
     view.$newElement.innerHTML = () => view.userDetailCollection.email;
 };
