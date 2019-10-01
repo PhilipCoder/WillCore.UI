@@ -16,16 +16,29 @@
     ],
     "redirect": [
       {
-        "value": "willCore/",
-        "target": "willCore/willcore.ui/",
+        "value": "/willcore/",
+        "target": "/willCore/willcore.ui/",
         "match": "startsWith"
       },
       {
-        "value": "willCore/",
-        "target": "wwwRoot/",
-        "match": "startsWith",
-        "negative": true
+        "value": "/",
+        "target": "/wwwRoot/",
+        "match": "startsWith"
       }
-    ]
+    ],
+    "mimeTypes": {
+      ".html": "text/html",
+      ".bmp": "image/bmp",
+      ".css": "text/css",
+      ".gif": "image/gif",
+      ".jpeg": "image/jpeg",
+      ".jpg": "image/jpeg",
+      ".js": "text/javascript",
+      ".json": "application/json",
+      ".woff": "font/woff",
+      ".map": "font/woff",
+      ".woff2": "font/woff2",
+      ".ico": "image/vnd.microsoft.icon"
+    }
   }
 }

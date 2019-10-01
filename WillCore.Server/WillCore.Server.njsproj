@@ -44,8 +44,13 @@
     <Content Include="willCore\willCore.server\server.static.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="willCore\willCore.ui\uiTest.js" />
+    <Content Include="wwwRoot\rootTest.js">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="willCore\willCore.ui\" />
     <Folder Include="wwwRoot\" />
     <Folder Include="willCore\" />
     <Folder Include="willCore\willCore.server\" />
