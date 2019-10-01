@@ -1,0 +1,31 @@
+{
+  "staticFiles": {
+    "fileExclutions": [
+      {
+        "value": "/willCore/willcore.server",
+        "match": "startsWith"
+      },
+      {
+        "value": ".server.js",
+        "match": "endsWith"
+      },
+      {
+        "value": ".json",
+        "match": "endsWith"
+      }
+    ],
+    "redirect": [
+      {
+        "value": "willCore/",
+        "target": "willCore/willcore.ui/",
+        "match": "startsWith"
+      },
+      {
+        "value": "willCore/",
+        "target": "wwwRoot/",
+        "match": "startsWith",
+        "negative": true
+      }
+    ]
+  }
+}
