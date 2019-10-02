@@ -47,7 +47,7 @@
     <Content Include="willCore\willCore.server\server.views.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="willCore\willCore.server\viewComparrison.js" />
+    <Content Include="willCore\willCore.server\viewProxy.js" />
     <Content Include="willCore\willCore.ui\uiTest.js" />
     <Content Include="wwwRoot\login.server.js">
       <SubType>Code</SubType>

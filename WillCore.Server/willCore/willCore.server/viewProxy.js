@@ -1,6 +1,10 @@
 var proxyHandler = {
-    set: function (target, property, value) {
-        target[property] = value;
+    set: async function (target, property, value) {
+        if (value.then) value = await value;
+        if (typeof value === "object") {
+            target[property] = new Proxy(value, proxyHandler);
+            value._collection = { isModified: true };
+        }
         if (target._collection) {
             target._collection.isModified = true;
         }
@@ -17,9 +21,9 @@ class viewProxy {
         function initProxy(value) {
             for (var key in value) {
                 var childObj = value[key];
-                if (typeof childObj === "object") {
-                    childObj._collection = value._collection || childObj;
+                if (typeof childObj === "object" && key !== "_collection") {
                     value[key] = new Proxy(childObj, proxyHandler);
+                    childObj._collection = value._collection || {};
                     initProxy(childObj);
                 }
             }
@@ -27,3 +31,5 @@ class viewProxy {
         initProxy(obj);
     }
 }
+
+module.exports = viewProxy;

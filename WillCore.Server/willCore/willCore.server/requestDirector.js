@@ -31,6 +31,7 @@ class requestDirector {
             response.end(result);
         } else if (request.method == "POST") {
             var viewServer = require('./server.views.js');
+            viewServer.runRequest(request, response);
         } else {
             throw `Invalid request method ${request.method}`;
         }
