@@ -2,6 +2,7 @@ var config = require('./config.json');
 var staticFileServer = require('./server.static.js');
 var path = require('path');
 
+
 class requestDirector {
     /**
      * Directs a request to either static file serving or server collection sources.
@@ -29,7 +30,7 @@ class requestDirector {
             response.writeHead(fileServer.responseCode, { 'Content-Type': fileServer.mimeType });
             response.end(result);
         } else if (request.method == "POST") {
-
+            var viewServer = require('./server.views.js');
         } else {
             throw `Invalid request method ${request.method}`;
         }

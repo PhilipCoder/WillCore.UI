@@ -47,7 +47,7 @@ Defining a server collection source:
 
 ```javascript
 //login.server.js
-exports.server = () =>  {
+exports.login = () =>  {
     view.userData = (view) => {
         loadFromDB(view.userInfo.userId);
     };
