@@ -40,5 +40,13 @@
       ".woff2": "font/woff2",
       ".ico": "image/vnd.microsoft.icon"
     }
+  },
+  "session": {
+    "encryptionKey": "Q3UBzdH9GEfiRCTKbi5MTPyChpzXLsTD",
+    "driver": "memory",
+    "timeout": 300000,
+    "expireOnClose": false,
+    "cookie": "willCore_session",
+    "domain": null
   }
 }

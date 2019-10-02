@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/PhilipCoder/WillCore.UI/issues"
   },
-  "homepage": "https://github.com/PhilipCoder/WillCore.UI#readme"
+  "homepage": "https://github.com/PhilipCoder/WillCore.UI#readme",
+  "dependencies": {}
 }

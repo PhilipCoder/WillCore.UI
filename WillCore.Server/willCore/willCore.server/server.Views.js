@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require("fs");
 var qs = require('querystring');
 var viewProxy = require('./viewProxy.js');
+var session = require('./server.session.js');
 
 var modules = {
     path: null,
@@ -29,10 +30,11 @@ class viewServer {
         }
     }
 
-    async runMethod(viewName, methodName, methodBody) {
+    async runMethod(viewName, methodName, methodBody, request, response) {
         if (!modules.modules[viewName]) return `View ${viewName} not found!`;
         if (!modules.modules[viewName][methodName]) return `Method ${methodName} on view ${viewName} not found!`;
-        await modules.modules[viewName][methodName](methodBody);
+        var userSession = new session(request, response);
+        await modules.modules[viewName][methodName](methodBody, userSession.authenticated ? userSession : userSession.authentication);
     }
     /**
     * @param {import('http').IncomingMessage} request
@@ -46,7 +48,7 @@ class viewServer {
         } else {
             var methodBody = await this.processPost(request, response);
             var proxy = new viewProxy(methodBody);
-            this.runMethod(parts[0], parts[1], proxy.proxy);
+            this.runMethod(parts[0], parts[1], proxy.proxy, request, response);
             var result = {};
             for (var collectionKey in proxy.proxy) {
                 var collection = proxy.proxy[collectionKey];

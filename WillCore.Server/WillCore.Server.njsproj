@@ -29,6 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="LICENSE" />
     <Content Include="willCore\willCore.server\config.json">
       <SubType>Code</SubType>
     </Content>
@@ -41,6 +42,7 @@
     <Content Include="Spec.md">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="willCore\willCore.server\server.session.js" />
     <Content Include="willCore\willCore.server\server.static.js">
       <SubType>Code</SubType>
     </Content>
