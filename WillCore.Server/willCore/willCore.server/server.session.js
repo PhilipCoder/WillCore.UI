@@ -1,7 +1,8 @@
-var session = require('node-session');
 var config = require('./config.json');
+var byteConverter = require('./encryption/byteConverter.js');
+var aesjs = require('./encryption/aes.js');
 
-class authenticated {
+class authentication {
     constructor(request, response) {
         this.request = request;
         this.response = response;
@@ -10,27 +11,19 @@ class authenticated {
      * Checks whether an user is authenticated.
      * */
     authenticated() {
-        return !!this.request.get('data');
     };
 
     /**
      * Gets the session data.
      * */
     getData() {
-        return this.request.get('data');
     };
 
     authentication(sessionData) {
-        session = new NodeSession({
-            secret: config.session.encryptionKey,
-            lifetime: config.session.timout,
-            expireOnClose: config.session.expireOnClose,
-            driver: config.session.driver,
-            cookie: config.session.cookie,
-            domain: config.session.domain
-        });
-        session.startSession(this.request, this.response, () => { });
-        this.request.session.put('data', sessionData);
+        var encryptoptor = new byteConverter();
+        var encryptored = encryptoptor.encryptObject({ name: "DrPhil" });
+        var decrypted = encryptoptor.decryptObject(encryptored);
+        
     }
 }
 
