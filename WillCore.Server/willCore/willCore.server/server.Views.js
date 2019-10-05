@@ -1,7 +1,7 @@
 var path = require('path');
 var fs = require("fs");
 var qs = require('querystring');
-var viewProxy = require('./viewProxy.js');
+var viewProxy = require('./server.viewProxy.js');
 var session = require('./server.session.js');
 
 var modules = {
@@ -33,8 +33,7 @@ class viewServer {
     async runMethod(viewName, methodName, methodBody, request, response) {
         if (!modules.modules[viewName]) return `View ${viewName} not found!`;
         if (!modules.modules[viewName][methodName]) return `Method ${methodName} on view ${viewName} not found!`;
-        var userSession = new session(request, response);
-        await modules.modules[viewName][methodName](methodBody, userSession.authenticated ? userSession : userSession.authentication);
+        await modules.modules[viewName][methodName](methodBody);
     }
     /**
     * @param {import('http').IncomingMessage} request
@@ -46,30 +45,35 @@ class viewServer {
             response.writeHead("400");
             response.end("Bad Request");
         } else {
-            var methodBody = await this.processPost(request, response);
-            var proxy = new viewProxy(methodBody);
-            this.runMethod(parts[0], parts[1], proxy.proxy, request, response);
-            var result = {};
-            for (var collectionKey in proxy.proxy) {
-                var collection = proxy.proxy[collectionKey];
-                if (collection._collection && collection._collection.isModified) {
-                    clearProxy(collection);
-                    result[collectionKey] = collection;
-                }
-            }
-            response.writeHead(200, { 'Content-Type': "application/json" });
-            response.end(JSON.stringify(result));
+            await this.handleMethod(request, response, parts);
         }
+        return true;
+    }
 
-        function clearProxy(value) {
-            if (value._collection) {
-                delete value._collection;
+    async handleMethod(request, response, parts) {
+        var methodBody = await this.processPost(request, response);
+        var proxy = new viewProxy(methodBody, request, response);
+        this.runMethod(parts[0], parts[1], proxy.proxy, request, response);
+        var result = {};
+        for (var collectionKey in proxy.proxy) {
+            var collection = proxy.proxy[collectionKey];
+            if (collection._collection && collection._collection.isModified) {
+                this.clearProxy(collection);
+                result[collectionKey] = collection;
             }
-            for (var key in value) {
-                var childObj = value[key];
-                if (typeof childObj === "object" ) {
-                    clearProxy(childObj);
-                }
+        }
+        response.writeHead(200, { 'Content-Type': "application/json" });
+        response.end(JSON.stringify(result));
+    }
+
+    clearProxy(value) {
+        if (value._collection) {
+            delete value._collection;
+        }
+        for (var key in value) {
+            var childObj = value[key];
+            if (typeof childObj === "object") {
+                clearProxy(childObj);
             }
         }
     }
@@ -87,4 +91,4 @@ class viewServer {
     }
 }
 
-module.exports = new viewServer();
+module.exports = viewServer;

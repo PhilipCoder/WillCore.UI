@@ -1,3 +1,5 @@
+var authentication = require('./server.session.js');
+
 var proxyHandler = {
     set: async function (target, property, value) {
         if (value.then) value = await value;
@@ -14,14 +16,17 @@ var proxyHandler = {
         return target[property];
     }
 };
-
+/**
+ * Server-Side collections container.
+ * */
 class viewProxy {
-    constructor(obj) {
+    constructor(obj, request, repsonse) {
         this.proxy = new Proxy(obj, proxyHandler);
+        obj.session = new authentication(request, repsonse);
         function initProxy(value) {
             for (var key in value) {
                 var childObj = value[key];
-                if (typeof childObj === "object" && key !== "_collection") {
+                if (typeof childObj === "object" && key !== "_collection" && key !== "session") {
                     value[key] = new Proxy(childObj, proxyHandler);
                     childObj._collection = value._collection || {};
                     initProxy(childObj);

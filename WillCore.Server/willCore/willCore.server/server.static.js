@@ -15,6 +15,38 @@ class staticFileServer {
         this.responseCode = 200;
     }
 
+    handleFile(request, response) {
+        if (!this.checkRequestFileExtension(request, response)) return;
+        if (!this.createFileServer(request, response)) return;
+        this.serverFile(request, response);
+        return true;
+    }
+
+    checkRequestFileExtension(request, response) {
+        var fileExtenstion = path.extname(request.url);
+        if (!fileExtenstion) {
+            response.end("File not found.");
+            return false;
+        }
+        return true;
+    }
+
+    createFileServer(request, response) {
+        if (this.getFileExcluded(request.url)) {
+            response.writeHead("401");
+            response.end("File not available for access.");
+            return false;
+        }
+        return true;
+    }
+
+    serverFile(request, response) {
+        var fileURL = this.getFileLocation(request.url);
+        var result = this.serveFile(fileURL);
+        response.writeHead(this.responseCode, { 'Content-Type': this.mimeType });
+        response.end(result);
+    }
+
     serveFile(filePath) {
         this.calculateMimeType(filePath);
         if (!this.mimeType) {

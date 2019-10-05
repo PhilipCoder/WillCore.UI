@@ -34,10 +34,13 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="willCore\willCore.server\encryption\aes.js" />
-    <Content Include="willCore\willCore.server\encryption\byteConverter.js">
+    <Content Include="willCore\willCore.server\encryption\encryptor.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="willCore\willCore.server\requestDirector.js">
+    <Content Include="willCore\willCore.server\server.authenticationRequest.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="willCore\willCore.server\server.requestDirector.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="willCore\willCore.server\server.js" />
@@ -53,14 +56,7 @@
     <Content Include="willCore\willCore.server\server.views.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="willCore\willCore.server\viewProxy.js" />
-    <Content Include="willCore\willCore.ui\uiTest.js" />
-    <Content Include="wwwRoot\login.server.js">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="wwwRoot\rootTest.js">
-      <SubType>Code</SubType>
-    </Content>
+    <Content Include="willCore\willCore.server\server.viewProxy.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="willCore\willCore.server\encryption\" />

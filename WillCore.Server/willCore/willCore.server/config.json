@@ -1,4 +1,25 @@
 {
+  "server": {
+    "port": 1337,
+    "methodHandlers": {
+      "GET": [
+        {
+          "module": "./server.authenticationRequest.js",
+          "entryPoint": "checkAuthentication"
+        },
+        {
+          "module": "./server.static.js",
+          "entryPoint": "handleFile"
+        }
+      ],
+      "POST": [
+        {
+          "module": "./server.views.js",
+          "entryPoint": "runRequest"
+        }
+      ]
+    }
+  },
   "staticFiles": {
     "fileExclutions": [
       {
@@ -44,7 +65,8 @@
   "session": {
     "encryptionKey": "Q3UBzdH9GEfiRCTKbi5MTPyChpzXLsTD",
     "driver": "memory",
-    "timeout": 300000,
+    "timeout": 1000000,
+    "sameSite": "Strict",
     "expireOnClose": false,
     "cookie": "willCore_session",
     "domain": null

@@ -1,10 +1,7 @@
 var aesjs = require('./aes.js');
 var config = require('../config.json');
 
-class ByteConverter {
-    constructor() {
-    }
-
+class Encryptor {
     encryptObject(value) {
         var json = JSON.stringify(value);
         var textBytes = aesjs.utils.utf8.toBytes(json);
@@ -24,4 +21,4 @@ class ByteConverter {
     }
 }
 
-module.exports = ByteConverter;
+module.exports = Encryptor;
