@@ -41,7 +41,7 @@ Server-side collection sources are used to retrieve data from the server. Server
 named and can have dependent collections. Dependent collections are collections that will be send to the server and that can be accessed in the collection source on the server. All changes made to collections
 in the server-side collection source will reflect in the front-end.
 
-*All requests are PUT requests since complex parameters are required to populate the collections on the server.*
+*All requests are POST requests since complex parameters are required to populate the collections on the server.*
 
 Defining a server collection source:
 
@@ -57,7 +57,7 @@ exports.login = () =>  {
 ```javascript
 //login.sources.js
 var sources = async (view, configuration) => {
-    view.userData = [server,() => [view.userInfo]];
+    view.userData = [server, [view.userInfo]];
 };
 
 export { sources };
@@ -77,18 +77,6 @@ export { logic };
 ```
 
  <br/>
-
-The following happens when a request is made:
-
-1. An assignable with a function that returns an array of dependent collections is used to create the server collection source.
-2. When the collection source is fired, a random GUID is generated (the request ID).
-3. A PUT request is fired with the with the request ID as parameter and the dependent collections as body.
-4. The same time a SSE request is fired, also with the request ID as parameter.
-5. A global SSE event container based on a proxy should be present. This request container is keyed by the request IDs.
-6. When a collection is modified, the server-side view proxy adds the modified collection to the SSE event container. The event container proxy will then check if any SSE promises are registered on the container, if there are any, they will be resolved with the modified collections.
-7. When the SSE hits the server, it will register itself on the event-container. This registration is a promise that when resolved, will return the SSE with JSON of the modified collections for the request.
-8. When the promise is registered, the SSE event proxy will do the same check to see if there are modified collections and will resolve the SSE promise if any modified collections are detected. 
-9. A SSE timeout should be specified in the config JSON. A timeout should be registered for the SSE that will reject the SSE promise.
 
 >## Authentication Framework
 

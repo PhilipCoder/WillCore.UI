@@ -4,28 +4,21 @@
     "methodHandlers": {
       "GET": [
         {
-          "module": "./middleware/endpoints/server.sseContainer.js",
-          "entryPoint": "registerSSE"
-        },
-        {
-          "module": "./middleware/session/server.authenticationRequest.js",
+          "module": "./server.authenticationRequest.js",
           "entryPoint": "checkAuthentication"
         },
         {
-          "module": "./middleware/staticFiles/server.static.js",
+          "module": "./server.static.js",
           "entryPoint": "handleFile"
         }
       ],
-      "PUT": [
+      "POST": [
         {
-          "module": "./middleware/endpoints/server.views.js",
+          "module": "./server.views.js",
           "entryPoint": "runRequest"
         }
       ]
     }
-  },
-  "sse": {
-    "requestExpiration": 240000
   },
   "staticFiles": {
     "fileExclutions": [
@@ -49,11 +42,6 @@
         "match": "startsWith"
       },
       {
-        "value": "/codegen/",
-        "target": "/codegenerator/",
-        "match": "startsWith"
-      },
-      {
         "value": "/",
         "target": "/wwwRoot/",
         "match": "startsWith"
@@ -66,7 +54,6 @@
       ".gif": "image/gif",
       ".jpeg": "image/jpeg",
       ".jpg": "image/jpeg",
-      ".png": "image/png",
       ".js": "text/javascript",
       ".json": "application/json",
       ".woff": "font/woff",

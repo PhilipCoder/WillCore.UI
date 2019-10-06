@@ -29,15 +29,56 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="codeGenerator\config\credentials.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\css\bootstrap.min.css" />
+    <Content Include="codeGenerator\css\codeGen.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\images\loginBackGround.jpg" />
+    <Content Include="codeGenerator\css\slateTheme.min.css" />
+    <Content Include="codeGenerator\images\WillCoreLogo.png" />
+    <Content Include="codeGenerator\index.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\index.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.bindings.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.collections.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.events.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\views\codeGen\codeGen.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.logic.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.meta.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.sources.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.targets.js" />
+    <Content Include="codeGenerator\views\codeGen\codeGen.traps.js" />
+    <Content Include="codeGenerator\views\login\login.bindings.js" />
+    <Content Include="codeGenerator\views\login\login.collections.js" />
+    <Content Include="codeGenerator\views\login\login.events.js" />
+    <Content Include="codeGenerator\views\login\login.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\views\login\login.js" />
+    <Content Include="codeGenerator\views\login\login.logic.js" />
+    <Content Include="codeGenerator\views\login\login.meta.js" />
+    <Content Include="codeGenerator\views\login\login.server.js" />
+    <Content Include="codeGenerator\views\login\login.sources.js" />
+    <Content Include="codeGenerator\views\login\login.targets.js" />
+    <Content Include="codeGenerator\views\login\login.traps.js" />
     <Content Include="LICENSE" />
     <Content Include="willCore\willCore.server\config.json">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="willCore\willCore.server\encryption\aes.js" />
-    <Content Include="willCore\willCore.server\encryption\encryptor.js">
+    <Content Include="willCore\willCore.server\middleware\endpoints\activeRequest\activeRequest.js" />
+    <Content Include="willCore\willCore.server\middleware\endpoints\server.sseContainer.js" />
+    <Content Include="willCore\willCore.server\middleware\session\encryption\aes.js" />
+    <Content Include="willCore\willCore.server\middleware\session\encryption\encryptor.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="willCore\willCore.server\server.authenticationRequest.js">
+    <Content Include="willCore\willCore.server\middleware\session\server.authenticationRequest.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="willCore\willCore.server\server.requestDirector.js">
@@ -49,18 +90,67 @@
     <Content Include="Spec.md">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="willCore\willCore.server\server.session.js" />
-    <Content Include="willCore\willCore.server\server.static.js">
+    <Content Include="willCore\willCore.server\middleware\session\server.session.js" />
+    <Content Include="willCore\willCore.server\middleware\staticFiles\server.static.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="willCore\willCore.server\server.views.js">
+    <Content Include="willCore\willCore.server\middleware\endpoints\server.views.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="willCore\willCore.server\server.viewProxy.js" />
+    <Content Include="willCore\willCore.server\middleware\endpoints\server.viewProxy.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\attribute.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\create.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\event.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\innerHTML.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\layout.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\layoutProxyFactory.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\model.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\repeat.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\view.js" />
+    <Content Include="willCore\willCore.ui\assignables\request.js" />
+    <Content Include="willCore\willCore.ui\assignables\route.js" />
+    <Content Include="willCore\willCore.ui\assignables\server.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="willCore\willCore.ui\assignables\source.js" />
+    <Content Include="willCore\willCore.ui\assignables\url.js" />
+    <Content Include="willCore\willCore.ui\binding\assignable.js" />
+    <Content Include="willCore\willCore.ui\binding\bindable.js" />
+    <Content Include="willCore\willCore.ui\binding\bindingManager.js" />
+    <Content Include="willCore\willCore.ui\binding\collectionManager.js" />
+    <Content Include="willCore\willCore.ui\binding\elementProxy.js" />
+    <Content Include="willCore\willCore.ui\binding\proxyObject.js" />
+    <Content Include="willCore\willCore.ui\helpers\exceptionHander.js" />
+    <Content Include="willCore\willCore.ui\helpers\guid.js" />
+    <Content Include="willCore\willCore.ui\helpers\lazyImport.js" />
+    <Content Include="willCore\willCore.ui\views\htmlLoader.js" />
+    <Content Include="willCore\willCore.ui\views\idManager.js" />
+    <Content Include="willCore\willCore.ui\views\router.js" />
+    <Content Include="willCore\willCore.ui\views\viewFactory.js" />
+    <Content Include="willCore\willCore.ui\views\viewLoader.js" />
+    <Content Include="willCore\willCore.ui\views\viewManager.js" />
+    <Content Include="willCore\willCore.ui\WillCore.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="willCore\willCore.server\encryption\" />
+    <Folder Include="codeGenerator\" />
+    <Folder Include="codeGenerator\css\" />
+    <Folder Include="codeGenerator\config\" />
+    <Folder Include="codeGenerator\images\" />
+    <Folder Include="codeGenerator\views\" />
+    <Folder Include="codeGenerator\views\login\" />
+    <Folder Include="codeGenerator\views\codeGen\" />
+    <Folder Include="willCore\willCore.server\middleware\endpoints\activeRequest\" />
+    <Folder Include="willCore\willCore.server\middleware\session\encryption\" />
+    <Folder Include="willCore\willCore.server\middleware\" />
+    <Folder Include="willCore\willCore.server\middleware\endpoints\" />
+    <Folder Include="willCore\willCore.server\middleware\session\" />
+    <Folder Include="willCore\willCore.server\middleware\staticFiles\" />
     <Folder Include="willCore\willCore.ui\" />
+    <Folder Include="willCore\willCore.ui\assignables\" />
+    <Folder Include="willCore\willCore.ui\assignables\bindables\" />
+    <Folder Include="willCore\willCore.ui\binding\" />
+    <Folder Include="willCore\willCore.ui\helpers\" />
+    <Folder Include="willCore\willCore.ui\views\" />
     <Folder Include="wwwRoot\" />
     <Folder Include="willCore\" />
     <Folder Include="willCore\willCore.server\" />

@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dist\**" />
+    <EmbeddedResource Remove="Dist\**" />
+    <None Remove="Dist\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.12" />
   </ItemGroup>
 
