@@ -141,3 +141,13 @@ exports.server = () =>  {
 ```
 
 The authenticated function can be overridden to implement custom authentication, such as role based authentication.
+
+>## Request Hub
+
+The request hubs are server-side objects that are mirrored on the front-end. All hub properties on the hubs are lazy loaded. The request hub containers are defined in *.hub files. Request hubs are assigned to the hub containers.
+Request hubs are proxies.
+
+```javascript
+//Defining a request hub:
+
+```

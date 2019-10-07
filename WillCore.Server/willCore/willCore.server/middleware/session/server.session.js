@@ -29,9 +29,9 @@ class authentication {
             sessionObj.authenticated = true;
         }
         var encrypted = this.encryptor.encryptObject(sessionObj);
-        var cookieString = `${config.session.cookie}=${encrypted}`;
+        var cookieString = `${config.session.cookie}=${encrypted};Path=/`;
         if (config.session.timeout) {
-            cookieString += `; expires='${new Date(new Date().getTime() + config.session.timeout).toUTCString()}`;
+            cookieString += `; expires=${new Date(new Date().getTime() + config.session.timeout).toUTCString()}`;
         }
         if (config.session.sameSite) {
             cookieString += `; SameSite=${config.session.sameSite}`;

@@ -36,6 +36,9 @@
     <Content Include="codeGenerator\css\codeGen.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\images\bootstrapIcon.png" />
+    <Content Include="codeGenerator\images\css.png" />
+    <Content Include="codeGenerator\images\html.png" />
     <Content Include="codeGenerator\images\loginBackGround.jpg" />
     <Content Include="codeGenerator\css\slateTheme.min.css" />
     <Content Include="codeGenerator\images\WillCoreLogo.png" />
@@ -55,6 +58,17 @@
     <Content Include="codeGenerator\views\codeGen\codeGen.sources.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.targets.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.traps.js" />
+    <Content Include="codeGenerator\views\initProject\view.bindings.js" />
+    <Content Include="codeGenerator\views\initProject\view.collections.js" />
+    <Content Include="codeGenerator\views\initProject\view.events.js" />
+    <Content Include="codeGenerator\views\initProject\view.html" />
+    <Content Include="codeGenerator\views\initProject\view.js" />
+    <Content Include="codeGenerator\views\initProject\view.logic.js" />
+    <Content Include="codeGenerator\views\initProject\view.meta.js" />
+    <Content Include="codeGenerator\views\initProject\initProject.server.js" />
+    <Content Include="codeGenerator\views\initProject\view.sources.js" />
+    <Content Include="codeGenerator\views\initProject\view.targets.js" />
+    <Content Include="codeGenerator\views\initProject\view.traps.js" />
     <Content Include="codeGenerator\views\login\login.bindings.js" />
     <Content Include="codeGenerator\views\login\login.collections.js" />
     <Content Include="codeGenerator\views\login\login.events.js" />
@@ -143,6 +157,7 @@
     <Folder Include="codeGenerator\views\" />
     <Folder Include="codeGenerator\views\login\" />
     <Folder Include="codeGenerator\views\codeGen\" />
+    <Folder Include="codeGenerator\views\initProject\" />
     <Folder Include="willCore\willCore.server\middleware\endpoints\activeRequest\" />
     <Folder Include="willCore\willCore.server\middleware\session\encryption\" />
     <Folder Include="willCore\willCore.server\middleware\" />
