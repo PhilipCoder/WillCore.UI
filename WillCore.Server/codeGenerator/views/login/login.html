@@ -8,19 +8,19 @@
     </div>
     <div class="form-group">
         <label>User Name</label>
-        <input type="email" class="form-control" id="emailInput" placeholder="Enter User Name">
+        <input type="text" class="form-control" id="userNameInput" placeholder="Enter User Name">
         <small class="form-text text-muted">The default credentials are set in the credentials.json file.</small>
     </div>
     <div class="form-group">
         <label>Enter Password</label>
         <input type="password" class="form-control" id="passwordInput" placeholder="Password">
     </div>
-    <div class="form-group" id="loginFailed" style="display:none">
+    <div class="form-group" id="loginFailed" >
         <div class="alert alert-danger">
             Login Failed!
         </div>
     </div>
-    <div class="form-group" id="loginSuccess" style="display:none">
+    <div class="form-group" id="loginSuccess" >
         <div class="alert alert-success">
             Login Success!
             <small class="float-right" id="navigationCountDown">Navigating in...</small>

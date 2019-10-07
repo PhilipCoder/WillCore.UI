@@ -29,12 +29,12 @@ class server extends assignable {
                 }
                 requestBody[data[i]._proxyName] = collectionObj;
             }
-         
-            that.PostRequest(`${window.location.origin}/${that.proxy._proxyTarget.viewManager.name}/${that.name}`, "PUT", { id: requestId, data: requestBody }, {});
             if (that.sse) {
                 that.sse.close();
             }
             createSSE();
+            that.PostRequest(`${window.location.origin}/${that.proxy._proxyTarget.viewManager.name}/${that.name}`, "PUT", { id: requestId, data: requestBody }, {});
+            
             function createSSE() {
                 that.sse = new EventSource(`/event-stream?id=${requestId}`);
                 that.sse.onerror = (e,b) => {

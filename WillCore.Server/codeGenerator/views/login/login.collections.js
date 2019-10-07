@@ -6,7 +6,7 @@
  * @param {object} configuration
  */
 var collections = async (view, configuration) => {
-    view.loginData = { userName: "adminUser", password: "adminPassword" };
+    view.loginData = { userName: "", password: "" };
 };
 
 export { collections };

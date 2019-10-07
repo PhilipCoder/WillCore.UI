@@ -75,9 +75,11 @@ class sseContainer {
 	 */
     static unloadSSE(requestId) {
         if (global.activeRequestContainer[requestId]) {
-            global.activeRequestContainer[requestId].sseResponse.write(`data: done\n\n`);
-            global.activeRequestContainer[requestId].sseResponse.end();
-            delete global.activeRequestContainer[requestId];
+            if (global.activeRequestContainer[requestId].sseResponse) {
+                global.activeRequestContainer[requestId].sseResponse.write(`data: done\n\n`);
+                global.activeRequestContainer[requestId].sseResponse.end();
+                delete global.activeRequestContainer[requestId];
+            }
         }
     }
 }

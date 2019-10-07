@@ -101,6 +101,9 @@
     <Content Include="willCore\willCore.ui\assignables\bindables\attribute.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\create.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\event.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\disabled.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\show.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\hide.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\innerHTML.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\layout.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\layoutProxyFactory.js" />
@@ -120,6 +123,7 @@
     <Content Include="willCore\willCore.ui\binding\collectionManager.js" />
     <Content Include="willCore\willCore.ui\binding\elementProxy.js" />
     <Content Include="willCore\willCore.ui\binding\proxyObject.js" />
+    <Content Include="willCore\willCore.ui\helpers\authentication.js" />
     <Content Include="willCore\willCore.ui\helpers\exceptionHander.js" />
     <Content Include="willCore\willCore.ui\helpers\guid.js" />
     <Content Include="willCore\willCore.ui\helpers\lazyImport.js" />

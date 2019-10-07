@@ -9,7 +9,7 @@ import { server } from "/willcore/WillCore.js";
  */
 var sources = async (view, configuration) => {
     view.login = [server, () => [view.loginData]];
-    view._login();
+    
 };
 
 export { sources };

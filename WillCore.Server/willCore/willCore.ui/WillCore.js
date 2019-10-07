@@ -4,6 +4,9 @@ import { router } from "./views/router.js";
 import { route } from "./assignables/route.js";
 import { url } from "./assignables/url.js";
 import { innerHTML } from "./assignables/bindables/innerHTML.js";
+import { hide } from "./assignables/bindables/hide.js";
+import { show } from "./assignables/bindables/show.js";
+import { disabled } from "./assignables/bindables/disabled.js";
 import { model } from "./assignables/bindables/model.js";
 import { attribute } from "./assignables/bindables/attribute.js";
 import { create } from "./assignables/bindables/create.js";
@@ -18,6 +21,8 @@ import { layout } from "./assignables/bindables/layout.js";
 import { layoutProxyFactory } from "./assignables/bindables/layoutProxyFactory.js";  
 import { source } from "./assignables/source.js";
 import { server } from "./assignables/server.js";
+import { authentication } from "./helpers/authentication.js";
+
 
 //=========WillCore======================================
 var coreProxyHander = {
@@ -76,4 +81,4 @@ var WillCoreInstance = {
 router.setCoreProxy(WillCoreInstance.willCore);
 
 var mainInstance = WillCoreInstance.willCore;
-export { mainInstance as willCore, route, url, innerHTML, model, attribute, repeat, event, request, partial, layout, source, create, server };
+export { mainInstance as willCore, route, url, innerHTML, model, attribute, repeat, event, request, partial, layout, source, create, server, authentication, hide, disabled };

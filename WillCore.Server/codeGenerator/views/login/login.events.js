@@ -6,7 +6,7 @@
  * @param {object} configuration
  */
 var events = async (view, logic) => {
-
+    view.$submitButton.event.onclick = () => view._login();
 };
 
 export { events };
