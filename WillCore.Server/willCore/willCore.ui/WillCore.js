@@ -21,7 +21,7 @@ import { layout } from "./assignables/bindables/layout.js";
 import { layoutProxyFactory } from "./assignables/bindables/layoutProxyFactory.js";  
 import { source } from "./assignables/source.js";
 import { server } from "./assignables/server.js";
-import { authentication } from "./helpers/authentication.js";
+import { authentication, authenticated } from "./helpers/authentication.js";
 
 
 //=========WillCore======================================
@@ -81,4 +81,4 @@ var WillCoreInstance = {
 router.setCoreProxy(WillCoreInstance.willCore);
 
 var mainInstance = WillCoreInstance.willCore;
-export { mainInstance as willCore, route, url, innerHTML, model, attribute, repeat, event, request, partial, layout, source, create, server, authentication, hide, disabled };
+export { mainInstance as willCore, route, url, innerHTML, model, attribute, repeat, event, request, partial, layout, source, create, server, authentication, hide, disabled, authenticated };

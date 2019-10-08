@@ -53,14 +53,15 @@ class server extends assignable {
         }
         this.proxy._proxyTarget["_$Sources" + this.name].push(runRequest);
         this.proxy._proxyTarget["_" + this.name] = function () {
-            var result = [];
+            var promises = [];
             var requestId = guid();
             var sources = that.proxy._proxyTarget["_$Sources" + that.name];
             for (var i = 0; i < sources.length; i++) {
                 var source = sources[i];
                 var result = source(requestId);
-                result.push(result);
+                promises.push(result);
             }
+            return promises;
         }
         console.log(this.proxy._proxyTarget);
 

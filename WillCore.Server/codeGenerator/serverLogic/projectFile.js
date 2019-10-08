@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require("fs");
+const fileCreator = require("./fileCreator.js");
 
 class projectFile {
     constructor() {
@@ -22,6 +23,15 @@ class projectFile {
             useGlobalCss: useGlobalCss
         };
         this.save();
+        if (useBootstrap) {
+            fileCreator.setBootstrap();
+        }
+        if (useIndexFile) {
+            fileCreator.setIndex(useBootstrap);
+        }
+        if (useGlobalCss) {
+            fileCreator.setDefaultCSS();
+        }
     }
 
     save() {

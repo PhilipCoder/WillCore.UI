@@ -31,7 +31,11 @@ class _viewLoader {
             } else {
                 that.isDefaultLayout = false;
             }
-            if (viewManager.routeAuthFunc && !viewManager.routeAuthFunc()) {
+            var authenticated = viewManager.routeAuthFunc();
+            if (authenticated.then) {
+                authenticated = await authenticated;
+            }
+            if (!authenticated) {
                 window.location.hash = "/";
                 return;
             }

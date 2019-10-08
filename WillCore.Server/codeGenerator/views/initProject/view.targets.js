@@ -1,3 +1,4 @@
+import { willCore } from "/willcore/WillCore.js";
 /**
  * Definition file for collection targets.
  * 
@@ -8,7 +9,7 @@
 var targets = async (view, configuration) => {
     view.projectData = (target, property, value) => {
         if (value && value.exists) {
-            alert("Project found");
+            willCore("/folderExplorer");
         }
     }
 };

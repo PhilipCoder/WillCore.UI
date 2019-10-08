@@ -52,6 +52,23 @@
     <Content Include="codeGenerator\serverLogic\projectFile.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\serverLogic\templates\defaultCss\defaultCss.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\serverLogic\templates\index\bootstrap\index.html" />
+    <Content Include="codeGenerator\serverLogic\templates\index\bootstrap\index.js" />
+    <Content Include="codeGenerator\serverLogic\templates\index\default\index.html" />
+    <Content Include="codeGenerator\serverLogic\templates\index\default\index.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.bindings.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.sources.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.targets.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.traps.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.events.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.logic.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.html" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.js" />
+    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName_meta.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.bindings.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.collections.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.events.js" />
@@ -64,6 +81,18 @@
     <Content Include="codeGenerator\views\codeGen\codeGen.sources.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.targets.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.traps.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.bindings.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.collections.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.events.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.logic.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.meta.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.sources.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.targets.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.traps.js" />
     <Content Include="codeGenerator\views\initProject\view.bindings.js" />
     <Content Include="codeGenerator\views\initProject\view.collections.js" />
     <Content Include="codeGenerator\views\initProject\view.events.js" />
@@ -161,10 +190,18 @@
     <Folder Include="codeGenerator\config\" />
     <Folder Include="codeGenerator\images\" />
     <Folder Include="codeGenerator\serverLogic\" />
+    <Folder Include="codeGenerator\serverLogic\templates\" />
+    <Folder Include="codeGenerator\serverLogic\templates\index\" />
+    <Folder Include="codeGenerator\serverLogic\templates\defaultCss\" />
+    <Folder Include="codeGenerator\serverLogic\templates\index\bootstrap\" />
+    <Folder Include="codeGenerator\serverLogic\templates\index\default\" />
+    <Folder Include="codeGenerator\serverLogic\templates\bootstrap\" />
+    <Folder Include="codeGenerator\serverLogic\templates\view\" />
     <Folder Include="codeGenerator\views\" />
     <Folder Include="codeGenerator\views\login\" />
     <Folder Include="codeGenerator\views\codeGen\" />
     <Folder Include="codeGenerator\views\initProject\" />
+    <Folder Include="codeGenerator\views\folderExplorer\" />
     <Folder Include="willCore\willCore.server\middleware\endpoints\activeRequest\" />
     <Folder Include="willCore\willCore.server\middleware\session\encryption\" />
     <Folder Include="willCore\willCore.server\middleware\" />

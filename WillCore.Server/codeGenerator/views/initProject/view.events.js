@@ -1,3 +1,5 @@
+import { willCore } from "/willcore/WillCore.js";
+
 /**
  * Event binding module 
  * 
@@ -6,9 +8,10 @@
  * @param {object} configuration
  */
 var events = async (view, logic) => {
-    view.$createBtn.event.onclick =async () => {
-        await Promise.all(view._initProject());
-        alert("done");
+    view.$createBtn.event.onclick = async () => {
+        var promises = view._initProject();
+        await Promise.all(promises);
+        willCore("/folderExplorer");
     };
 };
 

@@ -18,4 +18,11 @@ async function authentication() {
     return GetRequest(`${window.location.origin}/authentication`,"GET", {}, {});
 }
 
-export { authentication };
+async function authenticated() {
+    return new Promise(async (resolve, reject) => {
+        var result = await GetRequest(`${window.location.origin}/authentication`, "GET", {}, {});
+        resolve(result.authenticated);
+    });
+}
+
+export { authentication, authenticated };
