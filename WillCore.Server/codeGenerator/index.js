@@ -6,9 +6,5 @@ willCore.initProject = [willCore.$loginViewContainer, url, "/codeGen/views/initP
 
 //willCore.codeGen = [willCore.$mainContentDiv, url, "/views/codeGen.js", url, "/views/codeGen.html", route,"/", x=>true];
 authentication().then((data) => {
-    if (data.authenticated) {
-        willCore("/initProject");
-    } else {
-        willCore("/");
-    }
+    willCore(data.authenticated ? "/initProject" : "/");
 });

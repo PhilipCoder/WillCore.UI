@@ -29,7 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="codeGenerator\config\credentials.json">
+    <Content Include="codeGenerator\config\projectConfig.json">
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\css\bootstrap.min.css" />
@@ -46,6 +46,12 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\index.js" />
+    <Content Include="codeGenerator\serverLogic\fileCreator.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\serverLogic\projectFile.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="codeGenerator\views\codeGen\codeGen.bindings.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.collections.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.events.js" />
@@ -154,6 +160,7 @@
     <Folder Include="codeGenerator\css\" />
     <Folder Include="codeGenerator\config\" />
     <Folder Include="codeGenerator\images\" />
+    <Folder Include="codeGenerator\serverLogic\" />
     <Folder Include="codeGenerator\views\" />
     <Folder Include="codeGenerator\views\login\" />
     <Folder Include="codeGenerator\views\codeGen\" />

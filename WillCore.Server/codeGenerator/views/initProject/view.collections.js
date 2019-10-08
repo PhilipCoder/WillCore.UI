@@ -6,7 +6,9 @@
  * @param {object} configuration
  */
 var collections = async (view, configuration) => {
-    
+    view.projectSettings = { useBootstrap: true, useDefaultCSS: true, useIndexFile: true };
+    view.projectData = {};
+
 };
 
 export { collections };

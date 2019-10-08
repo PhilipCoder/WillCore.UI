@@ -1,10 +1,12 @@
-var path = require('path');
-var fs = require("fs");
+var projectFile = require("../../serverLogic/projectFile.js");
 
 module.exports = (view) => {
     view.projectExists = (view) => {
-        var dir = path.resolve(__dirname, `../../config/project.json`);
-        view.projectData = { exists: fs.existsSync(dir) };
+        view.projectData = { exists: projectFile.exists() };
         view.done();
     }
+    view.initProject = (view) => {
+        projectFile.init(view.projectSettings.useBootstrap, view.projectSettings.useIndexFile, view.projectSettings.useDefaultCSS);
+        view.done();
+    };
 };

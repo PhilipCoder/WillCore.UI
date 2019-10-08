@@ -33,7 +33,6 @@ class server extends assignable {
                 that.sse.close();
             }
             createSSE();
-            that.PostRequest(`${window.location.origin}/${that.proxy._proxyTarget.viewManager.name}/${that.name}`, "PUT", { id: requestId, data: requestBody }, {});
             
             function createSSE() {
                 that.sse = new EventSource(`/event-stream?id=${requestId}`);
@@ -50,18 +49,17 @@ class server extends assignable {
                     }
                 });
             }
-           
+            return that.PostRequest(`${window.location.origin}/${that.proxy._proxyTarget.viewManager.name}/${that.name}`, "PUT", { id: requestId, data: requestBody }, {});
         }
         this.proxy._proxyTarget["_$Sources" + this.name].push(runRequest);
         this.proxy._proxyTarget["_" + this.name] = function () {
+            var result = [];
             var requestId = guid();
             var sources = that.proxy._proxyTarget["_$Sources" + that.name];
             for (var i = 0; i < sources.length; i++) {
                 var source = sources[i];
                 var result = source(requestId);
-                if (typeof result !== "undefined" && result !== null) {
-                    //this.proxy[this.name] = result;
-                }
+                result.push(result);
             }
         }
         console.log(this.proxy._proxyTarget);
@@ -86,13 +84,11 @@ class server extends assignable {
             url = new URL(url);
             url.search = new URLSearchParams(query);
         }
-        fetch(url, {
+        return fetch(url, {
             method: method,
             mode: 'cors',
             body: JSON.stringify(body),
             headers: new Headers(headers)
-        }).then((data) => {
-            //that.sse.close();
         });
     }
 

@@ -1,3 +1,4 @@
+import { willCore } from "/willcore/WillCore.js";
 /**
  * Definition file for collection targets.
  * 
@@ -6,7 +7,11 @@
  * @param {object} configuration
  */
 var targets = async (view, configuration) => {
-    
+    view.loginData = (target, property, value) => {
+        if (value && value.success) {
+            willCore("/initProject");
+        }
+    }
 };
 
 export { targets };

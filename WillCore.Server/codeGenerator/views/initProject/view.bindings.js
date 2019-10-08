@@ -6,7 +6,9 @@
  * @param {view} view
  */
 var bindings = async (view) => {
-    view.projectData = {};
+    view.$useDefaultCSS.model = () => view.projectSettings.useDefaultCSS;
+    view.$useBootstrap.model = () => view.projectSettings.useBootstrap;
+    view.$useIndexFile.model = () => view.projectSettings.useIndexFile;
 };
 
 export { bindings };

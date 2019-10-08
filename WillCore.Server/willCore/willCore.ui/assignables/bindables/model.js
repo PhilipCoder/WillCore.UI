@@ -29,9 +29,11 @@ class model extends bindable {
         if (this.element.tagName === "IMG") {
             var imageBase64 = typeof targetValue === "object" ? this.getBase64(targetValue) : targetValue;
             this.element.src = "data:image/png;base64," + imageBase64;
-            return;
+        } else if (this.element.type == "checkbox" || this.element.type == "radio") {
+            this.element.checked = !!targetValue;
+        } else {
+            this.element.value = targetValue;
         }
-        this.element.value = targetValue;
     }
     setValueProps(receiver, property) {
         if (!this.element || typeof this.targetValue == "undefined") return;

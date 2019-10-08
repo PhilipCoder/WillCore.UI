@@ -9,6 +9,7 @@ import { server } from "/willcore/WillCore.js";
  */
 var sources = async (view, configuration) => {
     view.projectExists = [server, () => []];
+    view.initProject = [server, () => [view.projectSettings]];
     view._projectExists();
 };
 
