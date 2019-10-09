@@ -61,7 +61,7 @@ class sseContainer {
         if (request.url.startsWith("/event-stream")) {
             var requestId = request.url.substring(request.url.indexOf("=") + 1);
             global.activeRequestContainer[requestId] = global.activeRequestContainer[requestId] || new activeRequest(requestId, this.requestExpiration);
-            global.activeRequestContainer[requestId].registerSSE(response);
+            global.activeRequestContainer[requestId].registerSSE(response, requestId);
             //stop the middleware processing
             return true;
         }
@@ -75,7 +75,14 @@ class sseContainer {
 	 */
     static unloadSSE(requestId) {
         if (global.activeRequestContainer[requestId]) {
+            global.activeRequestContainer[requestId].toBeRemoved = true;
             if (global.activeRequestContainer[requestId].sseResponse) {
+                response.writeHead(200, {
+                    'Content-Type': 'text/event-stream',
+                    'Cache-Control': 'no-cache',
+                    'Connection': 'keep-alive',
+                    'transfer-encoding': ''
+                });
                 global.activeRequestContainer[requestId].sseResponse.write(`data: done\n\n`);
                 global.activeRequestContainer[requestId].sseResponse.end();
                 delete global.activeRequestContainer[requestId];

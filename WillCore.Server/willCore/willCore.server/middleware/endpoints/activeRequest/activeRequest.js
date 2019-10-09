@@ -38,7 +38,7 @@ class activeRequest {
      * Registers a SSE when a SSE request hits the server.
      * @param {import('http').ServerResponse} response
      */
-    registerSSE(response) {
+    registerSSE(response, requestId) {
         var that = this;
         this.sseResponse = response;
         this.sseRunCallback = () => {
@@ -54,7 +54,11 @@ class activeRequest {
             messageId++;
             let result = `data: ${json}\n\n`;// ${json}
             response.write(result);
-           // response.end();
+            if (global.activeRequestContainer[requestId].toBeRemoved) {
+                delete global.activeRequestContainer[requestId];
+                response.end();
+                clearTimeout(this.timer);
+            }
         };
         if (Object.keys(this.collections).length > 0) {
             this.sseRunCallback();
@@ -68,8 +72,10 @@ class activeRequest {
         for (var key in value) {
             if (key !== "_collection") {
                 var childObj = value[key];
-                if (typeof childObj === "object") {
+                if (typeof childObj === "object" && Array.isArray(childObj) !== true) {
                     childObj = this.getResultObj(childObj);
+                } else if (Array.isArray(childObj)) {
+                    childObj = childObj.map(x=>this.getResultObj(x));
                 }
                 result[key] = childObj;
             }

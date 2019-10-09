@@ -131,7 +131,7 @@ class repeat extends bindable {
         for (var i = 0; i < targetValue.length; i++) {
             var elements = this.getCopyOfElements(this.originalChildren);
             var idProxy = getIdProxyHander(elements, this.viewManager);
-            this.repeatFunction(idProxy, targetValue[i]);
+            this.repeatFunction(idProxy, targetValue[i], i);
             this.appendNodesToDom(elements);
         }
 

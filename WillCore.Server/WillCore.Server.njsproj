@@ -38,6 +38,14 @@
     </Content>
     <Content Include="codeGenerator\images\bootstrapIcon.png" />
     <Content Include="codeGenerator\images\css.png" />
+    <Content Include="codeGenerator\images\fileIcons\css.png" />
+    <Content Include="codeGenerator\images\fileIcons\file.png" />
+    <Content Include="codeGenerator\images\fileIcons\folder.png" />
+    <Content Include="codeGenerator\images\fileIcons\gif.png" />
+    <Content Include="codeGenerator\images\fileIcons\html.png" />
+    <Content Include="codeGenerator\images\fileIcons\js.png" />
+    <Content Include="codeGenerator\images\fileIcons\png.png" />
+    <Content Include="codeGenerator\images\fileIcons\svg.png" />
     <Content Include="codeGenerator\images\html.png" />
     <Content Include="codeGenerator\images\loginBackGround.jpg" />
     <Content Include="codeGenerator\css\slateTheme.min.css" />
@@ -46,7 +54,22 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\index.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.bindings.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.collections.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.events.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.logic.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.meta.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.sources.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.targets.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.traps.js" />
     <Content Include="codeGenerator\serverLogic\fileCreator.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codeGenerator\serverLogic\fileExplorer.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\serverLogic\projectFile.js">
@@ -93,6 +116,7 @@
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.sources.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.targets.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.traps.js" />
+    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.server.js" />
     <Content Include="codeGenerator\views\initProject\view.bindings.js" />
     <Content Include="codeGenerator\views\initProject\view.collections.js" />
     <Content Include="codeGenerator\views\initProject\view.events.js" />
@@ -128,6 +152,10 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="willCore\willCore.server\middleware\session\server.authenticationRequest.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="willCore\willCore.server\middleware\staticFiles\node-static\util.js" />
+    <Content Include="willCore\willCore.server\middleware\staticFiles\server.staticFiles.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="willCore\willCore.server\server.requestDirector.js">
@@ -189,6 +217,9 @@
     <Folder Include="codeGenerator\css\" />
     <Folder Include="codeGenerator\config\" />
     <Folder Include="codeGenerator\images\" />
+    <Folder Include="codeGenerator\images\fileIcons\" />
+    <Folder Include="codeGenerator\layouts\" />
+    <Folder Include="codeGenerator\layouts\fileExplorerLayout\" />
     <Folder Include="codeGenerator\serverLogic\" />
     <Folder Include="codeGenerator\serverLogic\templates\" />
     <Folder Include="codeGenerator\serverLogic\templates\index\" />
@@ -208,6 +239,7 @@
     <Folder Include="willCore\willCore.server\middleware\endpoints\" />
     <Folder Include="willCore\willCore.server\middleware\session\" />
     <Folder Include="willCore\willCore.server\middleware\staticFiles\" />
+    <Folder Include="willCore\willCore.server\middleware\staticFiles\node-static\" />
     <Folder Include="willCore\willCore.ui\" />
     <Folder Include="willCore\willCore.ui\assignables\" />
     <Folder Include="willCore\willCore.ui\assignables\bindables\" />

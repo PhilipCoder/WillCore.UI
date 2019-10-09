@@ -9,7 +9,7 @@ import { willCore } from "/willcore/WillCore.js";
 var targets = async (view, configuration) => {
     view.projectData = (target, property, value) => {
         if (value && value.exists) {
-            willCore("/folderExplorer");
+            willCore("/folderExplorer", { route: "wwwRoot" });
         }
     }
 };

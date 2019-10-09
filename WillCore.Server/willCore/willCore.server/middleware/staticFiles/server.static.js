@@ -2,6 +2,8 @@ var config = require('../../config.json');
 var path = require('path');
 var fs = require('fs');
 
+var files = new Map();
+
 class staticFileServer {
     /**
     * Static file server. 
@@ -59,8 +61,25 @@ class staticFileServer {
             this.responseCode = 404;
             return;
         }
-        return fs.readFileSync(filePath);
+        var cachedValue = files.get(filePath);
+        if (!cachedValue) {
+            cachedValue = fs.readFileSync(filePath);
+            files.set(filePath, cachedValue);
+        }
+        return cachedValue;
     }
+
+    //fs.access(filePath, fs.F_OK, (err) => {
+    //    if (err) {
+    //        console.error(err)
+    //        return
+    //    }
+
+    //    response.writeHead(this.responseCode, { 'Content-Type': this.mimeType });
+
+    //    const stream = fs.createReadStream(filePath)
+    //    stream.pipe(response)
+    //});
 
     calculateMimeType(filePath) {
         this.fileExtenstion = path.extname(filePath);

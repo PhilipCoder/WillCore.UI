@@ -5,10 +5,11 @@ var proxyHandler = {
     set: async function (target, property, value) {
         if (value.then) value = await value;
         if (typeof value === "object") {
-            target[property] = new Proxy(value, proxyHandler);
+            target[property] = Array.isArray(value) ? value: new Proxy(value, proxyHandler);
             value._collection = target._collection || { isModified: true, collectionName: property, container: target };
             sseContainer.setCollectionModified(target.requestId, property, target[property]);
-        } else {
+        } 
+        else {
             target[property] = value;
         }
         if (target._collection) {
@@ -32,7 +33,6 @@ class viewProxy {
     constructor(obj, request, repsonse) {
         obj.requestId = request.url.substring(request.url.indexOf("=") + 1);
         sseContainer.registerRequest(obj.requestId);
-        this.proxy = new Proxy(obj, proxyHandler);
         obj.session = new authentication(request, repsonse);
         obj.repsonse = repsonse;
         obj.done = function () {
@@ -41,18 +41,19 @@ class viewProxy {
             obj.repsonse.end(JSON.stringify(result));
             sseContainer.unloadSSE(obj.requestId);
         };
+        this.proxy = new Proxy(obj, proxyHandler);
         function initProxy(value) {
             for (var key in value) {
                 var childObj = value[key];
-                if (typeof childObj === "object" && key !== "_collection" && key !== "session" && key !== "repsonse") {
+                if (typeof childObj === "object" && key !== "_collection" && key !== "session" && key !== "repsonse" ) {
                     value[key] = new Proxy(childObj, proxyHandler);
-                    childObj._collection = value._collection || { collectionName: key, container: obj};
+                    childObj._collection = value._collection || { collectionName: key, container: obj };
                     initProxy(childObj);
                 }
             }
         }
         initProxy(obj);
-        
+
     }
 }
 

@@ -68,7 +68,7 @@ class _router {
             if (segments.length !== 2) {
                 execptionHander.handleExeception("Invalid URL parameters", `Unable to parse the current URL to any meaningful values.`);
             }
-            objectToAssignTo[segments[0]] = segments[1];
+            objectToAssignTo[segments[0]] = decodeURIComponent(segments[1]);
         });
     }
     regiserView(view) {

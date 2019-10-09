@@ -31,13 +31,15 @@ class _viewLoader {
             } else {
                 that.isDefaultLayout = false;
             }
-            var authenticated = viewManager.routeAuthFunc();
-            if (authenticated.then) {
-                authenticated = await authenticated;
-            }
-            if (!authenticated) {
-                window.location.hash = "/";
-                return;
+            if (typeof viewManager.routeAuthFunc === "function") {
+                var authenticated = viewManager.routeAuthFunc();
+                if (authenticated.then) {
+                    authenticated = await authenticated;
+                }
+                if (!authenticated) {
+                    window.location.hash = "/";
+                    return;
+                }
             }
             if (!viewManager.htmlURL || !viewManager.jsURL) {
                 execptionHander.handleExeception("Unable To Load View", `The view ${viewManager.name} does not both htmlURL and jsURL defined.`);

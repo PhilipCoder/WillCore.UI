@@ -66,7 +66,7 @@ class viewFactory {
 
         //Method that handles arrays that are assigned to a view
         var handleArray = (obj, prop, value, proxyInstance, propValue, handleSet) => {
-            if (prop.startsWith("$") || (value[0].assignAbleToNonElement && value[0].assignAbleToNonElement)) {
+            if (prop.startsWith("$") || (value.length > 0 && value[0].assignAbleToNonElement && value[0].assignAbleToNonElement)) {
                 value.forEach(assignmentVal => handleSet(obj, prop, assignmentVal));
             } else if (!prop.startsWith("$")) {
                 if (obj[prop] && obj[prop]._isProxy) {

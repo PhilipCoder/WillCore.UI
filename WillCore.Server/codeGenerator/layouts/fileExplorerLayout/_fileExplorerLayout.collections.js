@@ -1,12 +1,12 @@
 /**
  * Builds up the collections that are used by the view.
  * 
- * @typedef {import("./folderExplorer.meta.js").viewMetaData} view
+ * @typedef {import("./_fileExplorerLayout.meta.js").viewMetaData} view
  * @param {view} view
  * @param {object} configuration
  */
 var collections = async (view, configuration) => {
-    view.files = [];
+    view.routeData = view.route.route ? view.route.route.split("/") : [];
 };
 
 export { collections };

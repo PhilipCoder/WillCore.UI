@@ -18,7 +18,7 @@ import { request } from "./assignables/request.js";
 import { viewManager } from "./views/viewManager.js";
 import { idManager } from "./views/idManager.js";
 import { layout } from "./assignables/bindables/layout.js";
-import { layoutProxyFactory } from "./assignables/bindables/layoutProxyFactory.js";  
+import { layoutProxyFactory } from "./assignables/bindables/layoutProxyFactory.js";
 import { source } from "./assignables/source.js";
 import { server } from "./assignables/server.js";
 import { authentication, authenticated } from "./helpers/authentication.js";
@@ -67,14 +67,24 @@ var coreProxyHander = {
         return true;
     }
 }
-function routerFunction(route) {
-    window.location.hash = route;
+function routerFunction(route, routeParameters) {
+    let parameters = [];
+    let parameterString = "";
+    if (routeParameters && typeof routeParameters === "object") {
+        for (var key in routeParameters) {
+            parameters.push(`${key}=${encodeURIComponent(routeParameters[key])}`);
+        }
+        if (parameters.length > 0) {
+            parameterString = "?" + parameters.join("&");
+        }
+    }
+    window.location.hash = route + parameterString;
     router.init();
 }
 
 var WillCoreInstance = {
     router: router,
-    _init:false,
+    _init: false,
     willCore: new Proxy(routerFunction, coreProxyHander),
 };
 
