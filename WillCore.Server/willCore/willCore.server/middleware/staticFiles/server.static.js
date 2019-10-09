@@ -61,12 +61,12 @@ class staticFileServer {
             this.responseCode = 404;
             return;
         }
-        var cachedValue = files.get(filePath);
-        if (!cachedValue) {
-            cachedValue = fs.readFileSync(filePath);
-            files.set(filePath, cachedValue);
-        }
-        return cachedValue;
+        //var cachedValue = files.get(filePath);
+        //if (!cachedValue) {
+        //    cachedValue = fs.readFileSync(filePath);
+        //    files.set(filePath, cachedValue);
+        //}
+        return fs.readFileSync(filePath);
     }
 
     //fs.access(filePath, fs.F_OK, (err) => {

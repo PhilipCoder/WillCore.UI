@@ -47,6 +47,7 @@
     <Content Include="codeGenerator\images\fileIcons\png.png" />
     <Content Include="codeGenerator\images\fileIcons\svg.png" />
     <Content Include="codeGenerator\images\html.png" />
+    <Content Include="codeGenerator\images\loading.gif" />
     <Content Include="codeGenerator\images\loginBackGround.jpg" />
     <Content Include="codeGenerator\css\slateTheme.min.css" />
     <Content Include="codeGenerator\images\WillCoreLogo.png" />
