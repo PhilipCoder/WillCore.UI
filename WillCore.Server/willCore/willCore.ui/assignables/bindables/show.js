@@ -10,7 +10,8 @@ class show extends bindable {
     setValues(values) {
         if (!this.element) return;
         try {
-            this.initialDisplayState = !this.element.style.display || this.element.style.display === "none" ? "block" : this.element.style.display;
+            var display = getComputedStyle(this.element).display;
+            this.initialDisplayState = !display || display === "none" ? "block" : display;
             this.bindingMethod = values.function[0];
             this.viewManager.collectionManager.listen(this, this);
             this.updateDom();

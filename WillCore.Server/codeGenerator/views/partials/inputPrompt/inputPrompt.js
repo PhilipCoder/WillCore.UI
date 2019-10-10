@@ -1,10 +1,10 @@
-import { collections } from "./_fileExplorerLayout.collections.js";
-import { bindings } from "./_fileExplorerLayout.bindings.js";
-import { logic } from "./_fileExplorerLayout.logic.js";
-import { events } from "./_fileExplorerLayout.events.js";
-import { sources } from "./_fileExplorerLayout.sources.js";
-import { traps } from "./_fileExplorerLayout.traps.js";
-import { targets } from "./_fileExplorerLayout.targets.js";
+import { collections } from "./inputPrompt.collections.js";
+import { bindings } from "./inputPrompt.bindings.js";
+import { logic } from "./inputPrompt.logic.js";
+import { events } from "./inputPrompt.events.js";
+import { sources } from "./inputPrompt.sources.js";
+import { traps } from "./inputPrompt.traps.js";
+import { targets } from "./inputPrompt.targets.js";
 
 
 const configuration = {

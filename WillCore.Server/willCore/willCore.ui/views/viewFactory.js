@@ -156,12 +156,16 @@ class viewFactory {
             set: setTrap,
             deleteProperty: deletePropertyTrap
         };
-        var baseProxyObj = { viewManager: new viewManager(name), onUnload: null, assignmentMethods: { assignmentMethod: null } };
+        var baseProxyObj = {
+            viewManager: new viewManager(name), onUnload: null, assignmentMethods: { assignmentMethod: null }
+        };
         proxy = new Proxy(baseProxyObj, viewProxyHander);
         proxy.viewManager.proxy = proxy;
         proxy.viewManager.coreProxy = coreProxy;
         proxy.viewManager.parentViewManager = parentViewManager;
         proxy.route = { _skipCleanup: true };
+        proxy._proxyTarget.setLogic = (logic) => { proxy._proxyTarget.logic = logic; };
+
         //Copies the values from a parent view to the proxy of the child view
         if (initProxies) {
             for (var key in initProxies) {

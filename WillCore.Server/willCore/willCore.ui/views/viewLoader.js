@@ -16,7 +16,7 @@ class _viewLoader {
             this.defaultLayoutHTML = this.bodyElement.innerHTML;
         }
     }
-    async loadView(view, coreProxy) {
+    async loadView(view, coreProxy,initialDisplay) {
         var that = this;
         return new Promise(async (mainResolve, mainReject) => {
             var viewManager = view.viewManager;
@@ -49,7 +49,7 @@ class _viewLoader {
         });
     }
 
-    async finalizeLoad(viewManager, view, mainResolve) {
+    async finalizeLoad(viewManager, view, mainResolve, initialDisplay) {
         var html = await loadHTML(viewManager.htmlURL, view);
         const idManagerView = viewManager.parentViewManager ? viewManager.parentViewManager : null;
         var element = typeof viewManager.element === "string" ?

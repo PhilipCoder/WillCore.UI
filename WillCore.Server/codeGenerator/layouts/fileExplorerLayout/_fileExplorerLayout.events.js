@@ -6,6 +6,9 @@
  * @param {object} configuration
  */
 var events = async (view, logic) => {
+    view.$createView.event.onclick = () => logic.promptViewName();
+    view.$createLayout.event.onclick = () => logic.promptLayoutName();
+    view.$createFolder.event.onclick = () => logic.promptFolderName();
 
 };
 

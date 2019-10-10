@@ -1,3 +1,5 @@
+import { partial } from "/willcore/WillCore.js";
+
 /**
  * Binds the HTML elements to the collections.
  * Binding module
@@ -14,8 +16,10 @@ var bindings = async (view) => {
         currentURLs.push(row);
         elements.$routeBreadCrumbLink.innerHTML = () => row;
         elements.$routeBreadCrumbLink.attribute.href = () => "#/folderExplorer?route=" + encodeURIComponent(currentURLs.join("/"));
-
     });
+
+    //=======================Partials==============================
+    view.$inputModal = [partial, "/codeGen/views/partials/inputPrompt/inputPrompt.js", "/codeGen/views/partials/inputPrompt/inputPrompt.html", {}];
 };
 
 export { bindings };

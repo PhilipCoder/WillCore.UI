@@ -28,7 +28,7 @@ class layout extends bindable {
     }
 
     renderView() {
-        return viewLoader.loadView(this.view, this.viewManager.coreProxy, this.viewScope);
+        return viewLoader.loadView(this.view, this.viewManager.coreProxy);
     }
 
     static getInstanceFactory(target, property, value) {

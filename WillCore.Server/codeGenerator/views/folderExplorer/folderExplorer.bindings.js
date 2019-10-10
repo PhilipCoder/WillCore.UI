@@ -17,6 +17,7 @@ var imagePaths = {
 };
 
 var bindings = async (view) => {
+    //================binds the file view==========================
     view.$fileCard.repeat = () => view.files;
     view.$fileCard.repeat((elements, row, index) => {
         elements.$fileNameLabel.innerHTML = () => row.fileNameWithExtension;
@@ -25,6 +26,8 @@ var bindings = async (view) => {
             elements.$fileCard.attribute.href = () => "#/folderExplorer?route=" + encodeURIComponent(view.route.route + "/" + row.fileNameWithExtension);
         }
     });
+    
+
 };
 
 export { bindings };

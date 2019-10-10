@@ -31,7 +31,8 @@ class activeRequest {
             this.collections = {};
         }
         clearTimeout(this.timer);
-        this.timer = setTimeout(() => this.expireCallback(this), this.timeout);
+        var that = this;
+        this.timer = setTimeout(() => that.expireCallback && that.expireCallback(this), this.timeout);
     }
 
     /**

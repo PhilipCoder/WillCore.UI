@@ -163,6 +163,26 @@
     <Content Include="codeGenerator\views\login\login.sources.js" />
     <Content Include="codeGenerator\views\login\login.targets.js" />
     <Content Include="codeGenerator\views\login\login.traps.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.bindings.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.collections.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.events.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.html" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.logic.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.meta.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.sources.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.targets.js" />
+    <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.traps.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.bindings.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.collections.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.events.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.html" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.logic.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.meta.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.sources.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.targets.js" />
+    <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.traps.js" />
     <Content Include="LICENSE" />
     <Content Include="willCore\willCore.server\config.json">
       <SubType>Code</SubType>
@@ -257,6 +277,9 @@
     <Folder Include="codeGenerator\views\codeGen\" />
     <Folder Include="codeGenerator\views\initProject\" />
     <Folder Include="codeGenerator\views\folderExplorer\" />
+    <Folder Include="codeGenerator\views\partials\" />
+    <Folder Include="codeGenerator\views\partials\inputPrompt\" />
+    <Folder Include="codeGenerator\views\partials\confirmPrompt\" />
     <Folder Include="willCore\willCore.server\middleware\endpoints\activeRequest\" />
     <Folder Include="willCore\willCore.server\middleware\session\encryption\" />
     <Folder Include="willCore\willCore.server\middleware\" />
