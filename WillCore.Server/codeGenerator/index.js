@@ -6,6 +6,10 @@ willCore.initProject = [willCore.$loginViewContainer, url, "/codeGen/views/initP
 willCore.fileExplorerLayout = [layout, "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.js", "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.html"];
 willCore.folderExplorer = [willCore.fileExplorerLayout.$mainViewContainer, url, "/codeGen/views/folderExplorer/folderExplorer.js", url, "/codeGen/views/folderExplorer/folderExplorer.html", route, "/folderExplorer", x => authenticated(), willCore.fileExplorerLayout];
 
+willCore.editorLayout = [layout, "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.js", "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.html"];
+willCore.editor = [willCore.editorLayout.$mainViewContainer, url, "/codeGen/views/editor/editor.js", url, "/codeGen/views/editor/editor.html", route, "/editor", x => authenticated(), willCore.editorLayout];
+
+
 //willCore.codeGen = [willCore.$mainContentDiv, url, "/views/codeGen.js", url, "/views/codeGen.html", route,"/", x=>true];
 
 authentication().then((data) => {

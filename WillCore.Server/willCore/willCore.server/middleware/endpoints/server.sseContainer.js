@@ -77,12 +77,12 @@ class sseContainer {
         if (global.activeRequestContainer[requestId]) {
             global.activeRequestContainer[requestId].toBeRemoved = true;
             if (global.activeRequestContainer[requestId].sseResponse) {
-                response.writeHead(200, {
-                    'Content-Type': 'text/event-stream',
-                    'Cache-Control': 'no-cache',
-                    'Connection': 'keep-alive',
-                    'transfer-encoding': ''
-                });
+                //response.writeHead(200, {
+                //    'Content-Type': 'text/event-stream',
+                //    'Cache-Control': 'no-cache',
+                //    'Connection': 'keep-alive',
+                //    'transfer-encoding': ''
+                //});
                 global.activeRequestContainer[requestId].sseResponse.write(`data: done\n\n`);
                 global.activeRequestContainer[requestId].sseResponse.end();
                 delete global.activeRequestContainer[requestId];

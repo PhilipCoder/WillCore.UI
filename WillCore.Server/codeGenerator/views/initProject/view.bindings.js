@@ -9,7 +9,7 @@ var bindings = async (view) => {
     view.$useDefaultCSS.model = () => view.projectSettings.useDefaultCSS;
     view.$useBootstrap.model = () => view.projectSettings.useBootstrap;
     view.$useIndexFile.model = () => view.projectSettings.useIndexFile;
-    view.$loader.show = () => view.projectData && !view.projectData.exists;
+    view.$loader.show = () => !view.projectData;
 };
 
 export { bindings };

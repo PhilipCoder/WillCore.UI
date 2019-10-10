@@ -55,6 +55,16 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\index.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.bindings.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.collections.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.events.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.html" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.logic.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.meta.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.sources.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.targets.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.traps.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.bindings.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.collections.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.events.js" />
@@ -93,6 +103,7 @@
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.html" />
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.js" />
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName_meta.js" />
+    <Content Include="codeGenerator\todo.md" />
     <Content Include="codeGenerator\views\codeGen\codeGen.bindings.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.collections.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.events.js" />
@@ -105,6 +116,16 @@
     <Content Include="codeGenerator\views\codeGen\codeGen.sources.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.targets.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.traps.js" />
+    <Content Include="codeGenerator\views\editor\editor.bindings.js" />
+    <Content Include="codeGenerator\views\editor\editor.collections.js" />
+    <Content Include="codeGenerator\views\editor\editor.events.js" />
+    <Content Include="codeGenerator\views\editor\editor.html" />
+    <Content Include="codeGenerator\views\editor\editor.js" />
+    <Content Include="codeGenerator\views\editor\editor.logic.js" />
+    <Content Include="codeGenerator\views\editor\editor.meta.js" />
+    <Content Include="codeGenerator\views\editor\editor.sources.js" />
+    <Content Include="codeGenerator\views\editor\editor.targets.js" />
+    <Content Include="codeGenerator\views\editor\editor.traps.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.bindings.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.collections.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.events.js" />
@@ -220,6 +241,7 @@
     <Folder Include="codeGenerator\images\" />
     <Folder Include="codeGenerator\images\fileIcons\" />
     <Folder Include="codeGenerator\layouts\" />
+    <Folder Include="codeGenerator\layouts\editorLayout\" />
     <Folder Include="codeGenerator\layouts\fileExplorerLayout\" />
     <Folder Include="codeGenerator\serverLogic\" />
     <Folder Include="codeGenerator\serverLogic\templates\" />
@@ -230,6 +252,7 @@
     <Folder Include="codeGenerator\serverLogic\templates\bootstrap\" />
     <Folder Include="codeGenerator\serverLogic\templates\view\" />
     <Folder Include="codeGenerator\views\" />
+    <Folder Include="codeGenerator\views\editor\" />
     <Folder Include="codeGenerator\views\login\" />
     <Folder Include="codeGenerator\views\codeGen\" />
     <Folder Include="codeGenerator\views\initProject\" />
