@@ -74,6 +74,9 @@
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.logic.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.meta.js" />
+    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.server.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.sources.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.targets.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.traps.js" />
@@ -246,6 +249,9 @@
     <Content Include="willCore\willCore.ui\helpers\exceptionHander.js" />
     <Content Include="willCore\willCore.ui\helpers\guid.js" />
     <Content Include="willCore\willCore.ui\helpers\lazyImport.js" />
+    <Content Include="willCore\willCore.ui\helpers\requestProxy.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="willCore\willCore.ui\views\htmlLoader.js" />
     <Content Include="willCore\willCore.ui\views\idManager.js" />
     <Content Include="willCore\willCore.ui\views\router.js" />

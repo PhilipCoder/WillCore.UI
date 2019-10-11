@@ -78,6 +78,12 @@ class fileCreator {
             });
         });
     }
+
+    createFolder(path) {
+        if (!fs.existsSync(path)) {
+            fs.mkdirSync(path);
+        }
+    }
 }
 
 module.exports = new fileCreator();

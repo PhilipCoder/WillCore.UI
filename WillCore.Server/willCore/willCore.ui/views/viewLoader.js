@@ -16,13 +16,13 @@ class _viewLoader {
             this.defaultLayoutHTML = this.bodyElement.innerHTML;
         }
     }
-    async loadView(view, coreProxy,initialDisplay) {
+    async loadView(view, coreProxy, sender) {
         var that = this;
         return new Promise(async (mainResolve, mainReject) => {
             var viewManager = view.viewManager;
             if (viewManager.layout && that.previousLayout != viewManager.layout) {
                 that.previousLayout = viewManager.layout;
-                await that.loadView(viewManager.layout, coreProxy);
+                await that.loadView(viewManager.layout, coreProxy, view);
                 that.isDefaultLayout = false;
             } else if (!viewManager.layout && !viewManager.isLayout && !view._isPartial) {
                 that.bodyElement.innerHTML = this.defaultLayoutHTML;
@@ -31,6 +31,7 @@ class _viewLoader {
             } else {
                 that.isDefaultLayout = false;
             }
+            
             if (typeof viewManager.routeAuthFunc === "function") {
                 var authenticated = viewManager.routeAuthFunc();
                 if (authenticated.then) {
@@ -44,6 +45,9 @@ class _viewLoader {
             if (!viewManager.htmlURL || !viewManager.jsURL) {
                 execptionHander.handleExeception("Unable To Load View", `The view ${viewManager.name} does not both htmlURL and jsURL defined.`);
             } else {
+                if (viewManager.isLayout && sender) {
+                    view._proxyTarget.child = sender;
+                }
                 await this.finalizeLoad(viewManager, view, mainResolve);
             }
         });

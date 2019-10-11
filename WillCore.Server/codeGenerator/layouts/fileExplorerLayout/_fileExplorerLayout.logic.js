@@ -16,7 +16,12 @@ var logic = (view, configuration) => ({
     },
     promptFolderName: async () => {
         var result = await view.$inputModal.logic.show("Create New Folder", "Enter The Unique Name Of The Folder", "Enter folder name", "");
-        alert(result);
+        if (result) {
+            view.creationValues = { itemName: view.route.route + "\\" + result };
+            await view._createFolder();
+            view.child._getFiles();
+            alert(result);
+        }
 
     }
 });

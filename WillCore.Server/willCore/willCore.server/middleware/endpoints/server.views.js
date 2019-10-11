@@ -49,9 +49,9 @@ class viewServer {
     }
 
     async runMethod(viewName, methodName, methodBody, request, response) {
-        if (!modules.modules[viewName]) return `View ${viewName} not found!`;
-        if (!modules.modules[viewName][methodName]) return `Method ${methodName} on view ${viewName} not found!`;
-        await modules.modules[viewName][methodName](methodBody);
+        if (!modules.modules[viewName] && !modules.modules["_"+viewName]) return `View ${viewName} not found!`;
+        if (!modules.modules[viewName][methodName] && !modules.modules["_" + viewName][methodName]) return `Method ${methodName} on view ${viewName} not found!`;
+        await modules.modules[viewName] ? modules.modules[viewName][methodName](methodBody) : modules.modules["_" +viewName][methodName](methodBody);
     }
     /**
     * @param {import('http').IncomingMessage} request

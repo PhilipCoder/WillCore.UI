@@ -6,5 +6,5 @@ module.exports = (view) => {
         var files = fileExplorerInstance.getFiles();
         view.files = files;
         view.done();
-    }
+    };
 };
