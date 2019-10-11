@@ -1,10 +1,4 @@
-﻿import { lazyImport } from "../helpers/lazyImport.js";
-import { execptionHander } from "../helpers/exceptionHander.js";
-import { layout } from "../assignables/bindables/layout.js";
-import { loadHTML } from "./htmlLoader.js";
-import { idManager } from "./idManager.js";
-
-class _viewLoader {
+﻿class _viewLoader {
     constructor() {
         this.previousLayout = null;
         this.defaultLayoutHTML = null;
@@ -31,7 +25,7 @@ class _viewLoader {
             } else {
                 that.isDefaultLayout = false;
             }
-            
+
             if (typeof viewManager.routeAuthFunc === "function") {
                 var authenticated = viewManager.routeAuthFunc();
                 if (authenticated.then) {
@@ -43,7 +37,7 @@ class _viewLoader {
                 }
             }
             if (!viewManager.htmlURL || !viewManager.jsURL) {
-                execptionHander.handleExeception("Unable To Load View", `The view ${viewManager.name} does not both htmlURL and jsURL defined.`);
+                willCoreModules.execptionHander.handleExeception("Unable To Load View", `The view ${viewManager.name} does not both htmlURL and jsURL defined.`);
             } else {
                 if (viewManager.isLayout && sender) {
                     view._proxyTarget.child = sender;
@@ -54,13 +48,13 @@ class _viewLoader {
     }
 
     async finalizeLoad(viewManager, view, mainResolve, initialDisplay) {
-        var html = await loadHTML(viewManager.htmlURL, view);
+        var html = await willCoreModules.loadHTML(viewManager.htmlURL, view);
         const idManagerView = viewManager.parentViewManager ? viewManager.parentViewManager : null;
         var element = typeof viewManager.element === "string" ?
-            new idManager(idManagerView).getElement(viewManager.element) :
-            new idManager(idManagerView).getElementExistingId(viewManager.element.id);
+            new willCoreModules.idManager(idManagerView).getElement(viewManager.element) :
+            new willCoreModules.idManager(idManagerView).getElementExistingId(viewManager.element.id);
         element.innerHTML = html;
-        lazyImport(viewManager.jsURL).then(x => {
+        willCoreModules.lazyImport(viewManager.jsURL).then(x => {
             if (x.view) {
                 x.view(view);
             }
@@ -68,5 +62,7 @@ class _viewLoader {
         });
     }
 }
-var viewLoader = new _viewLoader();
+var viewLoader = {
+    getFactoryInstance: () => new _viewLoader()
+}
 export { viewLoader };

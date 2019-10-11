@@ -1,7 +1,4 @@
-﻿import { viewLoader } from "./viewLoader.js";
-import { execptionHander } from "../helpers/exceptionHander.js";
-
-class _router {
+﻿class _router {
     constructor() {
         this.registeredViews = {};
         this.coreProxy = null;
@@ -43,7 +40,7 @@ class _router {
                 if (this.previousViewManager) {
                     this.previousViewManager.unload();
                 }
-                viewLoader.loadView(viewToLoad, this.coreProxy);
+                willCoreModules.viewLoader.loadView(viewToLoad, this.coreProxy);
                 viewToLoad.route = {};
                 viewToLoad.route.url = this.getUrl();
                 this.getURLParameters(viewToLoad.route);
@@ -66,7 +63,7 @@ class _router {
         urlParameters.forEach(parameter => {
             var segments = parameter.split("=");
             if (segments.length !== 2) {
-                execptionHander.handleExeception("Invalid URL parameters", `Unable to parse the current URL to any meaningful values.`);
+                willCoreModules.execptionHander.handleExeception("Invalid URL parameters", `Unable to parse the current URL to any meaningful values.`);
             }
             objectToAssignTo[segments[0]] = decodeURIComponent(segments[1]);
         });
@@ -74,12 +71,14 @@ class _router {
     regiserView(view) {
         this.registeredViews[view.viewManager.name] = view;
         if (view.viewManager.route == this.currentRoute) {
-            viewLoader.loadView(view, this.coreProxy);
+            willCoreModules.viewLoader.loadView(view, this.coreProxy);
         }
     }
     init() {
         this.handleRoute(this.getUrl());
     }
 }
-var router = new _router();
+var router = {
+    getFactoryInstance: () => new _router()
+}
 export { router };

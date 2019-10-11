@@ -1,9 +1,4 @@
-﻿import { router } from "../views/router.js";
-import { idManager } from "../views/idManager.js";
-import { collectionManager } from "../binding/CollectionManager.js";
-import { bindingMangager } from "../binding/bindingManager.js";
-
-class viewManager {
+﻿class viewManager {
     constructor(name) {
         this.jsURL = null;
         this.htmlURL = null;
@@ -13,9 +8,9 @@ class viewManager {
         this.element = null;
         this.proxy = null;
         this.layout = null;
-        this.collectionManager = new collectionManager();
+        this.collectionManager = new willCoreModules.collectionManager();
         this.collectionManager.viewManager = this;
-        this.bindingMangager = new bindingMangager();
+        this.bindingMangager = new willCoreModules.bindingMangager();
         this.isLayout = false;
         this.childViews = [];
         this.onUnloadEvent = null;
@@ -42,7 +37,7 @@ class viewManager {
     setRoute(route, view) {
         this.route = route.string[0];
         this.routeAuthFunc = route.function[0];
-        router.regiserView(view);
+        willCoreModules.router.regiserView(view);
     }
 }
 

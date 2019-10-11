@@ -1,4 +1,4 @@
-import { server } from "/willcore/WillCore.js";
+
 /**
  * Definition file for collection sources.
  * 
@@ -7,7 +7,7 @@ import { server } from "/willcore/WillCore.js";
  * @param {object} configuration
  */
 var sources = async (view, configuration) => {
-    view.getFiles = [server, () => [view.route]];
+    view.getFiles = [willCoreModules.server, () => [view.route]];
     view._getFiles();
 };
 

@@ -1,10 +1,4 @@
-﻿import { viewManager } from "../views/viewManager.js";
-import { assignable } from "../binding/assignable.js";
-import { elementProxy } from "../binding/elementProxy.js";
-import { execptionHander } from "../helpers/exceptionHander.js";
-import { idManager } from "../views/idManager.js";
-import { partial } from "../assignables/bindables/view.js";
-
+﻿
 class viewFactory {
     static getView(name, coreProxy, initProxies, parentViewManager) {
         var proxy = null;
@@ -46,7 +40,7 @@ class viewFactory {
         var handleAssignable = (obj, prop, value, proxyInstance, propValue) => {
             var elementId = prop.substring(1);
             var documentVar = typeof window === "undefined" ? null : document;
-            var element = documentVar ? new idManager(proxy.viewManager).getElement(elementId) : null;
+            var element = documentVar ? new willCoreModules.idManager(proxy.viewManager).getElement(elementId) : null;
             propValue = new value(obj.viewManager);
             if (!prop.startsWith("$") && typeof obj[prop] === "object" && propValue.deleteCollection) {
                 delete proxyInstance[prop]
@@ -76,7 +70,7 @@ class viewFactory {
                     obj[prop] = obj.viewManager.collectionManager.getPoxyFromObject(prop, { value: value }, obj);
                 }
             } else {
-                execptionHander.handleExeception("Invalid Assignment", `Unable to assign value to ${prop}. Please check assignment values and sequence.`);
+                willCoreModules.execptionHander.handleExeception("Invalid Assignment", `Unable to assign value to ${prop}. Please check assignment values and sequence.`);
             }
         };
         //The trap used for the view's proxy to intercept get requests on the base
@@ -89,17 +83,17 @@ class viewFactory {
 
             if (!target[prop] && prop.startsWith("$")) {
                 var elementId = prop.substring(1);
-                var element = new idManager(proxy.viewManager).getElement(elementId);
+                var element = new willCoreModules.idManager(proxy.viewManager).getElement(elementId);
                 if (!element) {
                     var result = document.createElement("div");
                     result.id = elementId;
-                    return elementProxy(result, setTrap, target, prop, proxyInstance);;
+                    return willCoreModules.elementProxy(result, setTrap, target, prop, proxyInstance);;
                 }
                 else {
-                    return elementProxy(element, setTrap, target, prop, proxyInstance);
+                    return willCoreModules.elementProxy(element, setTrap, target, prop, proxyInstance);
                 }
             }
-            if (target[prop] instanceof partial) {
+            if (target[prop] instanceof willCoreModules.partial) {
                 return target[prop].view;
             }
             return target[prop] && target[prop].value ? target[prop].value : target[prop];
@@ -115,9 +109,9 @@ class viewFactory {
                 else if (Array.isArray(value) && prop.startsWith("$")) {
                     value.forEach(item => { handleSet(obj, prop, item); });
                 }
-                else if ((prop.startsWith("$") || (value.assignAbleToNonElement && value.assignAbleToNonElement)) && (propValue instanceof assignable) === false && !!value.registerBindable) {
+                else if ((prop.startsWith("$") || (value.assignAbleToNonElement && value.assignAbleToNonElement)) && (propValue instanceof willCoreModules.assignable) === false && !!value.registerBindable) {
                     handleAssignable(obj, prop, value, proxyInstance, propValue);
-                } else if (propValue instanceof assignable) {
+                } else if (propValue instanceof willCoreModules.assignable) {
                     propValue.assign(value);
                     if (propValue.setTarget) {
                         propValue.setTarget(obj, prop);
@@ -128,7 +122,7 @@ class viewFactory {
                 } else if (prop === "onUnload") {
                     obj.viewManager.onUnloadEvent = value;
                 } else {
-                    execptionHander.handleExeception("Invalid Assignment", `Unable to assign value to ${prop}. Please check assignment values and sequence.`);
+                    willCoreModules.execptionHander.handleExeception("Invalid Assignment", `Unable to assign value to ${prop}. Please check assignment values and sequence.`);
                 }
             }
             handleSet(obj, prop, value);
@@ -137,13 +131,13 @@ class viewFactory {
         //The trap used for the view's proxy to intercept delete requests on the base
         function deletePropertyTrap(target, prop) {
             var value = target[prop];
-            if (value instanceof partial) {
+            if (value instanceof willCoreModules.partial) {
                 value.unload();
             }
             if (!prop.startsWith("$")) {
                 target.viewManager.collectionManager.removeAllBindings(target[prop], target.viewManager.collectionManager, target, prop);
             } else {
-                var element = new idManager(target.viewManager).removeElement(prop.replace("$", ""));
+                var element = new willCoreModules.idManager(target.viewManager).removeElement(prop.replace("$", ""));
                 target.viewManager.collectionManager.removeAllElementBindings(element);
             }
             delete target[prop];
@@ -157,7 +151,7 @@ class viewFactory {
             deleteProperty: deletePropertyTrap
         };
         var baseProxyObj = {
-            viewManager: new viewManager(name), onUnload: null, assignmentMethods: { assignmentMethod: null }
+            viewManager: new willCoreModules.viewManager(name), onUnload: null, assignmentMethods: { assignmentMethod: null }
         };
         proxy = new Proxy(baseProxyObj, viewProxyHander);
         proxy.viewManager.proxy = proxy;

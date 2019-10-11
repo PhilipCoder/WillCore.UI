@@ -7,5 +7,7 @@
         document.getElementsByTagName("BODY")[0].style.color = "white";
     }
 };
-var execptionHander = new _execptionHander();
+var execptionHander = {
+    getFactoryInstance: () => new _execptionHander()
+};
 export { execptionHander };

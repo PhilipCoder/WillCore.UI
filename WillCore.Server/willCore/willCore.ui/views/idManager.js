@@ -1,7 +1,4 @@
-﻿import { execptionHander } from "../helpers/exceptionHander.js";
-import { viewFactory } from "../views/viewFactory.js";
-
-class idManager {
+﻿class idManager {
     constructor(viewManager) {
         this.viewName = viewManager ? viewManager.name : null;
     }
@@ -25,7 +22,7 @@ class idManager {
                 var id = that.get(elem.getAttribute("id"));
                 elem.setAttribute("id", id);
                 if (ids[id]) {
-                    execptionHander.handleExeception("Duplicate Element IDs Detected!", `The view ${that.viewName} has more than one element with ID ${id}.`);
+                    willCoreModules.execptionHander.handleExeception("Duplicate Element IDs Detected!", `The view ${that.viewName} has more than one element with ID ${id}.`);
                 }
                 ids[id] = true;
             }

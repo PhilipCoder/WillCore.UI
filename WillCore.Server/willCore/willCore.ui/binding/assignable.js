@@ -1,6 +1,4 @@
-﻿import { execptionHander } from "../helpers/exceptionHander.js";
-
-var allBindables = {};
+﻿var allBindables = {};
 
 class assignable {
     constructor(assignmentConstraints) {
@@ -9,7 +7,7 @@ class assignable {
         this.assignmentCompletionEvent = null;
         this.topInstance = null;
     }
-
+    static isBaseClass() { return "assignable"; }
     assign(value) {
         var that = this;
         var valueType = null;
@@ -27,11 +25,11 @@ class assignable {
         else if (typeof (value) == "function") {
             valueType = "function";
         } else {
-            execptionHander.handleExeception("Unsuppored Data Type", `Can't assign value ${value} to assignable.`);
+            willCoreModules.execptionHander.handleExeception("Unsuppored Data Type", `Can't assign value ${value} to assignable.`);
         }
         if (valueType != null) {
             if (!this.assignmentConstraints[valueType] || (this.assignedValues[valueType] && this.assignedValues[valueType].length >= this.assignmentConstraints[valueType])) {
-                execptionHander.handleExeception("Unsuppored Assignment", `The assignable ${this.topInstance.constructor.name} supports the following assignments: ${getErrorAssignmentValues()}.`);
+                willCoreModules.execptionHander.handleExeception("Unsuppored Assignment", `The assignable ${this.topInstance.constructor.name} supports the following assignments: ${getErrorAssignmentValues()}.`);
             } else {
                 this.assignedValues[valueType] = !this.assignedValues[valueType] ? [] : this.assignedValues[valueType];
                 this.assignedValues[valueType].push(value);

@@ -1,5 +1,3 @@
-import { server } from "/willcore/WillCore.js";
-
 /**
  * Definition file for collection sources.
  * 
@@ -8,7 +6,7 @@ import { server } from "/willcore/WillCore.js";
  * @param {object} configuration
  */
 var sources = async (view, configuration) => {
-    view.createFolder = [server, () => [view.creationValues]];
+    view.createFolder = [willCoreModules.server, () => [view.creationValues]];
 };
 
 export { sources };

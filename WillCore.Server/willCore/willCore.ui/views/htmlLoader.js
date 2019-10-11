@@ -1,6 +1,4 @@
-﻿import { idManager } from "./idManager.js";
-
-function loadHTML(url, view) {
+﻿function loadHTML(url, view) {
     var promise = new Promise((resolve, reject) => {
         var headers = new Headers();
         headers.append('Content-Type', 'text/html');
@@ -10,7 +8,7 @@ function loadHTML(url, view) {
             headers: headers
         }).then(function (response) {
             response.text().then(function (text) {
-                resolve(new idManager(view.viewManager).getProcessedIdHTML(text));
+                resolve(new willCoreModules.idManager(view.viewManager).getProcessedIdHTML(text));
             });
         })
     });

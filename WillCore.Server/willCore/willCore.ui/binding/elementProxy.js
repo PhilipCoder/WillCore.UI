@@ -1,12 +1,10 @@
-﻿import { allBindables, assignable } from "./assignable.js"
-
-var proxyHandler = {
+﻿var proxyHandler = {
     get: function (target, prop, proxyInstance) {
         if (prop === "element") {
             return target;
         }
-        if (allBindables[prop]) {
-            target.setFunction(target._target, target.field, allBindables[prop], target.proxyInstance);
+        if (willCoreModules.baseInhertants.assignable[prop]) {
+            target.setFunction(target._target, target.field, willCoreModules.baseInhertants.assignable[prop], target.proxyInstance);
             return elementProxy(target, target.setFunction, target._target, target.field, target.proxyInstance);
         } else if (prop in target) {
             return target[prop];
@@ -19,9 +17,9 @@ var proxyHandler = {
         }
 
     }, set: function (target, prop, value) {
-        if (!(target instanceof assignable)) {
-            if (allBindables[prop]) {
-                target.setFunction(target._target, target.field, allBindables[prop], target.proxyInstance);
+        if (!(target instanceof willCoreModules.assignable)) {
+            if (willCoreModules.baseInhertants.assignable[prop]) {
+                target.setFunction(target._target, target.field, willCoreModules.baseInhertants.assignable[prop], target.proxyInstance);
             } else {
                 target.setFunction(target._target, target.field, prop, target.proxyInstance);
             }

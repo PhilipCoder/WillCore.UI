@@ -1,6 +1,4 @@
-﻿import { proxyObject } from "./proxyObject.js";
-import { assignable } from "./assignable.js";
-class collectionManager {
+﻿class collectionManager {
     constructor() {
         this.collections = {};
         this.originalHTMLBindings = new Map();
@@ -12,7 +10,7 @@ class collectionManager {
     };
 
     deleteObject(curObj, moveToUnbinded, collectionManagerInstance) {
-        if (curObj instanceof assignable) return;
+        if (curObj instanceof willCoreModules.assignable) return;
         if (moveToUnbinded) {
             var nodes = collectionManagerInstance.originalHTMLBindings.get(curObj);
             if (nodes && nodes.values) {
@@ -59,7 +57,7 @@ class collectionManager {
     }
 
     getPoxyFromObject(name, object, proxy) {
-        this.collections[name] = proxyObject(object, this.valueChanged, this.valueAccessed, this);
+        this.collections[name] = willCoreModules.proxyObject(object, this.valueChanged, this.valueAccessed, this);
         return this.collections[name];
     };
 
@@ -91,7 +89,7 @@ class collectionManager {
             collectionManagerInstance.updateElementDom(collectionManagerInstance, target, property);
         }
         //if assigned is an object, run all the bindings to check if any unassigned binding can be assigned
-        if (typeof target == "object" && !Array.isArray(target) && (!value || (!value.then && !(value instanceof assignable)))) {
+        if (typeof target == "object" && !Array.isArray(target) && (!value || (!value.then && !(value instanceof willCoreModules.assignable)))) {
             var unbindedNodes = new Map();
             var that = this;
             var bindings = Array.from(collectionManagerInstance.unbindedHTMLBindings.keys());

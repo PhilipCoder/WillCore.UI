@@ -252,6 +252,8 @@
     <Content Include="willCore\willCore.ui\helpers\requestProxy.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="willCore\willCore.ui\moduleContainment\moduleProxy.js" />
+    <Content Include="willCore\willCore.ui\Modules.js" />
     <Content Include="willCore\willCore.ui\views\htmlLoader.js" />
     <Content Include="willCore\willCore.ui\views\idManager.js" />
     <Content Include="willCore\willCore.ui\views\router.js" />
@@ -298,6 +300,7 @@
     <Folder Include="willCore\willCore.ui\assignables\bindables\" />
     <Folder Include="willCore\willCore.ui\binding\" />
     <Folder Include="willCore\willCore.ui\helpers\" />
+    <Folder Include="willCore\willCore.ui\moduleContainment\" />
     <Folder Include="willCore\willCore.ui\views\" />
     <Folder Include="wwwRoot\" />
     <Folder Include="willCore\" />

@@ -1,5 +1,3 @@
-import { willCore } from "/willcore/WillCore.js";
-
 /**
  * Event binding module 
  * 

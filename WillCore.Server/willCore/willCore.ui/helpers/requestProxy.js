@@ -1,4 +1,3 @@
-import { guid } from "./guid.js";
 
 function PostRequest(url, method, parameterObj, headers) {
     headers['Content-Type'] = 'application/json';

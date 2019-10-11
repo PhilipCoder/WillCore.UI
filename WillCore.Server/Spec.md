@@ -90,6 +90,62 @@ The following happens when a request is made:
 8. When the promise is registered, the SSE event proxy will do the same check to see if there are modified collections and will resolve the SSE promise if any modified collections are detected. 
 9. A SSE timeout should be specified in the config JSON. A timeout should be registered for the SSE that will reject the SSE promise.
 
+
+ <br/>
+
+>## Simple View Requests
+When SSE streaming is not needed, simple requests are an easier way to quickly do requests. Where a SSE request have one parameter, a simple request can have multiple parameters. They are indicated by a request id of "0000". Unlike SSE requests,
+they are not defined in a strict manner via an assignable, but are called directly.
+
+```javascript
+//login.server.js
+exports.login = () =>  {
+    view.userData = (userName, password) => {
+        if (loadFromDB(userName,password)){
+            return true;
+        }else{
+            return false;
+        }
+    };
+};
+```
+
+```javascript
+var logic = (view, configuration) =>
+    ({
+        var result = await modules.serverRequest(view).userData("philip","password");
+    });
+
+export { logic };
+```
+
+
+>## Changes
+
+WillCore is too tightly coupled. A central modules file will import all the modules and all the other modules will access it from there. This modules container can be accessed from the UI scripts as well. Base modules should be registered first,
+for example assignables. Base models should have a property isBaseModule = true; Only the modules proxy should ever be imported, and once it is imported in the index, it will be a global instance.
+
+The modules container should have the following structure:
+
+```javascript
+var baseModules = {
+    assignable: assignable,
+    assignableImplementations:[model,hide]
+};
+var modules = {
+    //modules a-z
+    model:model
+};
+//When modules are registered, they are assigned to a proxy, which will do the necessary assignment to the containers:
+ 
+
+```
+
+
+Big Change:
+Modules should be able to define themselves to be called by the WillCore proxy or the view proxy's set or get traps. When a module inherits from a coreProxyTrap it will be called by the main WillCore proxy. When it inherits from a viewProxyTrap,
+it will be called by the view proxy. 
+
 >## Authentication Framework
 
 A basic, in memory authentication framework will be included.

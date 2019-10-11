@@ -1,18 +1,18 @@
-import { willCore, url, route, layout, authentication, authenticated} from "/willcore/WillCore.js";
+import { willCore} from "/willcore/WillCore.js";
 
 
-willCore.login = [willCore.$loginViewContainer, url, "/codeGen/views/login/login.js", url, "/codeGen/views/login/login.html", route, "/", x => true];
-willCore.initProject = [willCore.$loginViewContainer, url, "/codeGen/views/initProject/view.js", url, "/codeGen/views/initProject/view.html", route, "/initProject", x => authenticated()];
-willCore.fileExplorerLayout = [layout, "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.js", "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.html"];
-willCore.folderExplorer = [willCore.fileExplorerLayout.$mainViewContainer, url, "/codeGen/views/folderExplorer/folderExplorer.js", url, "/codeGen/views/folderExplorer/folderExplorer.html", route, "/folderExplorer", x => authenticated(), willCore.fileExplorerLayout];
+willCore.login = [willCore.$loginViewContainer, willCoreModules.url, "/codeGen/views/login/login.js", willCoreModules.url, "/codeGen/views/login/login.html", willCoreModules.route, "/", x => true];
+willCore.initProject = [willCore.$loginViewContainer, willCoreModules.url, "/codeGen/views/initProject/view.js", willCoreModules.url, "/codeGen/views/initProject/view.html", willCoreModules.route, "/initProject", x => willCoreModules.authenticated()];
+willCore.fileExplorerLayout = [willCoreModules.layout, "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.js", "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.html"];
+willCore.folderExplorer = [willCore.fileExplorerLayout.$mainViewContainer, willCoreModules.url, "/codeGen/views/folderExplorer/folderExplorer.js", willCoreModules.url, "/codeGen/views/folderExplorer/folderExplorer.html", willCoreModules.route, "/folderExplorer", x => willCoreModules.authenticated(), willCore.fileExplorerLayout];
 
-willCore.editorLayout = [layout, "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.js", "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.html"];
-willCore.editor = [willCore.editorLayout.$mainViewContainer, url, "/codeGen/views/editor/editor.js", url, "/codeGen/views/editor/editor.html", route, "/editor", x => authenticated(), willCore.editorLayout];
+willCore.editorLayout = [willCoreModules.layout, "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.js", "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.html"];
+willCore.editor = [willCore.editorLayout.$mainViewContainer, willCoreModules.url, "/codeGen/views/editor/editor.js", willCoreModules.url, "/codeGen/views/editor/editor.html", willCoreModules.route, "/editor", x => willCoreModules.authenticated(), willCore.editorLayout];
 
 
-//willCore.codeGen = [willCore.$mainContentDiv, url, "/views/codeGen.js", url, "/views/codeGen.html", route,"/", x=>true];
+//willCore.codeGen = [willCore.$mainContentDiv, willCoreModules.url, "/views/codeGen.js", willCoreModules.url, "/views/codeGen.html", route,"/", x=>true];
 
-authentication().then((data) => {
+willCoreModules.authentication().then((data) => {
     willCore(data.authenticated ? "/initProject" : "/");
 });
 

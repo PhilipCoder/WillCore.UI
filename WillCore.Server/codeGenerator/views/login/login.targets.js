@@ -1,4 +1,3 @@
-import { willCore } from "/willcore/WillCore.js";
 /**
  * Definition file for collection targets.
  * 

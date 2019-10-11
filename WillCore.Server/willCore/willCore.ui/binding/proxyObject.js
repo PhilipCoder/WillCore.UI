@@ -1,6 +1,4 @@
-﻿import { execptionHander } from "../helpers/exceptionHander.js";
-
-function isObject(obj) {
+﻿function isObject(obj) {
     return Object.prototype.toString.call(obj) === '[object Object]';
 }
 
@@ -63,12 +61,12 @@ function emulateArray(obj, update, validateFunc, viewManager) {
             }
 
             if (property in Array.prototype) {
-                execptionHander.handleExeception("Immutable Object", `Unable to change the array. All array collections are immutable.`);
+                willCoreModules.execptionHander.handleExeception("Immutable Object", `Unable to change the array. All array collections are immutable.`);
             }
         },
         set: function (target, property, value, receiver) {
             if (property === 'length') {
-                execptionHander.handleExeception("Immutable Object", `Unable to change the array. All array collections are immutable.`);
+                willCoreModules.execptionHander.handleExeception("Immutable Object", `Unable to change the array. All array collections are immutable.`);
                 return true;
             } else {
             }
@@ -76,7 +74,7 @@ function emulateArray(obj, update, validateFunc, viewManager) {
 
 
             if (Number(property) >= length) {
-                execptionHander.handleExeception("Immutable Object", `Unable to change the array. All array collections are immutable.`);
+                willCoreModules.execptionHander.handleExeception("Immutable Object", `Unable to change the array. All array collections are immutable.`);
             }
 
             return true;
