@@ -1,3 +1,3 @@
-﻿import { willCore, url, route, layout } from "./willCore/WillCore.js";
+import { willCore, url, route, layout } from "./willCore/WillCore.js";
 
 willCore("/");

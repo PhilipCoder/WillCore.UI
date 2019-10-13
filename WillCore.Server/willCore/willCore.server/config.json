@@ -16,6 +16,12 @@
           "entryPoint": "handleFile"
         }
       ],
+      "POST": [
+        {
+          "module": "./middleware/endpoints/server.simpleRequests.js",
+          "entryPoint": "runRequest"
+        }
+      ],
       "PUT": [
         {
           "module": "./middleware/endpoints/server.views.js",

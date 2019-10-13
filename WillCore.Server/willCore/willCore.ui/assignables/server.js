@@ -48,7 +48,7 @@
                             }
                         });
                     }
-                    return that.PostRequest(`${window.location.origin}/${that.proxy._proxyTarget.viewManager.name}/${that.name}`, "PUT", { id: requestId, data: requestBody }, {});
+                    return server.PostRequest(`${window.location.origin}/${that.proxy._proxyTarget.viewManager.name}/${that.name}`, "PUT", { id: requestId, data: requestBody }, {});
                 }
                 this.proxy._proxyTarget["_$Sources" + this.name].push(runRequest);
                 this.proxy._proxyTarget["_" + this.name] = function () {
@@ -66,7 +66,19 @@
 
             }
 
-            PostRequest(url, method, parameterObj, headers) {
+            static runRequest(path, parameters) {
+                var url = `${window.location.origin}/${path}`;
+                return new Promise((resolve, reject) => {
+                    server.PostRequest(url, "POST", { data: parameters }, {}).then(async response => {
+                        response = await response.json();
+                        resolve(response);
+                    }).catch(error => {
+                        reject(error);
+                    });
+                });
+            }
+
+            static PostRequest(url, method, parameterObj, headers) {
                 headers['Content-Type'] = 'application/json';
                 var body = null;
                 var that = this;

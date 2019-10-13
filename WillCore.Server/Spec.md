@@ -93,31 +93,7 @@ The following happens when a request is made:
 
  <br/>
 
->## Simple View Requests
-When SSE streaming is not needed, simple requests are an easier way to quickly do requests. Where a SSE request have one parameter, a simple request can have multiple parameters. They are indicated by a request id of "0000". Unlike SSE requests,
-they are not defined in a strict manner via an assignable, but are called directly.
 
-```javascript
-//login.server.js
-exports.login = () =>  {
-    view.userData = (userName, password) => {
-        if (loadFromDB(userName,password)){
-            return true;
-        }else{
-            return false;
-        }
-    };
-};
-```
-
-```javascript
-var logic = (view, configuration) =>
-    ({
-        var result = await modules.serverRequest(view).userData("philip","password");
-    });
-
-export { logic };
-```
 
 
 >## Changes
@@ -141,10 +117,6 @@ var modules = {
 
 ```
 
-
-Big Change:
-Modules should be able to define themselves to be called by the WillCore proxy or the view proxy's set or get traps. When a module inherits from a coreProxyTrap it will be called by the main WillCore proxy. When it inherits from a viewProxyTrap,
-it will be called by the view proxy. 
 
 >## Authentication Framework
 
@@ -206,4 +178,36 @@ Request hubs are proxies.
 ```javascript
 //Defining a request hub:
 
+```
+
+<br/>
+
+___
+>># New Changes
+___
+
+>## Simple View Requests
+When SSE streaming is not needed, simple requests are an easier way to quickly do requests. Where a SSE request have one parameter, a simple request can have multiple parameters. They are indicated by a request id of "0000". Unlike SSE requests,
+they are not defined in a strict manner via an assignable, but are called directly.
+
+```javascript
+//login.server.js
+exports.login = () =>  {
+    view.userData = (userName, password) => {
+        if (loadFromDB(userName,password)){
+            return true;
+        }else{
+            return false;
+        }
+    };
+};
+```
+
+```javascript
+var logic = (view, configuration) =>
+    ({
+        var result = await modules.serverRequest(view).userData("philip","password");
+    });
+
+export { logic };
 ```

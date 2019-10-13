@@ -10,7 +10,7 @@ class fileExplorer {
         return new Promise(async (resolve, reject) => {
             let files = await this.readFilesInDirectory(this.directory);
             var that = this;
-            resolve(files.filter(file => path.extname(file) !== ".js" ).map(file => ({
+            resolve(files.map(file => ({
                 path: path.resolve(that.directory, file),
                 fileName: path.basename(file),
                 fileNameWithExtension:file,

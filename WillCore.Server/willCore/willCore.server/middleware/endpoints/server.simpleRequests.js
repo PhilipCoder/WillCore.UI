@@ -1,51 +1,40 @@
-let viewProxy = require('./server.viewProxy.js');
 let session = require('../session/server.session.js');
 let modules = require('./server.endPointContainer.js');
 
-class viewServer {
+class simpleRequests {
     constructor() {
         modules.populate();
     }
 
     async runMethod(viewName, methodName, methodBody, request, response) {
-        if (!modules.modules[viewName] && !modules.modules["_"+viewName]) return `View ${viewName} not found!`;
+        if (!modules.modules[viewName] && !modules.modules["_" + viewName]) return `View ${viewName} not found!`;
         if (!modules.modules[viewName][methodName] && !modules.modules["_" + viewName][methodName]) return `Method ${methodName} on view ${viewName} not found!`;
-        await modules.modules[viewName] ? modules.modules[viewName][methodName](methodBody) : modules.modules["_" +viewName][methodName](methodBody);
+        var result = await (modules.modules[viewName] ? modules.modules[viewName][methodName](methodBody) : modules.modules["_" + viewName][methodName](methodBody));
+        response.writeHead(200, { 'Content-Type': "application/json" });
+        response.end(JSON.stringify(result));
     }
     /**
     * @param {import('http').IncomingMessage} request
     * @param {import('http').ServerResponse} response
     * */
-    async runRequest(request, response) {
+    runRequest(request, response) {
         var url = request.url;
-        var url = url.indexOf("?") > -1 ? url.substring(0, url.indexOf("?")) : url;
         var parts = url.split("/").filter(x => x && x.length > 0);
         if (parts.length != 2) {
             response.writeHead("400");
             response.end("Bad Request");
         } else {
-            await this.handleMethod(request, response, parts);
+            this.handleMethod(request, response, parts);
         }
         return true;
     }
 
     async handleMethod(request, response, parts) {
-        var methodBody = await this.processPost(request, response);
-        var proxy = new viewProxy(methodBody, request, response);
-        this.runMethod(parts[0], parts[1], proxy.proxy, request, response);
-       
-    }
-
-    clearProxy(value) {
-        if (value._collection) {
-            delete value._collection;
-        }
-        for (var key in value) {
-            var childObj = value[key];
-            if (typeof childObj === "object") {
-                clearProxy(childObj);
-            }
-        }
+        return new Promise(async (resolve, reject) => {
+            var methodBody = await this.processPost(request, response);
+            this.runMethod(parts[0], parts[1], methodBody, request, response);
+            resolve();
+        });
     }
 
     processPost(request, response) {
@@ -61,4 +50,4 @@ class viewServer {
     }
 }
 
-module.exports = viewServer;
+module.exports = simpleRequests;

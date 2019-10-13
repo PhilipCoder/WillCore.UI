@@ -34,6 +34,22 @@ import { elementProxy } from "./binding/elementProxy.js";
 import { guid } from "./helpers/guid.js";
 import { proxyObject } from "./binding/proxyObject.js";
 import { lazyImport } from "./helpers/lazyImport.js";
+import { routerFunction } from "./coreProxy/routerFunction.js";
+import { getDefaultElement } from "./coreProxy/get/getDefaultElement.js";
+import { getDefaultView } from "./coreProxy/get/getDefaultView.js";
+import { setDefaultView } from "./coreProxy/set/setDefaultView.js";
+import { setDefaultPromise } from "./coreProxy/set/setDefaultPromise.js";
+import { setLayoutInstance } from "./coreProxy/set/setLayoutInstance.js";
+import { setDefaultAssignable } from "./coreProxy/set/setDefaultAssignable.js";
+
+
+moduleProxy.routerFunction = routerFunction;
+moduleProxy.getDefaultElement = getDefaultElement;
+moduleProxy.getDefaultView = getDefaultView;
+moduleProxy.setDefaultView = setDefaultView;
+moduleProxy.setDefaultPromise = setDefaultPromise;
+moduleProxy.setLayoutInstance = setLayoutInstance;
+moduleProxy.setDefaultAssignable = setDefaultAssignable;
 
 moduleProxy.assignable = assignable;
 moduleProxy.bindable = bindable;

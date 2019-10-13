@@ -32,10 +32,26 @@
     <Content Include="codeGenerator\config\projectConfig.json">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\css\fontawesome\all.css" />
     <Content Include="codeGenerator\css\bootstrap.min.css" />
     <Content Include="codeGenerator\css\codeGen.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\css\webfonts\fa-brands-400.eot" />
+    <Content Include="codeGenerator\css\webfonts\fa-brands-400.svg" />
+    <Content Include="codeGenerator\css\webfonts\fa-brands-400.ttf" />
+    <Content Include="codeGenerator\css\webfonts\fa-brands-400.woff" />
+    <Content Include="codeGenerator\css\webfonts\fa-brands-400.woff2" />
+    <Content Include="codeGenerator\css\webfonts\fa-regular-400.eot" />
+    <Content Include="codeGenerator\css\webfonts\fa-regular-400.svg" />
+    <Content Include="codeGenerator\css\webfonts\fa-regular-400.ttf" />
+    <Content Include="codeGenerator\css\webfonts\fa-regular-400.woff" />
+    <Content Include="codeGenerator\css\webfonts\fa-regular-400.woff2" />
+    <Content Include="codeGenerator\css\webfonts\fa-solid-900.eot" />
+    <Content Include="codeGenerator\css\webfonts\fa-solid-900.svg" />
+    <Content Include="codeGenerator\css\webfonts\fa-solid-900.ttf" />
+    <Content Include="codeGenerator\css\webfonts\fa-solid-900.woff" />
+    <Content Include="codeGenerator\css\webfonts\fa-solid-900.woff2" />
     <Content Include="codeGenerator\images\bootstrapIcon.png" />
     <Content Include="codeGenerator\images\css.png" />
     <Content Include="codeGenerator\images\fileIcons\css.png" />
@@ -65,21 +81,13 @@
     <Content Include="codeGenerator\layouts\editorLayout\editorLayout.sources.js" />
     <Content Include="codeGenerator\layouts\editorLayout\editorLayout.targets.js" />
     <Content Include="codeGenerator\layouts\editorLayout\editorLayout.traps.js" />
-    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.bindings.js" />
-    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.collections.js" />
-    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.events.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.js" />
-    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.logic.js" />
-    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.meta.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.server.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.sources.js" />
-    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.targets.js" />
-    <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.traps.js" />
     <Content Include="codeGenerator\serverLogic\fileCreator.js">
       <SubType>Code</SubType>
     </Content>
@@ -119,28 +127,13 @@
     <Content Include="codeGenerator\views\codeGen\codeGen.sources.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.targets.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.traps.js" />
-    <Content Include="codeGenerator\views\editor\editor.bindings.js" />
-    <Content Include="codeGenerator\views\editor\editor.collections.js" />
-    <Content Include="codeGenerator\views\editor\editor.events.js" />
     <Content Include="codeGenerator\views\editor\editor.html" />
     <Content Include="codeGenerator\views\editor\editor.js" />
-    <Content Include="codeGenerator\views\editor\editor.logic.js" />
-    <Content Include="codeGenerator\views\editor\editor.meta.js" />
-    <Content Include="codeGenerator\views\editor\editor.sources.js" />
-    <Content Include="codeGenerator\views\editor\editor.targets.js" />
-    <Content Include="codeGenerator\views\editor\editor.traps.js" />
-    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.bindings.js" />
-    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.collections.js" />
-    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.events.js" />
+    <Content Include="codeGenerator\views\editor\editor.server.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.js" />
-    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.logic.js" />
-    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.meta.js" />
-    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.sources.js" />
-    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.targets.js" />
-    <Content Include="codeGenerator\views\folderExplorer\folderExplorer.traps.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.server.js" />
     <Content Include="codeGenerator\views\initProject\view.bindings.js" />
     <Content Include="codeGenerator\views\initProject\view.collections.js" />
@@ -153,19 +146,11 @@
     <Content Include="codeGenerator\views\initProject\view.sources.js" />
     <Content Include="codeGenerator\views\initProject\view.targets.js" />
     <Content Include="codeGenerator\views\initProject\view.traps.js" />
-    <Content Include="codeGenerator\views\login\login.bindings.js" />
-    <Content Include="codeGenerator\views\login\login.collections.js" />
-    <Content Include="codeGenerator\views\login\login.events.js" />
     <Content Include="codeGenerator\views\login\login.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\views\login\login.js" />
-    <Content Include="codeGenerator\views\login\login.logic.js" />
-    <Content Include="codeGenerator\views\login\login.meta.js" />
     <Content Include="codeGenerator\views\login\login.server.js" />
-    <Content Include="codeGenerator\views\login\login.sources.js" />
-    <Content Include="codeGenerator\views\login\login.targets.js" />
-    <Content Include="codeGenerator\views\login\login.traps.js" />
     <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.bindings.js" />
     <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.collections.js" />
     <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.events.js" />
@@ -191,7 +176,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="willCore\willCore.server\middleware\endpoints\activeRequest\activeRequest.js" />
+    <Content Include="willCore\willCore.server\middleware\endpoints\server.endPointContainer.js" />
     <Content Include="willCore\willCore.server\middleware\endpoints\server.sseContainer.js" />
+    <Content Include="willCore\willCore.server\middleware\endpoints\server.simpleRequests.js" />
     <Content Include="willCore\willCore.server\middleware\session\encryption\aes.js" />
     <Content Include="willCore\willCore.server\middleware\session\encryption\encryptor.js">
       <SubType>Code</SubType>
@@ -245,6 +232,15 @@
     <Content Include="willCore\willCore.ui\binding\collectionManager.js" />
     <Content Include="willCore\willCore.ui\binding\elementProxy.js" />
     <Content Include="willCore\willCore.ui\binding\proxyObject.js" />
+    <Content Include="willCore\willCore.ui\coreProxy\Get\getDefaultElement.js" />
+    <Content Include="willCore\willCore.ui\coreProxy\Get\getDefaultView.js" />
+    <Content Include="willCore\willCore.ui\coreProxy\routerFunction.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="willCore\willCore.ui\coreProxy\set\setDefaultAssignable.js" />
+    <Content Include="willCore\willCore.ui\coreProxy\set\setDefaultPromise.js" />
+    <Content Include="willCore\willCore.ui\coreProxy\set\setDefaultView.js" />
+    <Content Include="willCore\willCore.ui\coreProxy\set\setLayoutInstance.js" />
     <Content Include="willCore\willCore.ui\helpers\authentication.js" />
     <Content Include="willCore\willCore.ui\helpers\exceptionHander.js" />
     <Content Include="willCore\willCore.ui\helpers\guid.js" />
@@ -266,6 +262,8 @@
     <Folder Include="codeGenerator\" />
     <Folder Include="codeGenerator\css\" />
     <Folder Include="codeGenerator\config\" />
+    <Folder Include="codeGenerator\css\fontawesome\" />
+    <Folder Include="codeGenerator\css\webfonts\" />
     <Folder Include="codeGenerator\images\" />
     <Folder Include="codeGenerator\images\fileIcons\" />
     <Folder Include="codeGenerator\layouts\" />
@@ -299,8 +297,11 @@
     <Folder Include="willCore\willCore.ui\assignables\" />
     <Folder Include="willCore\willCore.ui\assignables\bindables\" />
     <Folder Include="willCore\willCore.ui\binding\" />
+    <Folder Include="willCore\willCore.ui\coreProxy\get\" />
+    <Folder Include="willCore\willCore.ui\coreProxy\set\" />
     <Folder Include="willCore\willCore.ui\helpers\" />
     <Folder Include="willCore\willCore.ui\moduleContainment\" />
+    <Folder Include="willCore\willCore.ui\coreProxy\" />
     <Folder Include="willCore\willCore.ui\views\" />
     <Folder Include="wwwRoot\" />
     <Folder Include="willCore\" />

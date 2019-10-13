@@ -79,9 +79,31 @@ class fileCreator {
         });
     }
 
-    createFolder(path) {
-        if (!fs.existsSync(path)) {
-            fs.mkdirSync(path);
+    createFolder(url) {
+        url = path.resolve(this.wwwRoot,"../", url);
+        if (!fs.existsSync(url)) {
+            fs.mkdirSync(url);
+        }
+    }
+
+    createFile(url) {
+        url = path.resolve(this.wwwRoot, "../", url);
+        if (!fs.existsSync(url)) {
+            fs.writeFileSync(url, "");
+        }
+    }
+
+    readFile(url) {
+        url = path.resolve(this.wwwRoot, "../", url);
+        if (fs.existsSync(url)) {
+            return fs.readFileSync(url, 'utf8');
+        }
+    }
+
+    saveFile(url,content) {
+        url = path.resolve(this.wwwRoot, "../", url);
+        if (fs.existsSync(url)) {
+            fs.writeFileSync(url, content);
         }
     }
 }

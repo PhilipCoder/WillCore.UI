@@ -3,38 +3,29 @@
 //=========WillCore======================================
 var coreProxyHander = {
     get: function (target, property) {
-        if (!target[property] && property.startsWith("$")) {
-            var elementId = property.substring(1);
-            var element = new willCoreModules.idManager(null).getElement(elementId);
-            return element || document.createElement("div");
+        if (willCoreModules.getDefaultElement.statement(target, property)) {
+            return willCoreModules.getDefaultElement.result(target, property);
         }
-        else if (!target[property] || WillCoreInstance._init) {
-            target[property] = willCoreModules.viewFactory.getView(property, target);
+        else if (willCoreModules.getDefaultView.statement(target, property, WillCoreInstance)) {
+            return willCoreModules.getDefaultView.result(target, property);
         }
         return target[property];
     },
 
     set: function (target, property, value) {
-        if (value && value.nodeType === 1) {
-            value = value.element || value;
-            if (!target[property]) {
-                target[property] = willCoreModules.viewFactory.getView(property, target);
-            }
-            if (target[property].viewManager.element) {
-                willCoreModules.execptionHander.handleExeception("Invalid Operation", `The DOM element for view is already assigned.`);
-            }
-            target[property].viewManager.element = value.id;
-        } else if (typeof value.then !== "undefined") {
-            return true;
+        if (willCoreModules.setDefaultView.statement(target, property, value)) {
+            willCoreModules.setDefaultView.result(target, property, value);
         }
-        else if (value.getInstanceFactory) {
-            target[property] = value.getInstanceFactory(target, property, value);
-        } else if (value.assignmentMethods && value.assignmentMethods.assignmentMethod) {
-            value.assignmentMethods.assignmentMethod(target, property, value);
+        else if (willCoreModules.setDefaultPromise.statement(target, property, value)) {
+            willCoreModules.setDefaultPromise.result(target, property, value);
         }
-        else if (target[property] instanceof willCoreModules.assignable) {
-            target[property].assign(value);
-        } else if (Array.isArray(value)) {
+        else if (willCoreModules.setLayoutInstance.statement(target, property, value)) {
+            willCoreModules.setLayoutInstance.result(target, property, value);
+        }
+        else if (willCoreModules.setDefaultAssignable.statement(target, property, value)) {
+            willCoreModules.setDefaultAssignable.result(target, property, value);
+        }
+        else if (Array.isArray(value)) {
             value.forEach(x => coreProxyHander.set(target, property, x));
         }
         else {
@@ -43,25 +34,11 @@ var coreProxyHander = {
         return true;
     }
 }
-function routerFunction(route, routeParameters) {
-    let parameters = [];
-    let parameterString = "";
-    if (routeParameters && typeof routeParameters === "object") {
-        for (var key in routeParameters) {
-            parameters.push(`${key}=${encodeURIComponent(routeParameters[key])}`);
-        }
-        if (parameters.length > 0) {
-            parameterString = "?" + parameters.join("&");
-        }
-    }
-    window.location.hash = route + parameterString;
-    willCoreModules.router.init();
-}
 
 var WillCoreInstance = {
     router: willCoreModules.router,
     _init: false,
-    willCore: new Proxy(routerFunction, coreProxyHander),
+    willCore: new Proxy(willCoreModules.routerFunction, coreProxyHander),
 };
 
 willCoreModules.router.setCoreProxy(WillCoreInstance.willCore);

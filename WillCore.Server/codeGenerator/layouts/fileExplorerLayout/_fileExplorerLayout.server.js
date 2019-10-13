@@ -2,8 +2,13 @@ var fileCreator = require("../../serverLogic/fileCreator.js");
 
 module.exports = (view) => {
     view.createFolder = async (view) => {
-        var folder = view.creationValues.itemName;
+        var folder = view.itemName;
         fileCreator.createFolder(folder);
-        view.done();
+        return true;
+    };
+    view.createFile = async (view) => {
+        var fileName = view.itemName;
+        fileCreator.createFile(fileName);
+        return true;
     };
 };
