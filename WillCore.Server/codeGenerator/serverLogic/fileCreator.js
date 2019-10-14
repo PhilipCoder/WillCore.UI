@@ -37,6 +37,23 @@ class fileCreator {
         });
     }
 
+    async setView(viewName) {
+        let indexTemplateDirectory = path.resolve(this.templateDirectory, "view\\");
+        let files = await this.readFilesInDirectory(indexTemplateDirectory);
+        var name = viewName.substring(viewName.lastIndexOf("\\") + 1);
+        var filePath = viewName.substring(0,viewName.lastIndexOf("\\"));
+        files.forEach(file => {
+            var inputFile = path.resolve(indexTemplateDirectory, file);
+            let fileContent = fs.readFileSync(inputFile, 'utf8');
+            file = file.replace(new RegExp("/", 'g'), "\\");
+            file = file.replace(new RegExp("view_itemName", 'g'), name);
+            fileContent = fileContent.replace(new RegExp("$safeitemname$", 'g'), name);
+
+            let outputFileName = path.resolve(this.wwwRoot + "/..", filePath, file);
+            fs.writeFileSync(outputFileName, fileContent);
+        });
+    }
+
     async setDefaultCSS() {
         let defaultCssDirectory = path.resolve(this.wwwRoot, "css\\", "defaultCss\\");
         if (!fs.existsSync(defaultCssDirectory)) {

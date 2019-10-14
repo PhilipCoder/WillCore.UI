@@ -37,7 +37,7 @@ class viewProxy {
         obj.repsonse = repsonse;
         obj.done = function () {
             var result = { success: true };
-            obj.repsonse.writeHead(200, { 'Content-Type': "application/json" });
+            obj.repsonse.writeHead(200, { 'Content-Type': "application/json", 'Cache-Control': 'private, no-cache, no-store, must-revalidate' });
             obj.repsonse.end(JSON.stringify(result));
             sseContainer.unloadSSE(obj.requestId);
         };

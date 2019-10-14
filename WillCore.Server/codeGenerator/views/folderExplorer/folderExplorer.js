@@ -6,6 +6,7 @@ var imagePaths = {
     ".html": "/codeGen/images/fileIcons/html.png",
     ".js": "/codeGen/images/fileIcons/js.png",
     ".png": "/codeGen/images/fileIcons/png.png",
+    ".view": "/codeGen/images/fileIcons/view.png",
     ".svg": "/codeGen/images/fileIcons/svg.png"
 };
 

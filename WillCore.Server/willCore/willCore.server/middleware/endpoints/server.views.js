@@ -52,7 +52,7 @@ class viewServer {
         return new Promise((resolve, reject) => {
             request.on('data', function (data) {
                 if (data.length > 1e6) {
-                    response.writeHead(413, { 'Content-Type': 'text/plain' }).end();
+                    response.writeHead(413, { 'Content-Type': 'text/plain', 'Cache-Control': 'private, no-cache, no-store, must-revalidate' }).end();
                     request.connection.destroy();
                 }
                 resolve(JSON.parse(data));

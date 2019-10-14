@@ -13,7 +13,7 @@ class activeRequest {
         this.id = id;
         this.timeout = config.sse.requestExpiration;
         this.expireCallback = expireCallback;
-        this.timer = setTimeout(() => expireCallback(this), this.timeout);
+        this.timer = setTimeout(() => expireCallback && expireCallback(this), this.timeout);
         this.collections = {};
         this.sseRunCallback = null;
         this.sseResponse = null;
@@ -42,14 +42,13 @@ class activeRequest {
     registerSSE(response, requestId) {
         var that = this;
         this.sseResponse = response;
+        response.writeHead(200, {
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'private, no-cache, no-store, must-revalidate',
+            'Connection': 'keep-alive',
+            'transfer-encoding': ''
+        });
         this.sseRunCallback = () => {
-            response.writeHead(200, {
-                'Content-Type': 'text/event-stream',
-                'Cache-Control': 'no-cache',
-                'Connection': 'keep-alive',
-                'transfer-encoding': ''
-            });
-
             var json = JSON.stringify(that.getResultObj(that.collections));
             response.write(`id: ${messageId}\n`);
             messageId++;
@@ -65,7 +64,6 @@ class activeRequest {
             this.sseRunCallback();
             this.collections = {};
         }
-
     }
 
     getResultObj(value) {

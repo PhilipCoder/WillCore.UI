@@ -11,4 +11,9 @@ module.exports = (view) => {
         fileCreator.createFile(fileName);
         return true;
     };
+    view.createView = async (view) => {
+        var fileName = view.itemName;
+        fileCreator.setView(fileName);
+        return true;
+    };
 };

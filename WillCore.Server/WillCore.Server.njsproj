@@ -113,7 +113,7 @@
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.logic.js" />
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.html" />
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName_meta.js" />
+    <Content Include="codeGenerator\serverLogic\templates\view\view_itemName.server.js" />
     <Content Include="codeGenerator\todo.md" />
     <Content Include="codeGenerator\views\codeGen\codeGen.bindings.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.collections.js" />

@@ -10,7 +10,7 @@ class simpleRequests {
         if (!modules.modules[viewName] && !modules.modules["_" + viewName]) return `View ${viewName} not found!`;
         if (!modules.modules[viewName][methodName] && !modules.modules["_" + viewName][methodName]) return `Method ${methodName} on view ${viewName} not found!`;
         var result = await (modules.modules[viewName] ? modules.modules[viewName][methodName](methodBody) : modules.modules["_" + viewName][methodName](methodBody));
-        response.writeHead(200, { 'Content-Type': "application/json" });
+        response.writeHead(200, { 'Content-Type': "application/json", 'Cache-Control': 'private, no-cache, no-store, must-revalidate' });
         response.end(JSON.stringify(result));
     }
     /**
@@ -41,7 +41,7 @@ class simpleRequests {
         return new Promise((resolve, reject) => {
             request.on('data', function (data) {
                 if (data.length > 1e6) {
-                    response.writeHead(413, { 'Content-Type': 'text/plain' }).end();
+                    response.writeHead(413, { 'Content-Type': 'text/plain', 'Cache-Control': 'private, no-cache, no-store, must-revalidate' }).end();
                     request.connection.destroy();
                 }
                 resolve(JSON.parse(data));

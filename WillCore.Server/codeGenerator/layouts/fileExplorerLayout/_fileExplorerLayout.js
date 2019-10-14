@@ -21,6 +21,7 @@ var view = async (view) => {
 
     view.$createFile.event.onclick = () => promptLayoutName();
     view.$createFolder.event.onclick = () => promptFolderName();
+    view.$createView.event.onclick = () => promptViewName();
 
     view.route = (target, property, value) => {
         if (value && property === "route") {
@@ -43,7 +44,14 @@ var view = async (view) => {
             await willCoreModules.server.runRequest("_fileExplorerLayout/createFolder", creationValues);
             view.child._getFiles();
         }
-
+    };
+    var promptViewName = async () => {
+        var result = await view.$inputModal.logic.show("Create New View", "Enter The Unique Name Of The View", "Enter view name (no extention)", "");
+        if (result) {
+            var creationValues = { itemName: view.route.route + "\\" + result };
+            await willCoreModules.server.runRequest("_fileExplorerLayout/createView", creationValues);
+            view.child._getFiles();
+        }
     };
 };
 

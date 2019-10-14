@@ -77,15 +77,17 @@ class sseContainer {
         if (global.activeRequestContainer[requestId]) {
             global.activeRequestContainer[requestId].toBeRemoved = true;
             if (global.activeRequestContainer[requestId].sseResponse) {
-                //response.writeHead(200, {
-                //    'Content-Type': 'text/event-stream',
-                //    'Cache-Control': 'no-cache',
-                //    'Connection': 'keep-alive',
-                //    'transfer-encoding': ''
-                //});
-                global.activeRequestContainer[requestId].sseResponse.write(`data: done\n\n`);
-                global.activeRequestContainer[requestId].sseResponse.end();
-                delete global.activeRequestContainer[requestId];
+                var currentSSE = global.activeRequestContainer[requestId];
+                currentSSE.toBeRemoved = true;
+                //if (Object.keys(currentSSE.collections).length > 0) {
+                //    var json = JSON.stringify(currentSSE.getResultObj(currentSSE.collections));
+                //    let result = `data: ${json}\n\n`;
+                //    currentSSE.sseResponse.write(result);
+                //} else {
+                //    global.activeRequestContainer[requestId].sseResponse.write(`data: done\n\n`);
+                //}
+                //global.activeRequestContainer[requestId].sseResponse.end();
+                //delete global.activeRequestContainer[requestId];
             }
         }
     }

@@ -11,7 +11,7 @@ class authenticationRequest {
         if (parts.length != 1 || parts[0] != "authentication") return false;
         var result = new session(request, response).getCookieObject();
         result = result || { authenticated: false };
-        response.writeHead(200, { 'Content-Type': "application/json" });
+        response.writeHead(200, { 'Content-Type': "application/json", 'Cache-Control': 'no-cache'});
         response.end(JSON.stringify(result));
         return true;
     }
