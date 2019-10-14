@@ -11,6 +11,19 @@
     }
     window.location.hash = route + parameterString;
     willCoreModules.router.init();
+};
+routerFunction.url = function (route, routeParameters) {
+    let parameters = [];
+    let parameterString = "";
+    if (routeParameters && typeof routeParameters === "object") {
+        for (var key in routeParameters) {
+            parameters.push(`${key}=${encodeURIComponent(routeParameters[key])}`);
+        }
+        if (parameters.length > 0) {
+            parameterString = "?" + parameters.join("&");
+        }
+    }
+    return "#"+route+parameterString;
 }
 
 export { routerFunction };
