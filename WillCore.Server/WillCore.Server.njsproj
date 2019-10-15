@@ -105,9 +105,9 @@
     <Content Include="codeGenerator\serverLogic\templates\index\default\index.html" />
     <Content Include="codeGenerator\serverLogic\templates\index\default\index.js" />
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.bindings.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.sources.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.targets.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.traps.js" />
+    <Content Include="codeGenerator\serverLogic\templates\view\view_itemName.sources.js" />
+    <Content Include="codeGenerator\serverLogic\templates\view\view_itemName.targets.js" />
+    <Content Include="codeGenerator\serverLogic\templates\view\view_itemName.traps.js" />
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.js" />
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.events.js" />
     <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.logic.js" />

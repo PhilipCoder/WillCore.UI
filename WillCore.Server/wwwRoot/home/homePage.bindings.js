@@ -1,11 +1,4 @@
-﻿/**
- * Binds the HTML elements to the collections.
- * Binding module
- * 
- * @param {view} view
- */
-var bindings = async (view) => {
-    
-};
-
-export { bindings };
+module.exports = (view) => {
+    view.default = (view) => {
+    }
+}; 
