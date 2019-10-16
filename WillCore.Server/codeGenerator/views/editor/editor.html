@@ -1,16 +1,16 @@
 <div style="width:100px">
-    <ul class="nav flex-column nav-dark">
+    <ul class="nav flex-column nav-dark" style="text-align:center;font-size:12px">
         <li class="nav-item bg-primary" style="margin-right:0px;margin-bottom:1px">
-            <a class="nav-link text-white" href="#"><i class="fas fa-play" style="margin-right:6px"></i>Run</a>
+            <a class="nav-link text-white" href="#"><i class="fas fa-play" style="margin-right:6px;width:100%"></i>Run</a>
         </li>
         <li class="nav-item bg-primary" style="margin-right:0px;margin-bottom:1px">
-            <a class="nav-link text-white" name="saveFile" id="saveFileBtn" style="cursor:pointer"><i class="fas fa-save" style="margin-right:6px"></i>Save</a>
+            <a class="nav-link text-white" name="saveFile" id="saveFileBtn" style="cursor:pointer"><i class="fas fa-save" style="margin-right:6px;width:100%"></i>Save</a>
         </li>
         <li class="nav-item bg-primary" style="margin-right:0px;margin-bottom:1px">
-            <a class="nav-link text-white" href="#"><i class="fas fa-undo" style="margin-right:6px"></i>Undo</a>
+            <a class="nav-link text-white" href="#"><i class="fas fa-undo" style="margin-right:6px;width:100%"></i>Undo</a>
         </li>
         <li class="nav-item bg-primary" style="margin-right:0px">
-            <a class="nav-link text-white" href="#"><i class="fas fa-redo" style="margin-right:6px"></i>Redo</a>
+            <a class="nav-link text-white" href="#"><i class="fas fa-redo" style="margin-right:6px;width:100%"></i>Redo</a>
         </li>
     </ul>
     <h6 style="margin-top:10px;text-align:center" class="text-white" id="viewModulesLabel">View Modules</h6>
@@ -43,4 +43,31 @@
 </div>
 <div style="flex:1" id="editor">
 
+</div>
+<div style="width:200px">
+    <h6 style="margin-top:10px;text-align:center" class="text-white">View Options</h6>
+    <div class="form-group" style="padding-left:14px">
+        <label class="control-label">View Type</label>
+        <select class="form-control form-control-sm">
+            <option>View</option>
+            <option>Partial View</option>
+            <option>View Layout</option>
+        </select>
+    </div>
+    <div class="form-group" style="padding-left:14px">
+        <label class="control-label">View Layout</label>
+        <select class="form-control form-control-sm">
+            <option>Default</option>
+            <option>Partial View</option>
+            <option>View Layout</option>
+        </select>
+    </div>
+    <div class="form-group" style="padding-left:14px">
+        <label class="control-label">View Route</label>
+        <input class="form-control form-control-sm" placeholder="Enter view hash route..." />
+    </div>
+    <div class="form-group" style="padding-left:14px">
+        <hr />
+        <button class="btn btn-primary btn-sm" style="width:100%">Link View To Index</button>
+    </div>
 </div>

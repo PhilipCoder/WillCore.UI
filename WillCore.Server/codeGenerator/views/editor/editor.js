@@ -1,3 +1,7 @@
+import PNotify from "../../libraries/pNotify/es/PNotify.js";
+PNotify.defaults.styling = 'bootstrap4';
+//import { PNotifyButtons } from '../../libraries/pNotify/es/PNotifyButtons.js';
+
 var languages = {
     ".js": "ace/mode/javascript",
     ".html": "ace/mode/html",
@@ -27,43 +31,43 @@ var view = async (view) => {
     view.$viewModuleLinks.show = () => isViewMode;
     view.$htmlModuleLink.event.onclick = async () => {
         view.currentModule.name = "html";
-        var targetURL = baseURL.replace(".view", ".html");
-        await loadFileIntoEditor(targetURL, editor);
+        currentFile = baseURL.replace(".view", ".html");
+        await loadFileIntoEditor(currentFile, editor);
     };
     view.$bindingsModuleLink.event.onclick = async () => {
         view.currentModule.name = "bindings";
-        var targetURL = baseURL.replace(".view", ".bindings.js");
-        await loadFileIntoEditor(targetURL, editor);
+        currentFile = baseURL.replace(".view", ".bindings.js");
+        await loadFileIntoEditor(currentFile, editor);
     };
     view.$collectionsModuleLink.event.onclick = async () => {
         view.currentModule.name = "collections";
-        var targetURL = baseURL.replace(".view", ".collections.js");
-        await loadFileIntoEditor(targetURL, editor);
+        currentFile = baseURL.replace(".view", ".collections.js");
+        await loadFileIntoEditor(currentFile, editor);
     };
     view.$eventsModuleLink.event.onclick = async () => {
         view.currentModule.name = "events";
-        var targetURL = baseURL.replace(".view", ".events.js");
-        await loadFileIntoEditor(targetURL, editor);
+        currentFile = baseURL.replace(".view", ".events.js");
+        await loadFileIntoEditor(currentFile, editor);
     };
     view.$targetsModuleLink.event.onclick = async () => {
         view.currentModule.name = "targets";
-        var targetURL = baseURL.replace(".view", ".targets.js");
-        await loadFileIntoEditor(targetURL, editor);
+        currentFile = baseURL.replace(".view", ".targets.js");
+        await loadFileIntoEditor(currentFile, editor);
     };
     view.$sourcesModuleLink.event.onclick = async () => {
         view.currentModule.name = "sources";
-        var targetURL = baseURL.replace(".view", ".sources.js");
-        await loadFileIntoEditor(targetURL, editor);
+        currentFile = baseURL.replace(".view", ".sources.js");
+        await loadFileIntoEditor(currentFile, editor);
     };
     view.$logicModuleLink.event.onclick = async () => {
         view.currentModule.name = "logic";
-        var targetURL = baseURL.replace(".view", ".logic.js");
-        await loadFileIntoEditor(targetURL, editor);
+        currentFile = baseURL.replace(".view", ".logic.js");
+        await loadFileIntoEditor(currentFile, editor);
     };
     view.$serverModuleLink.event.onclick = async () => {
         view.currentModule.name = "server";
-        var targetURL = baseURL.replace(".view", ".server.js");
-        await loadFileIntoEditor(targetURL, editor);
+        currentFile = baseURL.replace(".view", ".server.js");
+        await loadFileIntoEditor(currentFile, editor);
     };
 
     view.$htmlModuleLink.attribute.class = () => ({ activeLink: () => view.currentModule.name === "html"});
@@ -79,6 +83,10 @@ var view = async (view) => {
 
     view.$saveFileBtn.event.onclick = async () => {
         await willCoreModules.server.runRequest("editor/saveFile", { url: currentFile, contents: editor.getValue() })
+        PNotify.success({
+            text: "File Saved.",
+            type: 'notice'
+        });
     };
 };
 

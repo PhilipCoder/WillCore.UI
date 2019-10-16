@@ -1,12 +1,3 @@
-import { collections } from "./editorLayout.collections.js";
-import { bindings } from "./editorLayout.bindings.js";
-import { logic } from "./editorLayout.logic.js";
-import { events } from "./editorLayout.events.js";
-import { sources } from "./editorLayout.sources.js";
-import { traps } from "./editorLayout.traps.js";
-import { targets } from "./editorLayout.targets.js";
-
-
 const configuration = {
 };
 
@@ -17,13 +8,31 @@ const configuration = {
  * Should not contain any logic.
  */
 var view = async (view) => {
-    collections(view, configuration);
-    sources(view, configuration);
-    traps(view, configuration);
-    targets(view, configuration);
-    bindings(view);
-    let logicInstance = logic(view, configuration);
-    events(view, logicInstance);
+    view.routeData = view.route.route ? view.route.route.split("/") : [];
+
+    view.$routeBreadCrumb.repeat = () => view.routeData;
+    var currentURLs = [];
+    view.$routeBreadCrumb.repeat((elements, row, index) => {
+        currentURLs = index === 0 ? [] : currentURLs;
+        currentURLs.push(row);
+        elements.$routeBreadCrumbLink.innerHTML = () => row;
+        elements.$routeBreadCrumbLink.attribute.href = () => "#/folderExplorer?route=" + encodeURIComponent(currentURLs.join("/"));
+    });
+
+    //=======================Partials==============================
+    view.$inputModal = [willCoreModules.partial, "/codeGen/views/partials/inputPrompt/inputPrompt.js", "/codeGen/views/partials/inputPrompt/inputPrompt.html", {}];
+
+    view.$createFile.event.onclick = () => promptLayoutName();
+    view.$createFolder.event.onclick = () => promptFolderName();
+    view.$createView.event.onclick = () => promptViewName();
+
+    view.route = (target, property, value) => {
+        if (value && property === "route") {
+            view.routeData = value.split("/");
+        }
+    };
+
+    
 };
 
 export { view };

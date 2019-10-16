@@ -71,16 +71,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\index.js" />
-    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.bindings.js" />
-    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.collections.js" />
-    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.events.js" />
     <Content Include="codeGenerator\layouts\editorLayout\editorLayout.html" />
     <Content Include="codeGenerator\layouts\editorLayout\editorLayout.js" />
-    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.logic.js" />
-    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.meta.js" />
-    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.sources.js" />
-    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.targets.js" />
-    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.traps.js" />
+    <Content Include="codeGenerator\layouts\editorLayout\editorLayout.server.js" />
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.html">
       <SubType>Code</SubType>
     </Content>
@@ -88,6 +81,31 @@
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.server.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotify.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotify.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyAnimate.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyAnimate.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyButtons.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyButtons.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyCallbacks.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyCallbacks.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyCompat.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyCompat.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyConfirm.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyConfirm.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyDesktop.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyDesktop.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyHistory.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyHistory.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyMobile.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyMobile.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyNonBlock.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyNonBlock.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyReference.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyReference.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyStyleMaterial.js" />
+    <Content Include="codeGenerator\libraries\PNotify\es\PNotifyStyleMaterial.js.map" />
+    <Content Include="codeGenerator\libraries\PNotify\PNotifyBrightTheme.css" />
     <Content Include="codeGenerator\serverLogic\fileCreator.js">
       <SubType>Code</SubType>
     </Content>
@@ -269,6 +287,9 @@
     <Folder Include="codeGenerator\layouts\" />
     <Folder Include="codeGenerator\layouts\editorLayout\" />
     <Folder Include="codeGenerator\layouts\fileExplorerLayout\" />
+    <Folder Include="codeGenerator\libraries\" />
+    <Folder Include="codeGenerator\libraries\pNotify\" />
+    <Folder Include="codeGenerator\libraries\pNotify\es\" />
     <Folder Include="codeGenerator\serverLogic\" />
     <Folder Include="codeGenerator\serverLogic\templates\" />
     <Folder Include="codeGenerator\serverLogic\templates\index\" />

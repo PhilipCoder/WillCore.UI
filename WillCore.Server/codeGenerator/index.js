@@ -6,7 +6,7 @@ willCore.initProject = [willCore.$loginViewContainer, willCoreModules.url, "/cod
 willCore.fileExplorerLayout = [willCoreModules.layout, "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.js", "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.html"];
 willCore.folderExplorer = [willCore.fileExplorerLayout.$mainViewContainer, willCoreModules.url, "/codeGen/views/folderExplorer/folderExplorer.js", willCoreModules.url, "/codeGen/views/folderExplorer/folderExplorer.html", willCoreModules.route, "/folderExplorer", x => willCoreModules.authenticated(), willCore.fileExplorerLayout];
 
-willCore.editorLayout = [willCoreModules.layout, "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.js", "/codeGen/layouts/fileExplorerLayout/_fileExplorerLayout.html"];
+willCore.editorLayout = [willCoreModules.layout, "/codeGen/layouts/editorLayout/editorLayout.js", "/codeGen/layouts/editorLayout/editorLayout.html"];
 willCore.editor = [willCore.editorLayout.$mainViewContainer, willCoreModules.url, "/codeGen/views/editor/editor.js", willCoreModules.url, "/codeGen/views/editor/editor.html", willCoreModules.route, "/editor", x => willCoreModules.authenticated(), willCore.editorLayout];
 
 
