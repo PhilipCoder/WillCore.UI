@@ -7,6 +7,7 @@ class fileCreator {
     constructor() {
         this.wwwRoot = path.resolve(__dirname, `../../wwwRoot`);
         this.templateDirectory = path.resolve(__dirname, `templates\\`);
+        this.indexCodeTag = "<CodeTag>";
     }
 
     async setBootstrap() {
@@ -30,7 +31,7 @@ class fileCreator {
         let indexTemplateDirectory = path.resolve(this.templateDirectory, "index\\" + (useBootstrap ? "bootstrap\\" : "default\\"));
         let files = await this.readFilesInDirectory(indexTemplateDirectory);
         files.forEach(file => {
-            file = path.resolve(indexTemplateDirectory,file);
+            file = path.resolve(indexTemplateDirectory, file);
             let fileContent = fs.readFileSync(file, 'utf8');
             let outputFileName = path.resolve(this.wwwRoot, path.basename(file));
             fs.writeFileSync(outputFileName, fileContent);
@@ -41,7 +42,7 @@ class fileCreator {
         let indexTemplateDirectory = path.resolve(this.templateDirectory, "view\\");
         let files = await this.readFilesInDirectory(indexTemplateDirectory);
         var name = viewName.substring(viewName.lastIndexOf("\\") + 1);
-        var filePath = viewName.substring(0,viewName.lastIndexOf("\\"));
+        var filePath = viewName.substring(0, viewName.lastIndexOf("\\"));
         files.forEach(file => {
             var inputFile = path.resolve(indexTemplateDirectory, file);
             let fileContent = fs.readFileSync(inputFile, 'utf8');
@@ -97,7 +98,7 @@ class fileCreator {
     }
 
     createFolder(url) {
-        url = path.resolve(this.wwwRoot,"../", url);
+        url = path.resolve(this.wwwRoot, "../", url);
         if (!fs.existsSync(url)) {
             fs.mkdirSync(url);
         }
@@ -117,10 +118,24 @@ class fileCreator {
         }
     }
 
-    saveFile(url,content) {
+    saveFile(url, content) {
         url = path.resolve(this.wwwRoot, "../", url);
         if (fs.existsSync(url)) {
             fs.writeFileSync(url, content);
+        }
+    }
+
+    linkView(viewName, viewLayout, viewLayoutElement) {
+        var indexFile = path.resolve(this.wwwRoot, "index.js");
+        if (fs.existsSync(indexFile)) {
+            var fileContents = fs.readFileSync(indexFile, 'utf8');
+            var codeTagIndex = fileContents.indexOf(this.indexCodeTag);
+            if (codeTagIndex < 0) {
+                return false;
+            }
+            codeTagIndex += this.indexCodeTag.length;
+        } else {
+            return false;
         }
     }
 }

@@ -48,13 +48,13 @@
     <h6 style="margin-top:10px;text-align:center" class="text-white">View Options</h6>
     <div class="form-group" style="padding-left:14px">
         <label class="control-label">View Type</label>
-        <select class="form-control form-control-sm">
-            <option>View</option>
-            <option>Partial View</option>
-            <option>View Layout</option>
+        <select class="form-control form-control-sm" id="viewTypeSelect">
+            <option value="view">View</option>
+            <option value="partial">Partial View</option>
+            <option value="layout">View Layout</option>
         </select>
     </div>
-    <div class="form-group" style="padding-left:14px">
+    <div class="form-group" style="padding-left:14px" id="viewLayoutForm">
         <label class="control-label">View Layout</label>
         <select class="form-control form-control-sm">
             <option>Default</option>
@@ -62,12 +62,16 @@
             <option>View Layout</option>
         </select>
     </div>
-    <div class="form-group" style="padding-left:14px">
+    <div class="form-group" style="padding-left:14px" id="viewRouteForm">
         <label class="control-label">View Route</label>
         <input class="form-control form-control-sm" placeholder="Enter view hash route..." />
     </div>
+    <div class="form-group" style="padding-left:14px" id="layoutElementForm">
+        <label class="control-label">Layout Element</label>
+        <input class="form-control form-control-sm" placeholder="Enter the id of the layouts element..." />
+    </div>
     <div class="form-group" style="padding-left:14px">
         <hr />
-        <button class="btn btn-primary btn-sm" style="width:100%">Link View To Index</button>
+        <button class="btn btn-primary btn-sm" style="width:100%" id="linkViewBtn">Link View To Index</button>
     </div>
 </div>
