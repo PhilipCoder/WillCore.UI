@@ -45,32 +45,36 @@ class projectFile {
         this.save();
     }
 
-    linkView(layout, route, layoutElement) {
+    linkView(viewName, route, layout) {
+        this.configObj.views[viewName] = this.configObj.views[viewName] || {};
+        this.configObj.views[viewName].viewName = viewName;
         this.configObj.views[viewName].linked = true;
+        this.configObj.views[viewName].viewType = "view";
         this.configObj.views[viewName].layout = layout;
         this.configObj.views[viewName].route = route;
-        this.configObj.views[viewName].layoutElement = layoutElement;
         this.save();
     }
 
-    linkLayout(layout, route, layoutElement) {
+    linkLayout(viewName, layoutElement) {
+        this.configObj.views[viewName] = this.configObj.views[viewName] || {};
         this.configObj.views[viewName].linked = true;
-        this.configObj.views[viewName].layout = "layout";
-        this.configObj.views[viewName].route = null;
-        this.configObj.views[viewName].layoutElement = null;
+        this.configObj.views[viewName].viewName = viewName;
+        this.configObj.views[viewName].viewType = "layout";
+        this.configObj.views[viewName].layoutElement = layoutElement;
         this.save();
     }
 
     linkPartial(layout, route, layoutElement) {
         this.configObj.views[viewName].linked = true;
-        this.configObj.views[viewName].layout = "partial";
+        this.configObj.views[viewName].viewType = "partial";
         this.configObj.views[viewName].route = null;
         this.configObj.views[viewName].layoutElement = null;
         this.save();
     }
 
     getView(viewName) {
-        return this.configObj.views[viewName];
+        this.configObj.views = this.configObj.views || {};
+        return this.configObj.views[viewName] || { name: null, fileRoute: null, viewType: "view", linked: false, layout: null, route: "", layoutElement: "" };
     }
 }
 

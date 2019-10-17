@@ -5,7 +5,10 @@ PNotify.defaults.styling = 'bootstrap4';
 
 
 
-
+function getViewDirectory(currentFile) {
+    var viewName = currentFile.substring(currentFile.indexOf("/"));
+    return viewName.substring(0,viewName.lastIndexOf("/") );
+}
 
 function getViewName(currentFile) {
     var viewName = currentFile.substring(0, currentFile.indexOf("."));
@@ -62,6 +65,22 @@ var view = async (view) => {
         currentFile = baseURL.replace(".view", ".server.js");
         await loadFileIntoEditor(currentFile, view);
     };
+    view.$linkViewBtn.event.onclick = async () => {
+        if (view.viewData.viewType === "layout") {
+            var linkResult = await willCoreModules.server.runRequest("editor/linkLayout", {
+                layoutName: getViewName(currentFile),
+                viewPath: getViewDirectory(currentFile),
+                layoutElement: view.viewData.layoutElement
+            });
+        } else {
+            var linkResult = await willCoreModules.server.runRequest("editor/linkView", {
+                layoutName: getViewName(currentFile),
+                viewPath: getViewDirectory(currentFile),
+                layoutElement: view.viewData.layoutElement,
+                viewRoute: view.viewData.route
+            });
+        }
+    };
 
     view.$htmlModuleLink.attribute.class = () => ({ activeLink: () => view.currentModule.name === "html" });
     view.$bindingsModuleLink.attribute.class = () => ({ activeLink: () => view.currentModule.name === "bindings" });
@@ -76,7 +95,8 @@ var view = async (view) => {
     view.$viewRouteForm.show = () => view.viewData.viewType === "view";
     view.$layoutElementForm.show = () => view.viewData.viewType === "layout";
     view.$linkViewBtn.disabled = () => view.viewData.linked;
-
+    view.$layoutElement.model = () => view.viewData.layoutElement;
+    view.$viewRoute.model = () => view.viewData.route;
     view.$saveFileBtn.event.onclick = async () => {
         await willCoreModules.server.runRequest("editor/saveFile", { url: currentFile, contents: editor.getValue() })
         PNotify.success({

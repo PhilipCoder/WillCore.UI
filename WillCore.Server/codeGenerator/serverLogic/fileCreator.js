@@ -125,7 +125,7 @@ class fileCreator {
         }
     }
 
-    linkView(viewName, viewLayout, viewLayoutElement) {
+    linkView(viewName, viewPath, viewLayout, viewLayoutElement, viewRoute) {
         var indexFile = path.resolve(this.wwwRoot, "index.js");
         if (fs.existsSync(indexFile)) {
             var fileContents = fs.readFileSync(indexFile, 'utf8');
@@ -133,7 +133,32 @@ class fileCreator {
             if (codeTagIndex < 0) {
                 return false;
             }
-            codeTagIndex += this.indexCodeTag.length;
+            codeTagIndex -= 2;
+            var viewLinkingCode = '';
+            if (viewLayout === "Default") {
+                viewLinkingCode = `willCore.${viewName} = [willCore.$${viewLayoutElement}, willCoreModules.url, "${viewPath}/${viewName}.js", willCoreModules.url, "${viewPath}/${viewName}.html", willCoreModules.route, "${viewRoute}", x => true];\n`;
+            } else {
+                viewLinkingCode = `willCore.${viewName} = [willCore.${viewLayout}.${viewLayoutElement}, willCoreModules.url, "${viewPath}/${viewName}.js", willCoreModules.url, "${viewPath}/${viewName}.html", willCoreModules.route, "${viewRoute}", x => true, willCore.${viewLayout}];\n`;
+            }
+            var output = fileContents.slice(0, codeTagIndex) + viewLinkingCode + fileContents.slice(codeTagIndex);
+            fs.writeFileSync(indexFile, output);
+        } else {
+            return false;
+        }
+    }
+
+    linkLayout(viewName, viewPath, viewLayoutElement) {
+        var indexFile = path.resolve(this.wwwRoot, "index.js");
+        if (fs.existsSync(indexFile)) {
+            var fileContents = fs.readFileSync(indexFile, 'utf8');
+            var codeTagIndex = fileContents.indexOf(this.indexCodeTag);
+            if (codeTagIndex < 0) {
+                return false;
+            }
+            codeTagIndex -= 2;
+            var viewLinkingCode = `willCore.${viewName} = [willCoreModules.layout,  "${viewPath}/${viewName}.js","${viewPath}/${viewName}.html"];\n`;
+            var output = fileContents.slice(0, codeTagIndex) + viewLinkingCode + fileContents.slice(codeTagIndex);
+            fs.writeFileSync(indexFile, output);
         } else {
             return false;
         }

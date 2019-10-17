@@ -1,5 +1,5 @@
 ﻿import { willCore, url, route, layout } from "./willCore/WillCore.js";
 
-//Don't remove:<CodeTag>
+//<CodeTag> - Don't remove
 
 willCore("/");
