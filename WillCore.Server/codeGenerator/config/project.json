@@ -1,1 +1,0 @@
-{"useBootstrap":true,"useIndexFile":true,"useGlobalCss":true,"views":{"someLayout":{"linked":true,"viewName":"someLayout","viewType":"layout","layoutElement":"layoutElement"},"myView":{"name":"myView","fileRoute":"wwwRoot/views","viewType":"view","linked":false,"layout":null,"route":null,"layoutElement":null}}}

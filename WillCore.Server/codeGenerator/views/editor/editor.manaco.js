@@ -51,6 +51,10 @@ async function loadFileIntoEditor(currentFile, view) {
     var extension = currentFile.substring(currentFile.lastIndexOf("."));
     var mode = languages[extension] ? languages[extension] : "javascript";
     var result = await willCoreModules.server.runRequest("editor/readFile", { url: currentFile });
+    if (window.editor) {
+        window.editor.dispose();
+        window.editor = null;
+    }
     if (!window.editor) {
         require(['vs/editor/editor.main'], function () {
             window.editor = monaco.editor.create(document.getElementById(view.$editor.id), {

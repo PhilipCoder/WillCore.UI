@@ -10,6 +10,9 @@ module.exports = (view) => {
     view.getViewData = async (view) => {
         return projectFile.getView(view.viewName);
     };
+    view.getLayoutViews = async (view) => {
+        return projectFile.getLayouts();
+    };
     view.saveFile = async (view) => {
         fileCreator.saveFile(view.url, view.contents);
         return true;

@@ -80,6 +80,10 @@ var view = async (view) => {
                 viewRoute: view.viewData.route
             });
         }
+        PNotify.success({
+            text: "View Linked.",
+            type: 'notice'
+        });
     };
 
     view.$htmlModuleLink.attribute.class = () => ({ activeLink: () => view.currentModule.name === "html" });

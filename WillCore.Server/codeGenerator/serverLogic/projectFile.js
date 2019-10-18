@@ -76,6 +76,10 @@ class projectFile {
         this.configObj.views = this.configObj.views || {};
         return this.configObj.views[viewName] || { name: null, fileRoute: null, viewType: "view", linked: false, layout: null, route: "", layoutElement: "" };
     }
+
+    getLayouts() {
+        return Object.keys(this.configObj.views).filter(x => this.configObj.views[x].viewType === "layout");
+    }
 }
 
 module.exports = new projectFile();

@@ -309,6 +309,7 @@
     <Content Include="willCore\willCore.ui\assignables\bindables\create.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\event.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\disabled.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\options.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\show.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\hide.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\innerHTML.js" />
