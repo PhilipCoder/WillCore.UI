@@ -7,12 +7,13 @@
  */
 var logic = (view, configuration) => {
     let result = {};
-    result.show = (heading, label, inputPlaceHolder, inputValue) => {
+    result.show = (heading, label, inputPlaceHolder, inputValue, okFunction) => {
         view.modalData.heading = heading;
         view.modalData.label = label;
         view.modalData.inputPlaceHolder = inputPlaceHolder;
         view.modalData.display = true;
         view.modalData.inputValue = inputValue;
+        result.okFunction = okFunction;
         return new Promise((resolve, reject) => {
             result.resolve = resolve;
         });

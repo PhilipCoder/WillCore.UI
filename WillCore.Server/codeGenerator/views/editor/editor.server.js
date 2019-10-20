@@ -24,8 +24,12 @@ module.exports = (view) => {
     };
     view.linkView = (view) => {
         projectFile.linkView(view.viewName, view.viewRoute, view.viewLayout);
-        var layout = projectFile.getView(view.viewLayout);
-        fileCreator.linkView(view.viewName, view.viewPath, view.viewLayout, layout.layoutElement, view.viewRoute);
+        var layoutElement = view.viewLayout === "Default" ? view.layoutElement : projectFile.getView(view.viewLayout).layoutElement;
+        fileCreator.linkView(view.viewName, view.viewPath, view.viewLayout, layoutElement, view.viewRoute);
+        return true;
+    };
+    view.unlinkView = (view) => {
+        projectFile.unlinkView(view.viewName);
         return true;
     };
 };

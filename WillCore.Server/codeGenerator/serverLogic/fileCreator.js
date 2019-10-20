@@ -1,6 +1,8 @@
 const http = require('https');
 const fs = require('fs');
 const path = require('path');
+const pathUtil = require('./pathUtil.js');
+const projectFile = require('./projectFile.js');
 const projectConfig = require('../config/projectConfig.json');
 
 class fileCreator {
@@ -101,14 +103,18 @@ class fileCreator {
         url = path.resolve(this.wwwRoot, "../", url);
         if (!fs.existsSync(url)) {
             fs.mkdirSync(url);
+            return true;
         }
+        return false;
     }
 
     createFile(url) {
         url = path.resolve(this.wwwRoot, "../", url);
         if (!fs.existsSync(url)) {
             fs.writeFileSync(url, "");
+            return true;
         }
+        return false;
     }
 
     readFile(url) {
@@ -138,7 +144,7 @@ class fileCreator {
             if (viewLayout === "Default") {
                 viewLinkingCode = `willCore.${viewName} = [willCore.$${viewLayoutElement}, willCoreModules.url, "${viewPath}/${viewName}.js", willCoreModules.url, "${viewPath}/${viewName}.html", willCoreModules.route, "${viewRoute}", x => true];\n`;
             } else {
-                viewLinkingCode = `willCore.${viewName} = [willCore.${viewLayout}.${viewLayoutElement}, willCoreModules.url, "${viewPath}/${viewName}.js", willCoreModules.url, "${viewPath}/${viewName}.html", willCoreModules.route, "${viewRoute}", x => true, willCore.${viewLayout}];\n`;
+                viewLinkingCode = `willCore.${viewName} = [willCore.$${viewLayout}.${viewLayoutElement}, willCoreModules.url, "${viewPath}/${viewName}.js", willCoreModules.url, "${viewPath}/${viewName}.html", willCoreModules.route, "${viewRoute}", x => true, willCore.${viewLayout}];\n`;
             }
             var output = fileContents.slice(0, codeTagIndex) + viewLinkingCode + fileContents.slice(codeTagIndex);
             fs.writeFileSync(indexFile, output);
@@ -162,6 +168,45 @@ class fileCreator {
         } else {
             return false;
         }
+    }
+
+    async renameFile(filePath, newName) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                var viewName = pathUtil.getViewName(filePath);
+                if (projectFile.viewExists(viewName)) {
+                    resolve({ success: false });
+                } else {
+                    var viewFiles = await pathUtil.getViewFiles(filePath);
+                    viewFiles.forEach(filePath => {
+                        var newFileName = pathUtil.renameViewFile(filePath, newName);
+                        fs.renameSync(filePath, newFileName);
+                    });
+                    resolve({ success: true });
+                }
+            } catch (e) {
+                resolve({ error: e });
+            }
+        });
+    }
+
+    async deleteFile(filePath, newName) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                var viewName = pathUtil.getViewName(filePath);
+                if (projectFile.viewExists(viewName)) {
+                    resolve({ success: false });
+                } else {
+                    var viewFiles = await pathUtil.getViewFiles(filePath);
+                    viewFiles.forEach(filePath => {
+                        fs.unlinkSync(filePath);
+                    });
+                    resolve({ success: true });
+                }
+            } catch (e) {
+                resolve({ error: e });
+            }
+        });
     }
 }
 

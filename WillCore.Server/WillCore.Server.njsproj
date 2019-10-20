@@ -191,6 +191,7 @@
     <Content Include="codeGenerator\serverLogic\fileExplorer.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\serverLogic\pathUtil.js" />
     <Content Include="codeGenerator\serverLogic\projectFile.js">
       <SubType>Code</SubType>
     </Content>

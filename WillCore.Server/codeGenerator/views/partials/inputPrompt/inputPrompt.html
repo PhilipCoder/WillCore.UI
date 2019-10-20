@@ -1,4 +1,4 @@
-<div class="blackBackdrop" id="modal" >
+<div class="blackBackdrop" id="modal">
     <div class="flex-1"></div>
     <div class="card align-self-center">
         <div class="card-header" style="min-width:380px" id="header">
@@ -6,7 +6,11 @@
         <div class="card-body" id="body">
             <div class="form-group">
                 <label class="control-label" id="modalLabel"></label>
-                <input type="text" placeholder="Enter Name" class="form-control" id="modalInput" />
+                <input type="text" placeholder="Enter Name" class="form-control " id="modalInput" />
+                <div class="alert alert-danger" style="margin-top:8px;padding-bottom:8px;padding-top:8px" id="errorAlert">
+                    <i class="fas fa-exclamation-triangle" style="margin-right:8px"></i>
+                    <span id="errorMsg"></span>
+                </div>
             </div>
         </div>
         <div class="card-footer d-flex">
