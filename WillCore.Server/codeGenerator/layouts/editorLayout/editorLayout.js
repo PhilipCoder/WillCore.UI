@@ -8,6 +8,8 @@ const configuration = {
  * Should not contain any logic.
  */
 var view = async (view) => {
+    var specialCharCheckDot = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    var specialCharCheck = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
 
     view.routeData = view.route.route ? view.route.route.split("/") : [];
     view.state = { canModifyFile: false };
@@ -23,7 +25,7 @@ var view = async (view) => {
     //=======================Partials==============================
     view.$inputModal = [willCoreModules.partial, "/codeGen/views/partials/inputPrompt/inputPrompt.js", "/codeGen/views/partials/inputPrompt/inputPrompt.html", {}];
 
-    view.$createFile.event.onclick = () => promptLayoutName();
+    view.$renameFile.event.onclick = () => promptNewFileName();
     view.$createFolder.event.onclick = () => promptFolderName();
     view.$createView.event.onclick = () => promptViewName();
     view.$renameFile.disabled = () => !view.state.canModifyFile;
@@ -44,6 +46,20 @@ var view = async (view) => {
         }
     };
 
+    var promptNewFileName = async () => {
+        var result = await view.$inputModal.logic.show("Rename File Or View", "Enter New File/View Name", "Enter filename (without extension)...", "", async inputValue => {
+            if (!inputValue || specialCharCheck.test(inputValue)) {
+                return "Special characters not allowed!";
+            }
+            var creationValues = { filePath: view.route.route, newFileName: inputValue};
+            var fileCreationResult = await willCoreModules.server.runRequest("editorLayout/renameFile", creationValues);
+            if (typeof fileCreationResult !== "string") {
+                view.child._getFiles();
+            } else {
+                return fileCreationResult;
+            }
+        });
+    };
 
 };
 

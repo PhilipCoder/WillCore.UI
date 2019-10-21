@@ -2,7 +2,6 @@ const http = require('https');
 const fs = require('fs');
 const path = require('path');
 const pathUtil = require('./pathUtil.js');
-const projectFile = require('./projectFile.js');
 const projectConfig = require('../config/projectConfig.json');
 
 class fileCreator {
@@ -172,40 +171,23 @@ class fileCreator {
 
     async renameFile(filePath, newName) {
         return new Promise(async (resolve, reject) => {
-            try {
-                var viewName = pathUtil.getViewName(filePath);
-                if (projectFile.viewExists(viewName)) {
-                    resolve({ success: false });
-                } else {
-                    var viewFiles = await pathUtil.getViewFiles(filePath);
-                    viewFiles.forEach(filePath => {
-                        var newFileName = pathUtil.renameViewFile(filePath, newName);
-                        fs.renameSync(filePath, newFileName);
-                    });
-                    resolve({ success: true });
-                }
-            } catch (e) {
-                resolve({ error: e });
-            }
+            var viewName = pathUtil.getViewName(filePath);
+            var viewFiles = await pathUtil.getViewFiles(filePath);
+            viewFiles.forEach(filePath => {
+                var newFileName = pathUtil.renameViewFile(filePath, newName);
+                fs.renameSync(filePath, newFileName);
+            });
+            resolve({ success: true });
         });
     }
 
-    async deleteFile(filePath, newName) {
+    async deleteFile(filePath) {
         return new Promise(async (resolve, reject) => {
-            try {
-                var viewName = pathUtil.getViewName(filePath);
-                if (projectFile.viewExists(viewName)) {
-                    resolve({ success: false });
-                } else {
-                    var viewFiles = await pathUtil.getViewFiles(filePath);
-                    viewFiles.forEach(filePath => {
-                        fs.unlinkSync(filePath);
-                    });
-                    resolve({ success: true });
-                }
-            } catch (e) {
-                resolve({ error: e });
-            }
+            var viewFiles = await pathUtil.getViewFiles(filePath);
+            viewFiles.forEach(filePath => {
+                fs.unlinkSync(filePath);
+            });
+            resolve({ success: true });
         });
     }
 }

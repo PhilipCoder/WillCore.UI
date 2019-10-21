@@ -14,9 +14,9 @@
         var that = this;
         return new Promise(async (mainResolve, mainReject) => {
             var viewManager = view.viewManager;
-            if (viewManager.layout && that.previousLayout != viewManager.layout) {
-                if (viewManager.layout.viewManager.unload) {
-                    viewManager.layout.viewManager.unload();
+            if (viewManager.layout &&  that.previousLayout != viewManager.layout) {
+                if (that.previousLayout && that.previousLayout.viewManager.unload) {
+                    that.previousLayout.viewManager.unload();
                 }
                 that.previousLayout = viewManager.layout;
                 await that.loadView(viewManager.layout, coreProxy, view);

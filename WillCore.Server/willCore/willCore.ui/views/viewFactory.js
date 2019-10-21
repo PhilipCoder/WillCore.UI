@@ -153,6 +153,16 @@ class viewFactory {
         var baseProxyObj = {
             viewManager: new willCoreModules.viewManager(name), onUnload: null, assignmentMethods: { assignmentMethod: null }
         };
+        baseProxyObj.reset = () => {
+            for (var key in baseProxyObj) {
+                if (key !== "reset") {
+                    delete baseProxyObj[key];
+                }
+            }
+            baseProxyObj.viewManager = new willCoreModules.viewManager(name);
+            baseProxyObj.onUnload = null;
+            baseProxyObj.assignmentMethods = { assignmentMethod: null };
+        };
         proxy = new Proxy(baseProxyObj, viewProxyHander);
         proxy.viewManager.proxy = proxy;
         proxy.viewManager.coreProxy = coreProxy;

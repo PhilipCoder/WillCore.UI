@@ -27,6 +27,9 @@ var view = async (view) => {
     view.$createView.event.onclick = () => promptViewName();
 
     view.route = (target, property, value) => {
+        console.log(value);
+        console.log(property);
+
         if (value && property === "route") {
             view.routeData = value.split("/");
         }
