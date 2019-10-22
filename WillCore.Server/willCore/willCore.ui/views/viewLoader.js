@@ -13,20 +13,22 @@
     getViewCopy(proxy) {
         var viewProxy = willCoreModules.viewFactory.getView(proxy._proxyTarget.viewManager.name, proxy._proxyTarget.viewManager.coreProxy);
         proxy._proxyTarget.viewManager.copyTo(viewProxy._proxyTarget.viewManager);
+        viewProxy._proxyTarget.viewManager.id = new Date().getTime();
         viewProxy._proxyTarget._isPartial = proxy._proxyTarget._isPartial;
         return viewProxy;
     }
-    async loadView(view, coreProxy, sender) {
+    async loadView(view, coreProxy, sender, keepOriginal) {
         var that = this;
         return new Promise(async (mainResolve, mainReject) => {
-            view = that.getViewCopy(view);
+            view = keepOriginal ? view : that.getViewCopy(view);
             var viewManager = view.viewManager;
-            if (viewManager.layout &&  that.previousLayout != viewManager.layout) {
+            if (viewManager.layout && (!that.previousLayout || that.previousLayout.viewManager.id != viewManager.layout.viewManager.id)) {
                 if (that.previousLayout && that.previousLayout.viewManager.unload) {
                     that.previousLayout.viewManager.unload();
                 }
                 that.previousLayout = viewManager.layout;
-                await that.loadView(viewManager.layout, coreProxy, view);
+                var loadedLayoutInstance = await that.loadView(viewManager.layout, coreProxy, view);
+                view.viewManager.layout = loadedLayoutInstance;
                 that.isDefaultLayout = false;
             } else if (!viewManager.layout && !viewManager.isLayout && !view._isPartial) {
                 that.bodyElement.innerHTML = this.defaultLayoutHTML;
@@ -52,12 +54,20 @@
                 if (viewManager.isLayout && sender) {
                     view._proxyTarget.child = sender;
                 }
-                view.route = view.route || {};
-                view.route.url = this.getUrl();
-                that.getURLParameters(view.route);
                 await this.finalizeLoad(viewManager, view, mainResolve);
+                that.applyRoutingValues(view);
             }
         });
+    }
+
+    applyRoutingValues(view) {
+        view.route = view.route || {};
+        view.route.url = this.getUrl();
+        this.getURLParameters(view.route);
+        if (view.viewManager.layout) {
+            view.viewManager.layout.route.url = this.getUrl();
+            this.getURLParameters(view.viewManager.layout.route);
+        }
     }
 
     getUrl(returnFull) {

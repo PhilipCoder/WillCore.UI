@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 class pathUtil {
     static getWWWRootDir() {
@@ -28,7 +29,8 @@ class pathUtil {
         return new Promise(async (resolve, reject) => {
             var viewDir = path.dirname(viewPath);
             var viewName = this.getFileName(viewPath);
-            var directoryFiles = await this.getFilesInDirectory(viewPath);
+            viewName = this.getViewName(viewName);
+            var directoryFiles = await this.getFilesInDirectory(viewDir);
             var viewFiles = directoryFiles.filter(x => this.getViewName(x) === viewName);
             var result = viewFiles.map(x => path.resolve(viewDir, x));
             resolve(result);

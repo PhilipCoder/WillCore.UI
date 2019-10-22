@@ -99,7 +99,11 @@ class projectFile {
     }
 
     viewExists(viewName) {
-        return !!this.configObj.views && !!this.configObj.views[viewName]
+        return this.configObj.views && this.configObj.views[viewName]
+    }
+
+    isViewLinked(viewName) {
+        return this.configObj.views && this.configObj.views[viewName] && this.configObj.views[viewName].linked
     }
 }
 

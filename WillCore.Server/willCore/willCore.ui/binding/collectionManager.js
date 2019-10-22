@@ -52,9 +52,9 @@
             }
             if (key.startsWith("$")) {
                 delete proxy._proxyTarget[key];
-            } else if (proxy._proxyTarget[key] instanceof willCoreModules.assignable) {
-                delete proxy._proxyTarget[key];
-            }
+            }// else if (proxy._proxyTarget[key] instanceof willCoreModules.assignable) {
+            //    delete proxy._proxyTarget[key];
+            //}
         }
     }
 

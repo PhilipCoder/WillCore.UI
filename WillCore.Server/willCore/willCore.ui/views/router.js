@@ -41,33 +41,13 @@
                 if (this.previousViewManager) {
                     this.previousViewManager.unload();
                 }
-                viewToLoad = await willCoreModules.viewLoader.loadView(viewToLoad, this.coreProxy);
-                viewToLoad.route = {};
-                viewToLoad.route.url = this.getUrl();
-                this.getURLParameters(viewToLoad.route);
-                if (viewToLoad.viewManager.layout) {
-                    viewToLoad.viewManager.layout.route.url = this.getUrl();
-                    this.getURLParameters(viewToLoad.viewManager.layout.route);
+                var loadedViewInstance = await willCoreModules.viewLoader.loadView(viewToLoad, this.coreProxy);
+                if (loadedViewInstance.viewManager && loadedViewInstance.viewManager.layout) {
+                    viewToLoad.viewManager.layout = loadedViewInstance.viewManager.layout;
                 }
                 this.previousViewManager = viewToLoad.viewManager;
             }
         }
-    }
-    getURLParameters(objectToAssignTo) {
-        var url = window.location.hash.slice(1) || "/";
-        if (url.indexOf("?") > -1) {
-            url = url.substring(url.indexOf("?") + 1);
-        } else {
-            return;
-        }
-        var urlParameters = url.split("&");
-        urlParameters.forEach(parameter => {
-            var segments = parameter.split("=");
-            if (segments.length !== 2) {
-                willCoreModules.execptionHander.handleExeception("Invalid URL parameters", `Unable to parse the current URL to any meaningful values.`);
-            }
-            objectToAssignTo[segments[0]] = decodeURIComponent(segments[1]);
-        });
     }
     regiserView(view) {
         this.registeredViews[view.viewManager.name] = view;

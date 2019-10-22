@@ -23,6 +23,7 @@ var view = async (view) => {
     targets(view, configuration);
     bindings(view);
     let logicInstance = logic(view, configuration);
+    view.setLogic(logicInstance);
     events(view, logicInstance);
 };
 

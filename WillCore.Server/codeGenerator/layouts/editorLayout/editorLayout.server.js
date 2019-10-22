@@ -10,21 +10,21 @@ module.exports = (view) => {
     };
     view.renameFile = async (view) => {
         var viewName = pathUtil.getViewName(view.filePath);
-        if (projectFile.viewExists(viewName)) {
+        if (projectFile.isViewLinked(viewName)) {
             return "Unlink view before renaming.";
         } else if (projectFile.viewExists(view.newName)) {
             return `View ${view.newName} already exists.`;
         } else {
-            projectFile.renameFile(view.filePath, view.newFileName);
+            fileCreator.renameFile(view.filePath, view.newFileName);
         }
         return true;
     };
     view.deleteFile = async (view) => {
         var viewName = pathUtil.getViewName(view.filePath);
-        if (projectFile.viewExists(viewName)) {
+        if (projectFile.isViewLinked(viewName)) {
             return "Unlink view before deleting.";
         }  else {
-            await projectFile.deleteFile(view.filePath);
+            await fileCreator.deleteFile(view.filePath);
         }
         return true;
     };

@@ -33,7 +33,7 @@
                 view.viewManager.jsURL = values.string[0].endsWith(".js") ? values.string[0] : values.string[1];
                 view.viewManager.element.style.display = "none";
                 this.viewManager.childViews.push(view.viewManager);
-                await willCoreModules.viewLoader.loadView(view, this.viewManager.coreProxy);
+                await willCoreModules.viewLoader.loadView(view, this.viewManager.coreProxy, undefined, true);
                 that.element.display = display;
                 view.viewManager.element.style.display = display;
             }

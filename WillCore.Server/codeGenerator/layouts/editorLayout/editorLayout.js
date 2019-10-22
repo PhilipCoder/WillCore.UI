@@ -24,10 +24,10 @@ var view = async (view) => {
 
     //=======================Partials==============================
     view.$inputModal = [willCoreModules.partial, "/codeGen/views/partials/inputPrompt/inputPrompt.js", "/codeGen/views/partials/inputPrompt/inputPrompt.html", {}];
+    view.$promptModal = [willCoreModules.partial, "/codeGen/views/partials/confirmPrompt/confirmPrompt.js", "/codeGen/views/partials/confirmPrompt/confirmPrompt.html", {}];
 
     view.$renameFile.event.onclick = () => promptNewFileName();
-    view.$createFolder.event.onclick = () => promptFolderName();
-    view.$createView.event.onclick = () => promptViewName();
+    view.$deleteView.event.onclick = () => promptDeleteFile();
     view.$renameFile.disabled = () => !view.state.canModifyFile;
     view.$deleteView.disabled = () => !view.state.canModifyFile;
     function setState() {
@@ -36,7 +36,6 @@ var view = async (view) => {
         currentFile = currentFile.substring(currentFile.indexOf("/") + 1);
         console.log(currentFile);
         view.state.canModifyFile = currentFile !== "index";
-        console.log(view.state.canModifyFile);
     }
     setState();
     view.route = (target, property, value) => {
@@ -51,13 +50,24 @@ var view = async (view) => {
             if (!inputValue || specialCharCheck.test(inputValue)) {
                 return "Special characters not allowed!";
             }
-            var creationValues = { filePath: view.route.route, newFileName: inputValue};
+            var creationValues = { filePath: view.route.route, newFileName: inputValue };
             var fileCreationResult = await willCoreModules.server.runRequest("editorLayout/renameFile", creationValues);
             if (typeof fileCreationResult !== "string") {
-                view.child._getFiles();
+                var newURL = view.route.route.substring(0, view.route.route.lastIndexOf("/") + 1) + inputValue + ".view";
+                willCore("/editor", { route: newURL });
             } else {
                 return fileCreationResult;
             }
+        });
+    };
+
+    var promptDeleteFile = async () => {
+        var result = await view.$promptModal.logic.show("Are You Sure?", "Delete file?", async inputValue => {
+            var creationValues = { filePath: view.route.route };
+            await willCoreModules.server.runRequest("editorLayout/deleteFile", creationValues);
+            var newURL = view.route.route.substring(0, view.route.route.lastIndexOf("/"));
+            willCore("/folderExplorer", { route: newURL });
+            return true;
         });
     };
 

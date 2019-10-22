@@ -6,7 +6,9 @@
  * @param {view} view
  */
 var bindings = async (view) => {
-    
+    view.$modal.show = () => view.modalData.display;
+    view.$header.innerHTML = () => view.modalData.heading;
+    view.$modalLabel.innerHTML = () => view.modalData.label;
 };
 
 export { bindings };
