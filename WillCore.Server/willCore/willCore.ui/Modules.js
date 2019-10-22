@@ -18,7 +18,7 @@ import { options } from "./assignables/bindables/options.js";
 import { attribute } from "./assignables/bindables/attribute.js";
 import { create } from "./assignables/bindables/create.js";
 import { event } from "./assignables/bindables/event.js";
-import { partial } from "./assignables/bindables/view.js";
+import { partial } from "./assignables/bindables/partial.js";
 import { repeat } from "./assignables/bindables/repeat.js";
 import { viewFactory } from "./views/viewFactory.js";
 import { request } from "./assignables/request.js";
