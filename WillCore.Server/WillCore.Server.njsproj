@@ -319,6 +319,7 @@
     <Content Include="willCore\willCore.ui\assignables\bindables\model.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\repeat.js" />
     <Content Include="willCore\willCore.ui\assignables\bindables\partial.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\view.js" />
     <Content Include="willCore\willCore.ui\assignables\request.js" />
     <Content Include="willCore\willCore.ui\assignables\route.js" />
     <Content Include="willCore\willCore.ui\assignables\server.js">

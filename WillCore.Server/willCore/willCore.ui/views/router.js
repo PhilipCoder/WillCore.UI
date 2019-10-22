@@ -24,7 +24,8 @@
     setCoreProxy(coreProxy) {
         this.coreProxy = coreProxy;
     }
-    handleRoute(url) {
+    
+    async handleRoute(url) {
         var fullURL = this.getUrl(true);
         if (fullURL != this.previousUrl) {
             this.previousUrl = fullURL;
@@ -40,7 +41,7 @@
                 if (this.previousViewManager) {
                     this.previousViewManager.unload();
                 }
-                willCoreModules.viewLoader.loadView(viewToLoad, this.coreProxy);
+                viewToLoad = await willCoreModules.viewLoader.loadView(viewToLoad, this.coreProxy);
                 viewToLoad.route = {};
                 viewToLoad.route.url = this.getUrl();
                 this.getURLParameters(viewToLoad.route);

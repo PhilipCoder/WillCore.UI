@@ -16,6 +16,20 @@
         this.onUnloadEvent = null;
     }
 
+    copyTo(target) {
+        target.jsURL = this.jsURL;
+        target.htmlURL = this.htmlURL;
+        target.route = this.route;
+        target.routeAuthFunc = this.routeAuthFunc;
+        target.name = this.name;
+        target.layout = this.layout;
+        target.isLayout = this.isLayout;
+        target.childViews = this.childViews;
+        target.onUnloadEvent = this.onUnloadEvent;
+        target.element = this.element;
+        target.parentViewManager = this.parentViewManager;
+    }
+
     async setUrl(url) {
         url = url.string[0];
         if (url.endsWith(".js")) {
