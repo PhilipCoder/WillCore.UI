@@ -23,8 +23,8 @@ var view = async (view) => {
     });
 
     //=======================Partials==============================
-    view.$inputModal = [willCoreModules.partial, "/codeGen/views/partials/inputPrompt/inputPrompt.js", "/codeGen/views/partials/inputPrompt/inputPrompt.html", {}];
     view.$promptModal = [willCoreModules.partial, "/codeGen/views/partials/confirmPrompt/confirmPrompt.js", "/codeGen/views/partials/confirmPrompt/confirmPrompt.html", {}];
+    view.$inputModal = [willCoreModules.partial, "/codeGen/views/partials/inputPrompt/inputPrompt.js", "/codeGen/views/partials/inputPrompt/inputPrompt.html", {}];
 
     view.$renameFile.event.onclick = () => promptNewFileName();
     view.$deleteView.event.onclick = () => promptDeleteFile();
@@ -34,7 +34,6 @@ var view = async (view) => {
         var isViewMode = view.route.route.indexOf(".view") > -1;
         var currentFile = view.route.route.substring(0, view.route.route.indexOf("."));
         currentFile = currentFile.substring(currentFile.indexOf("/") + 1);
-        console.log(currentFile);
         view.state.canModifyFile = currentFile !== "index";
     }
     setState();

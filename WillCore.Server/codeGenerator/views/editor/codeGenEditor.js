@@ -1,5 +1,5 @@
 import PNotify from "../../libraries/pNotify/es/PNotify.js";
-import { loadFileIntoEditor } from "./editor.manaco.js";
+import { loadFileIntoEditor } from "./codeGenEditor.manaco.js";
 PNotify.defaults.styling = 'bootstrap4';
 //import { PNotifyButtons } from '../../libraries/pNotify/es/PNotifyButtons.js';
 
@@ -25,8 +25,8 @@ var view = async (view) => {
     var currentFile = isViewMode ? baseURL.replace(".view", view.route.page ? view.route.page : ".bindings.js") : baseURL;
     await loadFileIntoEditor(currentFile, view);
     view.currentModule = { name: "bindings" };
-    view.viewData = await willCoreModules.server.runRequest("editor/getViewData", { viewName: getViewName(currentFile) });
-    view.layouts = await willCoreModules.server.runRequest("editor/getLayoutViews", {});
+    view.viewData = await willCoreModules.server.runRequest("codeGenEditor/getViewData", { viewName: getViewName(currentFile) });
+    view.layouts = await willCoreModules.server.runRequest("codeGenEditor/getLayoutViews", {});
 
 
     view.$htmlModuleLink.event.onclick = async () => {
@@ -72,13 +72,13 @@ var view = async (view) => {
     
     view.$linkViewBtn.event.onclick = async () => {
         if (view.viewData.viewType === "layout") {
-            var linkResult = await willCoreModules.server.runRequest("editor/linkLayout", {
+            var linkResult = await willCoreModules.server.runRequest("codeGenEditor/linkLayout", {
                 layoutName: getViewName(currentFile),
                 viewPath: getViewDirectory(currentFile),
                 layoutElement: view.viewData.layoutElement
             });
         } else {
-            var linkResult = await willCoreModules.server.runRequest("editor/linkView", {
+            var linkResult = await willCoreModules.server.runRequest("codeGenEditor/linkView", {
                 viewName: getViewName(currentFile),
                 viewLayout: view.viewData.layout || "Default",
                 viewPath: getViewDirectory(currentFile),
@@ -93,7 +93,7 @@ var view = async (view) => {
         });
     };
     view.$unLinkViewBtn.event.onclick = async () => {
-        await willCoreModules.server.runRequest("editor/unlinkView", {
+        await willCoreModules.server.runRequest("codeGenEditor/unlinkView", {
             viewName: getViewName(currentFile)
         });
         view.viewData.linked = false;
@@ -140,7 +140,7 @@ var view = async (view) => {
     }
 
     view.$saveFileBtn.event.onclick = async () => {
-        await willCoreModules.server.runRequest("editor/saveFile", { url: currentFile, contents: editor.getValue() })
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() })
         PNotify.success({
             text: "File Saved.",
             type: 'notice'

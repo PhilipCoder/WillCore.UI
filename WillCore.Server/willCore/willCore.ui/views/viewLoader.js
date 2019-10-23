@@ -22,7 +22,7 @@
         return new Promise(async (mainResolve, mainReject) => {
             view = keepOriginal ? view : that.getViewCopy(view);
             var viewManager = view.viewManager;
-            if (viewManager.layout && (!that.previousLayout || that.previousLayout.viewManager.id != viewManager.layout.viewManager.id)) {
+            if (viewManager.layout && (!that.previousLayout || !that.previousLayout.viewManager.id || that.previousLayout.viewManager.id != viewManager.layout.viewManager.id)) {
                 if (that.previousLayout && that.previousLayout.viewManager.unload) {
                     that.previousLayout.viewManager.unload();
                 }
@@ -102,6 +102,7 @@
         var element = typeof viewManager.element === "string" ?
             new willCoreModules.idManager(idManagerView).getElement(viewManager.element) :
             new willCoreModules.idManager(idManagerView).getElementExistingId(viewManager.element.id);
+        console.log(html);
         element.innerHTML = html;
         willCoreModules.lazyImport(viewManager.jsURL).then(x => {
             if (x.view) {

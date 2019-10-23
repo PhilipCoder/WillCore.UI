@@ -17,6 +17,8 @@ const configuration = {
  * Should not contain any logic.
  */
 var view = async (view) => {
+    console.log("Confirm");
+    console.log(view);
     collections(view, configuration);
     sources(view, configuration);
     traps(view, configuration);

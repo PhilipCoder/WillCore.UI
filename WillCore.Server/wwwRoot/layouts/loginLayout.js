@@ -1,10 +1,10 @@
-import { collections } from "./view.collections.js";
-import { bindings } from "./view.bindings.js";
-import { logic } from "./view.logic.js";
-import { events } from "./view.events.js";
-import { sources } from "./view.sources.js";
-import { traps } from "./view.traps.js";
-import { targets } from "./view.targets.js";
+﻿import { collections } from "./$safeitemname$.collections.js";
+import { bindings } from "./$safeitemname$.bindings.js";
+import { logic } from "./$safeitemname$.logic.js";
+import { events } from "./$safeitemname$.events.js";
+import { sources } from "./$safeitemname$.sources.js";
+import { traps } from "./$safeitemname$.traps.js";
+import { targets } from "./$safeitemname$.targets.js";
 
 
 const configuration = {

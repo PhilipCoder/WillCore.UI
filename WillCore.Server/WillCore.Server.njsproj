@@ -225,31 +225,23 @@
     <Content Include="codeGenerator\views\codeGen\codeGen.sources.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.targets.js" />
     <Content Include="codeGenerator\views\codeGen\codeGen.traps.js" />
-    <Content Include="codeGenerator\views\editor\editor.html" />
-    <Content Include="codeGenerator\views\editor\editor.js" />
-    <Content Include="codeGenerator\views\editor\editor.manaco.js" />
-    <Content Include="codeGenerator\views\editor\editor.server.js" />
+    <Content Include="codeGenerator\views\editor\codeGenEditor.html" />
+    <Content Include="codeGenerator\views\editor\codeGenEditor.js" />
+    <Content Include="codeGenerator\views\editor\codeGenEditor.manaco.js" />
+    <Content Include="codeGenerator\views\editor\codeGenEditor.server.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.server.js" />
-    <Content Include="codeGenerator\views\initProject\view.bindings.js" />
-    <Content Include="codeGenerator\views\initProject\view.collections.js" />
-    <Content Include="codeGenerator\views\initProject\view.events.js" />
-    <Content Include="codeGenerator\views\initProject\view.html" />
-    <Content Include="codeGenerator\views\initProject\view.js" />
-    <Content Include="codeGenerator\views\initProject\view.logic.js" />
-    <Content Include="codeGenerator\views\initProject\view.meta.js" />
-    <Content Include="codeGenerator\views\initProject\initProject.server.js" />
-    <Content Include="codeGenerator\views\initProject\view.sources.js" />
-    <Content Include="codeGenerator\views\initProject\view.targets.js" />
-    <Content Include="codeGenerator\views\initProject\view.traps.js" />
-    <Content Include="codeGenerator\views\login\login.html">
+    <Content Include="codeGenerator\views\initProject\codeGenInitProject.html" />
+    <Content Include="codeGenerator\views\initProject\codeGenInitProject.js" />
+    <Content Include="codeGenerator\views\initProject\codeGenInitProject.server.js" />
+    <Content Include="codeGenerator\views\login\codeGenLogin.html">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="codeGenerator\views\login\login.js" />
-    <Content Include="codeGenerator\views\login\login.server.js" />
+    <Content Include="codeGenerator\views\login\codeGenLogin.js" />
+    <Content Include="codeGenerator\views\login\codeGenLogin.server.js" />
     <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.bindings.js" />
     <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.collections.js" />
     <Content Include="codeGenerator\views\partials\confirmPrompt\confirmPrompt.events.js" />

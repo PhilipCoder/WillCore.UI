@@ -62,8 +62,6 @@
                     }
                     return promises;
                 }
-                console.log(this.proxy._proxyTarget);
-
             }
 
             static runRequest(path, parameters) {

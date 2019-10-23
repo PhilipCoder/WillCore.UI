@@ -23,6 +23,7 @@ var show = {
                 var targetValue = this.bindingMethod();
                 if (!this.element) return;
                 this.element.style.display = targetValue ? this.initialDisplayState : "none";
+                this.element.style.backgroundColor = "black";
                 return targetValue;
             }
         };

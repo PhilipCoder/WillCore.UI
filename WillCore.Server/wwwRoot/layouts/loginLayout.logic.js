@@ -1,7 +1,7 @@
-/**
+﻿/**
  * Logic module 
  * 
- * @typedef {import("./view.meta.js").viewMetaData} view
+ * @typedef {import("./$safeitemname$.meta.js").viewMetaData} view
  * @param {view} view
  * @param {object} configuration
  */

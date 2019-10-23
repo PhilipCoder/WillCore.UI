@@ -102,7 +102,7 @@ class viewFactory {
         function setTrap(obj, prop, value, proxyInstance) {
             if (prop.startsWith("_"))
                 return true;
-            function handleSet(obj, prop, value, propValue = obj[prop]) {
+            async function handleSet(obj, prop, value, propValue = obj[prop]) {
                 if (Array.isArray(value) && !prop.startsWith("$")) {
                     handleArray(obj, prop, value, proxyInstance, propValue, handleSet);
                 }
@@ -112,7 +112,7 @@ class viewFactory {
                 else if ((prop.startsWith("$") || (value.assignAbleToNonElement && value.assignAbleToNonElement)) && (propValue instanceof willCoreModules.assignable) === false && !!value.registerBindable) {
                     handleAssignable(obj, prop, value, proxyInstance, propValue);
                 } else if (propValue instanceof willCoreModules.assignable) {
-                    propValue.assign(value);
+                    await propValue.assign(value);
                     if (propValue.setTarget) {
                         propValue.setTarget(obj, prop);
                     }

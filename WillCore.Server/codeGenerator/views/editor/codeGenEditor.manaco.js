@@ -50,7 +50,7 @@ async function loadFileIntoEditor(currentFile, view) {
     currentHTMLFile = currentHTMLFile.substring(0, currentHTMLFile.indexOf(".")) + ".html";
     var extension = currentFile.substring(currentFile.lastIndexOf("."));
     var mode = languages[extension] ? languages[extension] : "javascript";
-    var result = await willCoreModules.server.runRequest("editor/readFile", { url: currentFile });
+    var result = await willCoreModules.server.runRequest("codeGenEditor/readFile", { url: currentFile });
     if (window.editor) {
         window.editor.dispose();
         window.editor = null;

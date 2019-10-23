@@ -1,10 +1,10 @@
-import { collections } from "./inputPrompt.collections.js";
-import { bindings } from "./inputPrompt.bindings.js";
-import { logic } from "./inputPrompt.logic.js";
-import { events } from "./inputPrompt.events.js";
-import { sources } from "./inputPrompt.sources.js";
-import { traps } from "./inputPrompt.traps.js";
-import { targets } from "./inputPrompt.targets.js";
+﻿import { collections } from "./$safeitemname$.collections.js";
+import { bindings } from "./$safeitemname$.bindings.js";
+import { logic } from "./$safeitemname$.logic.js";
+import { events } from "./$safeitemname$.events.js";
+import { sources } from "./$safeitemname$.sources.js";
+import { traps } from "./$safeitemname$.traps.js";
+import { targets } from "./$safeitemname$.targets.js";
 
 
 const configuration = {
@@ -17,16 +17,12 @@ const configuration = {
  * Should not contain any logic.
  */
 var view = async (view) => {
-    console.log("Prompt");
-    console.log(view);
-
     collections(view, configuration);
     sources(view, configuration);
     traps(view, configuration);
     targets(view, configuration);
     bindings(view);
     let logicInstance = logic(view, configuration);
-    view.setLogic(logicInstance);
     events(view, logicInstance);
 };
 
