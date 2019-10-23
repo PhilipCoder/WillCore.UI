@@ -6,7 +6,7 @@
  * @param {object} configuration
  */
 var collections = async (view, configuration) => {
-    view.modalData = { display: false, heading: "Create New View", label: "Enter View Name" };
+    view.modalData = { display: false, heading: "Create New Viewsss", label: "Enter View Name" };
 };
 
 export { collections };

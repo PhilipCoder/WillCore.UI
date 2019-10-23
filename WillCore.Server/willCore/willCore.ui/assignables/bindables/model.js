@@ -1,4 +1,4 @@
-﻿var model = {
+﻿let model = {
     getFactoryInstance: () => {
         class model extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -22,11 +22,11 @@
                 }
             }
             updateDom() {
-                var targetValue = this.bindingMethod();
+                let targetValue = this.bindingMethod();
                 if (!this.element || typeof targetValue == "undefined" || this.element.type == "file") return;
                 if (this.previousValue === targetValue) return;
                 if (this.element.tagName === "IMG") {
-                    var imageBase64 = typeof targetValue === "object" ? this.getBase64(targetValue) : targetValue;
+                    let imageBase64 = typeof targetValue === "object" ? this.getBase64(targetValue) : targetValue;
                     this.element.src = "data:image/png;base64," + imageBase64;
                 } else if (this.element.type == "checkbox" || this.element.type == "radio") {
                     this.element.checked = !!targetValue;
@@ -36,7 +36,7 @@
             }
             setValueProps(receiver, property) {
                 if (!this.element || typeof this.targetValue == "undefined") return;
-                var that = this;
+                let that = this;
                 if (that.element.type == "checkbox" || that.element.type == "radio") {
                     this.element.onclick = function (event) {
                         receiver[property] = that.element.checked;
@@ -44,13 +44,13 @@
                     };
                 } else if (that.element.type == "file")
                     this.element.onchange = function (event) {
-                        var value = "";
+                        let value = "";
                         that.loadFileBytes(receiver, property);
                         return true;
                     };
                 else {
                     this.element.oninput = function (event) {
-                        var value = "";
+                        let value = "";
                         if ("value" in that.element) {
                             value = that.element.value;
                         } else {
@@ -63,18 +63,18 @@
             }
 
             loadFileBytes(receiver, property) {
-                var reader = new FileReader();
+                let reader = new FileReader();
                 reader.onload = function () {
-                    var arrayBuffer = new Uint8Array(this.result);
+                    let arrayBuffer = new Uint8Array(this.result);
                     receiver[property] = Array.from(arrayBuffer.values());
                 };
                 reader.readAsArrayBuffer(this.element.files[0]);
             }
 
             getBase64(bytes) {
-                var binary = '';
-                var len = bytes.length;
-                for (var i = 0; i < len; i++) {
+                let binary = '';
+                let len = bytes.length;
+                for (let i = 0; i < len; i++) {
                     binary += String.fromCharCode(bytes[i]);
                 }
                 return window.btoa(binary);

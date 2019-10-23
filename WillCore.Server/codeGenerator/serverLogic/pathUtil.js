@@ -41,6 +41,11 @@ class pathUtil {
         var viewName = this.getViewName(fileName);
         return fileName.replace(`${viewName}.`, `${newViewName}.`);
     }
+
+    static replaceAll(target, search, replacement) {
+        search = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        return target.replace(new RegExp(search, 'g'), replacement);
+    }
 }
 
 module.exports = pathUtil;

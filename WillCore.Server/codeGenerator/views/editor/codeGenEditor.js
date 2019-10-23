@@ -30,41 +30,49 @@ var view = async (view) => {
 
 
     view.$htmlModuleLink.event.onclick = async () => {
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
         view.currentModule.name = "html";
         currentFile = baseURL.replace(".view", ".html");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$bindingsModuleLink.event.onclick = async () => {
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
         view.currentModule.name = "bindings";
         currentFile = baseURL.replace(".view", ".bindings.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$collectionsModuleLink.event.onclick = async () => {
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
         view.currentModule.name = "collections";
         currentFile = baseURL.replace(".view", ".collections.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$eventsModuleLink.event.onclick = async () => {
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
         view.currentModule.name = "events";
         currentFile = baseURL.replace(".view", ".events.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$targetsModuleLink.event.onclick = async () => {
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
         view.currentModule.name = "targets";
         currentFile = baseURL.replace(".view", ".targets.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$sourcesModuleLink.event.onclick = async () => {
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
         view.currentModule.name = "sources";
         currentFile = baseURL.replace(".view", ".sources.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$logicModuleLink.event.onclick = async () => {
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
         view.currentModule.name = "logic";
         currentFile = baseURL.replace(".view", ".logic.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$serverModuleLink.event.onclick = async () => {
+        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
         view.currentModule.name = "server";
         currentFile = baseURL.replace(".view", ".server.js");
         await loadFileIntoEditor(currentFile, view);
@@ -87,6 +95,7 @@ var view = async (view) => {
             });
         }
         view.viewData.linked = true;
+        view.viewData = await willCoreModules.server.runRequest("codeGenEditor/getViewData", { viewName: getViewName(currentFile) });
         PNotify.success({
             text: "View Linked.",
             type: 'notice'
@@ -97,10 +106,22 @@ var view = async (view) => {
             viewName: getViewName(currentFile)
         });
         view.viewData.linked = false;
+        view.viewData = await willCoreModules.server.runRequest("codeGenEditor/getViewData", { viewName: getViewName(currentFile) });
         PNotify.success({
             text: "View Unlinked.",
             type: 'notice'
         });
+    };
+    view.$runFileBtn.event.onclick = async () => {
+        if (view.viewData.linked) {
+            await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+            window.open(window.location.origin + "/#" + view.viewData.route +"?forceUrl=true", '_blank').focus();
+        } else {
+            PNotify.info({
+                text: "Unable to run file. Only linked views can be run.",
+                type: 'notice'
+            });
+        }
     };
 
     view.$htmlModuleLink.attribute.class = () => ({ activeLink: () => view.currentModule.name === "html" });
@@ -131,6 +152,7 @@ var view = async (view) => {
     if (view.viewData.layoutPath) view.$viewLayoutLinkAnchor.attribute.href = () => willCore.url("/editor", { route: view.viewData.layoutPath});
     view.$viewLayoutLink.show = () => !!view.viewData.layoutPath;
     view.$dependantViews.show = () => !!view.viewData.childViews;
+    view.$runIcon.attribute.style = () => ({ color: view.viewData.linked ? "#007900" : "#ff0023"});
     if (!!view.viewData.childViews) {
         view.$dependantLink.repeat = () => view.viewData.childViews;
         view.$dependantLink.repeat((elements, row) => {

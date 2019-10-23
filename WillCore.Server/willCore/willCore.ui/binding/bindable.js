@@ -1,4 +1,4 @@
-﻿var bindable = {
+﻿let bindable = {
     getFactoryInstance: () => {
         class bindable extends willCoreModules.assignable {
             constructor(assignmentConstraints, viewManager) {
@@ -12,7 +12,7 @@
             setValues(values) {
                 if (!this.element) return;
                 this.bindingMethod = values.function[0];
-                var targetValue = this.topInstance.updateDom();
+                let targetValue = this.topInstance.updateDom();
                 this.viewManager.collectionManager.listen(this, targetValue);
                 targetValue = this.topInstance.bindingMethod();
             }

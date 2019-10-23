@@ -1,4 +1,4 @@
-﻿var server = {
+﻿let server = {
     getFactoryInstance: () => {
         class server extends willCoreModules.assignable {
             constructor() {
@@ -15,13 +15,13 @@
             setValues(values) {
                 this.collectionsFunc = values.function[0];
                 this.proxy._proxyTarget["_$Sources" + this.name] = this.proxy._proxyTarget["_$Sources" + this.name] || [];
-                var that = this;
-                var runRequest = function (requestId) {
-                    var requestBody = {};
-                    var data = that.collectionsFunc();
-                    for (var i = 0; i < data.length; i++) {
-                        var collectionObj = {};
-                        for (var collectionKey in data[i]) {
+                let that = this;
+                let runRequest = function (requestId) {
+                    let requestBody = {};
+                    let data = that.collectionsFunc();
+                    for (let i = 0; i < data.length; i++) {
+                        let collectionObj = {};
+                        for (let collectionKey in data[i]) {
                             if (!collectionKey.startsWith("_")) {
                                 collectionObj[collectionKey] = data[i][collectionKey];
                             }
@@ -42,7 +42,7 @@
                             const messageData = e.data;
                             if (messageData != "done") {
                                 let response = JSON.parse(messageData);
-                                for (var key in response) {
+                                for (let key in response) {
                                     that.proxy[key] = response[key];
                                 }
                             }
@@ -52,12 +52,12 @@
                 }
                 this.proxy._proxyTarget["_$Sources" + this.name].push(runRequest);
                 this.proxy._proxyTarget["_" + this.name] = function () {
-                    var promises = [];
-                    var requestId = willCoreModules.guid();
-                    var sources = that.proxy._proxyTarget["_$Sources" + that.name];
-                    for (var i = 0; i < sources.length; i++) {
-                        var source = sources[i];
-                        var result = source(requestId);
+                    let promises = [];
+                    let requestId = willCoreModules.guid();
+                    let sources = that.proxy._proxyTarget["_$Sources" + that.name];
+                    for (let i = 0; i < sources.length; i++) {
+                        let source = sources[i];
+                        let result = source(requestId);
                         promises.push(result);
                     }
                     return promises;
@@ -65,7 +65,7 @@
             }
 
             static runRequest(path, parameters) {
-                var url = `${window.location.origin}/${path}`;
+                let url = `${window.location.origin}/${path}`;
                 return new Promise((resolve, reject) => {
                     server.PostRequest(url, "POST", { data: parameters }, {}).then(async response => {
                         response = await response.json();
@@ -78,10 +78,10 @@
 
             static PostRequest(url, method, parameterObj, headers) {
                 headers['Content-Type'] = 'application/json';
-                var body = null;
-                var that = this;
-                var query = null;
-                for (var key in parameterObj) {
+                let body = null;
+                let that = this;
+                let query = null;
+                for (let key in parameterObj) {
                     if (typeof parameterObj[key] === "object") {
                         body = body || {};
                         body = parameterObj[key];

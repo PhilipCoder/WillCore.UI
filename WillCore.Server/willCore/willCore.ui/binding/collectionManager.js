@@ -12,11 +12,11 @@
     deleteObject(curObj, moveToUnbinded, collectionManagerInstance) {
         if (curObj instanceof willCoreModules.assignable) return;
         if (moveToUnbinded) {
-            var nodes = collectionManagerInstance.originalHTMLBindings.get(curObj);
+            let nodes = collectionManagerInstance.originalHTMLBindings.get(curObj);
             if (nodes && nodes.values) {
-                var values = Array.from(nodes.values());
+                let values = Array.from(nodes.values());
                 if (values.length > 0) {
-                    for (var valueCollectionIndex = 0; valueCollectionIndex < values.length; valueCollectionIndex++) {
+                    for (let valueCollectionIndex = 0; valueCollectionIndex < values.length; valueCollectionIndex++) {
                         values[valueCollectionIndex].forEach(x => {
                             collectionManagerInstance.unbindedHTMLBindings.set(x, true);
                         });
@@ -35,7 +35,7 @@
     };
 
     clear(proxy) {
-        for (var keyToRemove in this.collections) {
+        for (let keyToRemove in this.collections) {
             if (!proxy[keyToRemove]._skipCleanup)
                 delete proxy[keyToRemove];
         }
@@ -46,7 +46,7 @@
         this.bindableBindings = new WeakMap();
         this.currentBindable = null;
         this.targetValue = null;
-        for (var key in proxy) {
+        for (let key in proxy) {
             if (key.startsWith("_$Sources") || key.startsWith("_$targets")) {
                 proxy._proxyTarget[key] = [];
             }
@@ -66,9 +66,9 @@
     valueChanged(target, property, value, collectionManagerInstance, oldValue) {
         if (!(typeof property === "string")) return;
         if (target._proxyName && collectionManagerInstance.collections[target._proxyName] && collectionManagerInstance.viewManager.proxy["_$targets" + target._proxyName]) {
-            var targets = collectionManagerInstance.viewManager.proxy["_$targets" + target._proxyName];
+            let targets = collectionManagerInstance.viewManager.proxy["_$targets" + target._proxyName];
             targets.forEach(destination => {
-                var destResult = destination(target, property, value);
+                let destResult = destination(target, property, value);
                 if (typeof destResult === "object" && destResult[property]) {
                     destResult[property](target, property, value);
                 }
@@ -92,12 +92,12 @@
         }
         //if assigned is an object, run all the bindings to check if any unassigned binding can be assigned
         if (typeof target == "object" && !Array.isArray(target) && (!value || (!value.then && !(value instanceof willCoreModules.assignable)))) {
-            var unbindedNodes = new Map();
-            var that = this;
-            var bindings = Array.from(collectionManagerInstance.unbindedHTMLBindings.keys());
+            let unbindedNodes = new Map();
+            let that = this;
+            let bindings = Array.from(collectionManagerInstance.unbindedHTMLBindings.keys());
             bindings.forEach(unbindedBinding => {
                 try {
-                    var targetValue = collectionManagerInstance.runBindingFunc(unbindedBinding.bindingMethod);
+                    let targetValue = collectionManagerInstance.runBindingFunc(unbindedBinding.bindingMethod);
                     collectionManagerInstance.listen(unbindedBinding, targetValue);
                     collectionManagerInstance.runBindingFunc(unbindedBinding.bindingMethod);
                     collectionManagerInstance.stopListen();
@@ -112,7 +112,7 @@
     };
 
     updateElementDom(collectionManagerInstance, target, property) {
-        var elementBindings = collectionManagerInstance.originalHTMLBindings.get(target);
+        let elementBindings = collectionManagerInstance.originalHTMLBindings.get(target);
         //updates current values
         if (elementBindings) {
             var propertyBindings = elementBindings.get(property);
@@ -124,8 +124,8 @@
 
     removeAllBindings(oldValue, collectionManagerInstance, target, property) {
         if (Array.isArray(oldValue)) {
-            for (var i = 0; i < oldValue.length; i++) {
-                var row = oldValue[i];
+            for (let i = 0; i < oldValue.length; i++) {
+                let row = oldValue[i];
                 collectionManagerInstance.originalHTMLBindings.delete(row);
                 collectionManagerInstance.deleteObject(row, false, collectionManagerInstance);
             }
@@ -138,11 +138,11 @@
     }
 
     removeAllElementBindings(element) {
-        var keys = Array.from(this.originalHTMLBindings.keys());
+        let keys = Array.from(this.originalHTMLBindings.keys());
         keys.forEach(key => {
-            var targetObj = this.originalHTMLBindings.get(key);
+            let targetObj = this.originalHTMLBindings.get(key);
             if (targetObj) {
-                var fields = Array.from(targetObj.keys());
+                let fields = Array.from(targetObj.keys());
                 fields.forEach(field => {
                     var bindingArray = targetObj.get(field);
                     if (bindingArray && Array.isArray(bindingArray)) {
@@ -157,7 +157,7 @@
                 });
             }
         });
-        var unbindedKeys = Array.from(this.unbindedHTMLBindings.keys());
+        let unbindedKeys = Array.from(this.unbindedHTMLBindings.keys());
         unbindedKeys.forEach(binding => {
             if (binding.element.id === element.id) {
                 this.unbindedHTMLBindings.delete(binding);
@@ -182,12 +182,12 @@
     valueAccessed(target, property, collectionManagerInstance, receiver) {
         if (!(typeof property === "string")) return;
         if (collectionManagerInstance.currentBindable) {
-            var elementValue = collectionManagerInstance.originalHTMLBindings.get(receiver);
+            let elementValue = collectionManagerInstance.originalHTMLBindings.get(receiver);
             if (!elementValue) {
                 elementValue = new Map();
                 collectionManagerInstance.originalHTMLBindings.set(receiver, elementValue)
             }
-            var propValue = elementValue.get(property);
+            let propValue = elementValue.get(property);
             if (!propValue) {
                 propValue = [];
                 elementValue.set(property, propValue)
@@ -195,7 +195,7 @@
             if (propValue.filter(x => x == collectionManagerInstance.currentBindable).length == 0) {
                 propValue.push(collectionManagerInstance.currentBindable);
             }
-            var value = target[property];
+            let value = target[property];
             if (value == collectionManagerInstance.targetValue) {
                 if (collectionManagerInstance.currentBindable.setValueProps) {
                     collectionManagerInstance.currentBindable.setValueProps(receiver, property);
@@ -205,10 +205,10 @@
     };
 
     runBindingFunc(func) {
-        var result = func();
+        let result = func();
         if (typeof result === "object" && !Array.isArray(result)) {
-            for (var key in result) {
-                var propertyType = typeof (result[key]);
+            for (let key in result) {
+                let propertyType = typeof (result[key]);
                 if (propertyType === "function") {
                     result[key] = this.runBindingFunc(result[key]);
                 }

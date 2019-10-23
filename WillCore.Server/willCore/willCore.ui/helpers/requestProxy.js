@@ -1,9 +1,9 @@
 
 function PostRequest(url, method, parameterObj, headers) {
     headers['Content-Type'] = 'application/json';
-    var body = null;
-    var query = null;
-    for (var key in parameterObj) {
+    let body = null;
+    let query = null;
+    for (let key in parameterObj) {
         if (typeof parameterObj[key] === "object") {
             body = body || {};
             body = parameterObj[key];

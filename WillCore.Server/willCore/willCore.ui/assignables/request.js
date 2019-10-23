@@ -1,4 +1,4 @@
-﻿var request = {
+﻿let request = {
     getFactoryInstance: () => {
         class request extends willCoreModules.assignable {
             constructor() {
@@ -12,8 +12,8 @@
             }
 
             setValues(values) {
-                var firstString = values.string[0];
-                var secondString = values.string[1];
+                let firstString = values.string[0];
+                let secondString = values.string[1];
 
                 this.parameters = values.object[0];
                 this.headers = values.object[1];
@@ -21,7 +21,7 @@
                 this.verb = firstString != "GET" && firstString != "POST" && firstString != "DELETE" && firstString != "PUT" && firstString != "PATCH" ? secondString : firstString;
 
                 function getParameters(parameters) {
-                    var parameterObj = {};
+                    let parameterObj = {};
                     for (var paramName in parameters) {
                         var currentParameter = parameters[paramName];
                         if (typeof (currentParameter) == "function") {
@@ -61,9 +61,9 @@
 
             PostRequest(url, method, parameterObj, headers) {
                 headers['Content-Type'] = 'application/json';
-                var body = null;
-                var query = null;
-                for (var key in parameterObj) {
+                let body = null;
+                let query = null;
+                for (let key in parameterObj) {
                     if (typeof parameterObj[key] === "object") {
                         body = body || {};
                         body = parameterObj[key];

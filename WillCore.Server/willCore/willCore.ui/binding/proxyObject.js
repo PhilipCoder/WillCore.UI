@@ -3,7 +3,7 @@
 }
 
 function subProxyObj(obj, update, validateFunc, viewManager) {
-    var isArray = Array.isArray(obj);
+    let isArray = Array.isArray(obj);
 
     Object.keys(obj).forEach(function (property) {
         if (Array.isArray(obj[property])) {
@@ -17,7 +17,7 @@ function subProxyObj(obj, update, validateFunc, viewManager) {
 }
 
 function setUpdateValue(target, property, value, update, validateFunc, viewManager, receiver) {
-    var oldValue = target[property];
+    let oldValue = target[property];
 
     if (Array.isArray(value)) {
         target[property] = emulateArray(value, update, validateFunc, viewManager);
@@ -36,7 +36,7 @@ function setUpdateValue(target, property, value, update, validateFunc, viewManag
 }
 
 function updateValue(target, property, value, update, validateFunc, viewManager, receiver) {
-    var canUpdate = true;
+    let canUpdate = true;
     if (target.trap) {
         canUpdate = target.trap(property, value, target[property], receiver);
     }
@@ -45,7 +45,7 @@ function updateValue(target, property, value, update, validateFunc, viewManager,
 }
 
 function emulateArray(obj, update, validateFunc, viewManager) {
-    var length = obj.length || 0;
+    let length = obj.length || 0;
     obj._isProxy = true;
     subProxyObj(obj, update, validateFunc, viewManager);
     return new Proxy(obj, {

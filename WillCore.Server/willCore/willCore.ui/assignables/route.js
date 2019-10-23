@@ -1,4 +1,4 @@
-﻿var route = {
+﻿let route = {
     getFactoryInstance: () => {
         class route extends willCoreModules.assignable {
             constructor() {
@@ -18,7 +18,7 @@
             }
 
             static getInstanceFactory(target, property) {
-                var newRoute = new route();
+                let newRoute = new route();
                 newRoute.view = target[property];
                 newRoute.assignmentCompletionEvent = data => {
                     newRoute.view.viewManager.setRoute(data, newRoute.view);

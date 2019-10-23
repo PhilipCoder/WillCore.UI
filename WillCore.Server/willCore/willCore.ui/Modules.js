@@ -88,7 +88,7 @@ moduleProxy.guid = guid;
 moduleProxy.proxyObject = proxyObject;
 moduleProxy.lazyImport = lazyImport;
 
-for (var key in moduleProxy.allClasses) {
+for (let key in moduleProxy.allClasses) {
     if (moduleProxy[key].getFactoryInstance) {
         moduleProxy[key] = moduleProxy[key].getFactoryInstance();
     }

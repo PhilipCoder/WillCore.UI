@@ -49,7 +49,7 @@ class fileCreator {
             let fileContent = fs.readFileSync(inputFile, 'utf8');
             file = file.replace(new RegExp("/", 'g'), "\\");
             file = file.replace(new RegExp("view_itemName", 'g'), name);
-            fileContent = fileContent.replace(new RegExp("$safeitemname$", 'g'), name);
+            fileContent = pathUtil.replaceAll(fileContent, "$safeitemname$", name);
 
             let outputFileName = path.resolve(this.wwwRoot + "/..", filePath, file);
             fs.writeFileSync(outputFileName, fileContent);
@@ -78,22 +78,6 @@ class fileCreator {
                     reject();
                 }
                 resolve(files);
-            });
-        });
-    }
-
-    downloadFile(url, dest) {
-        return new Promise((resolve, reject) => {
-            var file = fs.createWriteStream(dest);
-            var request = http.get(url, function (response) {
-                response.pipe(file);
-                file.on('finish', function () {
-                    file.close(resolve);
-                    resolve(true);
-                });
-            }).on('error', function (err) {
-                fs.unlink(dest);
-                resolve(false);
             });
         });
     }
@@ -143,7 +127,7 @@ class fileCreator {
             if (viewLayout === "Default") {
                 viewLinkingCode = `willCore.${viewName} = [willCore.$${viewLayoutElement}, willCoreModules.url, "${viewPath}/${viewName}.js", willCoreModules.url, "${viewPath}/${viewName}.html", willCoreModules.route, "${viewRoute}", x => true];\n`;
             } else {
-                viewLinkingCode = `willCore.${viewName} = [willCore.$${viewLayout}.${viewLayoutElement}, willCoreModules.url, "${viewPath}/${viewName}.js", willCoreModules.url, "${viewPath}/${viewName}.html", willCoreModules.route, "${viewRoute}", x => true, willCore.${viewLayout}];\n`;
+                viewLinkingCode = `willCore.${viewName} = [willCore.${viewLayout}.$${viewLayoutElement}, willCoreModules.url, "${viewPath}/${viewName}.js", willCoreModules.url, "${viewPath}/${viewName}.html", willCoreModules.route, "${viewRoute}", x => true, willCore.${viewLayout}];\n`;
             }
             var output = fileContents.slice(0, codeTagIndex) + viewLinkingCode + fileContents.slice(codeTagIndex);
             fs.writeFileSync(indexFile, output);
@@ -176,6 +160,9 @@ class fileCreator {
             viewFiles.forEach(filePath => {
                 var newFileName = pathUtil.renameViewFile(filePath, newName);
                 fs.renameSync(filePath, newFileName);
+                let fileContent = fs.readFileSync(newFileName, 'utf8');
+                fileContent = pathUtil.replaceAll(fileContent, `"./${viewName}`, `"./${newName}`);
+                fs.writeFileSync(newFileName, fileContent);
             });
             resolve({ success: true });
         });

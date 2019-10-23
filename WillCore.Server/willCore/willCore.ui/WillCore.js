@@ -1,7 +1,7 @@
 ﻿import { moduleProxy } from "./Modules.js";
 
 //=========WillCore======================================
-var coreProxyHander = {
+let coreProxyHander = {
     get: function (target, property) {
         if (willCoreModules.getDefaultElement.statement(target, property)) {
             return willCoreModules.getDefaultElement.result(target, property);
@@ -35,7 +35,7 @@ var coreProxyHander = {
     }
 }
 
-var WillCoreInstance = {
+let WillCoreInstance = {
     router: willCoreModules.router,
     _init: false,
     willCore: new Proxy(willCoreModules.routerFunction, coreProxyHander),
@@ -43,7 +43,7 @@ var WillCoreInstance = {
 
 willCoreModules.router.setCoreProxy(WillCoreInstance.willCore);
 
-var mainInstance = WillCoreInstance.willCore;
+let mainInstance = WillCoreInstance.willCore;
 window.willCore = mainInstance;
 export {
     mainInstance as willCore

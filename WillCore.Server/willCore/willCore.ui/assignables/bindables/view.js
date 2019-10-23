@@ -1,4 +1,4 @@
-var view = {
+let view = {
     getFactoryInstance: () => {
         class view extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -10,11 +10,11 @@ var view = {
 
             async setValues(values) {
                 if (!this.element) return;
-                var display = getComputedStyle(this.element).display;
-                var that = this;
+                let display = getComputedStyle(this.element).display;
+                let that = this;
                 this.element.display = "none";
                 this.viewScope = values.object[0];
-                var view = willCoreModules.viewFactory.getView(new Date().getTime(), this.viewManager.coreProxy, this.viewScope, this.viewManager);
+                let view = willCoreModules.viewFactory.getView(new Date().getTime(), this.viewManager.coreProxy, this.viewScope, this.viewManager);
                 this.view = view;
                 view._proxyTarget._isPartial = true;
                 view.viewManager.element = this.element;

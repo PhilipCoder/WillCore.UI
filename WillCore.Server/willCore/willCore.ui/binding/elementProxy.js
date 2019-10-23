@@ -1,4 +1,4 @@
-﻿var proxyHandler = {
+﻿let proxyHandler = {
     get: function (target, prop, proxyInstance) {
         if (prop === "element") {
             return target;
@@ -29,7 +29,7 @@
     }
 };
 
-var elementProxy = function (element, set, target, field, proxyInstance) {
+let elementProxy = function (element, set, target, field, proxyInstance) {
     element.setFunction = set;
     element._target = target;
     element.field = field;

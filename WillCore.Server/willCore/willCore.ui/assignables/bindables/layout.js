@@ -1,4 +1,4 @@
-﻿var layout = {
+﻿let layout = {
     getFactoryInstance: () => {
         class layout extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -12,7 +12,7 @@
             setValues(values) {
                 this.viewScope = {};
                 this.viewManager.isLayout = true;
-                var view = willCoreModules.viewFactory.getView(this.name, this.viewManager.coreProxy, this.viewScope);
+                let view = willCoreModules.viewFactory.getView(this.name, this.viewManager.coreProxy, this.viewScope);
                 view.viewManager.element = document.getElementsByTagName("BODY")[0];
                 view.viewManager.htmlURL = values.string[0].endsWith(".html") ? values.string[0] : values.string[1];
                 view.viewManager.jsURL = values.string[0].endsWith(".js") ? values.string[0] : values.string[1];
@@ -26,7 +26,7 @@
             }
 
             static getInstanceFactory(target, property, value) {
-                var newLayout = willCoreModules.layoutProxyFactory.getLayout(new willCoreModules.viewManager(property));
+                let newLayout = willCoreModules.layoutProxyFactory.getLayout(new willCoreModules.viewManager(property));
                 newLayout.view = target[property];
                 newLayout.name = property;
                 newLayout.assignmentCompletionEvent = data => {

@@ -1,4 +1,4 @@
-﻿var source = {
+﻿let source = {
     getFactoryInstance: () => {
         class source extends willCoreModules.assignable {
             constructor() {
@@ -12,11 +12,11 @@
             }
 
             setValues(values) {
-                var sourceFunc = values.function[0];
-                var mapperFunc = values.function[1];
+                let sourceFunc = values.function[0];
+                let mapperFunc = values.function[1];
                 this.originalValue._proxyTarget._sources = this.target[this.source]._sources || [];
                 this.originalValue._proxyTarget._sources.push({ sourceFunc: sourceFunc, mapperFunc: mapperFunc });
-                var that = this;
+                let that = this;
                 this.originalValue.source = function () {
                     let target = that.target;
                     let property = that.source;

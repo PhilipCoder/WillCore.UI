@@ -1,17 +1,17 @@
-﻿var repeat = {
+﻿let repeat = {
     getFactoryInstance: () => {
         function getIdProxyHander(elements, viewManager) {
-            var getElement = function (target, prop) {
+            let getElement = function (target, prop) {
                 if (prop.startsWith("$")) {
-                    var elementId = new willCoreModules.idManager(viewManager).get(prop.substring(1));
+                    let elementId = new willCoreModules.idManager(viewManager).get(prop.substring(1));
                     function findNode(nodes) {
-                        for (var nodeI = 0; nodeI < nodes.length; nodeI++) {
-                            var node = nodes[nodeI];
+                        for (let nodeI = 0; nodeI < nodes.length; nodeI++) {
+                            let node = nodes[nodeI];
                             if (node.id == elementId) {
                                 return node;
                             }
                             if (node.children) {
-                                var childResult = findNode(node.children);
+                                let childResult = findNode(node.children);
                                 if (childResult) {
                                     return childResult;
                                 }
@@ -87,7 +87,7 @@
                 this.originalChildren = this.getCopyOfElements([this.element]);
                 try {
                     this.viewManager.collectionManager.listen(this, this);
-                    var targetValue = this.bindingMethod();
+                    let targetValue = this.bindingMethod();
                     this.viewManager.collectionManager.stopListen();
                     this.parentElement = this.element.parentElement;
                     this.updateDom();
@@ -103,8 +103,8 @@
                 return result;
             }
             clearIds(nodes) {
-                for (var i = 0; i < nodes.length; i++) {
-                    var node = nodes[i];
+                for (let i = 0; i < nodes.length; i++) {
+                    let node = nodes[i];
                     node.id = "";
                     if (node.children) {
                         this.clearIds(node.children);
@@ -112,7 +112,7 @@
                 }
             }
             appendNodesToDom(nodes) {
-                for (var i = 0; i < nodes.length; i++) {
+                for (let i = 0; i < nodes.length; i++) {
                     this.parentElement.appendChild(nodes[i]);
                 }
             }
@@ -125,8 +125,8 @@
                     willCoreModules.execptionHander.handleExeception("Invalid repeat assignment", `Repeats must be assigned to arrays!`);
                 }
                 for (var i = 0; i < targetValue.length; i++) {
-                    var elements = this.getCopyOfElements(this.originalChildren);
-                    var idProxy = getIdProxyHander(elements, this.viewManager);
+                    let elements = this.getCopyOfElements(this.originalChildren);
+                    let idProxy = getIdProxyHander(elements, this.viewManager);
                     this.repeatFunction(idProxy, targetValue[i], i);
                     this.appendNodesToDom(elements);
                 }

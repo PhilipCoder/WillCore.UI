@@ -17,7 +17,7 @@ const moduleProxyHandler = {
 	 */
     set: function (target, property, value) {
 		//Loop through all the registered baseClasses and see if the value inherits any of them
-        for (var baseClassName in target.baseClasses) {
+        for (let baseClassName in target.baseClasses) {
             if (value.prototype instanceof target.baseClasses[baseClassName]) {
                 target.baseInhertants[baseClassName][property] = value;
             }
@@ -27,7 +27,7 @@ const moduleProxyHandler = {
             target.baseClasses[property] = value;
             target.baseInhertants[property] = {};
 			//See if any of the current registered classes inherits the base class and assign them.
-            for (var className in target.allClasses) {
+            for (let className in target.allClasses) {
                 if (target.allClasses[className].prototype && value.prototype instanceof target.allClasses[className]) {
                     target.baseInhertants[property][className] = target.allClasses[className];
                 }

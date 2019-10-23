@@ -1,4 +1,4 @@
-﻿var attribute = {
+﻿let attribute = {
     getFactoryInstance: () => {
         class attribute extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -19,28 +19,28 @@
                 }
             }
             updateDom() {
-                var targetValue = this.bindingMethod();
+                let targetValue = this.bindingMethod();
                 if (!this.element || typeof targetValue == "undefined") return;
-                var currentAttribute = this.element.getAttribute(this.targetAttribute);
+                let currentAttribute = this.element.getAttribute(this.targetAttribute);
                 currentAttribute = currentAttribute == undefined || currentAttribute == null ? "" : currentAttribute;
                 if (typeof (targetValue) == "function") {
                     targetValue = targetValue();
                 }
                 if (typeof (targetValue) == "object") {
-                    for (var key in targetValue) {
-                        var propValue = targetValue[key];
+                    for (let key in targetValue) {
+                        let propValue = targetValue[key];
                         if (typeof (propValue) == "function") {
                             propValue = propValue();
                         }
                         if (typeof (propValue) == "boolean") {
-                            var parts = currentAttribute.split(" ").map(x => x.trim()).filter(x => x !== "" && x !== key);
+                            let parts = currentAttribute.split(" ").map(x => x.trim()).filter(x => x !== "" && x !== key);
                             if (propValue) {
                                 parts.push(key);
                             }
                             currentAttribute = parts.join(" ");
                         } else {
-                            var parts = currentAttribute.split(";").filter(x => x && x.trim() !== "");
-                            parts = parts.map(x => { var coreValues = x.split(":"); return [coreValues[0].trim(), coreValues[1].trim()] }).filter(x => x[0] !== key);
+                            let parts = currentAttribute.split(";").filter(x => x && x.trim() !== "");
+                            parts = parts.map(x => { let coreValues = x.split(":"); return [coreValues[0].trim(), coreValues[1].trim()] }).filter(x => x[0] !== key);
                             parts.push([key, propValue]);
                             currentAttribute = parts.map(x => x.join(":")).join(";");
                         }

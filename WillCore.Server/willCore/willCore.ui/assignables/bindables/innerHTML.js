@@ -1,4 +1,4 @@
-﻿var innerHTML = {
+﻿let innerHTML = {
     getFactoryInstance: () => {
         class innerHTML extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -18,7 +18,7 @@
                 }
             }
             updateDom() {
-                var targetValue = this.bindingMethod();
+                let targetValue = this.bindingMethod();
                 if (!this.element || typeof targetValue == "undefined") return;
                 this.element.innerHTML = targetValue;
                 return targetValue;

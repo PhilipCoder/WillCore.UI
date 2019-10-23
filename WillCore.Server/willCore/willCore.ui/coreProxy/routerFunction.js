@@ -2,21 +2,29 @@
     let parameters = [];
     let parameterString = "";
     if (routeParameters && typeof routeParameters === "object") {
-        for (var key in routeParameters) {
+        for (let key in routeParameters) {
             parameters.push(`${key}=${encodeURIComponent(routeParameters[key])}`);
         }
         if (parameters.length > 0) {
             parameterString = "?" + parameters.join("&");
         }
     }
-    window.location.hash = route + parameterString;
+    var forceUrl = false;
+    let url = window.location.hash.slice(1) || "/";
+    if (url.indexOf("?") > -1) {
+        url = url.substring(url.indexOf("?"));
+        forceUrl = url.indexOf("forceUrl=true") > -1;
+    }
+    if (!forceUrl) {
+        window.location.hash = route + parameterString;
+    }
     willCoreModules.router.init();
 };
 routerFunction.url = function (route, routeParameters) {
     let parameters = [];
     let parameterString = "";
     if (routeParameters && typeof routeParameters === "object") {
-        for (var key in routeParameters) {
+        for (let key in routeParameters) {
             parameters.push(`${key}=${encodeURIComponent(routeParameters[key])}`);
         }
         if (parameters.length > 0) {

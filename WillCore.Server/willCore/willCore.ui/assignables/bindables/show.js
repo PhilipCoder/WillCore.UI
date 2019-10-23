@@ -1,4 +1,4 @@
-var show = {
+let show = {
     getFactoryInstance: () => {
         class show extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -9,7 +9,7 @@ var show = {
             setValues(values) {
                 if (!this.element) return;
                 try {
-                    var display = getComputedStyle(this.element).display;
+                    let display = getComputedStyle(this.element).display;
                     this.initialDisplayState = !display || display === "none" ? "block" : display;
                     this.bindingMethod = values.function[0];
                     this.viewManager.collectionManager.listen(this, this);
@@ -20,10 +20,9 @@ var show = {
                 }
             }
             updateDom() {
-                var targetValue = this.bindingMethod();
+                let targetValue = this.bindingMethod();
                 if (!this.element) return;
                 this.element.style.display = targetValue ? this.initialDisplayState : "none";
-                this.element.style.backgroundColor = "black";
                 return targetValue;
             }
         };

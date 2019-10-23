@@ -1,4 +1,4 @@
-var disabled = {
+let disabled = {
     getFactoryInstance: () => {
         class disabled extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -19,7 +19,7 @@ var disabled = {
                 }
             }
             updateDom() {
-                var targetValue = this.bindingMethod();
+                let targetValue = this.bindingMethod();
                 if (!this.element) return;
                 this.element.disabled = !!targetValue;
                 return targetValue;

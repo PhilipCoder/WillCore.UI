@@ -3,8 +3,8 @@
         this.registeredViews = {};
         this.coreProxy = null;
         this.currentRoute = "";
-        var that = this;
-        var windowVar = typeof window === "undefined" ? null : window;
+        let that = this;
+        let windowVar = typeof window === "undefined" ? null : window;
         this.previousUrl = null;
         this.previousViewManager = null;
         if (windowVar) {
@@ -14,7 +14,7 @@
         }
     }
     getUrl(returnFull) {
-        var url = window.location.hash.slice(1) || "/";
+        let url = window.location.hash.slice(1) || "/";
         if (returnFull) return url;
         if (url.indexOf("?") > -1) {
             url = url.substring(0, url.indexOf("?"));
@@ -26,12 +26,12 @@
     }
     
     async handleRoute(url) {
-        var fullURL = this.getUrl(true);
+        let fullURL = this.getUrl(true);
         if (fullURL != this.previousUrl) {
             this.previousUrl = fullURL;
             this.currentRoute = url;
-            var viewToLoad = null;
-            for (var key in this.registeredViews) {
+            let viewToLoad = null;
+            for (let key in this.registeredViews) {
                 if (this.registeredViews[key].viewManager.route == this.currentRoute) {
                     viewToLoad = this.registeredViews[key];
                     break;
@@ -41,7 +41,7 @@
                 if (this.previousViewManager) {
                     this.previousViewManager.unload();
                 }
-                var loadedViewInstance = await willCoreModules.viewLoader.loadView(viewToLoad, this.coreProxy);
+                let loadedViewInstance = await willCoreModules.viewLoader.loadView(viewToLoad, this.coreProxy);
                 if (loadedViewInstance.viewManager && loadedViewInstance.viewManager.layout) {
                     viewToLoad.viewManager.layout = loadedViewInstance.viewManager.layout;
                 }

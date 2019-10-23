@@ -1,4 +1,4 @@
-﻿var url = {
+﻿let url = {
     getFactoryInstance: () => {
         class url extends willCoreModules.assignable {
             constructor() {
@@ -12,7 +12,7 @@
             }
 
             static getInstanceFactory(target, property) {
-                var newURL = new url();
+                let newURL = new url();
                 newURL.view = target[property];
                 newURL.assignmentCompletionEvent = data => {
                     newURL.view.viewManager.setUrl(data);

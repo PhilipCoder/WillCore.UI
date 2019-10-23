@@ -11,23 +11,23 @@
         }
     }
     getViewCopy(proxy) {
-        var viewProxy = willCoreModules.viewFactory.getView(proxy._proxyTarget.viewManager.name, proxy._proxyTarget.viewManager.coreProxy);
+        let viewProxy = willCoreModules.viewFactory.getView(proxy._proxyTarget.viewManager.name, proxy._proxyTarget.viewManager.coreProxy);
         proxy._proxyTarget.viewManager.copyTo(viewProxy._proxyTarget.viewManager);
         viewProxy._proxyTarget.viewManager.id = new Date().getTime();
         viewProxy._proxyTarget._isPartial = proxy._proxyTarget._isPartial;
         return viewProxy;
     }
     async loadView(view, coreProxy, sender, keepOriginal) {
-        var that = this;
+        let that = this;
         return new Promise(async (mainResolve, mainReject) => {
             view = keepOriginal ? view : that.getViewCopy(view);
-            var viewManager = view.viewManager;
+            let viewManager = view.viewManager;
             if (viewManager.layout && (!that.previousLayout || !that.previousLayout.viewManager.id || that.previousLayout.viewManager.id != viewManager.layout.viewManager.id)) {
                 if (that.previousLayout && that.previousLayout.viewManager.unload) {
                     that.previousLayout.viewManager.unload();
                 }
                 that.previousLayout = viewManager.layout;
-                var loadedLayoutInstance = await that.loadView(viewManager.layout, coreProxy, view);
+                let loadedLayoutInstance = await that.loadView(viewManager.layout, coreProxy, view);
                 view.viewManager.layout = loadedLayoutInstance;
                 that.isDefaultLayout = false;
             } else if (!viewManager.layout && !viewManager.isLayout && !view._isPartial) {
@@ -39,7 +39,7 @@
             }
 
             if (typeof viewManager.routeAuthFunc === "function") {
-                var authenticated = viewManager.routeAuthFunc();
+                let authenticated = viewManager.routeAuthFunc();
                 if (authenticated.then) {
                     authenticated = await authenticated;
                 }
@@ -71,7 +71,7 @@
     }
 
     getUrl(returnFull) {
-        var url = window.location.hash.slice(1) || "/";
+        let url = window.location.hash.slice(1) || "/";
         if (returnFull) return url;
         if (url.indexOf("?") > -1) {
             url = url.substring(0, url.indexOf("?"));
@@ -80,15 +80,15 @@
     }
 
     getURLParameters(objectToAssignTo) {
-        var url = window.location.hash.slice(1) || "/";
+        let url = window.location.hash.slice(1) || "/";
         if (url.indexOf("?") > -1) {
             url = url.substring(url.indexOf("?") + 1);
         } else {
             return;
         }
-        var urlParameters = url.split("&");
+        let urlParameters = url.split("&");
         urlParameters.forEach(parameter => {
-            var segments = parameter.split("=");
+            let segments = parameter.split("=");
             if (segments.length !== 2) {
                 willCoreModules.execptionHander.handleExeception("Invalid URL parameters", `Unable to parse the current URL to any meaningful values.`);
             }
@@ -97,14 +97,16 @@
     }
 
     async finalizeLoad(viewManager, view, mainResolve, initialDisplay) {
-        var html = await willCoreModules.loadHTML(viewManager.htmlURL, view);
+        let html = await willCoreModules.loadHTML(viewManager.htmlURL, view);
         const idManagerView = viewManager.parentViewManager ? viewManager.parentViewManager : null;
-        var element = typeof viewManager.element === "string" ?
+        let element = typeof viewManager.element === "string" ?
             new willCoreModules.idManager(idManagerView).getElement(viewManager.element) :
             new willCoreModules.idManager(idManagerView).getElementExistingId(viewManager.element.id);
-        console.log(html);
+       // console.log(html);
         element.innerHTML = html;
+        console.log(view);
         willCoreModules.lazyImport(viewManager.jsURL).then(x => {
+            console.log(view);
             if (x.view) {
                 x.view(view);
             }

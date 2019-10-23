@@ -1,19 +1,19 @@
 let getRandomBytes = function(n) {
-    var a = new Uint8Array(n);
-    for (var i = 0; i < n; i += 65536) {
+    let a = new Uint8Array(n);
+    for (let i = 0; i < n; i += 65536) {
         crypto.getRandomValues(a.subarray(i, i + Math.min(n - i, 65536)));
     }
     return a;
 }
 
 var byteToHex = [];
-for (var i = 0; i < 256; ++i) {
+for (let i = 0; i < 256; ++i) {
     byteToHex[i] = (i + 0x100).toString(16).substr(1);
 }
 
 function bytesToUuid(buf, offset) {
-    var i = offset || 0;
-    var bth = byteToHex;
+    let i = offset || 0;
+    let bth = byteToHex;
     return ([bth[buf[i++]], bth[buf[i++]],
     bth[buf[i++]], bth[buf[i++]], '-',
     bth[buf[i++]], bth[buf[i++]], '-',
@@ -24,28 +24,28 @@ function bytesToUuid(buf, offset) {
     bth[buf[i++]], bth[buf[i++]]]).join('');
 }
 
-var _nodeId;
-var _clockseq;
+let _nodeId;
+let _clockseq;
 
-var _lastMSecs = 0;
-var _lastNSecs = 0;
+let _lastMSecs = 0;
+let _lastNSecs = 0;
 //  A modified version of a GUID generator from orgiginal API
 //  Copyright (c) 2010-2016 Robert Kieffer and other contributors
 //	https://github.com/broofa/node-uuid 
 
 function guid(options, buf, offset) {
-    var i = buf && offset || 0;
-    var b = buf || [];
+    let i = buf && offset || 0;
+    let b = buf || [];
 
     options = options || {};
-    var node = options.node || _nodeId;
-    var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+    let node = options.node || _nodeId;
+    let clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
 
     // node and clockseq need to be initialized to random values if they're not
     // specified.  We do this lazily to minimize issues related to insufficient
     // system entropy.  See #189
     if (node == null || clockseq == null) {
-        var seedBytes = getRandomBytes();
+        let seedBytes = getRandomBytes();
         if (node == null) {
             // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
             node = _nodeId = [
@@ -63,14 +63,14 @@ function guid(options, buf, offset) {
     // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
     // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
     // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
-    var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+    let msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
 
     // Per 4.2.1.2, use count of uuid's generated during the current clock
-    // cycle to simulate higher resolution clock
-    var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+    //let cycle to simulate higher resolution clock
+    let nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
 
     // Time since last uuid creation (in msecs)
-    var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs) / 10000;
+    let dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs) / 10000;
 
     // Per 4.2.1.2, Bump clockseq on clock regression
     if (dt < 0 && options.clockseq === undefined) {
@@ -96,14 +96,14 @@ function guid(options, buf, offset) {
     msecs += 12219292800000;
 
     // `time_low`
-    var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+    let tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
     b[i++] = tl >>> 24 & 0xff;
     b[i++] = tl >>> 16 & 0xff;
     b[i++] = tl >>> 8 & 0xff;
     b[i++] = tl & 0xff;
 
     // `time_mid`
-    var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+    let tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
     b[i++] = tmh >>> 8 & 0xff;
     b[i++] = tmh & 0xff;
 
@@ -118,7 +118,7 @@ function guid(options, buf, offset) {
     b[i++] = clockseq & 0xff;
 
     // `node`
-    for (var n = 0; n < 6; ++n) {
+    for (let n = 0; n < 6; ++n) {
         b[i + n] = node[n];
     }
 

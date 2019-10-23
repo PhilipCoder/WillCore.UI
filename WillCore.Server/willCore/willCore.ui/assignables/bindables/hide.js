@@ -1,4 +1,4 @@
-var hide = {
+let hide = {
     getFactoryInstance: () => {
         class hide extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -9,7 +9,7 @@ var hide = {
             setValues(values) {
                 if (!this.element) return;
                 try {
-                    var display = getComputedStyle(this.element).display;
+                    let display = getComputedStyle(this.element).display;
                     this.initialDisplayState = !display || display === "none" ? "block" : display;
                     this.bindingMethod = values.function[0];
                     this.viewManager.collectionManager.listen(this, this);
@@ -20,7 +20,7 @@ var hide = {
                 }
             }
             updateDom() {
-                var targetValue = this.bindingMethod();
+                let targetValue = this.bindingMethod();
                 if (!this.element) return;
                 this.element.style.display = targetValue ? "none" : this.initialDisplayState;
                 return targetValue;

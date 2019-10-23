@@ -1,4 +1,4 @@
-﻿var create = {
+﻿let create = {
     getFactoryInstance: () => {
         class create extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -8,12 +8,12 @@
             }
             setValues(values) {
                 if (!this.element) return;
-                var newElemenId = `${this.proxy.viewManager.name}.${this.element.tmpId}`;
+                let newElemenId = `${this.proxy.viewManager.name}.${this.element.tmpId}`;
                 try {
-                    var attributes = values.object[0];
-                    var elementType = values.string[0];
-                    var newElement = document.createElement(elementType);
-                    for (var key in attributes) {
+                    let attributes = values.object[0];
+                    let elementType = values.string[0];
+                    let newElement = document.createElement(elementType);
+                    for (let key in attributes) {
                         newElement.setAttribute(key, attributes[key]);
                     }
                     newElement.id = newElemenId;

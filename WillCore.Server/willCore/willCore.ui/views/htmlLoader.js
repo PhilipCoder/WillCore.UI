@@ -1,6 +1,6 @@
 ﻿function loadHTML(url, view) {
-    var promise = new Promise((resolve, reject) => {
-        var headers = new Headers();
+    let promise = new Promise((resolve, reject) => {
+        let headers = new Headers();
         headers.append('Content-Type', 'text/html');
         fetch(url, {
             mode: 'cors',

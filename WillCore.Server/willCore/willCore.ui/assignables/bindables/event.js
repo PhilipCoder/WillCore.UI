@@ -1,4 +1,4 @@
-﻿var event = {
+﻿let event = {
     getFactoryInstance: () => {
         class event extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -16,7 +16,7 @@
 
             setValueProps() {
                 if (!this.element) return;
-                var that = this;
+                let that = this;
                 this.element[this.eventName] = function (event) {
                     that.eventMethod();
                     return true;

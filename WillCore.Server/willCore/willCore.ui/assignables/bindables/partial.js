@@ -1,4 +1,4 @@
-﻿var partial = {
+﻿let partial = {
     getFactoryInstance: () => {
         class partial extends willCoreModules.bindable {
             constructor(viewManager) {
@@ -9,7 +9,7 @@
             }
 
             setProxiesAsPartial(obj) {
-                for (var key in obj) {
+                for (let key in obj) {
                     if (typeof obj[key] === "object") {
                         obj[key]._isPartial = true;
                         this.setProxiesAsPartial(obj[key]);
@@ -20,12 +20,12 @@
             async setValues(values) {
                 return new Promise(async (resolve, reject) => {
                     if (!this.element) return;
-                    var display = getComputedStyle(this.element).display;
-                    var that = this;
+                    let display = getComputedStyle(this.element).display;
+                    let that = this;
                     this.element.display = "none";
                     this.viewScope = values.object[0];
                     this.setProxiesAsPartial(this.viewScope);
-                    var view = willCoreModules.viewFactory.getView(new Date().getTime(), this.viewManager.coreProxy, this.viewScope, this.viewManager);
+                    let view = willCoreModules.viewFactory.getView(willCoreModules.guid(), this.viewManager.coreProxy, this.viewScope, this.viewManager);
                     this.view = view;
                     view._proxyTarget._isPartial = true;
                     view.viewManager.element = this.element;

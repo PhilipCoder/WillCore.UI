@@ -1,4 +1,4 @@
-﻿var allBindables = {};
+﻿let allBindables = {};
 
 class assignable {
     constructor(assignmentConstraints) {
@@ -9,56 +9,53 @@ class assignable {
     }
     static isBaseClass() { return "assignable"; }
     async assign(value) {
-        return new Promise(async (resolve, reject) => {
-            var that = this;
-            var valueType = null;
-            if (typeof (value) == "object" && Array.isArray(value)) {
-                valueType = "array";
-            } else if (typeof (value) == "object") {
-                valueType = "object";
-            } else if (typeof (value) == "string") {
-                valueType = "string";
-            } else if (typeof (value) == "boolean") {
-                valueType = "boolean";
-            } else if (typeof (value) == "number") {
-                valueType = "number";
-            }
-            else if (typeof (value) == "function") {
-                valueType = "function";
+        let that = this;
+        let valueType = null;
+        if (typeof (value) == "object" && Array.isArray(value)) {
+            valueType = "array";
+        } else if (typeof (value) == "object") {
+            valueType = "object";
+        } else if (typeof (value) == "string") {
+            valueType = "string";
+        } else if (typeof (value) == "boolean") {
+            valueType = "boolean";
+        } else if (typeof (value) == "number") {
+            valueType = "number";
+        }
+        else if (typeof (value) == "function") {
+            valueType = "function";
+        } else {
+            willCoreModules.execptionHander.handleExeception("Unsuppored Data Type", `Can't assign value ${value} to assignable.`);
+        }
+        if (valueType != null) {
+            if (!this.assignmentConstraints[valueType] || (this.assignedValues[valueType] && this.assignedValues[valueType].length >= this.assignmentConstraints[valueType])) {
+                willCoreModules.execptionHander.handleExeception("Unsuppored Assignment", `The assignable ${this.topInstance.constructor.name} supports the following assignments: ${getErrorAssignmentValues()}.`);
             } else {
-                willCoreModules.execptionHander.handleExeception("Unsuppored Data Type", `Can't assign value ${value} to assignable.`);
-            }
-            if (valueType != null) {
-                if (!this.assignmentConstraints[valueType] || (this.assignedValues[valueType] && this.assignedValues[valueType].length >= this.assignmentConstraints[valueType])) {
-                    willCoreModules.execptionHander.handleExeception("Unsuppored Assignment", `The assignable ${this.topInstance.constructor.name} supports the following assignments: ${getErrorAssignmentValues()}.`);
-                } else {
-                    this.assignedValues[valueType] = !this.assignedValues[valueType] ? [] : this.assignedValues[valueType];
-                    this.assignedValues[valueType].push(value);
-                    if (isAssignmentCompleted()) {
-                        await this.topInstance.setValues(this.assignedValues);
-                        this.assignmentCompletionEvent(this.assignedValues);
-                    }
+                this.assignedValues[valueType] = !this.assignedValues[valueType] ? [] : this.assignedValues[valueType];
+                this.assignedValues[valueType].push(value);
+                if (isAssignmentCompleted()) {
+                    this.topInstance.setValues(this.assignedValues);
+                    this.assignmentCompletionEvent(this.assignedValues);
                 }
             }
+        }
 
-            function isAssignmentCompleted() {
-                for (var key in that.assignmentConstraints) {
-                    if (!that.assignedValues[key] || that.assignedValues[key].length !== that.assignmentConstraints[key]) {
-                        return false;
-                    }
+        function isAssignmentCompleted() {
+            for (let key in that.assignmentConstraints) {
+                if (!that.assignedValues[key] || that.assignedValues[key].length !== that.assignmentConstraints[key]) {
+                    return false;
                 }
-                return true;
             }
+            return true;
+        }
 
-            function getErrorAssignmentValues() {
-                var result = "";
-                for (var key in that.assignmentConstraints) {
-                    result = result + `${key} : ${that.assignmentConstraints[key]}, `;
-                }
-                return result;
+        function getErrorAssignmentValues() {
+            let result = "";
+            for (let key in that.assignmentConstraints) {
+                result = result + `${key} : ${that.assignmentConstraints[key]}, `;
             }
-            resolve();
-        });
+            return result;
+        }
     }
 
     static registerBindable(name, classType) {

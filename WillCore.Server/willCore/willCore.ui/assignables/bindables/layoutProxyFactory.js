@@ -1,16 +1,16 @@
-﻿var layoutProxyFactory = {
+﻿let layoutProxyFactory = {
     getFactoryInstance: () => {
         class layoutProxyFactory {
             constructor() {
 
             }
             static getLayout(viewManager) {
-                var view = new willCoreModules.layout(viewManager);
-                var handler = {
+                let view = new willCoreModules.layout(viewManager);
+                let handler = {
                     get: function (target, property) {
                         if (property.startsWith("$")) {
-                            var elementId = property.substring(1);
-                            var element = new willCoreModules.idManager(view.viewManager).getElement(elementId);
+                            let elementId = property.substring(1);
+                            let element = new willCoreModules.idManager(view.viewManager).getElement(elementId);
                             return element || (() => { var newElement = document.createElement("div"); newElement.id = elementId; return newElement })();
                         }
                         return target[property];
