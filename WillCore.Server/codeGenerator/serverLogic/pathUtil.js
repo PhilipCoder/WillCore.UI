@@ -42,6 +42,12 @@ class pathUtil {
         return fileName.replace(`${viewName}.`, `${newViewName}.`);
     }
 
+    /**
+     * Method to replace all occurrences in a string.
+     * @param {string} target
+     * @param {string} search
+     * @param {string} replacement
+     */
     static replaceAll(target, search, replacement) {
         search = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         return target.replace(new RegExp(search, 'g'), replacement);

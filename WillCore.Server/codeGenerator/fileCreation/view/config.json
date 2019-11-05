@@ -1,0 +1,7 @@
+{
+  "name": "View",
+  "extention": ".view",
+  "showSingleFile": true,
+  "icon": "icons/view.png",
+  "modulePath": "View"
+}
