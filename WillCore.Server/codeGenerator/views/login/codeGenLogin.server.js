@@ -1,3 +1,4 @@
+const fileCreateModuleLoader = require("../../fileCreation/logic/fileCreateModuleLoader.js");
 module.exports = (view) => {
     view.login = (view) => {
         if (view.loginData.userName == "admin" && view.loginData.password == "admin" && !view.session.authenticated()) {
