@@ -1,5 +1,6 @@
 const pathUtil = require('../../serverLogic/pathUtil.js');
 const fs = require('fs');
+const path = require('path');
 
 /**
  * Class should be returned by a file creation preProcess module.
@@ -23,10 +24,14 @@ class preProcessResult {
         this.fileContent = this.replaceTags(replacementTags, fileContent);
     }
     /**
-     * Saves the preProcess result to a file
+     * Saves the preProcess result to a file and creates the folder if it does not exists.
      * */
     save() {
-        var fileFullPath = path.resolve(pathUtil.getWWWRootDir(), this.filePath, this.fileName, this.fileExtention);
+        var filePath = path.resolve(pathUtil.getWWWRootDir(), this.filePath);
+        if (!fs.existsSync(filePath)) {
+            fs.mkdirSync(filePath, { recursive: true });
+        }
+        var fileFullPath = path.resolve(filePath, this.fileName + this.fileExtention);
         fs.writeFileSync(fileFullPath, this.fileContent);
     }
     /**

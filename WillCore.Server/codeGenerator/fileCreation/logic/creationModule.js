@@ -24,27 +24,43 @@ class creationModule {
      * @param {string} moduleName The name of the module, excluding directory path.
      */
     constructor(moduleName) {
-        this.loadState(moduleName);
-    }
-
-    async loadState(moduleName) {
         this.moduleName = moduleName;
-        let modulePath = path.resolve(__dirname, "../fileTypes/", moduleName);
-        this.config = require(path.resolve(modulePath, "config.json"));
-        this.validateConfig();
-        this.preProcessor = require(`../fileTypes/${moduleName}/preProcessor.js`);
-        this.finalizer = require(`../fileTypes/${moduleName}/finalizer.js`);
-        this.icon = `/codeGen/fileCreation/fileTypes/${moduleName}/${this.config.icon}`;
-        this.extention = this.config.extention;
-        this.showSingleFile = this.config.showSingleFile;
-        this.menuPath = this.config.menuPath;
-        this.templateFiles = await pathUtil.getFilesInDirectory(path.resolve(modulePath, "templates"));
-        this.templateFilePaths = this.templateFiles.map(x => path.resolve(modulePath, "templates", x));
     }
 
-    saveFiles() {
-        //Todo continue here
-        this.templateFilePaths.map(x => this.preProcessor.processFile();
+    loadState() {
+        return new Promise(async (resolve, reject) => {
+            let moduleName = this.moduleName;
+            let modulePath = path.resolve(__dirname, "../fileTypes/", moduleName);
+            this.config = require(path.resolve(modulePath, "config.json"));
+            this.validateConfig();
+            this.preProcessor = require(`../fileTypes/${moduleName}/preProcessor.js`);
+            this.finalizer = require(`../fileTypes/${moduleName}/finalizer.js`);
+            this.icon = `/codeGen/fileCreation/fileTypes/${moduleName}/${this.config.icon}`;
+            this.extention = this.config.extention;
+            this.showSingleFile = this.config.showSingleFile;
+            this.menuPath = this.config.menuPath;
+            this.templateFiles = await pathUtil.getFilesInDirectory(path.resolve(modulePath, "templates"));
+            this.templateFilePaths = this.templateFiles.map(x => path.resolve(modulePath, "templates", x));
+            resolve();
+        });
+    }
+
+    saveFiles(path) {
+        if (this.config.staticPath) {
+            path = this.config.staticPath;
+        }
+        let userFileName = pathUtil.getFileName(path);
+        let userFilePath = pathUtil.getFilePath(path);
+        let preProcessResults = this.templateFilePaths.map(templatePath =>
+            this.preProcessor.processFile(
+                userFileName,
+                pathUtil.getFileExtention(templatePath),
+                userFilePath,
+                pathUtil.getFileNameWithoutExtention(templatePath),
+                fs.readFileSync(templatePath, 'utf8')
+            )
+        );
+        preProcessResults.forEach(x=>x.save());
     }
 
     /**

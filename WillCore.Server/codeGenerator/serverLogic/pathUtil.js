@@ -8,6 +8,13 @@ class pathUtil {
     static getFileName(filePath) {
         return path.basename(filePath);
     }
+    static getFileNameWithoutExtention(filePath) {
+        let fileName = path.basename(filePath);
+        if (fileName.indexOf(".") > -1) {
+            fileName = fileName.substring(0, fileName.lastIndexOf("."));
+        }
+        return fileName;
+    }
     static getViewName(filePath) {
         var fileName = this.getFileName(filePath);
         return fileName.substring(0, fileName.indexOf("."));
@@ -40,6 +47,15 @@ class pathUtil {
     static renameViewFile(fileName, newViewName) {
         var viewName = this.getViewName(fileName);
         return fileName.replace(`${viewName}.`, `${newViewName}.`);
+    }
+
+    /**
+     * Get the directory of a file, does not need a file extention
+     * @param {string} path
+     */
+    static getFilePath(path) {
+        var cutIndex = path.indexOf("/") > path.indexOf("\\") ? path.indexOf("/") : path.indexOf("\\");
+        return path.substring(0, cutIndex);
     }
 
     /**

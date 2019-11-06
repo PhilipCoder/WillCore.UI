@@ -6,14 +6,32 @@ const creationModule = require("./creationModule.js");
  * Author : Philip Schoeman
  * */
 class fileCreateModuleLoader {
-    async loadFiles() {
-        this.moduleDirectory = path.resolve(__dirname, "../fileTypes");
-        this.modulesNames = await pathUtil.getFilesInDirectory(this.moduleDirectory);
-        this.modules = this.modulesNames.map(x => new creationModule(x));
+    loadFiles() {
+        return new Promise(async (resolve, reject) => {
+            this.moduleDirectory = path.resolve(__dirname, "../fileTypes");
+            this.modulesNames = await pathUtil.getFilesInDirectory(this.moduleDirectory);
+            let modules = this.modulesNames.map(x => new creationModule(x));
+            this.modules = {};
+            for (var i = 0; i < modules.length; i++) {
+                let module = modules[i];
+                await module.loadState();
+                this.modules[module.moduleName] = module;
+            }
+            resolve();
+        });
+    }
+
+    createFiles(moduleName, filePath) {
+        let module = this.modules[moduleName];
+        module.saveFiles(filePath);
     }
 }
 
 let fileCreateModuleLoaderInstance = new fileCreateModuleLoader();
-fileCreateModuleLoaderInstance.loadFiles();
+
+(async () => {
+    await fileCreateModuleLoaderInstance.loadFiles();
+    fileCreateModuleLoaderInstance.createFiles("view","test");
+})();
 
 module.exports = fileCreateModuleLoaderInstance;

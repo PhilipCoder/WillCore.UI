@@ -12,7 +12,7 @@ class preProcessor {
      * @param {string} templateContent
      */
     static processFile(userFileName, fileExtention, filePath, templateName, templateContent) {
-        templateName = templateName.replace("view.", `${userFileName}.`);
+        templateName = templateName.replace("view", `${userFileName}`);
         return new preProcessResult(templateName, fileExtention, filePath, templateContent, { "$safeitemname$": userFileName});
     }
 };
