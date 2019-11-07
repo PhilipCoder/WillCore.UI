@@ -69,6 +69,7 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\view\templates\view.sources.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\templates\view.targets.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\templates\view.traps.js" />
+    <Content Include="codeGenerator\fileCreation\README.md" />
     <Content Include="codeGenerator\images\bootstrapIcon.png" />
     <Content Include="codeGenerator\images\css.png" />
     <Content Include="codeGenerator\images\fileIcons\css.png" />
