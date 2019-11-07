@@ -52,6 +52,7 @@
     <Content Include="codeGenerator\css\webfonts\fa-solid-900.ttf" />
     <Content Include="codeGenerator\css\webfonts\fa-solid-900.woff" />
     <Content Include="codeGenerator\css\webfonts\fa-solid-900.woff2" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\view\modelFactory.js" />
     <Content Include="codeGenerator\fileCreation\logic\creationModule.js" />
     <Content Include="codeGenerator\fileCreation\logic\fileCreateModuleLoader.js" />
     <Content Include="codeGenerator\fileCreation\logic\preProcessResult.js" />

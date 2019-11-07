@@ -28,3 +28,13 @@ ___
 
 Files that are aggregated in the explorer view like the files of a view, will be aggregated by linking the registered plugin files in the project.json file
 to the plugin's config.json.
+
+___
+>### The create model
+___
+
+The create model is the model for the modal to create a file. This model defines the inputs that is displayed on the create modal. The model is created by
+a modelFactory class in the plugin directory. A method "createModel" will be called on the factory class that will return the model. It takes two parameters
+projectFile and wwwRootPath.
+
+The model should be an object containing the collection that will be submitted to the link function and a function that will create the elements.
