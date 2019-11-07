@@ -37,4 +37,27 @@ The create model is the model for the modal to create a file. This model defines
 a modelFactory class in the plugin directory. A method "createModel" will be called on the factory class that will return the model. It takes two parameters
 projectFile and wwwRootPath.
 
-The model should be an object containing the collection that will be submitted to the link function and a function that will create the elements.
+The model will be a ViewSON. ViewSON is JSON containing basic information to create a view.
+
+Defining the server-side file:
+```javascript
+//viewModal.viewSON
+let viewSON () => ({
+    myCollectionA:{Name:"John", Surname:"Doe"},
+    $formDiv:[create,"div",{class:"form-group"}],
+    "$formDiv.$formLabel":["create","label",{class:"control-label"}],
+    "$formDiv.$formControl":["create","input",{class:"control-label",type:"text"}],
+    $formControl:["model",{function:true,result:"myCollection.Name"}]
+});
+module.export = viewSON;
+```
+
+Using ViewSON client-side:
+
+```javascript
+//viewModal.ViewSON
+let view = async (view) => ({
+    view.$viewJSONContainer.viewSON = "./viewModal.viewSON";
+});
+module.export = viewSON;
+```
