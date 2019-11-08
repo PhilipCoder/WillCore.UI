@@ -1,0 +1,8 @@
+{
+  "extention": null,
+  "showSingleFile": false,
+  "staticPath": "/index",
+  "icon": "icons/html.png",
+  "menuPath": "Project/",
+  "optional": false
+}

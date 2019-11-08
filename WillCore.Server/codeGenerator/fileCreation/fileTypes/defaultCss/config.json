@@ -1,0 +1,8 @@
+{
+  "extention": null,
+  "showSingleFile": false,
+  "staticPath": "/css/site/site",
+  "icon": "icons/css.png",
+  "menuPath": "Project/Default CSS",
+  "optional": true
+}

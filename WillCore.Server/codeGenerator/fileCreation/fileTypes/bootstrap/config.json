@@ -1,0 +1,8 @@
+{
+  "extention": null,
+  "showSingleFile": false,
+  "staticPath": "/css/bootstrap/bootstrap",
+  "icon": "icons/bootstrapIcon.png",
+  "menuPath": "Project/",
+  "optional": false
+}

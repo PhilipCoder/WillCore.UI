@@ -7,7 +7,7 @@ const creationModule = require("./creationModule.js");
  * */
 class fileCreateModuleLoader {
     loadFiles() {
-        return new Promise(async (resolve, reject) => {
+        this.loadPromise = new Promise(async (resolve, reject) => {
             this.moduleDirectory = path.resolve(__dirname, "../fileTypes");
             this.modulesNames = await pathUtil.getFilesInDirectory(this.moduleDirectory);
             let modules = this.modulesNames.map(x => new creationModule(x));
@@ -21,17 +21,23 @@ class fileCreateModuleLoader {
         });
     }
 
-    createFiles(moduleName, filePath) {
+    async createFiles(moduleName, filePath) {
+        await this.loadPromise;
         let module = this.modules[moduleName];
         module.saveFiles(filePath);
+    }
+
+    async getProjectFileModules() {
+        await this.loadPromise;
+        return Object.keys(this.modules).filter(x => this.modules[x].config.menuPath.startsWith("Project/")).map(x => this.modules[x]);
     }
 }
 
 let fileCreateModuleLoaderInstance = new fileCreateModuleLoader();
 
 (async () => {
-    await fileCreateModuleLoaderInstance.loadFiles();
-    fileCreateModuleLoaderInstance.createFiles("view","test");
+    fileCreateModuleLoaderInstance.loadFiles();
+   // fileCreateModuleLoaderInstance.createFiles("view","test");
 })();
 
 module.exports = fileCreateModuleLoaderInstance;

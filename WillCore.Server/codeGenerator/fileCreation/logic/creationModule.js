@@ -5,7 +5,7 @@ const pathUtil = require("../../serverLogic/pathUtil.js");
  * Validations to validate that the JSON configuration of the module has the correct fields.
  * */
 let jsonFieldValidation = {
-    extention: value => typeof value === "string" && value.length > 1 && value.startsWith("."),
+    extention: value => value === null || (typeof value === "string" && value.length > 1 && value.startsWith(".")),
     showSingleFile: value => typeof value === "boolean",
     icon: value => typeof value === "string" && value.endsWith(".png"),
     menuPath: value => value && typeof value === "string" && value.length > 1
