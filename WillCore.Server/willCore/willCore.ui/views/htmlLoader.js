@@ -8,7 +8,7 @@
             headers: headers
         }).then(function (response) {
             response.text().then(function (text) {
-                resolve(new willCoreModules.idManager(view.viewManager).getProcessedIdHTML(text));
+                resolve(view ? new willCoreModules.idManager(view.viewManager).getProcessedIdHTML(text) : text);
             });
         })
     });

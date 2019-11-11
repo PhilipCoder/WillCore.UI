@@ -2,6 +2,9 @@
     getFactoryInstance: () => {
         function getIdProxyHander(elements, viewManager) {
             let getElement = function (target, prop) {
+                if (prop === "view") {
+                    return target[prop];
+                }
                 if (prop.startsWith("$")) {
                     let elementId = new willCoreModules.idManager(viewManager).get(prop.substring(1));
                     function findNode(nodes) {
@@ -38,6 +41,10 @@
             function set(obj, prop, value) {
                 if (!prop.startsWith("$")) {
                     willCoreModules.execptionHander.handleExeception(`Can't assign property ${prop} in iterator function. Only elements starting with $ can be assigned.`);
+                }
+                if (prop === "view") {
+                    obj[prop] = value;
+                    return true;
                 }
                 function handleSet(obj, prop, value) {
                     if (!obj[prop] && Array.isArray(value)) {
@@ -97,8 +104,11 @@
             }
             getCopyOfElements(nodes) {
                 var result = [];
+                var tmpDiv = document.createElement("div");
                 for (var i = 0; i < nodes.length; i++) {
-                    result.push(nodes[i].cloneNode(true));
+                    //result.push(nodes[i].cloneNode(true));
+                    tmpDiv.innerHTML = nodes[i].outerHTML;
+                    result.push(tmpDiv.firstElementChild);
                 }
                 return result;
             }
@@ -127,8 +137,8 @@
                 for (var i = 0; i < targetValue.length; i++) {
                     let elements = this.getCopyOfElements(this.originalChildren);
                     let idProxy = getIdProxyHander(elements, this.viewManager);
-                    this.repeatFunction(idProxy, targetValue[i], i);
                     this.appendNodesToDom(elements);
+                    this.repeatFunction(idProxy, targetValue[i], i);
                 }
 
                 return targetValue;

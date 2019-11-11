@@ -60,6 +60,23 @@
         });
     }
 
+    loadViewSync(view, js, html) {
+        let that = this;
+        view = that.getViewCopy(view);
+        let viewManager = view.viewManager;
+        that.isDefaultLayout = false;
+        html = new willCoreModules.idManager(viewManager).getCleanedIdHTML(html);
+        const idManagerView = viewManager.parentViewManager ? viewManager.parentViewManager : null;
+        let element = new willCoreModules.idManager(idManagerView).getElementExistingId(viewManager.element.id);
+        if (viewManager.forceElement) {
+            element = viewManager.forceElement;
+        }
+        element.innerHTML = html;
+        js(view);
+        that.applyRoutingValues(view);
+        return view;
+    }
+
     applyRoutingValues(view) {
         view.route = view.route || {};
         view.route.url = this.getUrl();
@@ -107,7 +124,7 @@
         if (viewManager.forceElement) {
             element = viewManager.forceElement;
         }
-       // console.log(html);
+        // console.log(html);
         element.innerHTML = html;
         if (typeof viewManager.jsURL === "function") {
             viewManager.jsURL(view);

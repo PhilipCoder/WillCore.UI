@@ -29,6 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="codeGenerator\components\bootstrapDropdown.html" />
     <Content Include="codeGenerator\components\bootstrapDropdown.js" />
     <Content Include="codeGenerator\components\bootstrapNative.js" />
     <Content Include="codeGenerator\config\projectConfig.json">

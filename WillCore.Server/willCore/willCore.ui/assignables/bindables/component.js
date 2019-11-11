@@ -8,17 +8,22 @@ let component = {
             //component
             //willCore["my-component"].load(this,"/component.html");
             constructor(viewManager) {
-                super({ object: 1, string: 1 }, viewManager);
+                super({ object: 1, string: 2 }, viewManager);
                 super.topInstance = this;
                 this.bindingMethod;
                 this.deleteFromProxy = false;
                 this.name = "";
                 this.loaded = false;
                 this.jsURL = "";
+                this.html = null;
             }
 
             setValues(values) {
                 this.jsURL = values.string[0].endsWith(".js") ? values.string[0] : values.string[1];
+                this.htmlURL = values.string[0].endsWith(".js") ? values.string[1] : values.string[0];
+                willCoreModules.loadHTML(this.htmlURL).then((html) => {
+                    this.html = html;
+                })
                 let settings = values.object[0];
                 willCoreModules.lazyImport(this.jsURL).then(exportedComponent => {
                     customElements.define(this.name, exportedComponent[Object.keys(exportedComponent)[0]], settings);
@@ -29,7 +34,7 @@ let component = {
                 this.init(element);
             }
 
-            async init(element) {
+            init(element) {
                 if (!element.main) {
                     willCoreModules.execptionHander.handleExeception("Component Error", `The component ${this.name} does not have a main function.`);
                 }
@@ -37,10 +42,10 @@ let component = {
                 view._proxyTarget.viewManager.name = willCoreModules.guid();
                 view._proxyTarget.viewManager.element = element;
                 view._proxyTarget.viewManager.forceElement = element;
-                view._proxyTarget.viewManager.htmlURL = element.html ? element.html : element.innerHTML;
+                view._proxyTarget.viewManager.htmlURL = this.html;
                 view._proxyTarget.viewManager.jsURL = element.main;
                 view._proxyTarget._isPartial = true;
-                element.view = await willCoreModules.viewLoader.loadView(view);
+                element.view = willCoreModules.viewLoader.loadViewSync(view, element.main, this.html);
             }
             static mainAssignable() { return true };
         }

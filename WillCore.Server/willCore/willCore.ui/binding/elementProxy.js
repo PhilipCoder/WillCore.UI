@@ -3,6 +3,9 @@
         if (prop === "element") {
             return target;
         }
+        if (prop === "view") {
+            return target[prop];
+        }
         if (willCoreModules.baseInhertants.assignable[prop]) {
             target.setFunction(target._target, target.field, willCoreModules.baseInhertants.assignable[prop], target.proxyInstance);
             return elementProxy(target, target.setFunction, target._target, target.field, target.proxyInstance);
@@ -17,6 +20,10 @@
         }
 
     }, set: function (target, prop, value) {
+        if (prop === "view") {
+            target[prop] = value;
+            return true;
+        }
         if (!(target instanceof willCoreModules.assignable)) {
             if (willCoreModules.baseInhertants.assignable[prop]) {
                 target.setFunction(target._target, target.field, willCoreModules.baseInhertants.assignable[prop], target.proxyInstance);

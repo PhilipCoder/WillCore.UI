@@ -1,7 +1,7 @@
 import { willCore } from "/willcore/WillCore.js";
 
 //components
-willCore["bootstrap-dropdown"] = [willCoreModules.component, "/codeGen/components/bootstrapDropdown.js", {}];
+willCore["bootstrap-dropdown"] = [willCoreModules.component, "/codeGen/components/bootstrapDropdown.js", "/codeGen/components/bootstrapDropdown.html", {}];
 
 
 willCore.codeGenLogin = [willCore.$loginViewContainer, willCoreModules.url, "/codeGen/views/login/codeGenLogin.js", willCoreModules.url, "/codeGen/views/login/codeGenLogin.html", willCoreModules.route, "/", x => true];
