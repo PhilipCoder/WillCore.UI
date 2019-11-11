@@ -36,7 +36,8 @@
                 if (!prop.startsWith("$")) {
                     willCoreModules.execptionHander.handleExeception(`Can't get property ${prop} in iterator function. Only elements starting with $ can be retrieved.`);
                 }
-                return willCoreModules.elementProxy(getElement(target, prop), set, target, prop, proxyInstance);
+                var element = getElement(target, prop);
+                return element.main ? element : willCoreModules.elementProxy(element, set, target, prop, proxyInstance);
             };
             function set(obj, prop, value) {
                 if (!prop.startsWith("$")) {

@@ -1,0 +1,7 @@
+{
+  "extention": ".css",
+  "showSingleFile": false,
+  "icon": "icons/css.png",
+  "menuPath": "Files/CSS",
+  "description": "Creates a CSS file."
+}

@@ -7,8 +7,26 @@ class fileExplorer {
         this.directory = directory;
     }
     async getFiles() {
+        //To remove files that are part of an aggragation and insert a single filename
+        //Get all the file names that are part of aggragation:
+        //a) all templates should have "fileName" as the part that needs to be replaced.
+        //b) group all files with the first part of the filename if it has more than one ".", groupings should be in an array;
+        //c) run the groupings against the plugins and check if any of the extentions' last parts of the templates match all to the groups last parts
+        //d) if it does not match, mark the grouping as removed.
+        //e) if it does match, mark the files as removed from the main list of files, 
+        //   replace the files in the grouping with the single file with the first part and extension: { name: myView.view, icon: "icon" }
+        //f) run through the list of files that are not marked as deleted and load their icons, if not found default icon
+        //g) join the two lists of files and return.
         return new Promise(async (resolve, reject) => {
             let files = await this.readFilesInDirectory(this.directory);
+            let fileNameGroupings = files.reduce((obj, file) => {
+                let fileParts = file.split(".");
+                if (fileParts.length > 2) {
+                    let index = 0;
+                    let fileName = fileParts.filter(filePart => (index++) > 1).join(".");
+                }
+            });
+
             let views = files.filter(x => x.indexOf(".bindings.js") > -1).map(x => x.substring(0, x.indexOf(".")+1));
             files = files.filter(file => views.filter(view => file.startsWith(view)).length === 0);
             views.forEach(x=>files.push(x+"view"));

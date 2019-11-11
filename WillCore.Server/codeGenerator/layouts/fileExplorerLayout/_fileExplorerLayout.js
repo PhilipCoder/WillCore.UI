@@ -16,26 +16,17 @@ var view = async (view) => {
         dropdowns[module.folder].push(module);
     });
 
-    console.log(dropdowns);
     view.$menuDropdownNav.repeat = () => Object.keys(dropdowns);
     view.$menuDropdownNav.repeat((elements, row, index) => {
-        elements.$menuDropdown.onready((dropdownView) => {
-            dropdownView.values.label = row;
-            dropdownView.values.items = dropdowns[row];
-        });
-      
-        elements.$menuDropdown.load((menuElements, menuRow) => {
+        elements.$menuDropdown.label = row;
+        elements.$menuDropdown.items = dropdowns[row];
+        elements.$menuDropdown.iterator = (menuElements, menuRow) => {
             menuElements.$link.innerHTML = () => menuRow.label;
-        });
+            menuElements.$link.event.onclick = () => promptModuleFileName(menuRow.label, menuRow.name);
+        };
     });
 
-    //view.$menuDropdown.view.values.label = "test me";
-    //view.$menuDropdown.view.values.items = [{ name: "Philip" }, { name: "Jurgens" }];
-    //view.$menuDropdown.load((elements, row) => {
-    //    elements.$link.innerHTML = () => row.name;
-    //});
-
-    view.$menuItem.repeat = () => view.fileModules.modules;
+    view.$menuItem.repeat = () => view.fileModules.modules.filter(x => !x.folder);
     view.$menuItem.repeat((elements, row, index) => {
         elements.$menuItemLink.innerHTML = () => row.label;
         elements.$menuItemLink.event.onclick = () => promptModuleFileName(row.label, row.name);

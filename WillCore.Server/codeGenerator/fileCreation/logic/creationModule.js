@@ -41,6 +41,7 @@ class creationModule {
             this.menuPath = this.config.menuPath;
             this.templateFiles = await pathUtil.getFilesInDirectory(path.resolve(modulePath, "templates"));
             this.templateFilePaths = this.templateFiles.map(x => path.resolve(modulePath, "templates", x));
+            this.templateExtentions = this.templateFilePaths.map(x => pathUtil.getFileExtention(x));
             resolve();
         });
     }
@@ -66,7 +67,7 @@ class creationModule {
                 fs.readFileSync(templatePath, 'utf8')
             )
         );
-        preProcessResults.forEach(x=>x.save());
+        preProcessResults.forEach(x => x.save());
     }
 
     /**

@@ -60,6 +60,11 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\icons\bootstrapIcon.png" />
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\preProcessor.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\templates\bootstrap.min.css" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\css\config.json" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\css\finalizer.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\css\icons\css.png" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\css\preProcessor.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\css\templates\fileName.css" />
     <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\config.json" />
     <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\finalizer.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\icons\css.png" />
@@ -416,6 +421,8 @@
     <Folder Include="codeGenerator\css\webfonts\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\bootstrap\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\bootstrap\templates\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\css\icons\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\css\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\defaultCss\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\defaultCss\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\folder\icons\" />
@@ -432,6 +439,7 @@
     <Folder Include="codeGenerator\fileCreation\fileTypes\js\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\js\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\js\templates\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\css\" />
     <Folder Include="codeGenerator\fileCreation\logic\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\" />
