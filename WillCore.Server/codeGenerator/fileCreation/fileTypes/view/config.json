@@ -2,5 +2,6 @@
   "extention": ".view",
   "showSingleFile": true,
   "icon": "icons/view.png",
-  "menuPath": "View"
+  "menuPath": "Create View",
+  "description": "Adds support to create view files."
 }

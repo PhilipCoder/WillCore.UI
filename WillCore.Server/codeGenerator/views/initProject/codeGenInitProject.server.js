@@ -3,16 +3,20 @@ const fileCreateModuleLoader = require("../../fileCreation/logic/fileCreateModul
 
 module.exports = (view) => {
     view.projectExists = async (view) => {
-        const viewModules = await fileCreateModuleLoader.getProjectFileModules().map(x => ({
+        const viewModules = (await fileCreateModuleLoader.getProjectFileModules()).map(x => ({
             label: x.config.menuPath.split('/')[x.config.menuPath.split('/').length - 1],
             name: x.moduleName,
-            icon:x.icon
+            icon: x.icon,
+            description: x.config.description,
+            optional: x.config.optional
         }));
-        view.projectData = { exists: projectFile.exists() };
-        view.done();
+        return { exists: projectFile.exists(), modules: viewModules };
     }
     view.initProject = (view) => {
-        projectFile.init(view.projectSettings.useBootstrap, view.projectSettings.useIndexFile, view.projectSettings.useDefaultCSS);
-        view.done();
+        projectFile.init(view.creationModules);
+        view.creationModules.forEach(creationModuleName => {
+            fileCreateModuleLoader.modules[creationModuleName].saveFiles();
+        });
+        return { success: true };
     };
 };

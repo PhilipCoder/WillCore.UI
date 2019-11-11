@@ -4,5 +4,6 @@
   "staticPath": "/css/site/site",
   "icon": "icons/css.png",
   "menuPath": "Project/Default CSS",
-  "optional": true
+  "optional": true,
+  "description": "Creates a default project CSS file."
 }

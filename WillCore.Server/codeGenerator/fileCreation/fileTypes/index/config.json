@@ -3,6 +3,8 @@
   "showSingleFile": false,
   "staticPath": "/index",
   "icon": "icons/html.png",
-  "menuPath": "Project/",
-  "optional": false
+  "menuPath": "Project/Index File",
+  "optional": false,
+  "description": "Creates a WillCore index file."
+
 }

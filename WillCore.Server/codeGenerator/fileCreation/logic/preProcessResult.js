@@ -27,7 +27,7 @@ class preProcessResult {
      * Saves the preProcess result to a file and creates the folder if it does not exists.
      * */
     save() {
-        var filePath = path.resolve(pathUtil.getWWWRootDir(), this.filePath);
+        var filePath = path.join(pathUtil.getWWWRootDir(), this.filePath);
         if (!fs.existsSync(filePath)) {
             fs.mkdirSync(filePath, { recursive: true });
         }

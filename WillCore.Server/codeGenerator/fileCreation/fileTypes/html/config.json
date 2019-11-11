@@ -1,0 +1,7 @@
+{
+  "extention": ".html",
+  "showSingleFile": false,
+  "icon": "icons/html.png",
+  "menuPath": "Files/HTML",
+  "description": "Creates a HTML file."
+}

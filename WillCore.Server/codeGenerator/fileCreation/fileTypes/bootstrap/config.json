@@ -3,6 +3,7 @@
   "showSingleFile": false,
   "staticPath": "/css/bootstrap/bootstrap",
   "icon": "icons/bootstrapIcon.png",
-  "menuPath": "Project/",
-  "optional": false
+  "menuPath": "Project/Bootstrap",
+  "optional": false,
+  "description": "Project uses Bootstrap by default."
 }

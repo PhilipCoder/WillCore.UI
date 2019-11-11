@@ -16,22 +16,9 @@ class projectFile {
         return !!this.configObj;
     }
 
-    init(useBootstrap, useIndexFile, useGlobalCss) {
-        this.configObj = {
-            useBootstrap: useBootstrap,
-            useIndexFile: useIndexFile,
-            useGlobalCss: useGlobalCss
-        };
+    init(creationModules) {
+        this.configObj = { creationModules };
         this.save();
-        if (useBootstrap) {
-            fileCreator.setBootstrap();
-        }
-        if (useIndexFile) {
-            fileCreator.setIndex(useBootstrap);
-        }
-        if (useGlobalCss) {
-            fileCreator.setDefaultCSS();
-        }
     }
 
     save() {

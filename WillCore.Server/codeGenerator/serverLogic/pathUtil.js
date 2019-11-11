@@ -54,7 +54,7 @@ class pathUtil {
      * @param {string} path
      */
     static getFilePath(path) {
-        var cutIndex = path.indexOf("/") > path.indexOf("\\") ? path.indexOf("/") : path.indexOf("\\");
+        var cutIndex = path.lastIndexOf("/") > path.lastIndexOf("\\") ? path.lastIndexOf("/") : path.lastIndexOf("\\");
         return path.substring(0, cutIndex);
     }
 

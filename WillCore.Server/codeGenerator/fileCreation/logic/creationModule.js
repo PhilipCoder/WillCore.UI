@@ -5,7 +5,7 @@ const pathUtil = require("../../serverLogic/pathUtil.js");
  * Validations to validate that the JSON configuration of the module has the correct fields.
  * */
 let jsonFieldValidation = {
-    extention: value => value === null || (typeof value === "string" && value.length > 1 && value.startsWith(".")),
+    extention: value => value === null || value === "" || (typeof value === "string" && value.length > 1 && value.startsWith(".")),
     showSingleFile: value => typeof value === "boolean",
     icon: value => typeof value === "string" && value.endsWith(".png"),
     menuPath: value => value && typeof value === "string" && value.length > 1
@@ -45,12 +45,18 @@ class creationModule {
         });
     }
 
-    saveFiles(path) {
+    saveFiles(userPath) {
         if (this.config.staticPath) {
-            path = this.config.staticPath;
+            userPath = this.config.staticPath;
         }
-        let userFileName = pathUtil.getFileName(path);
-        let userFilePath = pathUtil.getFilePath(path);
+        let userFileName = pathUtil.getFileName(userPath);
+        let userFilePath = pathUtil.getFilePath(userPath);
+        if (this.templateFilePaths.length === 0) {
+            var filePath = path.join(pathUtil.getWWWRootDir(), userPath);
+            if (!fs.existsSync(filePath)) {
+                fs.mkdirSync(filePath, { recursive: true });
+            }
+        }
         let preProcessResults = this.templateFilePaths.map(templatePath =>
             this.preProcessor.processFile(
                 userFileName,

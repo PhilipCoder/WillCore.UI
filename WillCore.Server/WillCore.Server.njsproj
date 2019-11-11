@@ -29,6 +29,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="codeGenerator\components\bootstrapDropdown.js" />
+    <Content Include="codeGenerator\components\bootstrapNative.js" />
     <Content Include="codeGenerator\config\projectConfig.json">
       <SubType>Code</SubType>
     </Content>
@@ -55,23 +57,33 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\config.json" />
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\finalizer.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\icons\bootstrapIcon.png" />
-    <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\modal.viewSON" />
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\preProcessor.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\templates\bootstrap.min.css" />
     <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\config.json" />
     <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\finalizer.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\icons\css.png" />
-    <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\modal.viewSON" />
     <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\preProcessor.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\defaultCss\templates\defaultCss.css" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\folder\config.json" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\folder\finalizer.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\folder\icons\folder.png" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\folder\preProcessor.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\html\config.json" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\html\finalizer.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\html\icons\html.png" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\html\preProcessor.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\html\templates\fileName.html" />
     <Content Include="codeGenerator\fileCreation\fileTypes\index\config.json" />
     <Content Include="codeGenerator\fileCreation\fileTypes\index\finalizer.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\index\icons\html.png" />
-    <Content Include="codeGenerator\fileCreation\fileTypes\index\modal.viewSON" />
     <Content Include="codeGenerator\fileCreation\fileTypes\index\preProcessor.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\index\templates\index.html" />
     <Content Include="codeGenerator\fileCreation\fileTypes\index\templates\index.js" />
-    <Content Include="codeGenerator\fileCreation\fileTypes\view\modal.viewSON" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\js\config.json" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\js\finalizer.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\js\icons\js.png" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\js\preProcessor.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\js\templates\fileName.js" />
     <Content Include="codeGenerator\fileCreation\logic\creationModule.js" />
     <Content Include="codeGenerator\fileCreation\logic\fileCreateModuleLoader.js" />
     <Content Include="codeGenerator\fileCreation\logic\preProcessResult.js" />
@@ -120,6 +132,8 @@
     <Content Include="codeGenerator\layouts\fileExplorerLayout\_fileExplorerLayout.server.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\libraries\bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="codeGenerator\libraries\jquery\jquery-3.3.1.slim.min.js" />
     <Content Include="codeGenerator\libraries\monaco-editor\vs\base\worker\workerMain.js" />
     <Content Include="codeGenerator\libraries\monaco-editor\vs\basic-languages\abap\abap.js" />
     <Content Include="codeGenerator\libraries\monaco-editor\vs\basic-languages\apex\apex.js" />
@@ -364,11 +378,13 @@
     <Content Include="willCore\willCore.ui\binding\collectionManager.js" />
     <Content Include="willCore\willCore.ui\binding\elementProxy.js" />
     <Content Include="willCore\willCore.ui\binding\proxyObject.js" />
+    <Content Include="willCore\willCore.ui\assignables\bindables\component.js" />
     <Content Include="willCore\willCore.ui\coreProxy\Get\getDefaultElement.js" />
     <Content Include="willCore\willCore.ui\coreProxy\Get\getDefaultView.js" />
     <Content Include="willCore\willCore.ui\coreProxy\routerFunction.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="willCore\willCore.ui\coreProxy\set\setMainAssignable.js" />
     <Content Include="willCore\willCore.ui\coreProxy\set\setDefaultAssignable.js" />
     <Content Include="willCore\willCore.ui\coreProxy\set\setDefaultPromise.js" />
     <Content Include="willCore\willCore.ui\coreProxy\set\setDefaultView.js" />
@@ -385,6 +401,7 @@
     <Content Include="willCore\willCore.ui\views\htmlLoader.js" />
     <Content Include="willCore\willCore.ui\views\idManager.js" />
     <Content Include="willCore\willCore.ui\views\router.js" />
+    <Content Include="willCore\willCore.ui\views\userComponent.js" />
     <Content Include="willCore\willCore.ui\views\viewFactory.js" />
     <Content Include="willCore\willCore.ui\views\viewLoader.js" />
     <Content Include="willCore\willCore.ui\views\viewManager.js" />
@@ -400,11 +417,20 @@
     <Folder Include="codeGenerator\fileCreation\fileTypes\bootstrap\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\defaultCss\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\defaultCss\templates\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\folder\icons\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\folder\templates\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\html\icons\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\html\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\index\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\index\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\index\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\bootstrap\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\defaultCss\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\folder\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\html\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\js\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\js\icons\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\js\templates\" />
     <Folder Include="codeGenerator\fileCreation\logic\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\" />
@@ -484,9 +510,12 @@
     <Folder Include="codeGenerator\libraries\monaco-editor\vs\language\html\" />
     <Folder Include="codeGenerator\libraries\monaco-editor\vs\language\json\" />
     <Folder Include="codeGenerator\libraries\monaco-editor\vs\language\typescript\" />
+    <Folder Include="codeGenerator\libraries\bootstrap\" />
+    <Folder Include="codeGenerator\libraries\jquery\" />
     <Folder Include="codeGenerator\libraries\pNotify\" />
     <Folder Include="codeGenerator\libraries\pNotify\es\" />
     <Folder Include="codeGenerator\fileCreation\" />
+    <Folder Include="codeGenerator\components\" />
     <Folder Include="codeGenerator\serverLogic\" />
     <Folder Include="codeGenerator\serverLogic\templates\" />
     <Folder Include="codeGenerator\serverLogic\templates\index\" />

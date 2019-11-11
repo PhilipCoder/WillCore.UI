@@ -25,6 +25,9 @@ let coreProxyHander = {
         else if (willCoreModules.setDefaultAssignable.statement(target, property, value)) {
             willCoreModules.setDefaultAssignable.result(target, property, value);
         }
+        else if (willCoreModules.setMainAssignable.statement(target, property, value)) {
+            willCoreModules.setMainAssignable.result(target, property, value);
+        }
         else if (Array.isArray(value)) {
             value.forEach(x => coreProxyHander.set(target, property, x));
         }

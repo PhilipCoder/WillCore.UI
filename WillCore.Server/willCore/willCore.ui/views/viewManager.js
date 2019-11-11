@@ -27,6 +27,7 @@
         target.childViews = this.childViews;
         target.onUnloadEvent = this.onUnloadEvent;
         target.element = this.element;
+        target.forceElement = this.forceElement;
         target.parentViewManager = this.parentViewManager;
     }
 

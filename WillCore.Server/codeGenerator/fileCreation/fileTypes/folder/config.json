@@ -1,0 +1,8 @@
+{
+  "extention": "",
+  "showSingleFile": false,
+  "icon": "icons/folder.png",
+  "menuPath": "Create Folder",
+  "description": "Creates a folder."
+
+}

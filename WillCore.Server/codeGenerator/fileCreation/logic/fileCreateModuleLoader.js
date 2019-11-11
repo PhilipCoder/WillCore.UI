@@ -28,8 +28,17 @@ class fileCreateModuleLoader {
     }
 
     async getProjectFileModules() {
-        await this.loadPromise;
-        return Object.keys(this.modules).filter(x => this.modules[x].config.menuPath.startsWith("Project/")).map(x => this.modules[x]);
+        return new Promise(async (resolve, reject) => {
+            await this.loadPromise;
+            resolve(Object.keys(this.modules).filter(x => this.modules[x].config.menuPath.startsWith("Project/")).map(x => this.modules[x]));
+        });
+    }
+
+    async getMainFileModules() {
+        return new Promise(async (resolve, reject) => {
+            await this.loadPromise;
+            resolve(Object.keys(this.modules).filter(x => !this.modules[x].config.menuPath.startsWith("Project/")).map(x => this.modules[x]));
+        });
     }
 }
 

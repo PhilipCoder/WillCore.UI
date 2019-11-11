@@ -13,7 +13,7 @@
     getViewCopy(proxy) {
         let viewProxy = willCoreModules.viewFactory.getView(proxy._proxyTarget.viewManager.name, proxy._proxyTarget.viewManager.coreProxy);
         proxy._proxyTarget.viewManager.copyTo(viewProxy._proxyTarget.viewManager);
-        viewProxy._proxyTarget.viewManager.id = new Date().getTime();
+        viewProxy._proxyTarget.viewManager.id = willCoreModules.guid();
         viewProxy._proxyTarget._isPartial = proxy._proxyTarget._isPartial;
         return viewProxy;
     }
@@ -97,21 +97,29 @@
     }
 
     async finalizeLoad(viewManager, view, mainResolve, initialDisplay) {
-        let html = await willCoreModules.loadHTML(viewManager.htmlURL, view);
+        let html = viewManager.htmlURL.endsWith(".html") ?
+            await willCoreModules.loadHTML(viewManager.htmlURL, view)
+            : new willCoreModules.idManager(viewManager).getCleanedIdHTML(viewManager.htmlURL);
         const idManagerView = viewManager.parentViewManager ? viewManager.parentViewManager : null;
         let element = typeof viewManager.element === "string" ?
             new willCoreModules.idManager(idManagerView).getElement(viewManager.element) :
             new willCoreModules.idManager(idManagerView).getElementExistingId(viewManager.element.id);
+        if (viewManager.forceElement) {
+            element = viewManager.forceElement;
+        }
        // console.log(html);
         element.innerHTML = html;
-        console.log(view);
-        willCoreModules.lazyImport(viewManager.jsURL).then(x => {
-            console.log(view);
-            if (x.view) {
-                x.view(view);
-            }
+        if (typeof viewManager.jsURL === "function") {
+            viewManager.jsURL(view);
             mainResolve(view);
-        });
+        } else {
+            willCoreModules.lazyImport(viewManager.jsURL).then(x => {
+                if (x.view) {
+                    x.view(view);
+                }
+                mainResolve(view);
+            });
+        }
     }
 }
 var viewLoader = {

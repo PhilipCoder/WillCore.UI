@@ -42,6 +42,10 @@ import { setDefaultView } from "./coreProxy/set/setDefaultView.js";
 import { setDefaultPromise } from "./coreProxy/set/setDefaultPromise.js";
 import { setLayoutInstance } from "./coreProxy/set/setLayoutInstance.js";
 import { setDefaultAssignable } from "./coreProxy/set/setDefaultAssignable.js";
+import { setMainAssignable } from "./coreProxy/set/setMainAssignable.js";
+
+import { component } from "./assignables/bindables/component.js";
+import { userComponent } from "./views/userComponent.js";
 
 
 moduleProxy.routerFunction = routerFunction;
@@ -51,6 +55,8 @@ moduleProxy.setDefaultView = setDefaultView;
 moduleProxy.setDefaultPromise = setDefaultPromise;
 moduleProxy.setLayoutInstance = setLayoutInstance;
 moduleProxy.setDefaultAssignable = setDefaultAssignable;
+moduleProxy.setMainAssignable = setMainAssignable;
+
 
 moduleProxy.assignable = assignable;
 moduleProxy.bindable = bindable;
@@ -87,6 +93,8 @@ moduleProxy.loadHTML = loadHTML;
 moduleProxy.guid = guid;
 moduleProxy.proxyObject = proxyObject;
 moduleProxy.lazyImport = lazyImport;
+moduleProxy.component = component;
+moduleProxy.userComponent = userComponent;
 
 for (let key in moduleProxy.allClasses) {
     if (moduleProxy[key].getFactoryInstance) {
