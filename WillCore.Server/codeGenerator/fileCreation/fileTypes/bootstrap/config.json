@@ -1,7 +1,9 @@
 {
   "extention": null,
+  "priority": 1,
   "showSingleFile": false,
   "staticPath": "/css/bootstrap/bootstrap",
+  "linkingPath": "/css/bootstrap/bootstrap.min.css",
   "icon": "icons/bootstrapIcon.png",
   "menuPath": "Project/Bootstrap",
   "optional": false,

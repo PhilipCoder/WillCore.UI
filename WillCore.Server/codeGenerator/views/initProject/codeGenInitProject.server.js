@@ -8,8 +8,10 @@ module.exports = (view) => {
             name: x.moduleName,
             icon: x.icon,
             description: x.config.description,
-            optional: x.config.optional
+            optional: x.config.optional,
+            priority: x.config.priority
         }));
+        viewModules.sort(function (a, b) { return a.priority - b.priority })
         return { exists: projectFile.exists(), modules: viewModules };
     }
     view.initProject = (view) => {

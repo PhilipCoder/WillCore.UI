@@ -1,5 +1,6 @@
 {
   "extention": ".html",
+  "priority": 1,
   "showSingleFile": false,
   "icon": "icons/html.png",
   "menuPath": "Files/HTML",

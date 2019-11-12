@@ -1,5 +1,6 @@
 {
   "extention": ".view",
+  "priority": 1,
   "showSingleFile": true,
   "icon": "icons/view.png",
   "menuPath": "Create View",

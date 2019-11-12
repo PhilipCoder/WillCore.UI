@@ -10,7 +10,7 @@ class fileCreateModuleLoader {
         this.loadPromise = new Promise(async (resolve, reject) => {
             this.moduleDirectory = path.resolve(__dirname, "../fileTypes");
             this.modulesNames = await pathUtil.getFilesInDirectory(this.moduleDirectory);
-            let modules = this.modulesNames.map(x => new creationModule(x));
+            let modules = this.modulesNames.map(x => new creationModule(x));;
             this.modules = {};
             for (var i = 0; i < modules.length; i++) {
                 let module = modules[i];
@@ -25,6 +25,7 @@ class fileCreateModuleLoader {
         await this.loadPromise;
         let module = this.modules[moduleName];
         module.saveFiles(filePath);
+
     }
 
     async getProjectFileModules() {

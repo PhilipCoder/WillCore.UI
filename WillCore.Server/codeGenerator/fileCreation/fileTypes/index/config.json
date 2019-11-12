@@ -1,5 +1,6 @@
 {
   "extention": null,
+  "priority": 0,
   "showSingleFile": false,
   "staticPath": "/index",
   "icon": "icons/html.png",

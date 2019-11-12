@@ -42,6 +42,12 @@ class creationModule {
             this.templateFiles = await pathUtil.getFilesInDirectory(path.resolve(modulePath, "templates"));
             this.templateFilePaths = this.templateFiles.map(x => path.resolve(modulePath, "templates", x));
             this.templateExtentions = this.templateFilePaths.map(x => pathUtil.getFileExtention(x));
+            this.templateFileDefinitions = this.templateFiles.map(file => {
+                let fileParts = file.split(".");
+                let index = 0;
+                let fileLastPart = fileParts.filter(filePart => (index++) > 0).join(".");
+                return fileLastPart;
+            });
             resolve();
         });
     }
@@ -68,6 +74,8 @@ class creationModule {
             )
         );
         preProcessResults.forEach(x => x.save());
+        this.finalizer.finalize(pathUtil.getWWWRootDir(), this.config);
+
     }
 
     /**

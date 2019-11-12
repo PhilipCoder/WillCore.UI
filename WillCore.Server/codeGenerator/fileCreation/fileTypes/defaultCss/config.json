@@ -1,5 +1,6 @@
 {
   "extention": null,
+  "priority": 1,
   "showSingleFile": false,
   "staticPath": "/css/site/site",
   "icon": "icons/css.png",

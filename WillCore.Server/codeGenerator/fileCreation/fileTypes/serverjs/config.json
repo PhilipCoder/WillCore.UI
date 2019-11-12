@@ -1,0 +1,7 @@
+{
+  "extention": ".js",
+  "showSingleFile": true,
+  "icon": "icons/js.png",
+  "menuPath": "Files/Server JS",
+  "description": "Adds support to create view files."
+}

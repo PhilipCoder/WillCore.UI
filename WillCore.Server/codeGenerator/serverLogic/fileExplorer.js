@@ -1,6 +1,6 @@
 ﻿const fs = require('fs');
 const path = require('path');
-const fileCreateModuleLoader = require("../../fileCreation/logic/fileCreateModuleLoader.js");
+const fileCreateModuleLoader = require("../fileCreation/logic/fileCreateModuleLoader.js");
 
 class fileExplorer {
     constructor(directory) {
@@ -25,10 +25,16 @@ class fileExplorer {
                 let fileParts = file.split(".");
                 if (fileParts.length > 2) {
                     let index = 0;
-                    let fileLastPart = fileParts.filter(filePart => (index++) > 1).join(".");
+                    let fileLastPart = fileParts.filter(filePart => (index++) > 0).join(".");
                     let fileName = fileParts[0];
-                    obj[fileName] = obj[fileName] || { deleted: false, files: [] };
-                    obj[fileName].files.push(fileLastPart);
+                    fileNameGroupings[fileName] = fileNameGroupings[fileName] || { deleted: true, files: [] };
+                    fileNameGroupings[fileName].files.push(fileLastPart);
+                } else if (fileParts.length === 2) {
+                    let index = 0;
+                    let fileLastPart = fileParts[1];
+                    let fileName = fileParts[0];
+                    fileNameGroupings[fileName] = fileNameGroupings[fileName] || { deleted: true, files: [] };
+                    fileNameGroupings[fileName].files.push(fileLastPart);
                 }
             });
 
@@ -37,21 +43,53 @@ class fileExplorer {
             let aggregrationModules = moduleNames.
                 filter(x => pluginModules[x].config.showSingleFile).
                 map(x => pluginModules[x]);
+            let simpleModules = moduleNames.
+                filter(x => !pluginModules[x].config.showSingleFile).
+                map(x => pluginModules[x]);
 
-            Object.keys(fileNameGroupings).forEach(gouping => {
-                let matchedPlugins = aggregrationModules.filter(module => );
+            Object.keys(fileNameGroupings).forEach(grouping => {
+                //unmark groupings that have template definitions
+                let matchedPlugins = aggregrationModules.filter(
+                    module => {
+                        return module.templateFileDefinitions.filter(
+                            templateDefinition => fileNameGroupings[grouping].files.indexOf(templateDefinition) > -1
+                        ).length === module.templateFileDefinitions.length;
+                    });
+                if (matchedPlugins.length > 0) {
+                    fileNameGroupings[grouping].deleted = false;
+                    fileNameGroupings[grouping].files.forEach(groupingFile => {
+                        files[files.indexOf(`${grouping}.${groupingFile}`)] = null;
+                    });
+                    files.push({ file: `${grouping}${matchedPlugins[0].extention}`, icon: matchedPlugins[0].icon });
+                }
             });
 
-            let views = files.filter(x => x.indexOf(".bindings.js") > -1).map(x => x.substring(0, x.indexOf(".") + 1));
-            files = files.filter(file => views.filter(view => file.startsWith(view)).length === 0);
-            views.forEach(x => files.push(x + "view"));
+            let icons = {};
+            simpleModules.forEach(simpleModule => {
+                if (simpleModule.icon !== undefined || simpleModule.icon !== null) {
+                    let extention = simpleModule.extention === "" ? "folder" : simpleModule.extention;
+                    icons[extention] = simpleModule.icon;
+                }
+            });
+            files = files.filter(x => !!x);
+
             var that = this;
-            resolve(files.map(file => ({
-                path: path.resolve(that.directory, file),
-                fileName: path.basename(file),
-                fileNameWithExtension: file,
-                fileExtention: path.extname(file)
-            })));
+            for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
+                let file = files[fileIndex];
+                if (typeof file === "string") {
+                    files[fileIndex] = { file: file, icon: icons[path.extname(file) === "" ? "folder" : path.extname(file)] }
+                }
+            }
+
+            let displayFiles = files.filter(x=>!!x).map(file => ({
+                path: path.resolve(that.directory, file.file),
+                fileName: path.basename(file.file),
+                fileNameWithExtension: file.file,
+                icon: file.icon,
+                fileExtention: path.extname(file.file)
+            }));
+
+            resolve(displayFiles);
         });
     }
 

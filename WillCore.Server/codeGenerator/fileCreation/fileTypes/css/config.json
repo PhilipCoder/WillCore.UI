@@ -1,5 +1,6 @@
 {
   "extention": ".css",
+  "priority": 1,
   "showSingleFile": false,
   "icon": "icons/css.png",
   "menuPath": "Files/CSS",

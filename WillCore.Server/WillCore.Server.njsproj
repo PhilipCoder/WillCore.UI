@@ -90,6 +90,12 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\js\icons\js.png" />
     <Content Include="codeGenerator\fileCreation\fileTypes\js\preProcessor.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\js\templates\fileName.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\config.json" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\finalizer.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\icons\js.png" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\preProcessor.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\templates\fileName.server" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\templates\fileName.js" />
     <Content Include="codeGenerator\fileCreation\logic\creationModule.js" />
     <Content Include="codeGenerator\fileCreation\logic\fileCreateModuleLoader.js" />
     <Content Include="codeGenerator\fileCreation\logic\preProcessResult.js" />
@@ -440,6 +446,9 @@
     <Folder Include="codeGenerator\fileCreation\fileTypes\js\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\js\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\css\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\icons\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\templates\" />
     <Folder Include="codeGenerator\fileCreation\logic\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\" />

@@ -23,7 +23,7 @@ var view = async (view) => {
     view.$fileCard.repeat = () => view.files;
     view.$fileCard.repeat((elements, row, index) => {
         elements.$fileNameLabel.innerHTML = () => row.fileNameWithExtension;
-        elements.$cardImg.attribute.src = () => !row.fileExtention ? imagePaths.folder : imagePaths[row.fileExtention] ? imagePaths[row.fileExtention] : imagePaths.none;
+        elements.$cardImg.attribute.src = () => row.icon;
         if (!row.fileExtention) {
             elements.$fileCard.attribute.href = () => "#/folderExplorer?route=" + encodeURIComponent(view.route.route + "/" + row.fileNameWithExtension);
         } else {
