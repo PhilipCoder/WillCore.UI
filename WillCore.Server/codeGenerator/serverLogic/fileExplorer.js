@@ -1,5 +1,6 @@
 ﻿const fs = require('fs');
 const path = require('path');
+const fileCreateModuleLoader = require("../../fileCreation/logic/fileCreateModuleLoader.js");
 
 class fileExplorer {
     constructor(directory) {
@@ -19,17 +20,31 @@ class fileExplorer {
         //g) join the two lists of files and return.
         return new Promise(async (resolve, reject) => {
             let files = await this.readFilesInDirectory(this.directory);
-            let fileNameGroupings = files.reduce((obj, file) => {
+            let fileNameGroupings = {};
+            files.forEach((file) => {
                 let fileParts = file.split(".");
                 if (fileParts.length > 2) {
                     let index = 0;
-                    let fileName = fileParts.filter(filePart => (index++) > 1).join(".");
+                    let fileLastPart = fileParts.filter(filePart => (index++) > 1).join(".");
+                    let fileName = fileParts[0];
+                    obj[fileName] = obj[fileName] || { deleted: false, files: [] };
+                    obj[fileName].files.push(fileLastPart);
                 }
             });
 
-            let views = files.filter(x => x.indexOf(".bindings.js") > -1).map(x => x.substring(0, x.indexOf(".")+1));
+            let pluginModules = fileCreateModuleLoader.modules;
+            let moduleNames = Object.keys(pluginModules);
+            let aggregrationModules = moduleNames.
+                filter(x => pluginModules[x].config.showSingleFile).
+                map(x => pluginModules[x]);
+
+            Object.keys(fileNameGroupings).forEach(gouping => {
+                let matchedPlugins = aggregrationModules.filter(module => );
+            });
+
+            let views = files.filter(x => x.indexOf(".bindings.js") > -1).map(x => x.substring(0, x.indexOf(".") + 1));
             files = files.filter(file => views.filter(view => file.startsWith(view)).length === 0);
-            views.forEach(x=>files.push(x+"view"));
+            views.forEach(x => files.push(x + "view"));
             var that = this;
             resolve(files.map(file => ({
                 path: path.resolve(that.directory, file),
