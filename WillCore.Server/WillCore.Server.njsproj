@@ -29,9 +29,12 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="codeGenerator\components\bootstrapDropdown.html" />
-    <Content Include="codeGenerator\components\bootstrapDropdown.js" />
-    <Content Include="codeGenerator\components\bootstrapNative.js" />
+    <Content Include="codeGenerator\components\bootstrap\bootstrapDropdown.html" />
+    <Content Include="codeGenerator\components\bootstrap\bootstrapDropdown.js" />
+    <Content Include="codeGenerator\components\bootstrap\bootstrapNative.js" />
+    <Content Include="codeGenerator\components\monaco\monacoEditor.html" />
+    <Content Include="codeGenerator\components\monaco\monacoEditor.js" />
+    <Content Include="codeGenerator\components\monaco\monacoEditor.server.js" />
     <Content Include="codeGenerator\config\projectConfig.json">
       <SubType>Code</SubType>
     </Content>
@@ -114,6 +117,10 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\view\templates\fileName.targets.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\templates\fileName.traps.js" />
     <Content Include="codeGenerator\fileCreation\README.md" />
+    <Content Include="codeGenerator\fileEditing\simple\config.json" />
+    <Content Include="codeGenerator\fileEditing\simple\simpleFileEditor.html" />
+    <Content Include="codeGenerator\fileEditing\simple\simpleFileEditor.js" />
+    <Content Include="codeGenerator\fileEditing\simple\simpleFileEditor.server.js" />
     <Content Include="codeGenerator\images\bootstrapIcon.png" />
     <Content Include="codeGenerator\images\css.png" />
     <Content Include="codeGenerator\images\fileIcons\css.png" />
@@ -421,6 +428,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="codeGenerator\" />
+    <Folder Include="codeGenerator\components\bootstrap\" />
+    <Folder Include="codeGenerator\components\monaco\" />
     <Folder Include="codeGenerator\css\" />
     <Folder Include="codeGenerator\config\" />
     <Folder Include="codeGenerator\css\fontawesome\" />
@@ -454,6 +463,8 @@
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\templates\" />
+    <Folder Include="codeGenerator\fileEditing\view\" />
+    <Folder Include="codeGenerator\fileEditing\simple\" />
     <Folder Include="codeGenerator\images\" />
     <Folder Include="codeGenerator\images\fileIcons\" />
     <Folder Include="codeGenerator\layouts\" />
@@ -534,6 +545,7 @@
     <Folder Include="codeGenerator\libraries\pNotify\es\" />
     <Folder Include="codeGenerator\fileCreation\" />
     <Folder Include="codeGenerator\components\" />
+    <Folder Include="codeGenerator\fileEditing\" />
     <Folder Include="codeGenerator\serverLogic\" />
     <Folder Include="codeGenerator\serverLogic\templates\" />
     <Folder Include="codeGenerator\serverLogic\templates\index\" />

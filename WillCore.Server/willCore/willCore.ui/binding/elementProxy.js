@@ -42,7 +42,7 @@ let elementProxy = function (element, set, target, field, proxyInstance) {
     element.field = field;
     element.proxyInstance = proxyInstance;
 
-    return new Proxy(element, proxyHandler);
+    return element.main ? element : new Proxy(element, proxyHandler);
 };
 
 export { elementProxy };

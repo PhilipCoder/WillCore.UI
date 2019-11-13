@@ -1,0 +1,4 @@
+{
+  "viewName": "simpleFileEditor",
+  "supportedFileTypes": [".js",".html",".json",".css","_"]
+}

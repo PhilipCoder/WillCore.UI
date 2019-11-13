@@ -44,10 +44,6 @@ var view = async (view) => {
     //=======================Partials==============================
     view.$inputModal = [willCoreModules.partial, "/codeGen/views/partials/inputPrompt/inputPrompt.js", "/codeGen/views/partials/inputPrompt/inputPrompt.html", {}];
 
-    view.$createFile.event.onclick = () => promptFileName();
-    view.$createFolder.event.onclick = () => promptFolderName();
-    view.$createView.event.onclick = () => promptViewName();
-
     view.route = (target, property, value) => {
         if (value && property === "route") {
             view.routeData = value.split("/");
@@ -68,56 +64,6 @@ var view = async (view) => {
             }
         });
     };
-
-    var promptFileName = async () => {
-        var result = await view.$inputModal.logic.show("Create New File", "Enter File Name", "Enter filename ( with file extension )", "", async inputValue => {
-            if (!inputValue || (!inputValue.endsWith(".js") && !inputValue.endsWith(".html") && !inputValue.endsWith(".json"))) {
-                return "Only JavaScript, HTML and JSON files allowed!";
-            }
-            if (!inputValue || specialCharCheck.test(inputValue)) {
-                return "Special characters not allowed!";
-            }
-            var creationValues = { itemName: view.route.route + "\\" + inputValue };
-            var fileCreationResult = await willCoreModules.server.runRequest("_fileExplorerLayout/createFile", creationValues);
-            if (fileCreationResult) {
-                view.child._getFiles();
-            } else {
-                return "Duplicate file name!";
-            }
-        });
-    };
-    var promptFolderName = async () => {
-        view.$inputModal.logic.show("Create New Folder", "Enter The Unique Name Of The Folder", "Enter folder name", "", async inputValue => {
-            if (!inputValue || specialCharCheck.test(inputValue)) {
-                return "Special characters not allowed!";
-            }
-            var creationValues = { itemName: view.route.route + "\\" + inputValue };
-            var folderCreationResult = await willCoreModules.server.runRequest("_fileExplorerLayout/createFolder", creationValues);
-            if (folderCreationResult) {
-                view.child._getFiles();
-            } else {
-                return "Duplicate folder name!";
-            }
-        });
-    };
-    var promptViewName = async () => {
-        var result = await view.$inputModal.logic.show("Create New View", "Enter The Unique Name Of The View", "Enter view name (no extention)", "", async inputValue => {
-            if (!inputValue || specialCharCheckDot.test(inputValue)) {
-                return "Special characters not allowed!";
-            }
-            var creationValues = { itemName: view.route.route + "\\" + inputValue };
-            var creationResult = await willCoreModules.server.runRequest("_fileExplorerLayout/createView", creationValues);
-            if (creationResult) {
-                view.child._getFiles();
-            } else {
-                return "Duplicate view name!";
-            }
-        });
-    };
-    
-    //view.$customDropdown.view.values.label = "testing";
-    //var counter = 0;
-    //window.setInterval(() => { counter++; view.$customDropdown.view.values.label = `${counter} testing`; }, 1000);
 };
 
 export { view };

@@ -23,56 +23,57 @@ var view = async (view) => {
 
     var baseURL = view.route.route;
     var currentFile = isViewMode ? baseURL.replace(".view", view.route.page ? view.route.page : ".bindings.js") : baseURL;
-    await loadFileIntoEditor(currentFile, view);
+  //  await loadFileIntoEditor(currentFile, view);
+    view.$editor.file = currentFile;
     view.currentModule = { name: "bindings" };
     view.viewData = await willCoreModules.server.runRequest("codeGenEditor/getViewData", { viewName: getViewName(currentFile) });
     view.layouts = await willCoreModules.server.runRequest("codeGenEditor/getLayoutViews", {});
 
 
     view.$htmlModuleLink.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+        await view.$editor.saveFile();
         view.currentModule.name = "html";
         currentFile = baseURL.replace(".view", ".html");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$bindingsModuleLink.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+        await view.$editor.saveFile();
         view.currentModule.name = "bindings";
         currentFile = baseURL.replace(".view", ".bindings.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$collectionsModuleLink.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+        await view.$editor.saveFile();
         view.currentModule.name = "collections";
         currentFile = baseURL.replace(".view", ".collections.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$eventsModuleLink.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+        await view.$editor.saveFile();
         view.currentModule.name = "events";
         currentFile = baseURL.replace(".view", ".events.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$targetsModuleLink.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+        await view.$editor.saveFile();
         view.currentModule.name = "targets";
         currentFile = baseURL.replace(".view", ".targets.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$sourcesModuleLink.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+        await view.$editor.saveFile();
         view.currentModule.name = "sources";
         currentFile = baseURL.replace(".view", ".sources.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$logicModuleLink.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+        await view.$editor.saveFile();
         view.currentModule.name = "logic";
         currentFile = baseURL.replace(".view", ".logic.js");
         await loadFileIntoEditor(currentFile, view);
     };
     view.$serverModuleLink.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+        await view.$editor.saveFile();
         view.currentModule.name = "server";
         currentFile = baseURL.replace(".view", ".server.js");
         await loadFileIntoEditor(currentFile, view);
@@ -114,7 +115,7 @@ var view = async (view) => {
     };
     view.$runFileBtn.event.onclick = async () => {
         if (view.viewData.linked) {
-            await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() });
+            await view.$editor.saveFile();
             window.open(window.location.origin + "/#" + view.viewData.route +"?forceUrl=true", '_blank').focus();
         } else {
             PNotify.info({
@@ -162,7 +163,7 @@ var view = async (view) => {
     }
 
     view.$saveFileBtn.event.onclick = async () => {
-        await willCoreModules.server.runRequest("codeGenEditor/saveFile", { url: currentFile, contents: editor.getValue() })
+        await view.$editor.saveFile();
         PNotify.success({
             text: "File Saved.",
             type: 'notice'
