@@ -14,8 +14,21 @@ willCore.folderExplorer = [willCore.fileExplorerLayout.$mainViewContainer, willC
 willCore.editorLayout = [willCoreModules.layout, "/codeGen/layouts/editorLayout/editorLayout.js", "/codeGen/layouts/editorLayout/editorLayout.html"];
 willCore.codeGenEditor = [willCore.editorLayout.$mainViewContainer, willCoreModules.url, "/codeGen/views/editor/codeGenEditor.js", willCoreModules.url, "/codeGen/views/editor/codeGenEditor.html", willCoreModules.route, "/editor", x => willCoreModules.authenticated(), willCore.editorLayout];
 
-
-//willCore.codeGen = [willCore.$mainContentDiv, willCoreModules.url, "/views/codeGen.js", willCoreModules.url, "/views/codeGen.html", route,"/", x=>true];
+willCoreModules.server.runRequest("index/getFileEditingViews", {}).then(editorModules => {
+    editorModules.forEach(editorView => {
+        willCore[editorView.name] = [
+            willCore.editorLayout.$mainViewContainer,
+            willCoreModules.url,
+            editorView.htmlPath,
+            willCoreModules.url,
+            editorView.jsPath,
+            willCoreModules.route,
+            editorView.config.route,
+            x => willCoreModules.authenticated(),
+            willCore.editorLayout
+        ];
+    });
+});
 
 willCoreModules.authentication().then((data) => {
     willCore(data.authenticated ? "/initProject" : "/");

@@ -47,7 +47,6 @@ let fileCreateModuleLoaderInstance = new fileCreateModuleLoader();
 
 (async () => {
     fileCreateModuleLoaderInstance.loadFiles();
-   // fileCreateModuleLoaderInstance.createFiles("view","test");
 })();
 
 module.exports = fileCreateModuleLoaderInstance;

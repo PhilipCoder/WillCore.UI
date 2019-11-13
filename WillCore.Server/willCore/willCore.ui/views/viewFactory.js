@@ -169,6 +169,7 @@ class viewFactory {
         proxy.viewManager.parentViewManager = parentViewManager;
         proxy.route = { _skipCleanup: true };
         proxy._proxyTarget.setLogic = (logic) => { proxy._proxyTarget.logic = logic; };
+        proxy._proxyTarget.server = willCoreModules.requestProxy;
 
         //Copies the values from a parent view to the proxy of the child view
         if (initProxies) {

@@ -117,10 +117,11 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\view\templates\fileName.targets.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\templates\fileName.traps.js" />
     <Content Include="codeGenerator\fileCreation\README.md" />
-    <Content Include="codeGenerator\fileEditing\simple\config.json" />
-    <Content Include="codeGenerator\fileEditing\simple\simpleFileEditor.html" />
-    <Content Include="codeGenerator\fileEditing\simple\simpleFileEditor.js" />
-    <Content Include="codeGenerator\fileEditing\simple\simpleFileEditor.server.js" />
+    <Content Include="codeGenerator\fileEditing\logic\fileEditingModuleLoader.js" />
+    <Content Include="codeGenerator\fileEditing\views\simple\config.json" />
+    <Content Include="codeGenerator\fileEditing\views\simple\simpleFileEditor.html" />
+    <Content Include="codeGenerator\fileEditing\views\simple\simpleFileEditor.js" />
+    <Content Include="codeGenerator\fileEditing\views\simple\simpleFileEditor.server.js" />
     <Content Include="codeGenerator\images\bootstrapIcon.png" />
     <Content Include="codeGenerator\images\css.png" />
     <Content Include="codeGenerator\images\fileIcons\css.png" />
@@ -141,6 +142,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\index.js" />
+    <Content Include="codeGenerator\index.server.js" />
     <Content Include="codeGenerator\layouts\editorLayout\editorLayout.html" />
     <Content Include="codeGenerator\layouts\editorLayout\editorLayout.js" />
     <Content Include="codeGenerator\layouts\editorLayout\editorLayout.server.js" />
@@ -412,11 +414,9 @@
     <Content Include="willCore\willCore.ui\helpers\exceptionHander.js" />
     <Content Include="willCore\willCore.ui\helpers\guid.js" />
     <Content Include="willCore\willCore.ui\helpers\lazyImport.js" />
-    <Content Include="willCore\willCore.ui\helpers\requestProxy.js">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="willCore\willCore.ui\moduleContainment\moduleProxy.js" />
     <Content Include="willCore\willCore.ui\Modules.js" />
+    <Content Include="willCore\willCore.ui\requests\requestProxy.js" />
     <Content Include="willCore\willCore.ui\views\htmlLoader.js" />
     <Content Include="willCore\willCore.ui\views\idManager.js" />
     <Content Include="willCore\willCore.ui\views\router.js" />
@@ -463,8 +463,9 @@
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\templates\" />
-    <Folder Include="codeGenerator\fileEditing\view\" />
-    <Folder Include="codeGenerator\fileEditing\simple\" />
+    <Folder Include="codeGenerator\fileEditing\logic\" />
+    <Folder Include="codeGenerator\fileEditing\views\" />
+    <Folder Include="codeGenerator\fileEditing\views\simple\" />
     <Folder Include="codeGenerator\images\" />
     <Folder Include="codeGenerator\images\fileIcons\" />
     <Folder Include="codeGenerator\layouts\" />
@@ -579,6 +580,7 @@
     <Folder Include="willCore\willCore.ui\helpers\" />
     <Folder Include="willCore\willCore.ui\moduleContainment\" />
     <Folder Include="willCore\willCore.ui\coreProxy\" />
+    <Folder Include="willCore\willCore.ui\requests\" />
     <Folder Include="willCore\willCore.ui\views\" />
     <Folder Include="wwwRoot\" />
     <Folder Include="willCore\" />

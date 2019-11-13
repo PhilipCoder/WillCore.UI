@@ -1,4 +1,4 @@
-import PNotify from "../../libraries/pNotify/es/PNotify.js";
+import PNotify from "../../../libraries/pNotify/es/PNotify.js";
 PNotify.defaults.styling = 'bootstrap4';
 
 var view = async (view) => {

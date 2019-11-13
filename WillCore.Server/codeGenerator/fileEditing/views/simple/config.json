@@ -1,0 +1,5 @@
+{
+  "viewName": "simpleFileEditor",
+  "supportedFileTypes": [ ".js", ".html", ".json", ".css", "_" ],
+  "route": "/simpleEditor"
+}

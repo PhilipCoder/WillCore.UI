@@ -22,13 +22,13 @@ const moduleProxyHandler = {
                 target.baseInhertants[baseClassName][property] = value;
             }
         }
-        if (value.isBaseClass && property === value.isBaseClass()) {
+        if (value.isBaseClass && !value.skipIndexing && property === value.isBaseClass() ) {
 			//Registers base class
             target.baseClasses[property] = value;
             target.baseInhertants[property] = {};
 			//See if any of the current registered classes inherits the base class and assign them.
             for (let className in target.allClasses) {
-                if (target.allClasses[className].prototype && value.prototype instanceof target.allClasses[className]) {
+                if (target.allClasses[className].prototype && !target.allClasses[className].skipIndexing && value.prototype instanceof target.allClasses[className]) {
                     target.baseInhertants[property][className] = target.allClasses[className];
                 }
             }

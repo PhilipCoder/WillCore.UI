@@ -46,8 +46,9 @@ import { setMainAssignable } from "./coreProxy/set/setMainAssignable.js";
 
 import { component } from "./assignables/bindables/component.js";
 import { userComponent } from "./views/userComponent.js";
+import { requestProxy } from "./requests/requestProxy.js";
 
-
+moduleProxy.requestProxy = requestProxy;
 moduleProxy.routerFunction = routerFunction;
 moduleProxy.getDefaultElement = getDefaultElement;
 moduleProxy.getDefaultView = getDefaultView;
@@ -97,7 +98,7 @@ moduleProxy.component = component;
 moduleProxy.userComponent = userComponent;
 
 for (let key in moduleProxy.allClasses) {
-    if (moduleProxy[key].getFactoryInstance) {
+    if (moduleProxy[key].getFactoryInstance && !moduleProxy[key].skipIndexing) {
         moduleProxy[key] = moduleProxy[key].getFactoryInstance();
     }
 }
