@@ -29,9 +29,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="codeGenerator\components\bootstrap\bootstrapDropdown.html" />
-    <Content Include="codeGenerator\components\bootstrap\bootstrapDropdown.js" />
+    <Content Include="codeGenerator\components\bootstrap\dropdown\bootstrapDropdown.html" />
+    <Content Include="codeGenerator\components\bootstrap\dropdown\bootstrapDropdown.js" />
     <Content Include="codeGenerator\components\bootstrap\bootstrapNative.js" />
+    <Content Include="codeGenerator\components\bootstrap\modal\bootstrapModal.js" />
     <Content Include="codeGenerator\components\monaco\monacoEditor.html" />
     <Content Include="codeGenerator\components\monaco\monacoEditor.js" />
     <Content Include="codeGenerator\components\monaco\monacoEditor.server.js" />
@@ -63,6 +64,12 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\icons\bootstrapIcon.png" />
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\preProcessor.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\bootstrap\templates\bootstrap.min.css" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\config.json" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\finalizer.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\icons\component.png" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\preProcessor.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\templates\fileName.html" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\templates\fileName.component.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\css\config.json" />
     <Content Include="codeGenerator\fileCreation\fileTypes\css\finalizer.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\css\icons\css.png" />
@@ -93,6 +100,19 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\js\icons\js.png" />
     <Content Include="codeGenerator\fileCreation\fileTypes\js\preProcessor.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\js\templates\fileName.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\config.json" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\finalizer.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\icons\moduleComponent.png" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\preProcessor.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.bindings.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.collections.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.events.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.html" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.component.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.logic.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.server.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.sources.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.targets.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\config.json" />
     <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\finalizer.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\icons\js.png" />
@@ -122,6 +142,10 @@
     <Content Include="codeGenerator\fileEditing\views\simple\simpleFileEditor.html" />
     <Content Include="codeGenerator\fileEditing\views\simple\simpleFileEditor.js" />
     <Content Include="codeGenerator\fileEditing\views\simple\simpleFileEditor.server.js" />
+    <Content Include="codeGenerator\fileEditing\views\view\config.json" />
+    <Content Include="codeGenerator\fileEditing\views\view\viewEditor.html" />
+    <Content Include="codeGenerator\fileEditing\views\view\viewEditor.js" />
+    <Content Include="codeGenerator\fileEditing\views\view\viewEditor.server.js" />
     <Content Include="codeGenerator\images\bootstrapIcon.png" />
     <Content Include="codeGenerator\images\css.png" />
     <Content Include="codeGenerator\images\fileIcons\css.png" />
@@ -429,6 +453,8 @@
   <ItemGroup>
     <Folder Include="codeGenerator\" />
     <Folder Include="codeGenerator\components\bootstrap\" />
+    <Folder Include="codeGenerator\components\bootstrap\dropdown\" />
+    <Folder Include="codeGenerator\components\bootstrap\modal\" />
     <Folder Include="codeGenerator\components\monaco\" />
     <Folder Include="codeGenerator\css\" />
     <Folder Include="codeGenerator\config\" />
@@ -436,6 +462,8 @@
     <Folder Include="codeGenerator\css\webfonts\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\bootstrap\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\bootstrap\templates\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\component\icons\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\component\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\css\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\css\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\defaultCss\icons\" />
@@ -455,6 +483,10 @@
     <Folder Include="codeGenerator\fileCreation\fileTypes\js\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\js\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\css\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\component\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\moduleComponent\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\moduleComponent\icons\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\templates\" />
@@ -466,6 +498,7 @@
     <Folder Include="codeGenerator\fileEditing\logic\" />
     <Folder Include="codeGenerator\fileEditing\views\" />
     <Folder Include="codeGenerator\fileEditing\views\simple\" />
+    <Folder Include="codeGenerator\fileEditing\views\view\" />
     <Folder Include="codeGenerator\images\" />
     <Folder Include="codeGenerator\images\fileIcons\" />
     <Folder Include="codeGenerator\layouts\" />

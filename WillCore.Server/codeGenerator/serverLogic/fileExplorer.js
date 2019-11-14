@@ -1,6 +1,7 @@
 ﻿const fs = require('fs');
 const path = require('path');
 const fileCreateModuleLoader = require("../fileCreation/logic/fileCreateModuleLoader.js");
+const fileEditingModuleLoader = require("../fileEditing/logic/fileEditingModuleLoader.js");
 
 class fileExplorer {
     constructor(directory) {
@@ -16,6 +17,7 @@ class fileExplorer {
                 fileName: path.basename(file.file),
                 fileNameWithExtension: file.file,
                 icon: file.icon,
+                fileEditorPath: file.fileEditorPath,
                 fileExtention: path.extname(file.file)
             }));
 
@@ -47,10 +49,15 @@ class fileExplorer {
     }
 
     applySimpleFileIcons(files, icons) {
+        let fileEditorExtentionAssociations = fileEditingModuleLoader.extentionMapping;
         for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
             let file = files[fileIndex];
             if (typeof file === "string") {
                 files[fileIndex] = { file: file, icon: icons[path.extname(file) === "" ? "folder" : path.extname(file)] };
+            }
+            file = files[fileIndex].file;
+            if (file.indexOf(".") > -1) {
+                files[fileIndex].fileEditorPath = fileEditorExtentionAssociations[path.extname(file)] ? fileEditorExtentionAssociations[path.extname(file)].config.route : fileEditorExtentionAssociations["_"].config.route;
             }
         }
     }
@@ -61,7 +68,10 @@ class fileExplorer {
             map(x => pluginModules[x]);
         Object.keys(fileNameGroupings).forEach(grouping => {
             let matchedPlugins = aggregrationModules.filter(module => {
-                return module.templateFileDefinitions.filter(templateDefinition => fileNameGroupings[grouping].files.indexOf(templateDefinition) > -1).length === module.templateFileDefinitions.length;
+                //check that all the grouping files count
+                return fileNameGroupings[grouping].files.filter(groupFile => module.templateFileDefinitions.indexOf(groupFile) > -1).length === module.templateFileDefinitions.length
+                    && fileNameGroupings[grouping].files.length === module.templateFileDefinitions.length;
+             //   return module.templateFileDefinitions.filter(templateDefinition => fileNameGroupings[grouping].files.indexOf(templateDefinition) > -1).length === module.templateFileDefinitions.length;
             });
             if (matchedPlugins.length > 0) {
                 fileNameGroupings[grouping].deleted = false;

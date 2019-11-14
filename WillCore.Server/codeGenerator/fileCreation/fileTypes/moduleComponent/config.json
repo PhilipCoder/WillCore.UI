@@ -1,0 +1,8 @@
+{
+  "extention": ".component",
+  "priority": 1,
+  "showSingleFile": true,
+  "icon": "icons/moduleComponent.png",
+  "menuPath": "Components/Module Based Component",
+  "description": "Adds support to create view files."
+}

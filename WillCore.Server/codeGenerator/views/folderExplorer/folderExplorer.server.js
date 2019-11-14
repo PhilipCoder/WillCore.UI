@@ -4,7 +4,7 @@ var fileEditingModuleLoader = require("../../fileEditing/logic/fileEditingModule
 module.exports = (view) => {
     view.getFiles = async (view) => {
         var fileExplorerInstance = new fileExplorer(view.route.route);
-        var files = fileExplorerInstance.getFiles();
+        var files = await fileExplorerInstance.getFiles();
         view.files = files;
         view.done();
     };

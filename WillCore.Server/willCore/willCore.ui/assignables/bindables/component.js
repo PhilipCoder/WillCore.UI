@@ -21,9 +21,11 @@ let component = {
             setValues(values) {
                 this.jsURL = values.string[0].endsWith(".js") ? values.string[0] : values.string[1];
                 this.htmlURL = values.string[0].endsWith(".js") ? values.string[1] : values.string[0];
-                willCoreModules.loadHTML(this.htmlURL).then((html) => {
-                    this.html = html;
-                })
+                if (this.htmlURL.endsWith(".html")) {
+                    willCoreModules.loadHTML(this.htmlURL).then((html) => {
+                        this.html = html;
+                    });
+                }
                 let settings = values.object[0];
                 willCoreModules.lazyImport(this.jsURL).then(exportedComponent => {
                     customElements.define(this.name, exportedComponent[Object.keys(exportedComponent)[0]], settings);
@@ -41,8 +43,9 @@ let component = {
                 let view = willCoreModules.viewFactory.getView(this.name, willCoreModules, {});
                 view._proxyTarget.viewManager.name = willCoreModules.guid();
                 view._proxyTarget.viewManager.element = element;
+                view._proxyTarget.viewManager.shadowMode = element.shadowMode;
                 view._proxyTarget.viewManager.forceElement = element;
-                view._proxyTarget.viewManager.htmlURL = this.html;
+                view._proxyTarget.viewManager.htmlURL = this.html || new willCoreModules.idManager(view.viewManager).getCleanedIdHTML(element.innerHTML);
                 view._proxyTarget.viewManager.jsURL = element.main;
                 view._proxyTarget._isPartial = true;
                 element.view = willCoreModules.viewLoader.loadViewSync(view, element.main, this.html);

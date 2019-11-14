@@ -1,10 +1,10 @@
-import { Dropdown } from "./bootstrapNative.js"
+import { Dropdown } from "../bootstrapNative.js"
 //Changes: cache the html so that the loading does not happen async
 class bootstrapDropdown extends HTMLElement {
     constructor() {
         super();
         this.view = null;
-        this.onclick = null;
+        //this.shadowMode = true;
         willCore["bootstrap-dropdown"].load(this);
     }
     main(view) {

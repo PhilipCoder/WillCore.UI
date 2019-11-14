@@ -1,12 +1,13 @@
 ﻿class idManager {
     constructor(viewManager) {
         this.viewName = viewManager ? viewManager.name : null;
+        this.viewManager = viewManager;
     }
     getElement(id) {
         return this.getElementExistingId(this.get(id));
     }
     getElementExistingId(id) {
-        return document.getElementById(id);
+        return this.viewManager && this.viewManager.shadowMode ? this.viewManager.element.getElementById(id) : document.getElementById(id);
     }
     get(id) {
         return this.viewName ? `${this.viewName}.${id}` : id;

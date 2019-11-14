@@ -14,6 +14,7 @@
         this.isLayout = false;
         this.childViews = [];
         this.onUnloadEvent = null;
+        this.shadowMode = false;
     }
 
     copyTo(target) {
@@ -29,6 +30,7 @@
         target.element = this.element;
         target.forceElement = this.forceElement;
         target.parentViewManager = this.parentViewManager;
+        target.shadowMode = this.shadowMode;
     }
 
     async setUrl(url) {

@@ -1,0 +1,5 @@
+{
+  "viewName": "viewEditor",
+  "supportedFileTypes": [ ".view"],
+  "route": "/viewEditor"
+}

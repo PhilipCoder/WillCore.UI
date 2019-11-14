@@ -1,7 +1,7 @@
 import { willCore } from "/willcore/WillCore.js";
 
 //components
-willCore["bootstrap-dropdown"] = [willCoreModules.component, "/codeGen/components/bootstrap/bootstrapDropdown.js", "/codeGen/components/bootstrap/bootstrapDropdown.html", {}];
+willCore["bootstrap-dropdown"] = [willCoreModules.component, "/codeGen/components/bootstrap/dropdown/bootstrapDropdown.js", "/codeGen/components/bootstrap/dropdown/bootstrapDropdown.html", {}];
 willCore["monaco-editor"] = [willCoreModules.component, "/codeGen/components/monaco/monacoEditor.js", "/codeGen/components/monaco/monacoEditor.html", {}];
 
 

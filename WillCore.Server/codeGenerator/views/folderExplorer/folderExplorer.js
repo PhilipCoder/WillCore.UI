@@ -27,7 +27,7 @@ var view = async (view) => {
         if (!row.fileExtention) {
             elements.$fileCard.attribute.href = () => "#/folderExplorer?route=" + encodeURIComponent(view.route.route + "/" + row.fileNameWithExtension);
         } else {
-            elements.$fileCard.attribute.href = () => "#/editor?route=" + encodeURIComponent(view.route.route + "/" + row.fileNameWithExtension);
+            elements.$fileCard.attribute.href = () => `#${row.fileEditorPath}?route=${encodeURIComponent(view.route.route + "/" + row.fileNameWithExtension)}`;
         }
     });
 

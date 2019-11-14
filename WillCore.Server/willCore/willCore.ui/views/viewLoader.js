@@ -71,6 +71,10 @@
         if (viewManager.forceElement) {
             element = viewManager.forceElement;
         }
+        if (viewManager.shadowMode) {
+            element = element.attachShadow({ mode: 'open' });
+            viewManager.element = element;
+        }
         element.innerHTML = html;
         js(view);
         that.applyRoutingValues(view);
