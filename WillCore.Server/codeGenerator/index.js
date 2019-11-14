@@ -2,6 +2,8 @@ import { willCore } from "/willcore/WillCore.js";
 
 //components
 willCore["bootstrap-dropdown"] = [willCoreModules.component, "/codeGen/components/bootstrap/dropdown/bootstrapDropdown.js", "/codeGen/components/bootstrap/dropdown/bootstrapDropdown.html", {}];
+willCore["editor-module-nav"] = [willCoreModules.component, "/codeGen/components/editorModuleNav/editorModuleNav.js", "/codeGen/components/editorModuleNav/editorModuleNav.html", {}];
+willCore["editor-view-link-panel"] = [willCoreModules.component, "/codeGen/components/editorViewLinkPanel/editorViewLinkPanel.js", "/codeGen/components/editorViewLinkPanel/editorViewLinkPanel.html", {}];
 willCore["monaco-editor"] = [willCoreModules.component, "/codeGen/components/monaco/monacoEditor.js", "/codeGen/components/monaco/monacoEditor.html", {}];
 
 

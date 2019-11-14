@@ -12,10 +12,12 @@ class fileCreateModuleLoader {
             this.modulesNames = await pathUtil.getFilesInDirectory(this.moduleDirectory);
             let modules = this.modulesNames.map(x => new creationModule(x));;
             this.modules = {};
+            this.extentionMapping = {};
             for (var i = 0; i < modules.length; i++) {
                 let module = modules[i];
                 await module.loadState();
                 this.modules[module.moduleName] = module;
+                this.extentionMapping[module.extention] = module;
             }
             resolve();
         });

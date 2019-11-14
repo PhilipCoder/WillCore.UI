@@ -4,5 +4,47 @@
   "showSingleFile": true,
   "icon": "icons/view.png",
   "menuPath": "Create View",
-  "description": "Adds support to create view files."
+  "description": "Adds support to create view files.",
+  "moduleLinks": [
+    {
+      "lastPart": ".html",
+      "label": "HTML",
+      "icon": "fas fa-code"
+    },
+    {
+      "lastPart": ".collections.js",
+      "label": "Collections",
+      "icon": "fas fa-layer-group"
+    },
+    {
+      "lastPart": ".bindings.js",
+      "label": "Bindings",
+      "icon": "fas fa-link"
+    },
+    {
+      "lastPart": ".targets.js",
+      "label": "Events",
+      "icon": "fas fa-mouse"
+    },
+    {
+      "lastPart": ".targets.js",
+      "label": "Targets",
+      "icon": "fas fa-dot-circle"
+    },
+    {
+      "lastPart": ".sources.js",
+      "label": "Sources",
+      "icon": "fas fa-database"
+    },
+    {
+      "lastPart": ".logic.js",
+      "label": "Logic",
+      "icon": "fas fa-brain"
+    },
+    {
+      "lastPart": ".server.js",
+      "label": "Server",
+      "icon": "fas fa-server"
+    }
+  ]
 }

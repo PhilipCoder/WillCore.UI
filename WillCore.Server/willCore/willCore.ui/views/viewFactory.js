@@ -78,7 +78,7 @@ class viewFactory {
             if (prop == "_proxyTarget") {
                 return target;
             }
-            if (prop.startsWith("_"))
+            if (prop.startsWith("_") || prop === "server")
                 return target[prop];
 
             if (!target[prop] && prop.startsWith("$")) {

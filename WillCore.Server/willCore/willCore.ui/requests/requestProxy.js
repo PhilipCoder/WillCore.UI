@@ -2,7 +2,7 @@
 const methodProxyHandler = {
     get: function (target, property) {
         return function (requestParameters) {
-            return willCoreModules.server.runRequest(`${property}/${target.view}`, requestParameters);
+            return willCoreModules.server.runRequest(`${target.view}/${property}`, requestParameters);
         }
     }
 };
