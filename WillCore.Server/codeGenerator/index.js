@@ -3,7 +3,7 @@ import { willCore } from "/willcore/WillCore.js";
 //components
 willCore["bootstrap-dropdown"] = [willCoreModules.component, "/codeGen/components/bootstrap/dropdown/bootstrapDropdown.js", "/codeGen/components/bootstrap/dropdown/bootstrapDropdown.html", {}];
 willCore["editor-module-nav"] = [willCoreModules.component, "/codeGen/components/editorModuleNav/editorModuleNav.js", "/codeGen/components/editorModuleNav/editorModuleNav.html", {}];
-willCore["editor-view-link-panel"] = [willCoreModules.component, "/codeGen/components/editorViewLinkPanel/editorViewLinkPanel.js", "/codeGen/components/editorViewLinkPanel/editorViewLinkPanel.html", {}];
+//willCore["editor-view-link-panel"] = [willCoreModules.component, "/codeGen/components/editorViewLinkPanel/editorViewLinkPanel.js", "/codeGen/components/editorViewLinkPanel/editorViewLinkPanel.html", {}];
 willCore["monaco-editor"] = [willCoreModules.component, "/codeGen/components/monaco/monacoEditor.js", "/codeGen/components/monaco/monacoEditor.html", {}];
 
 
@@ -16,8 +16,8 @@ willCore.folderExplorer = [willCore.fileExplorerLayout.$mainViewContainer, willC
 willCore.editorLayout = [willCoreModules.layout, "/codeGen/layouts/editorLayout/editorLayout.js", "/codeGen/layouts/editorLayout/editorLayout.html"];
 willCore.codeGenEditor = [willCore.editorLayout.$mainViewContainer, willCoreModules.url, "/codeGen/views/editor/codeGenEditor.js", willCoreModules.url, "/codeGen/views/editor/codeGenEditor.html", willCoreModules.route, "/editor", x => willCoreModules.authenticated(), willCore.editorLayout];
 
-willCoreModules.server.runRequest("index/getFileEditingViews", {}).then(editorModules => {
-    editorModules.forEach(editorView => {
+willCoreModules.server.runRequest("index/getFileEditingViews", {}).then(modules => {
+    modules.fileEditors.forEach(editorView => {
         willCore[editorView.name] = [
             willCore.editorLayout.$mainViewContainer,
             willCoreModules.url,
@@ -28,6 +28,14 @@ willCoreModules.server.runRequest("index/getFileEditingViews", {}).then(editorMo
             editorView.config.route,
             x => willCoreModules.authenticated(),
             willCore.editorLayout
+        ];
+    });
+    modules.editorComponents.forEach(component => {
+        willCore[component.name] = [
+            willCoreModules.component,
+            component.jsPath,
+            component.htmlPath,
+            {}
         ];
     });
 });

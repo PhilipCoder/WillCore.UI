@@ -5,6 +5,16 @@
   "icon": "icons/view.png",
   "menuPath": "Create View",
   "description": "Adds support to create view files.",
+  "editorComponents": [
+    {
+      "js": "editorPanels/editorViewLinkPanel/editorViewLinkPanel.js",
+      "html": "editorPanels/editorViewLinkPanel/editorViewLinkPanel.html",
+      "name": "editor-view-link-panel",
+      "parentElementId": "viewOptions",
+      "elementId": "editorLinkPanel",
+      "class": "editorViewLinkPanel"
+    }
+  ],
   "moduleLinks": [
     {
       "lastPart": ".html",

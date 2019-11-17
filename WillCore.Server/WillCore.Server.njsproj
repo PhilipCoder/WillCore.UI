@@ -36,9 +36,9 @@
     <Content Include="codeGenerator\components\editorModuleNav\editorModuleNav.server.js" />
     <Content Include="codeGenerator\components\editorModuleNav\editorModuleNav.html" />
     <Content Include="codeGenerator\components\editorModuleNav\editorModuleNav.js" />
-    <Content Include="codeGenerator\components\editorViewLinkPanel\editorViewLinkPanel.html" />
-    <Content Include="codeGenerator\components\editorViewLinkPanel\editorViewLinkPanel.js" />
-    <Content Include="codeGenerator\components\editorViewLinkPanel\editorViewLinkPanel.server.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.html" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.server.js" />
     <Content Include="codeGenerator\components\monaco\monacoEditor.html" />
     <Content Include="codeGenerator\components\monaco\monacoEditor.js" />
     <Content Include="codeGenerator\components\monaco\monacoEditor.server.js" />
@@ -184,6 +184,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\libraries\bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="codeGenerator\libraries\esprima\esprima.js" />
     <Content Include="codeGenerator\libraries\jquery\jquery-3.3.1.slim.min.js" />
     <Content Include="codeGenerator\libraries\monaco-editor\vs\base\worker\workerMain.js" />
     <Content Include="codeGenerator\libraries\monaco-editor\vs\basic-languages\abap\abap.js" />
@@ -367,6 +368,10 @@
     <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.targets.js" />
     <Content Include="codeGenerator\views\partials\inputPrompt\inputPrompt.traps.js" />
     <Content Include="LICENSE" />
+    <Content Include="tests\TestIndexParser.js">
+      <SubType>Code</SubType>
+      <TestFramework>Jasmine</TestFramework>
+    </Content>
     <Content Include="willCore\willCore.server\config.json">
       <SubType>Code</SubType>
     </Content>
@@ -463,7 +468,7 @@
     <Folder Include="codeGenerator\components\bootstrap\modal\" />
     <Folder Include="codeGenerator\components\monaco\" />
     <Folder Include="codeGenerator\components\editorModuleNav\" />
-    <Folder Include="codeGenerator\components\editorViewLinkPanel\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\" />
     <Folder Include="codeGenerator\css\" />
     <Folder Include="codeGenerator\config\" />
     <Folder Include="codeGenerator\css\fontawesome\" />
@@ -498,6 +503,7 @@
     <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\icons\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\serverjs\templates\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\" />
     <Folder Include="codeGenerator\fileCreation\logic\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\" />
@@ -513,6 +519,7 @@
     <Folder Include="codeGenerator\layouts\editorLayout\" />
     <Folder Include="codeGenerator\layouts\fileExplorerLayout\" />
     <Folder Include="codeGenerator\libraries\" />
+    <Folder Include="codeGenerator\libraries\esprima\" />
     <Folder Include="codeGenerator\libraries\monaco-editor\" />
     <Folder Include="codeGenerator\libraries\monaco-editor\vs\" />
     <Folder Include="codeGenerator\libraries\monaco-editor\vs\base\" />
@@ -605,6 +612,7 @@
     <Folder Include="codeGenerator\views\partials\" />
     <Folder Include="codeGenerator\views\partials\inputPrompt\" />
     <Folder Include="codeGenerator\views\partials\confirmPrompt\" />
+    <Folder Include="tests\" />
     <Folder Include="willCore\willCore.server\middleware\endpoints\activeRequest\" />
     <Folder Include="willCore\willCore.server\middleware\session\encryption\" />
     <Folder Include="willCore\willCore.server\middleware\" />

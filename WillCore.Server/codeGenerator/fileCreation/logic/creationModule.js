@@ -36,6 +36,7 @@ class creationModule {
             this.preProcessor = require(`../fileTypes/${moduleName}/preProcessor.js`);
             this.finalizer = require(`../fileTypes/${moduleName}/finalizer.js`);
             this.icon = `/codeGen/fileCreation/fileTypes/${moduleName}/${this.config.icon}`;
+            this.basePath = `/codeGen/fileCreation/fileTypes/${moduleName}/`;
             this.extention = this.config.extention;
             this.showSingleFile = this.config.showSingleFile;
             this.menuPath = this.config.menuPath;

@@ -10,7 +10,8 @@ class fileCreateModuleLoader {
         this.loadPromise = new Promise(async (resolve, reject) => {
             this.moduleDirectory = path.resolve(__dirname, "../fileTypes");
             this.modulesNames = await pathUtil.getFilesInDirectory(this.moduleDirectory);
-            let modules = this.modulesNames.map(x => new creationModule(x));;
+            let modules = this.modulesNames.map(x => new creationModule(x));
+            this.moduleCollection = modules;
             this.modules = {};
             this.extentionMapping = {};
             for (var i = 0; i < modules.length; i++) {
@@ -41,6 +42,22 @@ class fileCreateModuleLoader {
         return new Promise(async (resolve, reject) => {
             await this.loadPromise;
             resolve(Object.keys(this.modules).filter(x => !this.modules[x].config.menuPath.startsWith("Project/")).map(x => this.modules[x]));
+        });
+    }
+
+    async getEditorModules() {
+        return new Promise(async (resolve, reject) => {
+            await this.loadPromise;
+            let editorModules = this.moduleCollection.filter(x => x.config.editorComponents && Array.isArray(x.config.editorComponents));
+            let allComponents = [];
+            editorModules.forEach(module => {
+                module.config.editorComponents.forEach(component => {
+                    component.jsPath = pathUtil.replaceAll(path.join(module.basePath, component.js),"\\","/");
+                    component.htmlPath = pathUtil.replaceAll(path.join(module.basePath, component.html), "\\", "/");
+                    allComponents.push(component);
+                });
+            });
+            resolve(allComponents);
         });
     }
 }

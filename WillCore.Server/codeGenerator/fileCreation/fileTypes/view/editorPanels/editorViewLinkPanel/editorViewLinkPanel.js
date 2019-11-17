@@ -1,4 +1,4 @@
-import PNotify from "../../libraries/pNotify/es/PNotify.js";
+import PNotify from "../../../../../libraries/pNotify/es/PNotify.js";
 
 function getViewName(currentFile) {
     var viewName = currentFile.substring(0, currentFile.indexOf("."));
