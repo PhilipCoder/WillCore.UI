@@ -1,15 +1,4 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-/* istanbul ignore next */
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-/* istanbul ignore next */
-	else if(typeof exports === 'object')
-		exports["esprima"] = factory();
-	else
-		root["esprima"] = factory();
-})(this, function() {
+var factory = function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -6705,5 +6694,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }
 /******/ ])
-});
-;
+};
+
+var esprima = factory();
+
+export { esprima };
