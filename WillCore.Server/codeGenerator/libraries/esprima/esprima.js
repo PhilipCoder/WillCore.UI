@@ -1,4 +1,6 @@
-var factory = function() {
+let modulesContainer = {};
+
+var factory = function () {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -1804,7 +1806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return YieldExpression;
 	}());
 	exports.YieldExpression = YieldExpression;
-
+    modulesContainer = exports;
 
 /***/ },
 /* 8 */
@@ -6695,7 +6697,79 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ }
 /******/ ])
 };
-
 var esprima = factory();
+let ArrayExpression = modulesContainer.ArrayExpression;
+let ArrayPattern = modulesContainer.ArrayPattern;
+let ArrowFunctionExpression = modulesContainer.ArrowFunctionExpression;
+let AssignmentExpression = modulesContainer.AssignmentExpression;
+let AssignmentPattern = modulesContainer.AssignmentPattern;
+let AsyncArrowFunctionExpression = modulesContainer.AsyncArrowFunctionExpression;
+let AsyncFunctionDeclaration = modulesContainer.AsyncFunctionDeclaration;
+let AsyncFunctionExpression = modulesContainer.AsyncFunctionExpression;
+let AwaitExpression = modulesContainer.AwaitExpression;
+let BinaryExpression = modulesContainer.BinaryExpression;
+let BlockStatement = modulesContainer.BlockStatement;
+let BreakStatement = modulesContainer.BreakStatement;
+let CallExpression = modulesContainer.CallExpression;
+let CatchClause = modulesContainer.CatchClause;
+let ClassBody = modulesContainer.ClassBody;
+let ClassDeclaration = modulesContainer.ClassDeclaration;
+let ClassExpression = modulesContainer.ClassExpression;
+let ComputedMemberExpression = modulesContainer.ComputedMemberExpression;
+let ConditionalExpression = modulesContainer.ConditionalExpression;
+let ContinueStatement = modulesContainer.ContinueStatement;
+let DebuggerStatement = modulesContainer.DebuggerStatement;
+let Directive = modulesContainer.Directive;
+let DoWhileStatement = modulesContainer.DoWhileStatement;
+let EmptyStatement = modulesContainer.EmptyStatement;
+let ExportAllDeclaration = modulesContainer.ExportAllDeclaration;
+let ExportDefaultDeclaration = modulesContainer.ExportDefaultDeclaration;
+let ExportNamedDeclaration = modulesContainer.ExportNamedDeclaration;
+let ExportSpecifier = modulesContainer.ExportSpecifier;
+let ExpressionStatement = modulesContainer.ExpressionStatement;
+let ForInStatement = modulesContainer.ForInStatement;
+let ForOfStatement = modulesContainer.ForOfStatement;
+let ForStatement = modulesContainer.ForStatement;
+let FunctionDeclaration = modulesContainer.FunctionDeclaration;
+let FunctionExpression = modulesContainer.FunctionExpression;
+let Identifier = modulesContainer.Identifier;
+let IfStatement = modulesContainer.IfStatement;
+let ImportDeclaration = modulesContainer.ImportDeclaration;
+let ImportDefaultSpecifier = modulesContainer.ImportDefaultSpecifier;
+let ImportNamespaceSpecifier = modulesContainer.ImportNamespaceSpecifier;
+let ImportSpecifier = modulesContainer.ImportSpecifier;
+let LabeledStatement = modulesContainer.LabeledStatement;
+let Literal = modulesContainer.Literal;
+let MetaProperty = modulesContainer.MetaProperty;
+let MethodDefinition = modulesContainer.MethodDefinition;
+let Module = modulesContainer.Module;
+let NewExpression = modulesContainer.NewExpression;
+let ObjectExpression = modulesContainer.ObjectExpression;
+let ObjectPattern = modulesContainer.ObjectPattern;
+let Property = modulesContainer.Property;
+let RegexLiteral = modulesContainer.RegexLiteral;
+let RestElement = modulesContainer.RestElement;
+let ReturnStatement = modulesContainer.ReturnStatement;
+let Script = modulesContainer.Script;
+let SequenceExpression = modulesContainer.SequenceExpression;
+let SpreadElement = modulesContainer.SpreadElement;
+let StaticMemberExpression = modulesContainer.StaticMemberExpression;
+let Super = modulesContainer.Super;
+let SwitchCase = modulesContainer.SwitchCase;
+let SwitchStatement = modulesContainer.SwitchStatement;
+let TaggedTemplateExpression = modulesContainer.TaggedTemplateExpression;
+let TemplateElement = modulesContainer.TemplateElement;
+let TemplateLiteral = modulesContainer.TemplateLiteral;
+let ThisExpression = modulesContainer.ThisExpression;
+let ThrowStatement = modulesContainer.ThrowStatement;
+let TryStatement = modulesContainer.TryStatement;
+let UnaryExpression = modulesContainer.UnaryExpression;
+let UpdateExpression = modulesContainer.UpdateExpression;
+let VariableDeclaration = modulesContainer.VariableDeclaration;
+let VariableDeclarator = modulesContainer.VariableDeclarator;
+let WhileStatement = modulesContainer.WhileStatement;
+let WithStatement = modulesContainer.WithStatement;
+let YieldExpression = modulesContainer.YieldExpression; 
 
-export { esprima };
+
+export { esprima, ArrayExpression, ArrayPattern, ArrowFunctionExpression, AssignmentExpression, AssignmentPattern, AsyncArrowFunctionExpression, AsyncFunctionDeclaration, AsyncFunctionExpression, AwaitExpression, BinaryExpression, BlockStatement, BreakStatement, CallExpression, CatchClause, ClassBody, ClassDeclaration, ClassExpression, ComputedMemberExpression, ConditionalExpression, ContinueStatement, DebuggerStatement, Directive, DoWhileStatement, EmptyStatement, ExportAllDeclaration, ExportDefaultDeclaration, ExportNamedDeclaration, ExportSpecifier, ExpressionStatement, ForInStatement, ForOfStatement, ForStatement, FunctionDeclaration, FunctionExpression, Identifier, IfStatement, ImportDeclaration, ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier, LabeledStatement, Literal, MetaProperty, MethodDefinition, Module, NewExpression, ObjectExpression, ObjectPattern, Property, RegexLiteral, RestElement, ReturnStatement, Script, SequenceExpression, SpreadElement, StaticMemberExpression, Super, SwitchCase, SwitchStatement, TaggedTemplateExpression, TemplateElement, TemplateLiteral, ThisExpression, ThrowStatement, TryStatement, UnaryExpression, UpdateExpression, VariableDeclaration, VariableDeclarator, WhileStatement, WithStatement, YieldExpression };

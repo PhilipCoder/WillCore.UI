@@ -290,6 +290,7 @@
     <Content Include="codeGenerator\libraries\PNotify\es\PNotifyStyleMaterial.js" />
     <Content Include="codeGenerator\libraries\PNotify\es\PNotifyStyleMaterial.js.map" />
     <Content Include="codeGenerator\libraries\PNotify\PNotifyBrightTheme.css" />
+    <Content Include="codeGenerator\parser\indexParser.js" />
     <Content Include="codeGenerator\serverLogic\fileCreator.js">
       <SubType>Code</SubType>
     </Content>
@@ -595,6 +596,7 @@
     <Folder Include="codeGenerator\fileCreation\" />
     <Folder Include="codeGenerator\components\" />
     <Folder Include="codeGenerator\fileEditing\" />
+    <Folder Include="codeGenerator\parser\" />
     <Folder Include="codeGenerator\serverLogic\" />
     <Folder Include="codeGenerator\serverLogic\templates\" />
     <Folder Include="codeGenerator\serverLogic\templates\index\" />

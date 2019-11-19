@@ -1,8 +1,8 @@
 import { willCore } from "/willcore/WillCore.js";
 
-import { esprima } from "./libraries/esprima/esprima.js";
+import { indexParser } from "./parser/indexParser.js";
 
-console.log(esprima.parseScript('const answer = 42'));
+new indexParser("/index.js").processIndexFile().then(console.log);
 
 //components
 willCore["bootstrap-dropdown"] = [willCoreModules.component, "/codeGen/components/bootstrap/dropdown/bootstrapDropdown.js", "/codeGen/components/bootstrap/dropdown/bootstrapDropdown.html", {}];
