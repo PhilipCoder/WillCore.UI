@@ -184,7 +184,15 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codeGenerator\libraries\bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="codeGenerator\libraries\escodegen\ast.js" />
+    <Content Include="codeGenerator\libraries\escodegen\code.js" />
+    <Content Include="codeGenerator\libraries\escodegen\escodegen.js" />
+    <Content Include="codeGenerator\libraries\escodegen\estraverse.js" />
+    <Content Include="codeGenerator\libraries\escodegen\keyword.js" />
+    <Content Include="codeGenerator\libraries\escodegen\source-map.js" />
+    <Content Include="codeGenerator\libraries\escodegen\utils.js" />
     <Content Include="codeGenerator\libraries\esprima\esprima.js" />
+    <Content Include="codeGenerator\libraries\esprima\esprima_amd.js" />
     <Content Include="codeGenerator\libraries\jquery\jquery-3.3.1.slim.min.js" />
     <Content Include="codeGenerator\libraries\monaco-editor\vs\base\worker\workerMain.js" />
     <Content Include="codeGenerator\libraries\monaco-editor\vs\basic-languages\abap\abap.js" />
@@ -297,6 +305,9 @@
     <Content Include="codeGenerator\serverLogic\fileExplorer.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\serverLogic\parser\indexBindingExpressionFactory.js" />
+    <Content Include="codeGenerator\serverLogic\parser\indexLinker.js" />
+    <Content Include="codeGenerator\serverLogic\parser\indexParser.js" />
     <Content Include="codeGenerator\serverLogic\pathUtil.js" />
     <Content Include="codeGenerator\serverLogic\projectFile.js">
       <SubType>Code</SubType>
@@ -591,6 +602,7 @@
     <Folder Include="codeGenerator\libraries\monaco-editor\vs\language\typescript\" />
     <Folder Include="codeGenerator\libraries\bootstrap\" />
     <Folder Include="codeGenerator\libraries\jquery\" />
+    <Folder Include="codeGenerator\libraries\escodegen\" />
     <Folder Include="codeGenerator\libraries\pNotify\" />
     <Folder Include="codeGenerator\libraries\pNotify\es\" />
     <Folder Include="codeGenerator\fileCreation\" />
@@ -598,6 +610,7 @@
     <Folder Include="codeGenerator\fileEditing\" />
     <Folder Include="codeGenerator\parser\" />
     <Folder Include="codeGenerator\serverLogic\" />
+    <Folder Include="codeGenerator\serverLogic\parser\" />
     <Folder Include="codeGenerator\serverLogic\templates\" />
     <Folder Include="codeGenerator\serverLogic\templates\index\" />
     <Folder Include="codeGenerator\serverLogic\templates\defaultCss\" />
