@@ -1,6 +1,5 @@
 import { willCore } from '/willcore/WillCore.js';
-import { indexParser } from './parser/indexParser.js';
-new indexParser('/index.js').processIndexFile().then(console.log);
+
 willCore['bootstrap-dropdown'] = [
     willCoreModules.component,
     '/codeGen/components/bootstrap/dropdown/bootstrapDropdown.js',

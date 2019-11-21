@@ -1,5 +1,7 @@
 const esprima = require("../../libraries/esprima/esprima_amd.js");
 const codeGen = require("../../libraries/escodegen/escodegen.js");
+const stringConstants = require("./expressionConstants.js");
+const expresssionMatcher = require("./expressionMatcher.js");
 
 const fs = require("fs");
 
