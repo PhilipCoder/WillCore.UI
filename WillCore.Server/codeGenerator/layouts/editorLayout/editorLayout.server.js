@@ -3,11 +3,6 @@ const projectFile = require('../../serverLogic/projectFile.js');
 const pathUtil = require('../../serverLogic/pathUtil.js');
 
 module.exports = (view) => {
-    view.createFolder = async (view) => {
-        var folder = view.itemName;
-        fileCreator.createFolder(folder);
-        return true;
-    };
     view.renameFile = async (view) => {
         var viewName = pathUtil.getViewName(view.filePath);
         if (projectFile.isViewLinked(viewName)) {

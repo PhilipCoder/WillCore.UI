@@ -304,6 +304,7 @@
     <Content Include="codeGenerator\serverLogic\fileExplorer.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codeGenerator\serverLogic\indexCore.js" />
     <Content Include="codeGenerator\serverLogic\parser\expressionConstants.js" />
     <Content Include="codeGenerator\serverLogic\parser\expressionMatcher.js" />
     <Content Include="codeGenerator\serverLogic\parser\expressionPartFactory.js" />
@@ -314,40 +315,7 @@
     <Content Include="codeGenerator\serverLogic\projectFile.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="codeGenerator\serverLogic\templates\defaultCss\defaultCss.css">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="codeGenerator\serverLogic\templates\index\bootstrap\index.html" />
-    <Content Include="codeGenerator\serverLogic\templates\index\bootstrap\index.js" />
-    <Content Include="codeGenerator\serverLogic\templates\index\default\index.html" />
-    <Content Include="codeGenerator\serverLogic\templates\index\default\index.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.bindings.js" />
-    <Content Include="codeGenerator\serverLogic\templates\view\view_itemName.sources.js" />
-    <Content Include="codeGenerator\serverLogic\templates\view\view_itemName.targets.js" />
-    <Content Include="codeGenerator\serverLogic\templates\view\view_itemName.traps.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.collections.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.events.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.logic.js" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.html" />
-    <Content Include="codeGenerator\serverLogic\templates\View\view_itemName.js" />
-    <Content Include="codeGenerator\serverLogic\templates\view\view_itemName.server.js" />
     <Content Include="codeGenerator\todo.md" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.bindings.js" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.collections.js" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.events.js" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.html">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="codeGenerator\views\codeGen\codeGen.js" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.logic.js" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.meta.js" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.sources.js" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.targets.js" />
-    <Content Include="codeGenerator\views\codeGen\codeGen.traps.js" />
-    <Content Include="codeGenerator\views\editor\codeGenEditor.html" />
-    <Content Include="codeGenerator\views\editor\codeGenEditor.js" />
-    <Content Include="codeGenerator\views\editor\codeGenEditor.manaco.js" />
-    <Content Include="codeGenerator\views\editor\codeGenEditor.server.js" />
     <Content Include="codeGenerator\views\folderExplorer\folderExplorer.html">
       <SubType>Code</SubType>
     </Content>
@@ -612,17 +580,8 @@
     <Folder Include="codeGenerator\fileEditing\" />
     <Folder Include="codeGenerator\serverLogic\" />
     <Folder Include="codeGenerator\serverLogic\parser\" />
-    <Folder Include="codeGenerator\serverLogic\templates\" />
-    <Folder Include="codeGenerator\serverLogic\templates\index\" />
-    <Folder Include="codeGenerator\serverLogic\templates\defaultCss\" />
-    <Folder Include="codeGenerator\serverLogic\templates\index\bootstrap\" />
-    <Folder Include="codeGenerator\serverLogic\templates\index\default\" />
-    <Folder Include="codeGenerator\serverLogic\templates\bootstrap\" />
-    <Folder Include="codeGenerator\serverLogic\templates\view\" />
     <Folder Include="codeGenerator\views\" />
-    <Folder Include="codeGenerator\views\editor\" />
     <Folder Include="codeGenerator\views\login\" />
-    <Folder Include="codeGenerator\views\codeGen\" />
     <Folder Include="codeGenerator\views\initProject\" />
     <Folder Include="codeGenerator\views\folderExplorer\" />
     <Folder Include="codeGenerator\views\partials\" />

@@ -15,10 +15,6 @@ var view = async (view) => {
     view.projectSettings = { useBootstrap: true, useDefaultCSS: true, useIndexFile: true };
     view.projectData = {};
 
-    //view.$useDefaultCSS.model = () => view.projectSettings.useDefaultCSS;
-    //view.$useBootstrap.model = () => view.projectSettings.useBootstrap;
-    //view.$useIndexFile.model = () => view.projectSettings.useIndexFile;
-    console.log(view.projectExists.viewModules);
     view.$viewModuleItem.repeat = () => view.projectExists.modules;
     view.$viewModuleItem.repeat((elements, row, index) => {
         row.selected = row.optional === false;

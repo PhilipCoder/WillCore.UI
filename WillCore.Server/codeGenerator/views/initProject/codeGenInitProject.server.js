@@ -1,4 +1,4 @@
-var projectFile = require("../../serverLogic/projectFile.js");
+const indexCore = require("../../serverLogic/indexCore.js");
 const fileCreateModuleLoader = require("../../fileCreation/logic/fileCreateModuleLoader.js");
 
 module.exports = (view) => {
@@ -12,10 +12,9 @@ module.exports = (view) => {
             priority: x.config.priority
         }));
         viewModules.sort(function (a, b) { return a.priority - b.priority })
-        return { exists: projectFile.exists(), modules: viewModules };
+        return { exists: new indexCore().exists, modules: viewModules };
     }
     view.initProject = (view) => {
-        projectFile.init(view.creationModules);
         view.creationModules.forEach(creationModuleName => {
             fileCreateModuleLoader.modules[creationModuleName].saveFiles();
         });

@@ -33,11 +33,11 @@ class indexBindingExpressionFactory {
      */
     static getLayoutExpression(name, htmlURL, jsURL) {
         return {
-            expression: expressionPartFactory.getAssignable(expressionPartFactory.willCoreAssignement(componentName),
+            expression: expressionPartFactory.getAssignable(expressionPartFactory.willCoreAssignement(name),
                 [
                     expressionPartFactory.memberExpression([stringConstants.MODULE_CONTAINER, stringConstants.LAYOUT_CLASS_NAME]),
-                    expressionPartFactory.stringLitteral(componentJSUrl),
-                    expressionPartFactory.stringLitteral(componentHTMLUrl)
+                    expressionPartFactory.stringLitteral(htmlURL),
+                    expressionPartFactory.stringLitteral(jsURL)
                 ]
             ),
             type: stringConstants.LAYOUT_CLASS_NAME
@@ -53,13 +53,13 @@ class indexBindingExpressionFactory {
      */
     static getViewExpression(viewName, viewElement, jsURL, htmlURL, route) {
         return {
-            expression: expressionPartFactory.getAssignable(expressionPartFactory.willCoreAssignement(componentName),
+            expression: expressionPartFactory.getAssignable(expressionPartFactory.willCoreAssignement(viewName),
                 [
                     expressionPartFactory.memberExpression([stringConstants.WILLCORE_CLASS_NAME, viewElement]),
                     expressionPartFactory.memberExpression([stringConstants.MODULE_CONTAINER, stringConstants.URL_CLASS_NAME]),
-                    expressionPartFactory.stringLitteral(componentJSUrl),
+                    expressionPartFactory.stringLitteral(jsURL),
                     expressionPartFactory.memberExpression([stringConstants.MODULE_CONTAINER, stringConstants.URL_CLASS_NAME]),
-                    expressionPartFactory.stringLitteral(componentHTMLUrl),
+                    expressionPartFactory.stringLitteral(htmlURL),
                     expressionPartFactory.memberExpression([stringConstants.MODULE_CONTAINER, stringConstants.ROUTE_CLASS_NAME]),
                     expressionPartFactory.stringLitteral(route),
                     expressionPartFactory.trueFunction()
@@ -79,13 +79,13 @@ class indexBindingExpressionFactory {
      */
     static getViewWithLayoutExpression(viewName, viewElement, jsURL, htmlURL, route, layout) {
         return {
-            expression: expressionPartFactory.getAssignable(expressionPartFactory.willCoreAssignement(componentName),
+            expression: expressionPartFactory.getAssignable(expressionPartFactory.willCoreAssignement(viewName),
                 [
                     expressionPartFactory.memberExpression([stringConstants.WILLCORE_CLASS_NAME, layout, viewElement]),
                     expressionPartFactory.memberExpression([stringConstants.MODULE_CONTAINER, stringConstants.URL_CLASS_NAME]),
-                    expressionPartFactory.stringLitteral(componentJSUrl),
+                    expressionPartFactory.stringLitteral(jsURL),
                     expressionPartFactory.memberExpression([stringConstants.MODULE_CONTAINER, stringConstants.URL_CLASS_NAME]),
-                    expressionPartFactory.stringLitteral(componentHTMLUrl),
+                    expressionPartFactory.stringLitteral(htmlURL),
                     expressionPartFactory.memberExpression([stringConstants.MODULE_CONTAINER, stringConstants.ROUTE_CLASS_NAME]),
                     expressionPartFactory.stringLitteral(route),
                     expressionPartFactory.trueFunction(),
