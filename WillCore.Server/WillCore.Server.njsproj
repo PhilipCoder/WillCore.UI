@@ -36,6 +36,7 @@
     <Content Include="codeGenerator\components\editorModuleNav\editorModuleNav.server.js" />
     <Content Include="codeGenerator\components\editorModuleNav\editorModuleNav.html" />
     <Content Include="codeGenerator\components\editorModuleNav\editorModuleNav.js" />
+    <Content Include="codeGenerator\config\projectConstants.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.html" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.server.js" />

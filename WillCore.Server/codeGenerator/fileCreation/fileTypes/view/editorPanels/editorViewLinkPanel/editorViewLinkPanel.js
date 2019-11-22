@@ -74,8 +74,8 @@ class editorViewLinkPanel extends HTMLElement {
 
     async setupView() {
         this.viewLoaded = true;
-        this.view.layouts = await this.view.server.editorViewLinkPanel.getLayoutViews({});
         this.view.viewData = await this.view.server.editorViewLinkPanel.getViewData({ viewName: getViewName(this.view.values.file) });
+      //  this.view.layouts = await this.view.server.editorViewLinkPanel.getLayoutViews({});
 
         this.view.$linkViewBtn.event.onclick = () => linkView(view);
         this.view.$unLinkViewBtn.event.onclick = () => unlinkView(view);
