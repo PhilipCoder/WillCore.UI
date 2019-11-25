@@ -19,11 +19,11 @@ class expressionPartFactory {
             type: stringConstants.MEMBER_EXPRESSION,
             computed: false,
             object: {
-                type: stringConstants.IDENTIFIER_EXPRESSION,
+                type: stringConstants.IDENTIFIER_DECLARATION,
                 name: parts[0]
             },
             property: {
-                type: stringConstants.IDENTIFIER_EXPRESSION,
+                type: stringConstants.IDENTIFIER_DECLARATION,
                 name: parts[1]
             }
         };
@@ -33,7 +33,7 @@ class expressionPartFactory {
                 computed: false,
                 object: initialObject,
                 property: {
-                    type: stringConstants.IDENTIFIER_EXPRESSION,
+                    type: stringConstants.IDENTIFIER_DECLARATION,
                     name: parts[i]
                 }
             };

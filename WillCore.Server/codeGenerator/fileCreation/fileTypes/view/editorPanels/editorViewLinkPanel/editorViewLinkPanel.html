@@ -11,6 +11,7 @@
     <select class="form-control form-control-sm" id="layoutSelect">
         <option value="Default">Default</option>
     </select>
+    <small class="text-danger" style="text-align:center" id="noElementsError">The selected layout does not contain any elements!</small>
 </div>
 <div class="form-group" style="padding-left:14px" id="viewLayoutLink">
     <label class="control-label">View Layout</label>
@@ -18,13 +19,16 @@
         <i class="fas fa-arrow-alt-circle-right" style="margin-right:8px"></i><span id="layoutLinkName"></span>
     </a>
 </div>
+<div class="form-group" style="padding-left:14px" id="layoutElementForm">
+    <label class="control-label">Layout Element</label>
+    <select class="form-control form-control-sm" id="layoutElement">
+        <option value="">Please Select...</option>
+    </select>
+    <!--<input class="form-control form-control-sm" placeholder="Enter the id of the layouts element..." id="layoutElement" />-->
+</div>
 <div class="form-group" style="padding-left:14px" id="viewRouteForm">
     <label class="control-label">View Route</label>
     <input class="form-control form-control-sm" placeholder="Enter view hash route..." id="viewRoute" />
-</div>
-<div class="form-group" style="padding-left:14px" id="layoutElementForm">
-    <label class="control-label">Layout Element</label>
-    <input class="form-control form-control-sm" placeholder="Enter the id of the layouts element..." id="layoutElement" />
 </div>
 <div class="form-group" style="padding-left:14px">
     <hr />

@@ -88,6 +88,22 @@ class indexCore {
         let componentCodeExpression = indexBindingExpressionFactory.getComponentExpression(componentName, componentJSUrl, componentHTMLUrl).expression;
         return this.indexLinker.addBinding(componentCodeExpression);
     }
+
+    /**
+     * Removes an assigned assignable from the index file.
+     * 
+     * @param {string} name
+     */
+    removeAssignable(name) {
+        this.indexLinker.removeBinding(name);
+        return true;
+    }
+
+    assignableExists(name) {
+        return this.linkedAssignables.views.filter(x => x.name === name).length > 0 ||
+            this.linkedAssignables.components.filter(x => x.name === name).length > 0 ||
+            this.linkedAssignables.layouts.filter(x => x.name === name).length > 0;
+    }
 }
 
 module.exports = indexCore;

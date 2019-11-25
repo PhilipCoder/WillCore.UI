@@ -41,6 +41,7 @@ class indexLinker {
                 }
                 var code = codeGen.generate(expressionTree);
                 fs.writeFileSync(this.filePath, code);
+                return true;
             } catch (e) {
                 return { message: stringConstants.PARSING_ERROR, error: e };
             }
@@ -59,8 +60,6 @@ class indexLinker {
             let js = fs.readFileSync(this.filePath, 'utf8');
             try {
                 let expressionTree = esprima.parseModule(js);
-                let newViewExpression = indexBindingFactory.getComponentExpression("superComponenet", "/lol.js", "/lol.html");
-                expressionTree.body.push(newViewExpression.expression);
                 expressionTree.body = expressionTree.body.filter(x =>
                     !(x.type === stringConstants.EXPRESSION_STATEMENT && x.expression.type === stringConstants.ASSIGNMENT_EXPRESSION &&
                         x.expression.left && x.expression.left.object && x.expression.left.object.name === stringConstants.WILLCORE_CLASS_NAME
@@ -68,6 +67,7 @@ class indexLinker {
                 );
                 let code = codeGen.generate(expressionTree);
                 fs.writeFileSync(this.filePath, code);
+                return true;
             } catch (e) {
                 return { message: stringConstants.PARSING_ERROR, error: e };
             }
@@ -125,7 +125,7 @@ class indexLinker {
             expression.expression.right.elements[0].type === stringConstants.MEMBER_EXPRESSION;
         if (isMember) {
             let memberparts = this.parseStaticMemberExpression(expression.expression.right.elements[0]);
-            return memberparts.filter(x => x.startsWith("$")).length > 0;
+            return memberparts.filter(x => x && x.startsWith("$")).length > 0;
         }
         return false;
     }
