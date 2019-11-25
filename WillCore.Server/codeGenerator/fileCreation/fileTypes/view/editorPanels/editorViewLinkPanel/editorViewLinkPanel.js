@@ -65,15 +65,22 @@ async function linkView(view) {
 }
 
 async function unlinkView(view) {
-    await view.server.editorViewLinkPanel.unlinkView({
+    let unlinkResult = await view.server.editorViewLinkPanel.unlinkView({
         viewName: getViewName(view.values.file)
     });
-    view.viewData.linked = false;
-    view.viewData = await view.server.editorViewLinkPanel.getViewData({ viewName: getViewName(view.values.file) });
-    PNotify.success({
-        text: "View Unlinked.",
-        type: 'notice'
-    });
+    if (unlinkResult === true) {
+        view.viewData.linked = false;
+        view.viewData = await view.server.editorViewLinkPanel.getViewData({ viewName: getViewName(view.values.file) });
+        PNotify.success({
+            text: "View Unlinked.",
+            type: 'notice'
+        });
+    } else {
+        PNotify.error({
+            text: unlinkResult,
+            type: 'notice'
+        });
+    }
 }
 
 class editorViewLinkPanel extends HTMLElement {
@@ -82,6 +89,7 @@ class editorViewLinkPanel extends HTMLElement {
         this.view = null;
         //this.shadowMode = true;
         willCore["editor-view-link-panel"].load(this);
+        this._linkedEvent = null;
     }
     main(view) {
         view.values = { file: null };
@@ -98,7 +106,10 @@ class editorViewLinkPanel extends HTMLElement {
 
     set currentLink(value) {
         this.view.values.currentLink = value;
+    }
 
+    set linkedEvent(value) {
+        this._linkedEvent = value;
     }
 
     async setupView() {
@@ -151,6 +162,9 @@ class editorViewLinkPanel extends HTMLElement {
             if (property === "layout") {
                 this.view.layoutElements = await getHTMLElements(this.view.viewData.layout, this.view);
                 this.view.viewData.layoutElement = "";
+            }
+            if (property === "linked" && this._linkedEvent) {
+                this._linkedEvent(value);
             }
         };
     }

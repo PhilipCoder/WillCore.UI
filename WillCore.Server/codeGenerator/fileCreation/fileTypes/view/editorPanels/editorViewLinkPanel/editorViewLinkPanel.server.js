@@ -68,7 +68,13 @@ module.exports = (view) => {
         return true;
     };
     view.unlinkView = (view) => {
-        index.removeAssignable(view.viewName);
+        let allIndexComponents = index.linkedAssignables;
+        let layouts = allIndexComponents.layouts.filter(x => x.name == view.viewName);
+        if (layouts.length > 0 && allIndexComponents.views.filter(x => x.layout === view.viewName).length > 0) {
+            return "Unable to unlink layout view. There are views using it as a layout. Unlink the dependant views first.";
+        } else {
+            index.removeAssignable(view.viewName);
+        }
         return true;
     };
     view.getLayoutHTML = async (view) => {
