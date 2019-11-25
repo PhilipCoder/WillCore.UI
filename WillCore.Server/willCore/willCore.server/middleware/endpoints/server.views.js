@@ -1,6 +1,7 @@
 let viewProxy = require('./server.viewProxy.js');
 let session = require('../session/server.session.js');
 let modules = require('./server.endPointContainer.js');
+const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
 
 class viewServer {
     constructor() {
@@ -8,9 +9,15 @@ class viewServer {
     }
 
     async runMethod(viewName, methodName, methodBody, request, response) {
-        if (!modules.modules[viewName] && !modules.modules["_"+viewName]) return `View ${viewName} not found!`;
-        if (!modules.modules[viewName][methodName] && !modules.modules["_" + viewName][methodName]) return `Method ${methodName} on view ${viewName} not found!`;
-        await modules.modules[viewName] ? modules.modules[viewName][methodName](methodBody) : modules.modules["_" +viewName][methodName](methodBody);
+        try {
+            if (!modules.modules[viewName] && !modules.modules["_" + viewName]) return `View ${viewName} not found!`;
+            if (!modules.modules[viewName][methodName] && !modules.modules["_" + viewName][methodName]) return `Method ${methodName} on view ${viewName} not found!`;
+            await modules.modules[viewName] ? modules.modules[viewName][methodName](methodBody) : modules.modules["_" + viewName][methodName](methodBody);
+        } catch (e) {
+            console.log("====================================STATIC FILE SERVER ERROR==================================");
+            console.log(e);
+            console.log("===============================================================================================");
+        }
     }
     /**
     * @param {import('http').IncomingMessage} request
@@ -33,7 +40,7 @@ class viewServer {
         var methodBody = await this.processPost(request, response);
         var proxy = new viewProxy(methodBody, request, response);
         this.runMethod(parts[0], parts[1], proxy.proxy, request, response);
-       
+
     }
 
     clearProxy(value) {

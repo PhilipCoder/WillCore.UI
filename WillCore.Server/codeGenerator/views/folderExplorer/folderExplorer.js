@@ -17,7 +17,7 @@ var imagePaths = {
  * Should not contain any logic.
  */
 var view = async (view) => {
-    view.files = [];
+    view.files = await view.server.folderExplorer.getFiles({ route: view.route});
 
     //================binds the file view==========================
     view.$fileCard.repeat = () => view.files;
@@ -30,9 +30,6 @@ var view = async (view) => {
             elements.$fileCard.attribute.href = () => `#${row.fileEditorPath}?route=${encodeURIComponent(view.route.route + "/" + row.fileNameWithExtension)}`;
         }
     });
-
-    view.getFiles = [willCoreModules.server, () => [view.route]];
-    view._getFiles();
 
 };
 

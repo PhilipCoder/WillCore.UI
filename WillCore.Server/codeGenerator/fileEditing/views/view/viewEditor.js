@@ -34,9 +34,9 @@ var view = async (view) => {
     var currentFile = view.route.route.replace(".view", view.route.page ? view.route.page : ".bindings.js");
     view.$editor.file = currentFile;
     view.$editorLinkPanel.setfile(currentFile);
-    view.viewData = await view.server.codeGenEditor.getViewData({ viewName: getViewName(currentFile) });
+    //view.viewData = await view.server.viewEditor.getViewData({ viewName: getViewName(currentFile) });
    
-    view.$runIcon.attribute.style = () => ({ color: view.viewData.linked ? "#007900" : "#ff0023"});
+    //view.$runIcon.attribute.style = () => ({ color: view.viewData.linked ? "#007900" : "#ff0023"});
 
     view.$saveFileBtn.event.onclick = async () => {
         await view.$editor.saveFile();

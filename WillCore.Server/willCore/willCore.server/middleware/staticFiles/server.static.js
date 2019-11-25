@@ -17,12 +17,20 @@ class staticFileServer {
         this.responseCode = 200;
     }
 
-    handleFile(request, response) {
-        if (request.url === "/" || request.url === "/codegen") request.url = request.url === "/codegen" ? "/codegen/index.html"  : "/index.html";
-        if (!this.checkRequestFileExtension(request, response)) return;
-        if (!this.createFileServer(request, response)) return;
-        this.serverFile(request, response);
-        return true;
+    async handleFile(request, response) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                if (request.url === "/" || request.url === "/codegen") request.url = request.url === "/codegen" ? "/codegen/index.html" : "/index.html";
+                if (!this.checkRequestFileExtension(request, response)) resolve(false);
+                if (!this.createFileServer(request, response, this)) resolve(false);
+                await this.serverFile(request, response, this);
+                resolve(true);
+            } catch (e) {
+                console.log("====================================STATIC FILE SERVER ERROR==================================");
+                console.log(e);
+                console.log("===============================================================================================");
+            }
+        });
     }
 
     checkRequestFileExtension(request, response) {
@@ -34,8 +42,8 @@ class staticFileServer {
         return true;
     }
 
-    createFileServer(request, response) {
-        if (this.getFileExcluded(request.url)) {
+    createFileServer(request, response, that) {
+        if (that.getFileExcluded(request.url)) {
             response.writeHead("401");
             response.end("File not available for access.");
             return false;
@@ -43,47 +51,36 @@ class staticFileServer {
         return true;
     }
 
-    serverFile(request, response) {
-        var fileURL = this.getFileLocation(request.url);
-        var result = this.serveFile(fileURL);
-        response.writeHead(this.responseCode, { 'Content-Type': this.mimeType });
-        response.end(result);
+    serverFile(request, response, that) {
+        return new Promise(async (resolve, reject) => {
+            var fileURL = that.getFileLocation(request.url);
+            var result = await that.serveFile(fileURL, that);
+            response.writeHead(that.responseCode, { 'Content-Type': that.mimeType });
+            response.end(result);
+            resolve();
+        });
     }
 
-    serveFile(filePath) {
-        this.calculateMimeType(filePath);
-        if (!this.mimeType) {
-            this.responseCode = 401;
-            return;
-        }
-        filePath = this.getFilePath(filePath);
-        if (!fs.existsSync(filePath)) {
-            this.responseCode = 404;
-            return;
-        }
-        //var cachedValue = files.get(filePath);
-        //if (!cachedValue) {
-        //    cachedValue = fs.readFileSync(filePath);
-        //    files.set(filePath, cachedValue);
-        //}
-        return fs.readFileSync(filePath);
+    serveFile(filePath, that) {
+        return new Promise(async (resolve, reject) => {
+            that.calculateMimeType(filePath, that);
+            if (!that.mimeType) {
+                that.responseCode = 401;
+                resolve();
+            }
+            filePath = that.getFilePath(filePath);
+            if ((await fileHelper.exists(filePath)) === false) {
+                that.responseCode = 404;
+                resolve();
+            }
+            let results = await fileHelper.read(filePath);
+            resolve(results);
+        });
     }
 
-    //fs.access(filePath, fs.F_OK, (err) => {
-    //    if (err) {
-    //        console.error(err)
-    //        return
-    //    }
-
-    //    response.writeHead(this.responseCode, { 'Content-Type': this.mimeType });
-
-    //    const stream = fs.createReadStream(filePath)
-    //    stream.pipe(response)
-    //});
-
-    calculateMimeType(filePath) {
-        this.fileExtenstion = path.extname(filePath);
-        this.mimeType = config.staticFiles.mimeTypes[this.fileExtenstion];
+    calculateMimeType(filePath, that) {
+        that.fileExtenstion = path.extname(filePath);
+        that.mimeType = config.staticFiles.mimeTypes[that.fileExtenstion];
     }
 
     getFilePath(filePath) {

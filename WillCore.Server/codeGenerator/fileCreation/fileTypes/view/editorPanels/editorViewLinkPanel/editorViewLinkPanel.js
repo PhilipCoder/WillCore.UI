@@ -129,23 +129,22 @@ class editorViewLinkPanel extends HTMLElement {
         this.view.$layoutSelect.model = () => this.view.viewData.layout;
         this.view.$layoutSelect.disabled = () => this.view.viewData.linked;
 
-        this.view.$linkViewBtn.show = () => !this.view.viewData.linked && (this.view.layoutElements && this.view.layoutElements.length > 0) && this.view.viewData.layoutElement;
+        this.view.$linkViewBtn.show = () => !this.view.viewData.linked && ((this.view.layoutElements && this.view.layoutElements.length > 0) && this.view.viewData.layoutElement || this.view.viewData.viewType === "layout");
         this.view.$linkViewBtn.event.onclick = () => linkView(this.view);
 
-        this.view.$viewLayoutLink.show = () => this.view.viewData.linked;
         this.view.$viewLayoutLink.show = () => !!this.view.viewData.layoutPath;
 
         this.view.$noElementsError.show = () => this.view.viewData.viewType === "view" && this.view.layoutElements && this.view.layoutElements.length === 0;
 
         this.view.$layoutLinkName.innerHTML = () => this.view.viewData.layout;
 
-        if (this.view.viewData.layoutPath) this.view.$viewLayoutLinkAnchor.attribute.href = () => willCore.url("/editor", { route: this.view.viewData.layoutPath });
+        if (this.view.viewData.layoutPath) this.view.$viewLayoutLinkAnchor.attribute.href = () => willCore.url("/viewEditor", { route: this.view.viewData.layoutPath });
         this.view.$dependantViews.show = () => !!this.view.viewData.childViews;
         if (!!this.view.viewData.childViews) {
             this.view.$dependantLink.repeat = () => this.view.viewData.childViews;
             this.view.$dependantLink.repeat((elements, row) => {
                 elements.$dependantLinkAnchor.innerHTML = () => row.viewName;
-                elements.$dependantLinkAnchor.attribute.href = () => willCore.url("/editor", { route: row.viewPath });
+                elements.$dependantLinkAnchor.attribute.href = () => willCore.url("/viewEditor", { route: row.viewPath });
             });
         }
         this.view.viewData = async (target, property, value) => {

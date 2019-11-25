@@ -20,36 +20,42 @@ class fileCreator {
     }
 
     createFile(url) {
-        url = path.resolve(this.wwwRoot, "../", url);
-        if (!fs.existsSync(url)) {
-            fs.writeFileSync(url, "");
-            return true;
-        }
-        return false;
+        return new Promise(async (resolve, reject) => {
+            url = path.resolve(this.wwwRoot, "../", url);
+            if ((await fileHelper.exists(url)) === false) {
+                await fileHelper.writeFile(url, "");
+                resolve(true);
+            }
+            resolve(false);
+        });
     }
 
     readFile(url) {
-        url = path.resolve(this.wwwRoot, "../", url);
-        if (fs.existsSync(url)) {
-            return fs.readFileSync(url, 'utf8');
-        }
+        return new Promise(async (resolve, reject) => {
+            url = path.resolve(this.wwwRoot, "../", url);
+            if ((await fileHelper.exists(url))) {
+                return await fileHelper.readFile(url);
+            }
+        });
     }
 
     saveFile(url, content) {
-        url = path.resolve(this.wwwRoot, "../", url);
-        if (fs.existsSync(url)) {
-            fs.writeFileSync(url, content);
-        }
+        return new Promise(async (resolve, reject) => {
+            url = path.resolve(this.wwwRoot, "../", url);
+            if ((await fileHelper.exists(url))) {
+                await fileHelper.writeFile(url, content)
+            }
+        });
     }
 
     async renameFile(filePath, newName) {
         return new Promise(async (resolve, reject) => {
             var viewName = pathUtil.getViewName(filePath);
             var viewFiles = await pathUtil.getViewFiles(filePath);
-            viewFiles.forEach(filePath => {
+            viewFiles.forEach(async filePath => {
                 var newFileName = pathUtil.renameViewFile(filePath, newName);
                 fs.renameSync(filePath, newFileName);
-                let fileContent = fs.readFileSync(newFileName, 'utf8');
+                let fileContent = await fileHelper.readFile(newFileName);
                 fileContent = pathUtil.replaceAll(fileContent, `"./${viewName}`, `"./${newName}`);
                 fs.writeFileSync(newFileName, fileContent);
             });

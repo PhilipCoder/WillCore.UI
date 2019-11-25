@@ -5,15 +5,15 @@ const path = require('path');
 module.exports = (view) => {
     view.readFile = async (view) => {
         let url = path.resolve(pathUtil.getWWWRootDir(), "../", view.url);
-        if (fs.existsSync(url)) {
-            return fs.readFileSync(url, 'utf8');
+        if (await fileHelper.exists(url)) {
+            return await fileHelper.readFile(url);
         }
         return "";
     };
     view.saveFile = async (view) => {
         let url = path.resolve(pathUtil.getWWWRootDir(), "../", view.url);
-        if (fs.existsSync(url)) {
-            fs.writeFileSync(url, view.content);
+        if (await fileHelper.exists(url)) {
+            await fileHelper.writeFile(url, view.content);
         }
         return true;
     };

@@ -358,6 +358,7 @@
     <Content Include="willCore\willCore.server\config.json">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="willCore\willCore.server\helpers\fileHelper.js" />
     <Content Include="willCore\willCore.server\middleware\endpoints\activeRequest\activeRequest.js" />
     <Content Include="willCore\willCore.server\middleware\endpoints\server.endPointContainer.js" />
     <Content Include="willCore\willCore.server\middleware\endpoints\server.sseContainer.js" />
@@ -596,6 +597,7 @@
     <Folder Include="willCore\willCore.server\middleware\session\" />
     <Folder Include="willCore\willCore.server\middleware\staticFiles\" />
     <Folder Include="willCore\willCore.server\middleware\staticFiles\node-static\" />
+    <Folder Include="willCore\willCore.server\helpers\" />
     <Folder Include="willCore\willCore.ui\" />
     <Folder Include="willCore\willCore.ui\assignables\" />
     <Folder Include="willCore\willCore.ui\assignables\bindables\" />

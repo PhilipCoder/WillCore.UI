@@ -1,4 +1,5 @@
 var http = require('http');
+var fileHelper = require('./helpers/fileHelper.js');
 var requestDirector = require('./server.requestDirector.js');
 var config = require('./config.json');
 var port = config.server.port || 1337;

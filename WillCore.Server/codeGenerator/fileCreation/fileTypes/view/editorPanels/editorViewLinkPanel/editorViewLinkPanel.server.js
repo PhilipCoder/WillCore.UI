@@ -3,29 +3,30 @@ const indexCore = require("../../../../../serverLogic/indexCore.js");
 const projectConstants = require("../../../../../config/projectConstants.js");
 const pathUtil = require("../../../../../serverLogic/pathUtil.js");
 const path = require("path");
-const fs = require("fs");
 const index = new indexCore();
 
 module.exports = (view) => {
     view.getViewData = async (view) => {
-        let views = index.linkedAssignables.views.filter(x => x.name == view.viewName);
-        let layouts = index.linkedAssignables.layouts.filter(x => x.name == view.viewName);
+        let allIndexComponents = index.linkedAssignables;
+        let views = allIndexComponents.views.filter(x => x.name == view.viewName);
+        let layouts = allIndexComponents.layouts.filter(x => x.name == view.viewName);
         let result = { name: null, viewType: "view", layout: "Default", layoutElement: null, linked: false, route:"" };
         if (views.length > 0) {
             let view = views[0];
             result = { name: view.name, viewType: "view", layout: null, layoutElement: view.element, linked: true, route: view.route };
             if (view.layout) {
                 result.layout = view.layout;
-                let viewLayout = layouts.filter(x => x.name === view.layout);
+                let viewLayout = allIndexComponents.layouts.filter(x => x.name === view.layout);
                 if (viewLayout.length > 0) {
                     viewLayout = viewLayout[0];
-                    let layoutPath = viewLayout.htmlUrl.substring(viewLayout.htmlUrl.lastIndexOf(`/${projectConstants.WWWROOT_INDICATOR}`))
+                    let layoutPath = viewLayout.htmlUrl;
+                    layoutPath = "wwwRoot"+layoutPath.substring(0,layoutPath.indexOf("."))+".view";
                     result.layoutPath = layoutPath;
                 }
             }
         } else if (layouts.length > 0) {
             let layout = layouts[0];
-            result = { name: layout.name, viewType: "layout", layout: null, layoutElement: null, linked: true };
+            result = { name: layout.name, viewType: "layout", layout: null, layoutElement: null, linked: true, childViews: allIndexComponents.views.filter(x => x.layout === view.viewName).map(x => ({ viewName: x.name, viewPath:"wwwRoot"+ x.htmlUrl.substring(0,x.htmlUrl.indexOf(".")) + ".view" }))  };
         }
         return result;
     };
@@ -70,7 +71,7 @@ module.exports = (view) => {
         index.removeAssignable(view.viewName);
         return true;
     };
-    view.getLayoutHTML = (view) => {
+    view.getLayoutHTML = async (view) => {
         let htmlPath;
         if (view.layoutName === "Default") {
             htmlPath = path.resolve(pathUtil.getWWWRootDir(), "index.html");
@@ -78,7 +79,7 @@ module.exports = (view) => {
             let layout = index.linkedAssignables.layouts.filter(x => x.name == view.layoutName)[0];
             htmlPath = path.join(pathUtil.getWWWRootDir(), layout.htmlUrl);
         }
-        let html = fs.readFileSync(htmlPath, 'utf8');
+        let html = await fileHelper.readFile(htmlPath);
         return html;
     }
 };
