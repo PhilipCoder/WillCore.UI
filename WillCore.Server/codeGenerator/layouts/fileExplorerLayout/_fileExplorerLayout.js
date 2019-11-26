@@ -52,15 +52,20 @@ var view = async (view) => {
 
     var promptModuleFileName = async (moduleLabel, moduleName) => {
         var result = await view.$inputModal.logic.show(moduleLabel, "Enter Item Name", "Enter item name ( without file extension )", "", async inputValue => {
-            if (!inputValue || specialCharCheck.test(inputValue)) {
-                return "Special characters not allowed!";
+            if (!inputValue || inputValue.length === 0) {
+                return "Please enter a name.";
             }
-            var creationValues = { itemName: view.route.route + "\\" + inputValue, moduleName: moduleName };
-            var fileCreationResult = await willCoreModules.server.runRequest("_fileExplorerLayout/createModuleFile", creationValues);
-            if (fileCreationResult) {
-                view.child.logic.load();
+            let validationResult = await view.server["_fileExplorerLayout"].validateName({ itemName: inputValue, moduleName: moduleName });
+            if (validationResult === true) {
+                var creationValues = { itemName: view.route.route + "\\" + inputValue, moduleName: moduleName };
+                var fileCreationResult = await willCoreModules.server.runRequest("_fileExplorerLayout/createModuleFile", creationValues);
+                if (fileCreationResult) {
+                    view.child.logic.load();
+                } else {
+                    return "Duplicate file name.";
+                }
             } else {
-                return "Duplicate file name!";
+                return validationResult;
             }
         });
     };

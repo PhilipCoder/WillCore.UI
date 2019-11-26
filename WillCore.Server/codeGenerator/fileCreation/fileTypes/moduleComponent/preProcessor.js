@@ -1,4 +1,6 @@
 const preProcessResult = require("../../logic/preProcessResult.js");
+const pathUtil = require("../../../serverLogic/pathUtil.js");
+
 /**
  * Preprocessor for view files.
  * Author : Philip Schoeman
@@ -13,7 +15,13 @@ class preProcessor {
      */
     static processFile(userFileName, fileExtention, filePath, templateName, templateContent) {
         templateName = templateName.replace("fileName", `${userFileName}`);
-        return new preProcessResult(templateName, fileExtention, filePath, templateContent, { "$safeitemname$": userFileName});
+        let noDashName = pathUtil.replaceAll(userFileName, "-", "");
+        return new preProcessResult(templateName, fileExtention, filePath, templateContent, { "$safeitemname$": userFileName, "$safeitemnameNoDash$": noDashName});
+    }
+
+    static validateName(name) {
+        var specialCharCheckDot = /[ !@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?]/;
+        return specialCharCheckDot.test(name) || name.indexOf("-") === -1 ? 'The name of a component should contain at least one "-" and no other special characters.' : true;
     }
 };
 

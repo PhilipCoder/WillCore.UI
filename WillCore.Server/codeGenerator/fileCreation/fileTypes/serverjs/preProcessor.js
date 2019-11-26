@@ -15,6 +15,11 @@ class preProcessor {
         templateName = templateName.replace("fileName", `${userFileName}`);
         return new preProcessResult(templateName, fileExtention, filePath, templateContent, { "$safeitemname$": userFileName});
     }
+
+    static validateName(name) {
+        var specialCharCheckDot = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+        return specialCharCheckDot.test(name) ? 'The name of a JS file should not contain any special characters.' : true;
+    }
 };
 
 module.exports = preProcessor;

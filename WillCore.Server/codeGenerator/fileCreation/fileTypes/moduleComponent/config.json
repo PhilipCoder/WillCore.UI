@@ -4,5 +4,53 @@
   "showSingleFile": true,
   "icon": "icons/moduleComponent.png",
   "menuPath": "Components/Module Based Component",
-  "description": "Adds support to create view files."
+  "description": "Adds support to create view files.",
+  "editorComponents": [
+    {
+      "js": "editorPanels/editorComponentLinkPanel/editorComponentLinkPanel.js",
+      "html": "editorPanels/editorComponentLinkPanel/editorComponentLinkPanel.html",
+      "name": "editor-component-module-link-panel",
+      "parentElementId": "viewOptions",
+      "elementId": "editorLinkPanel",
+      "class": "editorViewLinkPanel"
+    }
+  ],
+  "moduleLinks": [
+    {
+      "lastPart": ".html",
+      "label": "HTML",
+      "icon": "fas fa-code"
+    },
+    {
+      "lastPart": ".component.js",
+      "label": "Component",
+      "icon": "fas fa-microchip"
+    },
+    {
+      "lastPart": ".collections.js",
+      "label": "Collections",
+      "icon": "fas fa-layer-group"
+    },
+    {
+      "lastPart": ".bindings.js",
+      "label": "Bindings",
+      "icon": "fas fa-link",
+      "default": true
+    },
+    {
+      "lastPart": ".events.js",
+      "label": "Events",
+      "icon": "fas fa-mouse"
+    },
+    {
+      "lastPart": ".sources.js",
+      "label": "Sources",
+      "icon": "fas fa-database"
+    },
+    {
+      "lastPart": ".logic.js",
+      "label": "Logic",
+      "icon": "fas fa-brain"
+    }
+  ]
 }

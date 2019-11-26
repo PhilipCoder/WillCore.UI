@@ -40,6 +40,9 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.html" />
     <Content Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.server.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.html" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.server.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.html" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.server.js" />
@@ -120,7 +123,6 @@
     <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.html" />
     <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.component.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.logic.js" />
-    <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.server.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.sources.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\moduleComponent\templates\fileName.targets.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\serverjs\config.json" />
@@ -457,6 +459,8 @@
     <Folder Include="codeGenerator\components\editorModuleNav\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\editorComponentLinkPanel\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\moduleComponent\editorPanels\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\moduleComponent\editorPanels\editorComponentLinkPanel\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\" />
     <Folder Include="codeGenerator\css\" />
     <Folder Include="codeGenerator\config\" />

@@ -1,4 +1,4 @@
-﻿class bootstrapDropdown extends HTMLElement {
+﻿class $safeitemnameNoDash$ extends HTMLElement {
     constructor() {
         super();
         this.view = null;
@@ -10,4 +10,4 @@
 
 }
 
-export { bootstrapDropdown };
+export { $safeitemnameNoDash$ };

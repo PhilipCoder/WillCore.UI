@@ -15,6 +15,11 @@ class preProcessor {
         userFileName = userFileName+"/"
         return new preProcessResult(templateName, fileExtention, filePath, templateContent, {});
     }
+
+    static validateName(name) {
+        var specialCharCheckDot = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+        return specialCharCheckDot.test(name) ? 'The name of a folder should not contain any special characters.' : true;
+    }
 };
 
 module.exports = preProcessor;

@@ -6,7 +6,7 @@ module.exports = (view) => {
     view.renameFile = async (view) => {
         var viewName = pathUtil.getViewName(view.filePath);
         if (projectFile.isViewLinked(viewName)) {
-            return "Unlink view before renaming.";
+            return "Unlink before renaming.";
         } else if (projectFile.viewExists(view.newName)) {
             return `View ${view.newName} already exists.`;
         } else {
@@ -17,7 +17,7 @@ module.exports = (view) => {
     view.deleteFile = async (view) => {
         var viewName = pathUtil.getViewName(view.filePath);
         if (projectFile.isViewLinked(viewName)) {
-            return "Unlink view before deleting.";
+            return "Unlink before deleting.";
         }  else {
             await fileCreator.deleteFile(view.filePath);
         }

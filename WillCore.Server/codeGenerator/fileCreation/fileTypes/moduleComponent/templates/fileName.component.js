@@ -5,23 +5,24 @@ import { events } from "./$safeitemname$.events.js";
 import { sources } from "./$safeitemname$.sources.js";
 import { targets } from "./$safeitemname$.targets.js";
 
-class bootstrapDropdown extends HTMLElement {
+class $safeitemnameNoDash$ extends HTMLElement {
     constructor() {
         super();
         this.view = null;
-        willCore["$safeitemname$"].load(this);
     }
     main(view) {
         collections(view);
-    }
-
-    connectedCallback() {
         sources(view);
         targets(view);
         bindings(view);
         let logicInstance = logic(view);
+        view.setLogic(logicInstance);
         events(view, logicInstance);
+    }
+
+    connectedCallback() {
+        willCore["$safeitemname$"].load(this);
     }
 }
 
-export { bootstrapDropdown };
+export { $safeitemnameNoDash$ };

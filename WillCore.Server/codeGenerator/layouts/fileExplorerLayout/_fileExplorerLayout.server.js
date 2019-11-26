@@ -16,4 +16,8 @@ module.exports = (view) => {
         fileCreateModuleLoader.modules[view.moduleName].saveFiles(view.itemName);
         return {success:true};
     };
+
+    view.validateName = async (view) => {
+        return fileCreateModuleLoader.modules[view.moduleName].preProcessor.validateName(view.itemName);
+    };
 };
