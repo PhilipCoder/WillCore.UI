@@ -7,12 +7,12 @@ function getViewName(currentFile) {
 }
 
 function setupModuleNav(view) {
-    view.$editorModuleNav.currentLink = "Bindings";
-    view.$editorModuleNav.file = view.route.route;
-    view.$editorModuleNav.label = "View Modules";
     view.$editorModuleNav.changeEvent = (file) => {
         view.$editor.file = file;
     };
+    view.$editorModuleNav.file = view.route.route;
+    view.$editorModuleNav.label = "Modules";
+
 }
 
 async function runFile() {
@@ -28,16 +28,14 @@ async function runFile() {
 }
 
 var view = async (view) => {
+    let panelType = await view.server.viewEditor.getSideBar({ extention: view.route.route.substring(view.route.route.lastIndexOf(".")) });
+    view.$viewOptions.$editorLinkPanel.create[panelType] = { };
     setupModuleNav(view);
     view.$runFileBtn.event.onclick = () => runFile();
 
     var currentFile = view.route.route.replace(".view", view.route.page ? view.route.page : ".bindings.js");
     view.$editor.linkedEvent = (isLinked) => { };
-    view.$editor.file = currentFile;
     view.$editorLinkPanel.setfile(currentFile);
-    //view.viewData = await view.server.viewEditor.getViewData({ viewName: getViewName(currentFile) });
-
-    //view.$runIcon.attribute.style = () => ({ color: view.viewData.linked ? "#007900" : "#ff0023"});
 
     view.$saveFileBtn.event.onclick = async () => {
         await view.$editor.saveFile();

@@ -37,6 +37,9 @@
     <Content Include="codeGenerator\components\editorModuleNav\editorModuleNav.html" />
     <Content Include="codeGenerator\components\editorModuleNav\editorModuleNav.js" />
     <Content Include="codeGenerator\config\projectConstants.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.html" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.js" />
+    <Content Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\editorComponentLinkPanel\editorComponentLinkPanel.server.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.html" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.js" />
     <Content Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\editorViewLinkPanel.server.js" />
@@ -452,6 +455,8 @@
     <Folder Include="codeGenerator\components\bootstrap\modal\" />
     <Folder Include="codeGenerator\components\monaco\" />
     <Folder Include="codeGenerator\components\editorModuleNav\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\" />
+    <Folder Include="codeGenerator\fileCreation\fileTypes\component\editorPanels\editorComponentLinkPanel\" />
     <Folder Include="codeGenerator\fileCreation\fileTypes\view\editorPanels\editorViewLinkPanel\" />
     <Folder Include="codeGenerator\css\" />
     <Folder Include="codeGenerator\config\" />

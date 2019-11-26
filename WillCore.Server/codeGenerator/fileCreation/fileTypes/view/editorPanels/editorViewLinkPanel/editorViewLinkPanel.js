@@ -24,7 +24,7 @@ function validRouteName(view) {
     if (view.viewData.route.startsWith("/") && specialCharCheckDot.test(view.viewData.route.substring(1)) === false) {
         return true;
     }
- 
+
     return false;
 }
 
@@ -44,7 +44,7 @@ async function linkView(view) {
                 layoutElement: view.viewData.layoutElement,
                 viewRoute: view.viewData.route
             });
-            linkingError = linkResult === false ? linkResult : linkingError; 
+            linkingError = linkResult === false ? linkResult : linkingError;
         } else {
             linkingError = "Enter valid route. A route should start with a / and should not contain any special characters. Example: /home.";
         }
@@ -88,7 +88,6 @@ class editorViewLinkPanel extends HTMLElement {
         super();
         this.view = null;
         //this.shadowMode = true;
-        willCore["editor-view-link-panel"].load(this);
         this._linkedEvent = null;
     }
     main(view) {
@@ -112,6 +111,10 @@ class editorViewLinkPanel extends HTMLElement {
         this._linkedEvent = value;
     }
 
+    connectedCallback() {
+        willCore["editor-view-link-panel"].load(this);
+    }
+
     async setupView() {
         this.viewLoaded = true;
         this.view.viewData = await this.view.server.editorViewLinkPanel.getViewData({ viewName: getViewName(this.view.values.file) });
@@ -128,7 +131,7 @@ class editorViewLinkPanel extends HTMLElement {
         this.view.$viewLayoutForm.show = () => this.view.viewData.viewType === "view" && !this.view.viewData.layoutPath;
         this.view.$viewRouteForm.show = () => this.view.viewData.viewType === "view";
         this.view.$layoutElementForm.show = () => this.view.viewData.viewType === "view";
-        
+
         this.view.$layoutElement.options = () => this.view.layoutElements.map(x => [x, x]);
         this.view.$layoutElement.model = () => this.view.viewData.layoutElement;
         this.view.$layoutElement.disabled = () => this.view.viewData.linked;
@@ -167,6 +170,7 @@ class editorViewLinkPanel extends HTMLElement {
                 this._linkedEvent(value);
             }
         };
+        
     }
 }
 

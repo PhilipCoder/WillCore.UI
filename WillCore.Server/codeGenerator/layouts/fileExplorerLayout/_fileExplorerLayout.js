@@ -58,7 +58,7 @@ var view = async (view) => {
             var creationValues = { itemName: view.route.route + "\\" + inputValue, moduleName: moduleName };
             var fileCreationResult = await willCoreModules.server.runRequest("_fileExplorerLayout/createModuleFile", creationValues);
             if (fileCreationResult) {
-                view.child._getFiles();
+                view.child.logic.load();
             } else {
                 return "Duplicate file name!";
             }

@@ -17,8 +17,15 @@ var imagePaths = {
  * Should not contain any logic.
  */
 var view = async (view) => {
-    view.files = await view.server.folderExplorer.getFiles({ route: view.route});
 
+    let logic = {
+        load: () => new Promise(async (resolve, reject) => {
+            view.files = await view.server.folderExplorer.getFiles({ route: view.route });
+            resolve();
+        })
+    };
+    await logic.load();
+    view.setLogic(logic);
     //================binds the file view==========================
     view.$fileCard.repeat = () => view.files;
     view.$fileCard.repeat((elements, row, index) => {

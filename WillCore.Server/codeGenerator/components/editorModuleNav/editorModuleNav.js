@@ -18,6 +18,11 @@ class editorModuleNav extends HTMLElement {
         var extention = value.substring(value.lastIndexOf("."));
         this.view.server.editorModuleNav.getViewNavItems({ extention: extention }).then((result) => {
             this.view.values.items = result;
+            let defaultRow = result.filter(x => x.default)[0];
+            this.view.values.currentLink = defaultRow.label;
+            if (this._changeEvent) {
+                this._changeEvent(this.view.values.file.replace(this.view.values.extenstion, defaultRow.lastPart));
+            }
         });
         this.view.values.extenstion = extention;
     }

@@ -29,7 +29,8 @@
     {
       "lastPart": ".bindings.js",
       "label": "Bindings",
-      "icon": "fas fa-link"
+      "icon": "fas fa-link",
+      "default": true
     },
     {
       "lastPart": ".targets.js",

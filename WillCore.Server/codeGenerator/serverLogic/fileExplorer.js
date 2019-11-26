@@ -21,6 +21,16 @@ class fileExplorer {
                 fileExtention: path.extname(file.file)
             }));
 
+            displayFiles.sort(function (fileA, fileB) {
+                let fileAExtention = fileA.fileExtention || "A";
+                let fileBExtention = fileB.fileExtention || "A";
+                if (fileAExtention < fileBExtention) return 1;
+                if (fileAExtention > fileBExtention) return -1;
+
+                if (fileA.fileName > fileB.fileName) return 1;
+                if (fileA.fileName < fileB.fileName) return -1;
+            });
+
             resolve(displayFiles);
         });
     }
@@ -71,7 +81,6 @@ class fileExplorer {
                 //check that all the grouping files count
                 return fileNameGroupings[grouping].files.filter(groupFile => module.templateFileDefinitions.indexOf(groupFile) > -1).length === module.templateFileDefinitions.length
                     && fileNameGroupings[grouping].files.length === module.templateFileDefinitions.length;
-             //   return module.templateFileDefinitions.filter(templateDefinition => fileNameGroupings[grouping].files.indexOf(templateDefinition) > -1).length === module.templateFileDefinitions.length;
             });
             if (matchedPlugins.length > 0) {
                 fileNameGroupings[grouping].deleted = false;
