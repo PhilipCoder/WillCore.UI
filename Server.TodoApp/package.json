@@ -1,9 +1,0 @@
-{
-  "name": "will-core.server",
-  "version": "0.0.0",
-  "description": "WillCore.Server",
-  "main": "server.js",
-  "author": {
-    "name": ""
-  }
-}

@@ -1,5 +1,0 @@
-{
-  "viewName": "viewEditor",
-  "supportedFileTypes": [ ".view",".comp",".modcomp"],
-  "route": "/viewEditor"
-}

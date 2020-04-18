@@ -1,7 +1,0 @@
-{
-  "extention": ".js",
-  "showSingleFile": false,
-  "icon": "icons/js.png",
-  "menuPath": "Files/JavaScript",
-  "description": "Creates a HTML file."
-}

@@ -1,9 +1,0 @@
-{
-  "extention": "",
-  "priority": 1,
-  "showSingleFile": false,
-  "icon": "icons/folder.png",
-  "menuPath": "Create Folder",
-  "description": "Creates a folder."
-
-}
