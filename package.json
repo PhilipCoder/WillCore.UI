@@ -1,0 +1,9 @@
+{
+    "_moduleAliases": {
+        "willcore.ui": "moduleContainer/willCoreModules.js"
+    },
+    "dependencies": {
+        "module-alias": "^2.2.2",
+        "willcore.uicore": "^1.0.4"
+    }
+}
