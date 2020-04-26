@@ -9,6 +9,12 @@ class uiAssignable extends coreUIAssignable {
         this.addClientAssignable("bind", "/uiModules/bindings/bind.js");
         this.addClientAssignable("model", "/uiModules/bindings/model.js");
         this.addClientAssignable("event", "/uiModules/bindings/event.js");
+        this.addClientAssignable("disabled", "/uiModules/bindings/disabled.js");
+        this.addClientAssignable("hide", "/uiModules/bindings/hide.js");
+        this.addClientAssignable("options", "/uiModules/bindings/options.js");
+        this.addClientAssignable("show", "/uiModules/bindings/show.js");
+        this.addClientAssignable("style", "/uiModules/bindings/style.js");
+        this.addClientAssignable("attribute", "/uiModules/bindings/attribute.js");
     }
 
 

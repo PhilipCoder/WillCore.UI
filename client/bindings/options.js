@@ -15,12 +15,12 @@ class component extends bindable {
         return elementProxy;
     }
 
-    completionResult() {
-        this.innerHTML = this.element.innerHTML;
-        return false;
+    beforeBind() {
+        this.initialHTML = this.element.innerHTML;
     }
 
     updateDOM(value) {//key is label, property value is value
+
         this.element.innerHTML = this.initialHTML;
         if (!Array.isArray(value) && typeof value === "object") {
             Object.keys(value).forEach(key => {

@@ -19,7 +19,7 @@ class dataSetProxyHandler {
         target[property] = value;
         this.bindings[property].forEach((binding) => {
             if (binding !== dataScope.bindable) {
-                binding.updateDOM(value);
+                binding.updateDOMValue(value);
             }
         });
     }

@@ -15,10 +15,9 @@ class component extends bindable {
         return elementProxy;
     }
 
-    completionResult() {
+    beforeBind() {
         let display = getComputedStyle(this.element).display;
         this.initialDisplayState = !display || display === "none" ? "block" : display;
-        return false;
     }
 
     updateDOM(value) {

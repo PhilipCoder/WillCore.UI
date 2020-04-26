@@ -44,7 +44,13 @@ class bindable extends assignable {
     }
 
     completed() {
+        if (this.beforeBind) this.beforeBind();
         this.bind();
+    }
+
+    updateDOMValue(){
+        let updateValue = this.bindedValues.function[this.bindingFunctionIndex](this.parentProxy);
+        this.updateDOM(updateValue);
     }
 
     updateDOM(value) {
