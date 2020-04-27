@@ -1,7 +1,14 @@
 import { dataScope } from "./dataScope.js";
 
 class dataSetProxyHandler {
-    constructor() {
+    constructor(value) {
+        if (typeof value === "object") {
+            for (let key in value) {
+                if (typeof value[key] === "object" && !value[key]._isDataSet) {
+                    value[key] = dataSetProxyFactory(value[key]);
+                }
+            }
+        }
         this.bindings = {};
     }
     //Set
@@ -25,10 +32,27 @@ class dataSetProxyHandler {
     }
 
     handleObjectAssignment(target, property, value) {
+        let previousValue = target[property];
         target[property] = dataSetProxyFactory(value._isDataSet ? value._target : value);
         this.bindings[property].forEach((binding) => {
             binding.bind();
         });
+        if (typeof previousValue === "object" &&  previousValue._handler){
+            previousValue._handler.rebindAll(previousValue._target);
+        }
+    }
+
+    rebindAll(target) {
+        Object.keys(this.bindings).forEach(
+            (bindings) => {
+                this.bindings[bindings].forEach((binding) => {
+                    binding.bind();
+                });
+                if (typeof target[bindings] === "object" && target[bindings]._handler){
+                    target[bindings]._handler.rebindAll();
+                }
+            }
+        );
     }
 
     ensureBindingArray(property) {
@@ -44,6 +68,9 @@ class dataSetProxyHandler {
         }
         else if (property === "_isDataSet") {
             return true;
+        }
+        else if (property === "_handler") {
+            return this;
         }
         else if (dataScope.hasBindable()) {
             this.ensureBindingArray(property);
@@ -66,7 +93,8 @@ class dataSetProxyHandler {
 }
 
 let dataSetProxyFactory = (target) => {
-    return new Proxy(target || {}, new dataSetProxyHandler())
+    target = target || {};
+    return new Proxy(target, new dataSetProxyHandler(target))
 };
 
 export { dataSetProxyFactory };

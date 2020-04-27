@@ -12,8 +12,9 @@ class viewModelProxyHandler extends assignableProxyHandler {
 
     getElementProxy(target, property, proxy) {
         if (property.startsWith("$")) {
-            property = property.substring(1);
-            let elementId = `${proxy._viewId}.${property}`;
+            if (target[property]) return { value: target[property], status: true }
+            let id = property.substring(1);
+            let elementId = `${proxy._viewId}.${id}`;
             let element = document.getElementById(elementId);
             if (elementId) {
                 target[property] = elementProxy.new(element);

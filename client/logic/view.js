@@ -38,6 +38,12 @@ class view {
         await this.viewFunction(this.viewModel);
     }
 
+    async renderIntoElement(element){
+        element.innerHTML = this.html;
+        await this.viewFunction(this.viewModel);
+        return this.viewModel;
+    }
+
     async deleteChild(viewId) {
         await this._children[viewId].unload();
         delete this._children[viewId];
