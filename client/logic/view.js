@@ -2,7 +2,7 @@ import { guid } from "../helpers/guid.js";
 import { viewDomLoader } from "./viewDomLoader.js";
 import { lazyImport } from "/willcore/helpers/lazyImport.js";
 import { viewModelProxy } from "../proxies/viewModel/viewModelProxy.js";
-
+import { baseRequestProxy } from "../proxies/requestProxy/baseRequestProxy.js";
 class view {
     constructor(url) {
         this._viewDomLoader = new viewDomLoader();
@@ -16,7 +16,7 @@ class view {
     }
 
     async init() {
-        this.html = await this._viewDomLoader.loadView(this.url,this.viewId);
+        this.html = await this._viewDomLoader.loadView(this.url, this.viewId);
         let viewModule = await lazyImport(`/views/${this.url}.js`);
         this.layoutViewUrl = viewModule.layout;
         this.containerId = viewModule.containerId;
@@ -33,12 +33,12 @@ class view {
         if (!layoutView) {
             document.getElementsByTagName('body')[0].innerHTML = this.html;
         } else {
-            layoutView.viewModel["$"+layoutView.containerId]._element.innerHTML = this.html;
+            layoutView.viewModel["$" + layoutView.containerId]._element.innerHTML = this.html;
         }
-        await this.viewFunction(this.viewModel);
+        await this.viewFunction(this.viewModel, baseRequestProxy.new());
     }
 
-    async renderIntoElement(element){
+    async renderIntoElement(element) {
         element.innerHTML = this.html;
         await this.viewFunction(this.viewModel);
         return this.viewModel;

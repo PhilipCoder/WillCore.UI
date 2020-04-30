@@ -1,4 +1,4 @@
-let init = (willcore) => {
+let init = (willcore, service) => {
     willcore.ui;
 };
 

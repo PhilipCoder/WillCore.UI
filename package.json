@@ -3,7 +3,11 @@
         "willcore.ui": "moduleContainer/willCoreModules.js"
     },
     "dependencies": {
-        "module-alias": "^2.2.2",
-        "willcore.uicore": "^1.0.4"
-    }
+        "willcore.uicore": "^1.0.6"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^7.1.1",
+        "module-alias": "^2.2.2"
+      }
 }

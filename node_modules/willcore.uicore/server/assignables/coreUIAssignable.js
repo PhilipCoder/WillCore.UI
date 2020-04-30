@@ -29,8 +29,7 @@ class coreUIAssignable extends assignable {
 
     completed() {
         if (!this.parentProxy._moduleRegistry) {
-            let registry = new moduleRegistry();
-            this.parentProxy._moduleRegistry = registry;
+            this.parentProxy._moduleRegistry = moduleRegistry;
             this.createService();
             this.createCoreFileServer();
         }

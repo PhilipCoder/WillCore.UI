@@ -1,4 +1,4 @@
-class moduleRegistry {
+class _moduleRegistry {
     constructor() {
         this.modules = {};
     }
@@ -19,5 +19,7 @@ class moduleRegistry {
         return Object.keys(this.modules).map(key => this.modules[key]);
     }
 }
+
+const moduleRegistry = new _moduleRegistry();
 
 module.exports = moduleRegistry;
