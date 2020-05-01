@@ -7,8 +7,8 @@ let view = async (model, requests) => {
         gender: "",
         list: [{ value: "ItemA" }, { value: "ItemB" }, { value: "ItemC" }]
     };
-    console.log(await requests.product.getData.get({resultCount:8,value:"Hello world"}));
-    console.log(await requests.product.postData.post({resultCount:8,value:"Hello world"}));
+    console.log(await requests.product.getData.get({ resultCount: 8, value: "Hello world" }));
+    console.log(await requests.product.postData.post({ resultCount: 8, value: "Hello world" }));
 
     model.$output.bind = () => model.myData.name;
     model.$input.model = () => model.myData.name;
@@ -32,6 +32,15 @@ let view = async (model, requests) => {
             clientModel.data.value = "5 Seconds Passed.";
         }, 5000);
     };
+    model.$goTo.onclick.event = () => {
+        model.location.navigate("/zView/about", { name: 'John', surname: 'Doe' });
+    };
+
+    model.watch = () => model.myData.name;
+    model.watch = () => {
+        console.log(model.myData.name);
+    };
+    model.$input.invalid.class = () => model.myData.name.length === 0;
 };
 
 let layout = "/zTestLayouts/layout"

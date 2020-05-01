@@ -4,8 +4,8 @@ class viewDomLoader {
 
     }
 
-    async loadView(viewURL, viewId) {
-        let html = await loadHTML(`/views/${viewURL}.html`);
+    async loadView(viewURL, viewId, html) {
+        html = html || await loadHTML(`/views/${viewURL}.html`);
         html = this.getCleanedIdHTML(html, viewId);
         return html;
     }

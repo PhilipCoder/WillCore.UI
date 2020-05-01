@@ -17,6 +17,9 @@ class uiAssignable extends coreUIAssignable {
         this.addClientAssignable("attribute", "/uiModules/bindings/attribute.js");
         this.addClientAssignable("repeat", "/uiModules/bindings/repeat.js");
         this.addClientAssignable("view", "/uiModules/bindings/view.js");
+        this.addClientAssignable("location", "/uiModules/bindings/location.js");
+        this.addClientAssignable("watch", "/uiModules/bindings/watch.js");
+        this.addClientAssignable("class", "/uiModules/bindings/class.js");
     }
 
 

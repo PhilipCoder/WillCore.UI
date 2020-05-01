@@ -8,20 +8,24 @@ class view {
         this._viewDomLoader = new viewDomLoader();
         this.viewId = guid();
         this.url = url;
+        this.html = null;
         this.parentElementId = null;
         this.layoutViewUrl = null;
         this.layoutElementId = null;
         this.viewFunction = null;
+        this.skipFunctionImport = false;
         this._children = {};
     }
 
     async init() {
-        this.html = await this._viewDomLoader.loadView(this.url, this.viewId);
-        let viewModule = await lazyImport(`/views/${this.url}.js`);
-        this.layoutViewUrl = viewModule.layout;
-        this.containerId = viewModule.containerId;
-        this.viewFunction = viewModule.view;
+        this.html = await this._viewDomLoader.loadView(this.url, this.viewId, this.html);
         this.viewModel = viewModelProxy.new(this.viewId);
+        if (!this.skipFunctionImport) {
+            let viewModule = await lazyImport(`/views/${this.url}.js`);
+            this.layoutViewUrl = viewModule.layout;
+            this.containerId = viewModule.containerId;
+            this.viewFunction = viewModule.view;
+        }
     }
 
     async unload() {
@@ -38,9 +42,9 @@ class view {
         await this.viewFunction(this.viewModel, baseRequestProxy.new());
     }
 
-    async renderIntoElement(element) {
+    async renderIntoElement(element, viewFunction) {
         element.innerHTML = this.html;
-        await this.viewFunction(this.viewModel);
+        await (viewFunction || this.viewFunction)(this.viewModel);
         return this.viewModel;
     }
 
