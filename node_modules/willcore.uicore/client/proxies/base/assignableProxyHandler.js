@@ -97,7 +97,7 @@ class assignableProxyHandler extends baseProxyHandler {
         }
         else if (moduleContainer["&" + property] && moduleContainer[property].noValues && this.canAssign(proxy, moduleContainer[property])) {
             proxy[property] = moduleContainer[property];
-            return { value: proxy[property]._noIntermediateProxy ? proxy[property] : intermediateAssignableProxy.new(proxy, property), status: true };
+            return { value: (proxy[property]._noIntermediateProxy || proxy[property].then ) ? proxy[property] : intermediateAssignableProxy.new(proxy, property), status: true };
         }
         else {
             return { value: intermediateAssignableProxy.new(proxy, property), status: true };

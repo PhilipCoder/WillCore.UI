@@ -22,12 +22,12 @@ class coreElement extends HTMLElement {
         this.originalHTML = this.innerHTML;
         this.viewInstance = new view(this.config.htmlTemplateURL);
         this.viewInstance.html = this.config.html;
-        this.viewInstance.skipFunctionImport = !!this.config.viewFunction;
-        this.loading = new Promise((resolve, reject) => {
+        this.viewInstance.skipFunctionImport = !!this.view;
+        this.model = new Promise(async (resolve, reject) => {
             this.viewInstance.init().then(async () => {
+                this.viewInstance.viewModel._noIntermediateProxy = true;
                 this.innerHTML = this.viewInstance.html;//by setting the html first, the children will render first
-                this.model = this.viewInstance.viewModel;
-                let slot = this.model.$slot;
+                let slot = this.viewInstance.viewModel.$slot;
                 if (slot._element) {
                     slot._element.parentCoreElement = this;
                     slot._element.innerHTML = this.originalHTML;
@@ -35,9 +35,12 @@ class coreElement extends HTMLElement {
                 if (this.onLoaded) {
                     this.onLoaded();
                 }
-                await this.config.viewFunction(this.viewInstance.viewModel);
-                resolve();
+                await this.view(this.viewInstance.viewModel);
+                resolve(this.viewInstance.viewModel);
             });
+        });
+        this.model.then((value)=>{
+            this.model = value;
         });
     }
 }

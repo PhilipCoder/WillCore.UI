@@ -16,33 +16,38 @@ ___
 With so many JS UI frameworks popping up, it is hard to keep up to date with all the new front-end libraries. Most of them are over complicated, requires pre-compilers, and take ages just to set them up. That is why WillCore.UI was born, a simple but yet powerful framework was needed to not only build websites, but also PWAs with offline functionality.
 
 ###### WillCore.UI has a simple API and can be learned in a day (disclaimer: excluding people with impaired cognitive functionality). 
+
+<br/>
+
 ___
-> ### Index
+> ## Index
 ___
 
-1. [Assignable Introduction](#Assignable-Introduction)
-2. [Getting Started](#Getting-Started)
-   1. [Without CLI](#Without-CLI)
-   2. [With CLI](#With-CLI)
-3. [Architecture Overview](#Architecture-Overview)
-   1. [The WillCore Proxy](#The-WillCore-Proxy)
-   2. [The View Proxy](#The-View-Proxy)
-4. [Views](#Views)
-5. [View Layouts](#View-Layouts)
-6. [Collections And Model Binding](#Collections-And-Model-Binding)
-   1. [WillCore.UI Model Binding](#WillCore.UI-Model-Binding)
-   2. [Model](#Model)
-   3. [Inner HTML](#Inner-HTML)
-   4. [Repeat](#Repeat)
-   5. [Events](#Events)
-   6. [Attributes](#Attributes)
-   7. [Partial Views](#Partial-Views)
-7. [HTTP requests](#HTTP-requests)
-8. [Collection Targets And Sources](#Collection-Targets-And-Sources)
-9. [Routing](#Routing)
-10. [Runtime Creation Of HTML DOM Elements](#Runtime-Creation-Of-HTML-DOM-Elements)
+1. [Assignable Introduction](#1-Assignable-Introduction)
+2. [Getting Started](#2-Getting-Started)
+3. [Views And Routing](#3-Views-And-Routing)
+4. [Data Proxies](#4-Data-Proxies)
+5. [Data Bindings](#5-Data-Bindings)
+   1. [Model](#5.1-Model)
+   2. [Bind](#5.2-Bind-(InnerHTML))
+   3. [Repeat](#5.3-Repeat)
+   4. [Events](#5.4-Events)
+   5. [Attributes](#5.5-Attributes)
+   6. [Select Options](#5.6-Select-Options)
+   7. [Disabled](#5.7-Disabled)
+   8. [Hide](#5.8-Hide)
+   9. [Show](#5.9-Show)
+   10. [Style](#5.10-Style)
+   11. [Class](#5.11-Class)
+   12. [Partial Views](#5.12-Partial-Views)
+9. [Adding CSS and JavaScript to the HTML document](#6-Adding-CSS-and-JavaScript-to-the-HTML-document)
+7. [Custom Components](#7-Custom-Components)
+8. [Making Server Requests From The Front-End](#8-Making-Server-Requests-From-The-Front-End)
+
+<br/>
+
 ___
-> ### 1) Assignable-Introduction
+> ## 1 Assignable-Introduction
 ___
 
 In order to make the API as simple as possible, WC.UI (WillCore.UI) uses the concept of assignables to instantiate and assign state to internal objects. The concept might be a bit weird at first, but it simplifies the API.
@@ -91,8 +96,10 @@ view.$elementId.attribute.style = () => ({ color: "red" });
 
 Examples 2 and 3 do the same thing. Assignables are the core of WillCore.UI's API and all interaction with the framework is done via assignables.
 
+<br/>
+
 ___
-> ### 2) Getting Started
+>## 2 Getting Started
 ___
 
 WillCore.UI can be installed via an NPM package. Make a new directory and install the module into the directory:
@@ -164,8 +171,11 @@ let view = async (model) => {
 //Exports the view function
 export {view};
 ```
+
+<br/>
+
 ___
->## 3) Views And Routing.
+>## 3 Views And Routing
 ___
 
 WillCore.UI views are rendered into a built up HTML document and consists of a JavaScript module and HTML file. The HTML file and JavaScript files should have the same name, only the extensions differ. For instance a view "home" should have a "home.js" and "home.html" file in the same directory.
@@ -298,7 +308,7 @@ export { view, layout };
 <br/>
 
 ___
->## 4) Data Proxies
+>## 4 Data Proxies
 ___
 
 Data proxies are objects that triggers events when data on them changes. They are the core of the model-binding functionality of WillCore.UI. To create a data proxy, simply assign an object or array containing the data to a property on a view's model. All objects and arrays will be converted into data proxies. Data proxies can be multi-layer deep and when an object is assigned to a data proxy as a child, it will also be converted into a data proxy.
@@ -321,8 +331,10 @@ let view = async (model) => {
 export {view};
 ```
 
+<br/>
+
 ___
->## 5) Data Bindings
+>## 5 Data Bindings
 ___
 
 WillCore.UI supports model binding between HTML elements and JavaScript state. A proxy engine is used instead of observables and instead of a virtual DOM, the DOM is accessed directly via HTML IDs. The lack of all this unnecessary complexity makes WillCore.UI fast, very fast.
@@ -358,7 +370,7 @@ ___
 >#### Different Bindings
 ___
 
->##### Model
+>##### 5.1 Model
 
 The model binding is an unique binding in the sense that it provides bi-directional model binding. An example of bi-directional model binding is when a string field is bound to an input. The property changes when the value of the input changes, and the input changes when the property changes. The input's value will always be the same as the property.
 
@@ -377,7 +389,7 @@ model.$elementId.model = () => model.dataProxy.someProperty;
 <br/>
 
 
->##### Bind (InnerHTML)
+>##### 5.2 Bind (InnerHTML)
 
 The bind binding binds an element's inner HTML to a field or function result. It a one way binding.
 
@@ -396,7 +408,7 @@ model.$elementId.bind = () => model.dataProxy.someProperty;
 <br/>
 
 
->##### Repeat
+>##### 5.3 Repeat
 
 The repeat binding binds an element to an array. The element with it's children will be duplicated for every item in the array. An iterator function can be used to bind the children of the element. A temporary proxy is passed to the iterator function that can be used for the binding of the child elements.
 
@@ -453,7 +465,7 @@ ___
 ___
 
 
->##### Events
+>##### 5.4 Events
 
 HTML events are all handled via the event assignable. The events have the same name than in vanilla JavaScript. For example, onclick.
 
@@ -472,7 +484,7 @@ model.$elementId.onclick.event= () => alert("The item was clicked!");
 
 <br/>
 
->##### Attributes
+>##### 5.5 Attributes
 
 All attributes on a HTML element can be binded to values. Attribute bindings like, class, href, disabled etc. are all supported
 
@@ -491,7 +503,7 @@ model.$elementId.disabled.attribute = () => model.userData.isLoggedIn;
 
 <br/>
 
->##### Select Options
+>##### 5.6 Select Options
 
 The options in a select dropdown can be bound to a data proxy with the options binding. The data proxy values can be either an object or multidimensional array.
 
@@ -535,7 +547,7 @@ model.$dropdown.model = () => model.myData.gender;
 
 <br/>
 
->##### Disabled
+>##### 5.7 Disabled
 
 The disabled binding binds an element's disabled attribute to a field or function result. It a one way binding.
 
@@ -553,7 +565,7 @@ model.$submitButton.disabled = () => model.myData.name.length > 10;
 
 <br/>
 
->##### Hide
+>##### 5.8 Hide
 
 The hide binding binds an element's hidden status to a field or function result. It a one way binding.
 
@@ -570,7 +582,7 @@ model.$submitButton.hide = () => model.myData.name.length > 10;
 ```
 <br/>
 
->##### Show
+>##### 5.9 Show
 
 The show binding binds an element's hidden status to a field or function result. It a one way binding.
 
@@ -588,7 +600,7 @@ model.$submitButton.show = () => model.myData.name.length > 10;
 
 <br/>
 
->##### Style
+>##### 5.10 Style
 
 The style binding binds an element's css style to a field or function result. It a one way binding.
 
@@ -607,7 +619,7 @@ model.$dropdown.backgroundColor.style = () => model.myData.gender === "male" ? "
 
 <br/>
 
->##### Class
+>##### 5.11 Class
 
 The class binding binds an element's css class to a field or function result. It a one way binding.
 
@@ -626,7 +638,7 @@ model.$nameInput.invalid.class = () => model.myData.name.length === 0;
 
 <br/>
 
->##### Partial Views
+>##### 5.12 Partial Views
 
 Views can be loaded into a view as child or partial views. Data proxies can be assigned to a partial view from the parent view. After a partial view is loaded, it's model can be accessed via the callback function.
 
@@ -652,11 +664,13 @@ model.$partialDiv.view = (clientModel) => {
 
 <br/>
 
->## 5) Adding CSS and JavaScript to the HTML document.
+___
+>## 6 Adding CSS and JavaScript to the HTML document
+___
 
 WillCore.UI builds up the HTML header tag, so it is not possible to include HTML and CSS files directly in the HTML. The header is built using the script and style cache in the server-side assignable.
 
->#### 5.1) Adding A CSS Style File To The Page
+>#### 6.1) Adding A CSS Style File To The Page
 
 A style file can be assigned to the server via the style assignable.
 
@@ -679,7 +693,7 @@ core.testServer.ui;
 core.testServer.bootstrapStyle.scriptModule = "/css/BootStrap.css;
 ```
 
->#### 5.2) Adding A JavaScript File To The Page
+>#### 6.2) Adding A JavaScript File To The Page
 
 A script file can be assigned to the server via the script assignable.
 
@@ -702,7 +716,7 @@ core.testServer.ui;
 core.testServer.bootstrapScript.script = "/libraries/BootStrap.js";
 ```
 
->#### 5.3) Adding A JavaScript Module File To The Page
+>#### 6.3) Adding A JavaScript Module File To The Page
 
 A script file of type "module" can be assigned to the server via the script assignable.
 
@@ -725,6 +739,220 @@ core.testServer.ui;
 core.testServer.myComponent.scriptModule = "/libraries/myComponent.js";
 ```
 
->## 6) Custom Components
+<br/>
 
-Custom components in WillCore.UI combine the power of HTML web components with the easy of use proxy model binding. 
+___
+>## 7 Custom Components
+___
+
+Custom components in WillCore.UI combine the power of HTML web components with the easy of use proxy model binding. Custom elements allows you to define new element tags.
+
+A custom element consists out of 3 parts:
+
+* Element class
+* HTML template
+* View Function
+
+>### Element Class
+
+The element class is a class that inherits from the coreElement class available at _"/uiModules/components/coreElement.js"_. This is the class that defines the web component to the browser. The configuration of the element is done on an instance of the elementCreationConfig class available at _"/uiModules/components/elementCreationConfig.js"_.
+
+#### API (Element Class)
+
+Base Location : /uiModules/components/coreElement.js
+
+| Method | Parameters | Description |
+| ------ | ---------- | ----------- |
+| constructor(config) | config : elementCreationConfig | The constructor should call the base constructor with an instance of a elementCreationConfig class |
+| onLoaded() | None | A callback that will be executed after the element is appended to the DOM and the view function is done executing |
+| register(elementName) | elementName : String | Method to register the component with an element name in the browser. The name provided will be the HTML tag used to create the element |
+| view(model) | Function | The view function of the component. Takes a model and request proxy as parameters. |
+
+#### API (Configuration Class)
+
+Location : /uiModules/components/elementCreationConfig.js
+
+| Method | Parameters | Description |
+| ------ | ---------- | ----------- |
+| constructor() | None | Creates an instance of the class |
+| html | String | The HTML string of the template. When the template is in another file, htmlTemplateURL should be used |
+| htmlTemplateURL | String | The path to the HTML template. The html property can be used instead if the template is not in another file. |
+
+>### Example: Custom Button
+
+In this example we create a custom button element that displays the amount of times an user clicked on it and it turns from blue to red when an user clicked more that 10 times. Lets name it clicker-button.
+
+#### clickerButton.js
+
+```javascript
+import { coreElement } from "/uiModules/components/coreElement.js"; //Get the base class we need to extend
+import { elementCreationConfig } from "/uiModules/components/elementCreationConfig.js"; //Get the configuration needed.
+
+//Define the configuration for the element
+const conf = new elementCreationConfig();
+conf.html = `<button id="button"><span id="label"></span></button>`;
+
+class clickerButton extends coreElement {
+    constructor() {
+        super(conf)
+    }
+    //The elements view function
+    async view(model){
+        //Creates a data proxy with a single property called clickCount
+        model.data = { clickCount: 0 };
+        //Binds the buttons innerHTML to the click count on the data proxy.
+        model.$label.bind = () => `Clicked : ${model.data.clickCount}`;
+        //Increments the click count every time the user clicks on the button.
+        model.$button.onclick.event = () => { model.data.clickCount++ };
+        //Changes the buttons background color depending on the click count.
+        model.$button.backgroundColor.style = () => model.data.clickCount > 10 ? "red" : "blue";
+    };
+}
+
+//Registers the element into the browser.
+clickerButton.register("clicker-button");
+
+export { loaderButton };
+```
+
+>### Adding the JavaScript module file to the page.
+
+To add the module to the included modules, it needs to be added to the list of script files __server-side__.
+
+```javascript
+willCoreInstance.serverName.clickerButton.scriptModule = "/views/elements/clickerButton.js";
+```
+
+_The component can be registered by an assignable in an WillCore.UI extension module._
+
+>### Using The Component
+
+The component can be rendered in the HTML by using the defined HTML tag.
+
+```html
+<loader-button> </loader-button>
+```
+
+The custom control will be rendered:
+
+![Custom Button](/res/clickerBTN.PNG)
+
+>### Accessing A Components Model From A Parent View
+
+The viewModel of a component can be accessed from a parent view by calling the viewModel property on the element proxy. The viewModel property is a promise that will resolve once the element's view function is done executing.
+
+```html
+<!--HTML-->
+<loader-button id="myLoaderBtn"> </loader-button>
+```
+
+```javascript 
+//Parent view function
+//Changing the click count from outside the element.
+await model.$customElement.viewModel;
+model.$customElement.viewModel.data.clickCount = 100;
+```
+
+>### Template Slots
+
+There are cases when you want to keep the child components of the custom element. For this task, you can use the element's slot. The way that WillCore.UI renders the custom elements, the child elements will be loaded before the parent elements. This allows you to configure a parent element according to the child elements.
+
+When an element with an ID of "slot" is present in the element's template HTML, the contents of the element will be moved to the slot element.
+
+Let's change our original example to show the children of the element inside the button next to the click counter.
+
+#### clickerButton.js
+
+```javascript
+import { coreElement } from "/uiModules/components/coreElement.js"; //Get the base class we need to extend
+import { elementCreationConfig } from "/uiModules/components/elementCreationConfig.js"; //Get the configuration needed.
+
+//Define the configuration for the element
+const conf = new elementCreationConfig();
+//Specify a template with a slot
+conf.html = `<button id="button"><span id="label"></span><span id="slot"></span></button>`;
+
+class clickerButton extends coreElement {
+    constructor() {
+        super(conf)
+    }
+    //The elements view function
+    async view(model){
+        //Creates a data proxy with a single property called clickCount
+        model.data = { clickCount: 0 };
+        //Binds the buttons innerHTML to the click count on the data proxy.
+        model.$label.bind = () => `Clicked : ${model.data.clickCount}`;
+        //Increments the click count every time the user clicks on the button.
+        model.$button.onclick.event = () => { model.data.clickCount++ };
+        //Changes the buttons background color depending on the click count.
+        model.$button.backgroundColor.style = () => model.data.clickCount > 10 ? "red" : "blue";
+    };
+}
+
+//Registers the element into the browser.
+clickerButton.register("clicker-button");
+
+export { loaderButton };
+```
+
+Using the custom element.
+
+```html
+<loader-button id="customElement">
+    <span style="color: red;">Click me</span>
+</loader-button>
+```
+
+The custom control will be rendered with the children:
+
+![Custom Button](/res/clickerBTNB.PNG)
+
+<br/>
+
+___
+>## 8 Making Server Requests From The Front-End
+___
+
+Since WillCore.UI uses WillCore.Server as a back-end, it is easy to define server-side web-services that can be called from the font-end. WillCore.UI provides a simple to use proxy that can be used to make HTTP requests.
+
+A request proxy is available as a second parameter on the view function. The proxy currently only supports RPC actions, but REST functionality is in development. A function returned when activating the get traps on the request proxy in the following order:
+
+__requestProxy.serviceName.actionName.httpVerb__
+
+The function returned takes the query parameters in the case of a GET or DELETE and request body in the case of a POST as an object parameter.
+
+#### Lets Define Actions:
+
+```javascript
+//product.js (service module)
+module.exports = (service, server, willcore) => {
+    service.getData.action.get = async (model) => {
+        let result = model.id === 0 ? [{name:"Item One"},{name:"Item two"}] : [];
+        model.result = result;
+    };
+    service.addData.action.post = async (model) => {
+        model.result = {message:`Data addded! From server: ${model.message}`};
+    };
+};
+```
+
+#### And A Service:
+
+```javascript
+ willcoreInstance.serverName.products.service = "/product.js";
+```
+
+>#### Calling The Service
+
+To call the get action and return data:
+
+```javascript
+let view = async (model, requests) => {
+    console.log(await requests.products.getData.get({ id: 0 }));//Will return an object: {result: [{name:"Item One"},{name:"Item two"}]}
+    console.log(await requests.products.getData.get({ id: 1 }));//Will return an array {result: []}
+
+    console.log(await requests.products.addData.post({ message: "Hello world" }));//Will return an object {result: { message: "Data addded! From server: Hello World" }}
+};
+
+export { view };
+```

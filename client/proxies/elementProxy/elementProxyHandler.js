@@ -3,11 +3,15 @@ import { assignableProxyHandler } from "/willcore/proxies/base/assignableProxyHa
 class elementProxyHandler extends assignableProxyHandler {
     constructor() {
         super(null);
-       // this.getTraps.unshift(this.getElementProxy);
+        this.getTraps.unshift(this.getTarget);
     }
 
-    getElementProxy(target, property, proxy){
-        throw "Not Implemented";
+
+    getTarget(target, property, proxy) {
+        if (property === "_target") {
+            return { status: true, value: target };
+        }
+        return { status: false };
     }
 }
 

@@ -41,6 +41,8 @@ let view = async (model, requests) => {
         console.log(model.myData.name);
     };
     model.$input.invalid.class = () => model.myData.name.length === 0;
+  //  await model.$customElement.viewModel;
+    //model.$customElement.viewModel.data.clickCount = 100;
 };
 
 let layout = "/zTestLayouts/layout"
