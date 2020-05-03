@@ -113,22 +113,24 @@ WillCore.UI is an extension on WillCore.Server. For documentation on WillCore.Se
 
 #### To create a server
 
+> #### Important: Keep in mind that when files are being served, all files including server-side file will be served. To block files being served, make sure that there is "_server" included in the file path. Either put the server files in a folder named *_server or name the files *_server. Example: /services_server/products.js or /services/products_server.js.
+
 The basic folder structure of a WillCore.UI project:
 
 ```text
 |─── Project Directory
 |    |─── client
-|         |─── app.js
-|         |─── index.js
-|         |─── index.html
-|    |─── services
-|─── server.js
+|    |─── app.js
+|    |─── index.js
+|    |─── index.html
+|    |─── services_server
+|─── server_server.js
 ```
 
-#### Create a server.js file in the project root directory:
+#### Create a server_server.js file in the project root directory:
 
 ```javascript
-//server.js
+//server_server.js
 //Import the WillCore Proxy.
 const willCoreProxy = require("willcore.core");
 //Create a new proxy instance.

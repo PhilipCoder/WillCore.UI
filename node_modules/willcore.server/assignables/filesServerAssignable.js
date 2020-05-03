@@ -40,7 +40,7 @@ class filesServerAssignable extends assignable {
             }
         }
 
-        if (filePath === false || !(await fileHelper.exists(filePath))) {
+        if (filePath === false || filePath.indexOf("_server") > -1 || !(await fileHelper.exists(filePath))) {
             return { data: JSON.stringify({ error: "File not found." }), mime: "application/json", status: 404 };
         }
         let data = await fileHelper.read(filePath);

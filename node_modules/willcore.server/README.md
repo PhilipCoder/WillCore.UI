@@ -201,6 +201,7 @@ const willCoreProxy = require("willcore.core");
 
 ## Serving a single file
 
+> #### Important: Keep in mind that when files are being served, all files including server-side file will be served. To block files being served, make sure that there is "_server" included in the file path. Either put the server files in a folder named *_server or name the files *_server. Example: /services_server/products.js or /services/products_server.js.
 
 ### __File assignable__
 
