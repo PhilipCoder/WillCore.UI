@@ -43,6 +43,7 @@ ___
 9. [Adding CSS and JavaScript to the HTML document](#6-Adding-CSS-and-JavaScript-to-the-HTML-document)
 7. [Custom Components](#7-Custom-Components)
 8. [Making Server Requests From The Front-End](#8-Making-Server-Requests-From-The-Front-End)
+9. [View Access](#9-View-Access)
 
 <br/>
 
