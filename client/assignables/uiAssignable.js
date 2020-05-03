@@ -18,7 +18,7 @@ class component extends assignable {
     }
 
     completed() {
-        this.router = new router();
+        this.router = new router(this.parentProxy);
         if (window.location.hash.length === 0){
             this.router.navigate("/");
         }

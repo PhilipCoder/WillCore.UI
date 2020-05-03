@@ -1,0 +1,5 @@
+let view = () => {
+
+};
+
+export { view };

@@ -14,10 +14,11 @@ class view {
         this.layoutElementId = null;
         this.viewFunction = null;
         this.skipFunctionImport = false;
+        this.access = true;
         this._children = {};
     }
 
-    async init() {
+    async init(parentProxy) {
         this.html = await this._viewDomLoader.loadView(this.url, this.viewId, this.html);
         this.viewModel = viewModelProxy.new(this.viewId);
         if (!this.skipFunctionImport) {
@@ -25,6 +26,7 @@ class view {
             this.layoutViewUrl = viewModule.layout;
             this.containerId = viewModule.containerId;
             this.viewFunction = viewModule.view;
+            this.access = viewModule.access && typeof viewModule.access === "function" ? await viewModule.access(parentProxy) : this.access;
         }
     }
 

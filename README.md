@@ -1,7 +1,7 @@
 <p align="center">
 <img src="res/WillCoreLogo.png"  />
 <h1 align="center">WillCore.UI</h1>
-<h5 align="center">Simple, Fast And Powerfull Client-Side HTML UI Framework - By Philip Schoeman</h5>
+<h5 align="center">Simple, Fast And Powerful Client-Side HTML UI Framework - By Philip Schoeman</h5>
 <h5 align="center" style="color:red">DOCUMENTATION IS A WORK IN  PROGRESS.</h5>
 </p>
 
@@ -955,4 +955,44 @@ let view = async (model, requests) => {
 };
 
 export { view };
+```
+
+<br/>
+
+___
+>## 9 View Access
+___
+
+To block user access to views, an access function can be returned from a view module. The result of this function will indicate the following:
+
+* When the function returns true, access is granted to the view.
+* When the function returns false, access is blocked and no the destination view won't load.
+* When the result is a string, the page will navigate to the URL returned by the function.
+
+#### Allow Access
+
+```javascript
+let viewFunction = async (model) => {
+};
+
+export  let view = viewFunction, access = (willcore) => true;
+```
+
+
+#### Deny Access
+
+```javascript
+let viewFunction = async (model) => {
+};
+
+export  let view = viewFunction, access = (willcore) => false;
+```
+
+#### Deny Access And Redirect To Another View
+
+```javascript
+let viewFunction = async (model) => {
+};
+
+export  let view = viewFunction, access = (willcore) => "/views/accessDenied";
 ```

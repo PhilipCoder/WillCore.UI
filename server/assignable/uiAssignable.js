@@ -1,10 +1,19 @@
 const coreUIAssignable = require("willcore.uicore/server/assignables/coreUIAssignable.js");
+const path = require("path");
 
 class uiAssignable extends coreUIAssignable {
     constructor() {
         super();
+    }
+
+    register(){
         this.fileServiceName = "uiModules";
-        this.folderPath = "/client";
+        let endPointFolder = path.normalize(`${__dirname}/../../client`);
+        let mainExecutingDirectory = this.parentProxy._assignable.pathHelper.rootDirectory;
+        let relativePath = path.relative(mainExecutingDirectory, endPointFolder);
+        relativePath = "/" + relativePath.split("\\").join("/");
+
+        this.folderPath =  relativePath;
         this.addClientAssignable("ui", "/uiModules/assignables/uiAssignable.js");
         this.addClientAssignable("bind", "/uiModules/bindings/bind.js");
         this.addClientAssignable("model", "/uiModules/bindings/model.js");
@@ -22,7 +31,6 @@ class uiAssignable extends coreUIAssignable {
         this.addClientAssignable("class", "/uiModules/bindings/class.js");
         this.addClientAssignable("viewModel", "/uiModules/bindings/viewModel.js");
     }
-
 
     completionResult() {
         this.parentProxy.views.files = "/";

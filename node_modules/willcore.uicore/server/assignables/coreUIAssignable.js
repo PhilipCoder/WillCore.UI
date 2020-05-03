@@ -28,6 +28,7 @@ class coreUIAssignable extends assignable {
     }
 
     completed() {
+        if (this.register) this.register();
         if (!this.parentProxy._moduleRegistry) {
             this.parentProxy._moduleRegistry = moduleRegistry;
             this.createService();

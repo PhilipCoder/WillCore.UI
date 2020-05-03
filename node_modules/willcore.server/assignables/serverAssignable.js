@@ -22,6 +22,7 @@ class serverAssignable extends assignable {
         };
         this.server = null;
         this.requestProxies = {};
+        this.globalInterceptors = [];
         this.directory = null;
         this.pathHelper = null;
     }
@@ -29,12 +30,15 @@ class serverAssignable extends assignable {
     /**
      * @param {requestDetails} requestInfo 
      */
-    async onRequest(requestInfo, request,response) {
+    async onRequest(requestInfo, request, response) {
         let requestProxy = this.requestProxies[requestInfo.url] || this.requestProxies[requestInfo.servicePart];
         if (!requestProxy) {
             return { data: JSON.stringify({ error: "Endpoint not found" }), mime: "application/json", status: 404 };
         }
-        let requestResult = await requestProxy._assignable.onRequest(requestInfo, request,response);
+        let requestResult = await requestProxy._assignable.onRequest(requestInfo, request, response);
+        this.globalInterceptors.forEach(async (interceptor) => {
+            await interceptor(requestResult, requestInfo, request, response);
+        });
         return requestResult;
     }
 

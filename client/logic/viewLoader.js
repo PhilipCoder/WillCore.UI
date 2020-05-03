@@ -1,9 +1,10 @@
 import { view } from "./view.js";
 
 class viewLoader {
-    constructor() {
+    constructor(parentProxy) {
         this.loadedLayout = null;
         this.loadedView = null;
+        this.parentProxy = parentProxy;
     }
 
     /**Adds a view to view Tree
@@ -12,19 +13,27 @@ class viewLoader {
      */
     async renderView(viewUrl) {
         let viewToLoad = new view(viewUrl);
-        await viewToLoad.init(viewToLoad.viewId);
+        await viewToLoad.init(this.parentProxy);
+        if (viewToLoad.access !== true) return viewToLoad.access;
         await this._unloadViews(viewToLoad);
-        await this._renderLayout(viewToLoad);
-        await viewToLoad.render(this.loadedLayout);
-        this.loadedView = viewToLoad;
+        let access = await this._renderLayout(viewToLoad);
+        if (access === true) {
+            await viewToLoad.render(this.loadedLayout);
+            this.loadedView = viewToLoad;
+        }
+        return access;
     }
 
-    async _renderLayout(viewToLoad){
+    async _renderLayout(viewToLoad) {
         if (viewToLoad.hasLayout && (!this.loadedLayout || this.loadedLayout.url !== viewToLoad.layoutViewUrl)) {
             this.loadedLayout = new view(viewToLoad.layoutViewUrl);
-            await this.loadedLayout.init()
-            await this.loadedLayout.render();
+            await this.loadedLayout.init(this.parentProxy)
+            if (this.loadedLayout.access) {
+                await this.loadedLayout.render();
+            }
+            return this.loadedLayout.access;
         }
+        return true;
     }
 
     async _unloadViews(viewToLoad) {

@@ -1,14 +1,15 @@
 import { viewLoader } from "./viewLoader.js";
 
 class router {
-    constructor() {
+    constructor(parentProxy) {
         this.routeOverWrite = {
             "/": "/index"
         };
+        this.parentProxy = parentProxy;
         this.previousUrl = null;
         this.registerEventHandler();
         let url = this.getUrl();
-        this._viewLoader = new viewLoader();
+        this._viewLoader = new viewLoader(this.parentProxy);
         if (window.location.hash && window.location.hash.length > 0) {
             this.handleRoute(url);
         }
@@ -20,7 +21,8 @@ class router {
         }
         console.log("Navigated " + url);
         let fullURL = this.getUrl(true);
-        await this._viewLoader.renderView(url);
+        let renderResult = await this._viewLoader.renderView(url);
+        if (typeof renderResult === "string") this.navigate(renderResult);
     }
 
     getUrl(returnFull) {

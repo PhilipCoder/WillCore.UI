@@ -1,13 +1,37 @@
 {
+    "name": "willcore.ui",
+    "version": "1.0.1",
+    "description": "Simple, Fast And Powerful Client-Side HTML UI Framework.",
+    "main": "moduleContainer/willCoreModules.js",
     "_moduleAliases": {
         "willcore.ui": "moduleContainer/willCoreModules.js"
     },
     "dependencies": {
-        "willcore.uicore": "^1.0.9"
+        "willcore.uicore": "^1.1.1"
     },
     "devDependencies": {
         "chai": "^4.2.0",
         "mocha": "^7.1.1",
         "module-alias": "^2.2.2"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PhilipCoder/WillCore.UI.git"
+    },
+    "author": "Philip Schoeman",
+    "license": "LGPL-2.1-only",
+    "bugs": {
+        "url": "https://github.com/PhilipCoder/WillCore.UI/issues"
+    },
+    "homepage": "https://github.com/PhilipCoder/WillCore.UI#readme",
+    "keywords": [
+        "Binding",
+        "Proxies",
+        "Assignables"
+    ],
+    "files": [
+        "/client",
+        "/moduleContainer",
+        "/server"
+    ]
 }

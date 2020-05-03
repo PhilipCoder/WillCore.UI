@@ -1,6 +1,5 @@
-let view = async (model) => {
+let viewFunction = async (model) => {
 };
 
-let containerId = "container";
-
-export {view, containerId};
+export  let view = viewFunction, access = (willcore) => true;
+   
