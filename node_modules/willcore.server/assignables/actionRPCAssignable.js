@@ -25,6 +25,8 @@ class actionRPCAssignable extends requestAssignable {
     */
     async onRequest(requestInfo, request,response) {
         let model = actionModel.new(requestInfo);
+        model._request = request;
+        model._response = response;
         model.record();
         for (let beforeIndex = 0; beforeIndex < this.interceptors.before.length; beforeIndex++) {
             let interceptorResult = await this.interceptors.before[beforeIndex](model, request,response);
