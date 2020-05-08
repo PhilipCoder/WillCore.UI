@@ -13,4 +13,7 @@ module.exports = (service, server, willcore) => {
         }
         model.result = result;
     };
+    service.hasAccess.action.get = async (model) => {
+        model.hasAccess = false;
+    };
 };

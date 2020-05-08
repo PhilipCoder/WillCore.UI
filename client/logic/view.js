@@ -3,6 +3,7 @@ import { viewDomLoader } from "./viewDomLoader.js";
 import { lazyImport } from "/willcore/helpers/lazyImport.js";
 import { viewModelProxy } from "../proxies/viewModel/viewModelProxy.js";
 import { baseRequestProxy } from "../proxies/requestProxy/baseRequestProxy.js";
+
 class view {
     constructor(url) {
         this._viewDomLoader = new viewDomLoader();
@@ -26,7 +27,7 @@ class view {
             this.layoutViewUrl = viewModule.layout;
             this.containerId = viewModule.containerId;
             this.viewFunction = viewModule.view;
-            this.access = viewModule.access && typeof viewModule.access === "function" ? await viewModule.access(parentProxy) : this.access;
+            this.access = viewModule.access && typeof viewModule.access === "function" ? await viewModule.access(parentProxy, baseRequestProxy.new()) : this.access;
         }
     }
 

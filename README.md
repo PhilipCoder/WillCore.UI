@@ -966,11 +966,13 @@ ___
 >## 9 View Access
 ___
 
-To block user access to views, an access function can be returned from a view module. The result of this function will indicate the following:
+To block user access to views, an async access function can be returned from a view module. The result of this function will indicate the following:
 
 * When the function returns true, access is granted to the view.
 * When the function returns false, access is blocked and no the destination view won't load.
 * When the result is a string, the page will navigate to the URL returned by the function.
+
+The first parameter of this function is the WillCore proxy instance and the second parameter is an request proxy. 
 
 #### Allow Access
 
@@ -978,24 +980,24 @@ To block user access to views, an access function can be returned from a view mo
 let viewFunction = async (model) => {
 };
 
-export  let view = viewFunction, access = (willcore) => true;
+export  let view = viewFunction, access = (willcore, requestProxy) => true;
 ```
 
 
 #### Deny Access
 
 ```javascript
-let viewFunction = async (model) => {
+let viewFunction = async (model, requestProxy) => {
 };
 
-export  let view = viewFunction, access = (willcore) => false;
+export  let view = viewFunction, access = async (willcore, requestProxy) => false;
 ```
 
 #### Deny Access And Redirect To Another View
 
 ```javascript
-let viewFunction = async (model) => {
+let viewFunction = async (model, requestProxy) => {
 };
 
-export  let view = viewFunction, access = (willcore) => "/views/accessDenied";
+export  let view = viewFunction, access = async (willcore, requestProxy) => "/views/accessDenied";
 ```
