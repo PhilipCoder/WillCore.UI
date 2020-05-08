@@ -28,7 +28,7 @@ class actionRESTAssignable extends requestAssignable {
     */
     async onRequest(requestInfo, request,response) {
         requestInfo.parameterFormat = this.parameterFormat;
-        let model = actionModel.new(requestInfo);
+        let model = actionModel.new(requestInfo,this.parentProxy);
         model._request = request;
         model._response = response;
         model.record();

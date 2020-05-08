@@ -1,19 +1,20 @@
 const actionModelProxyHandler = require("./actionModelProxyHandler.js");
-const baseProxy = require("willcore.core/proxies/base/baseProxy.js");
+const baseProxy = require("willcore.core/proxies/base/assignableProxyHandler.js");
 
 /**
  * Proxy class for the main willCore instance.
  */
 class actionModelProxy extends baseProxy {
-    constructor() {
+    constructor(parentProxy) {
         super();
+        this.parentProxy = parentProxy;
     }
     /**
      * Factory method.
      * @type {InstanceType<requestProxyHandler>}
      */
-    static new(sourceObj) {
-        let proxy = new actionModelProxy();
+    static new(sourceObj,parentProxy) {
+        let proxy = new actionModelProxy(parentProxy);
         if (sourceObj) {
             if (sourceObj.parameters && typeof sourceObj.parameters === "object") {
                 Object.keys(sourceObj.parameters).filter(k => !k.startsWith("_")).forEach(key => {

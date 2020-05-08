@@ -23,13 +23,13 @@ class actionRPCAssignable extends requestAssignable {
     /**
     * @param {import('../models/requestDetails.js').requestInstance} requestInfo 
     */
-    async onRequest(requestInfo, request,response) {
-        let model = actionModel.new(requestInfo);
+    async onRequest(requestInfo, request, response) {
+        let model = actionModel.new(requestInfo, this.parentProxy);
         model._request = request;
         model._response = response;
         model.record();
         for (let beforeIndex = 0; beforeIndex < this.interceptors.before.length; beforeIndex++) {
-            let interceptorResult = await this.interceptors.before[beforeIndex](model, request,response);
+            let interceptorResult = await this.interceptors.before[beforeIndex](model, request, response);
             if (!interceptorResult) {
                 return { data: JSON.stringify(model.stateValues), mime: "application/json", status: model.statusCode };
             }
@@ -38,7 +38,7 @@ class actionRPCAssignable extends requestAssignable {
         await this.requestFunction(model);
 
         for (let afterIndex = 0; afterIndex < this.interceptors.after.length; afterIndex++) {
-            let interceptorResult = await this.interceptors.after[afterIndex](model, request,response);
+            let interceptorResult = await this.interceptors.after[afterIndex](model, request, response);
             if (!interceptorResult) {
                 return { data: JSON.stringify(model.stateValues), mime: "application/json", status: model.statusCode };
             }

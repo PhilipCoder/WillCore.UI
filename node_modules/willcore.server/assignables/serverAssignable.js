@@ -35,10 +35,10 @@ class serverAssignable extends assignable {
         if (!requestProxy) {
             return { data: JSON.stringify({ error: "Endpoint not found" }), mime: "application/json", status: 404 };
         }
-        let requestResult = await requestProxy._assignable.onRequest(requestInfo, request, response);
         this.globalInterceptors.forEach(async (interceptor) => {
-            await interceptor(requestResult, requestInfo, request, response);
+            await interceptor(requestInfo, request, response);
         });
+        let requestResult = await requestProxy._assignable.onRequest(requestInfo, request, response);
         return requestResult;
     }
 
