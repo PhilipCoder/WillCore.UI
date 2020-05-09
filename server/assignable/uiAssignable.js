@@ -1,5 +1,7 @@
 const coreUIAssignable = require("willcore.uicore/server/assignables/coreUIAssignable.js");
 const path = require("path");
+const uiProxy = require("../proxies/uiProxy.js");
+
 
 class uiAssignable extends coreUIAssignable {
     constructor() {
@@ -34,7 +36,7 @@ class uiAssignable extends coreUIAssignable {
 
     completionResult() {
         this.parentProxy.views.files = "/";
-        return false;
+        return uiProxy.new(this);
     }
 }
 

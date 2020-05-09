@@ -1,6 +1,6 @@
 {
     "name": "willcore.ui",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Simple, Fast And Powerful Client-Side HTML UI Framework.",
     "main": "moduleContainer/willCoreModules.js",
     "_moduleAliases": {
