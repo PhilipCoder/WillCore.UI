@@ -250,23 +250,6 @@ When a view module also export an container ID, the view module will be treated 
 
 <br/>
 
-#### To define a layout:
-
-
-```javascript
-//===================================================================
-//index.js
-//===================================================================
-
-import { willCore, url, route, layout } from "./willCore/WillCore.js";
-//register view layout
-willCore.homeLayout = [layout, "/myLayout.js", "/myLayout.html"];
-//register a main view that uses the layout
-willCore.homePage = [willCore.homeLayout.$mainContentDiv, url, "/homepage.js", url, "/homepage.html", route, "/home", x => true, willCore.homeLayout];
-```
-
-<br/>
-
 #### The layout view files (layoutView.html):
 
 ```html
