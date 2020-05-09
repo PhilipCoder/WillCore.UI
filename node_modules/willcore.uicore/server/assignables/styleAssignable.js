@@ -11,7 +11,7 @@ class styleAssignable extends assignable {
     }
 
     completed() {
-        this.parentProxy._styleRegistry.registerScript("stylesheet", this.bindedValues.string[0])
+        this.parentProxy._styleRegistry.registerStyle("stylesheet", this.bindedValues.string[0])
     }
 }
 

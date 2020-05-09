@@ -1,13 +1,13 @@
 {
     "name": "willcore.ui",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Simple, Fast And Powerful Client-Side HTML UI Framework.",
     "main": "moduleContainer/willCoreModules.js",
     "_moduleAliases": {
         "willcore.ui": "moduleContainer/willCoreModules.js"
     },
     "dependencies": {
-        "willcore.uicore": "^1.2.0"
+        "willcore.uicore": "^1.2.1"
     },
     "devDependencies": {
         "chai": "^4.2.0",

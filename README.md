@@ -676,7 +676,7 @@ core.testServer.server[__dirname] = 8580;
 core.testServer.http;
 core.testServer.ui;
 //Add a CSS style file to the server
-core.testServer.bootstrapStyle.scriptModule = "/css/BootStrap.css;
+core.testServer.bootstrapStyle.style = "/css/BootStrap.css";
 ```
 
 >#### 6.2) Adding A JavaScript File To The Page
