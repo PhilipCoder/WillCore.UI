@@ -13,6 +13,7 @@ class coreUIAssignable extends assignable {
         this.fileServiceName = null;
         this.folderPath = null;
         this.clientAssignables = [];
+        this.isAssigned = false;
     }
 
     static get noValues() {
@@ -21,6 +22,9 @@ class coreUIAssignable extends assignable {
 
     addClientAssignable(assignableName, fileURL) {
         this.clientAssignables.push({ name: assignableName, fileURL: fileURL });
+        if (this.isAssigned && this.parentProxy){
+            this.parentProxy._moduleRegistry.registerModule(assignableName, fileURL)
+        }
     }
 
     completionResult() {
@@ -37,6 +41,7 @@ class coreUIAssignable extends assignable {
         this.validateValues();
         this.createRegistries();
         this.clientAssignables.forEach(entry => this.parentProxy._moduleRegistry.registerModule(entry.name, entry.fileURL));
+        this.isAssigned = true;
         this.createFileServer(this.folderPath);
         this.createIndexHTMLService();
     }
