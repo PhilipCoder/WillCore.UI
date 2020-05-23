@@ -4,6 +4,7 @@ const moduleRegistry = require("../helpers/moduleRegistry.js");
 const path = require("path");
 const scriptRegistry = require("../helpers/scriptRegistry.js");
 const styletRegistry = require("../helpers/styletRegistry.js");
+const metaTagRegistry = require("../helpers/metaTagRegistry.js");
 const indexHTMLGenerator = require("../helpers/indexHTMLGenerator.js");
 const serviceResult = require("willcore.server/models/serviceResult.js");
 
@@ -53,10 +54,13 @@ class coreUIAssignable extends assignable {
         if (!this.parentProxy._styleRegistry) {
             this.parentProxy._styleRegistry = new styletRegistry();
         }
+        if (!this.parentProxy._metaTagRegistry){
+            this.parentProxy._metaTagRegistry = new metaTagRegistry();
+        }
     }
 
     createIndexHTMLService(){
-        this.parentProxy.indexFile.executableService["/"] = ()=> new serviceResult(200,"text/html",indexHTMLGenerator(this.parentProxy._scriptRegistry, this.parentProxy._styleRegistry));
+        this.parentProxy.indexFile.executableService["/"] = ()=> new serviceResult(200,"text/html",indexHTMLGenerator(this.parentProxy._metaTagRegistry, this.parentProxy._scriptRegistry, this.parentProxy._styleRegistry));
     }
 
     validateValues() {

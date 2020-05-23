@@ -8,13 +8,19 @@ import { moduleContainer } from "../moduleContainment/moduleProxyHandler.js";
 class assignableProxyHandler extends baseProxyHandler {
     constructor(assignableInstance) {
         super();
-        this.getTraps = [this.getCopy, this.getStraightValue, this.getAssignable];
+        this.getTraps = [this.getTarget, this.getCopy, this.getStraightValue, this.getAssignable];
         this.setTraps = [this.assignStraightValue, this.assignArray, this.assignAssignable, this.assignAssignableValue, this.assignCompleted];
         this.hiddenVariables = {};
         this.hiddenVariables["_assignable"] = assignableInstance;
     }
 
 
+    getTarget(target, property, value, proxy) {
+        if (property === "_target") {
+            return { value: target, status: true };
+        }
+        return { value: false, status: false };
+    }
 
     assignStraightValue(target, property, value, proxy) {
         if (property.startsWith("_")) {
@@ -74,8 +80,8 @@ class assignableProxyHandler extends baseProxyHandler {
             } else if (completionResult !== undefined) {
                 target[property] = completionResult;
                 return { value: true };
-            }else if (completionResult === undefined){
-                return  { value: true };
+            } else if (completionResult === undefined) {
+                return { value: true };
             }
         }
         if (target[property] instanceof assignable) {
@@ -97,7 +103,7 @@ class assignableProxyHandler extends baseProxyHandler {
         }
         else if (moduleContainer["&" + property] && moduleContainer[property].noValues && this.canAssign(proxy, moduleContainer[property])) {
             proxy[property] = moduleContainer[property];
-            return { value: (proxy[property]._noIntermediateProxy || proxy[property].then ) ? proxy[property] : intermediateAssignableProxy.new(proxy, property), status: true };
+            return { value: (proxy[property]._noIntermediateProxy || proxy[property].then) ? proxy[property] : intermediateAssignableProxy.new(proxy, property), status: true };
         }
         else {
             return { value: intermediateAssignableProxy.new(proxy, property), status: true };

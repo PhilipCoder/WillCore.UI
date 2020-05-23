@@ -3,6 +3,7 @@ import { viewDomLoader } from "./viewDomLoader.js";
 import { lazyImport } from "/willcore/helpers/lazyImport.js";
 import { viewModelProxy } from "../proxies/viewModel/viewModelProxy.js";
 import { baseRequestProxy } from "../proxies/requestProxy/baseRequestProxy.js";
+import { willcoreUIInstance } from "../assignables/uiAssignable.js";
 
 class view {
     constructor(url) {
@@ -17,6 +18,7 @@ class view {
         this.skipFunctionImport = false;
         this.access = true;
         this._children = {};
+        this.parentProxy = null;
     }
 
     async init(parentProxy) {
@@ -42,12 +44,12 @@ class view {
         } else {
             layoutView.viewModel["$" + layoutView.containerId]._element.innerHTML = this.html;
         }
-        await this.viewFunction(this.viewModel, baseRequestProxy.new());
+        await this.viewFunction(this.viewModel, willcoreUIInstance, baseRequestProxy.new());
     }
 
     async renderIntoElement(element, viewFunction) {
         element.innerHTML = this.html;
-        await (viewFunction || this.viewFunction)(this.viewModel);
+        await (viewFunction || this.viewFunction)(this.viewModel, willcoreUIInstance, baseRequestProxy.new());
         return this.viewModel;
     }
 

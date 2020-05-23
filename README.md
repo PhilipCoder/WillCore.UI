@@ -40,7 +40,7 @@ ___
    10. [Style](#5.10-Style)
    11. [Class](#5.11-Class)
    12. [Partial Views](#5.12-Partial-Views)
-9. [Adding CSS and JavaScript to the HTML document](#6-Adding-CSS-and-JavaScript-to-the-HTML-document)
+9. [Adding meta tags, CSS and JavaScript to the HTML document](#6-Adding-CSS-and-JavaScript-to-the-HTML-document)
 7. [Custom Components](#7-Custom-Components)
 8. [Making Server Requests From The Front-End](#8-Making-Server-Requests-From-The-Front-End)
 9. [View Access](#9-View-Access)
@@ -651,12 +651,40 @@ model.$partialDiv.view = (clientModel) => {
 <br/>
 
 ___
->## 6 Adding CSS and JavaScript to the HTML document
+>## 6 Adding meta tags CSS and JavaScript to the HTML document
 ___
 
 WillCore.UI builds up the HTML header tag, so it is not possible to include HTML and CSS files directly in the HTML. The header is built using the script and style cache in the server-side assignable.
 
 >#### 6.1) Adding A CSS Style File To The Page
+
+HTML meta tags can be added to the page via the metaTag assignable. There are 2 default meta tags, as soon as a meta tag is assigned, the default assignables will be cleared. Default meta tags:
+
+```html
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+```
+
+_A metaTag assignable needs the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+string | The name of the tag.
+metaTag (assignable) | The tag assignable.
+string | The meta tag;
+
+```javascript
+//Create the server
+const willCoreProxy = require("willcore.core");
+let core = willCoreProxy.new();
+core.testServer.server[__dirname] = 8580;
+core.testServer.http;
+core.testServer.ui;
+//Add a CSS style file to the server
+core.testServer.viewport.metaTag = '<meta name="viewport" content="width=device-width, initial-scale=2, shrink-to-fit=no">';
+```
+
+>#### 6.2) Adding A CSS Style File To The Page
 
 A style file can be assigned to the server via the style assignable.
 
@@ -679,7 +707,7 @@ core.testServer.ui;
 core.testServer.bootstrapStyle.style = "/css/BootStrap.css";
 ```
 
->#### 6.2) Adding A JavaScript File To The Page
+>#### 6.3) Adding A JavaScript File To The Page
 
 A script file can be assigned to the server via the script assignable.
 
@@ -702,7 +730,7 @@ core.testServer.ui;
 core.testServer.bootstrapScript.script = "/libraries/BootStrap.js";
 ```
 
->#### 6.3) Adding A JavaScript Module File To The Page
+>#### 6.4) Adding A JavaScript Module File To The Page
 
 A script file of type "module" can be assigned to the server via the script assignable.
 
@@ -901,7 +929,7 @@ ___
 
 Since WillCore.UI uses WillCore.Server as a back-end, it is easy to define server-side web-services that can be called from the font-end. WillCore.UI provides a simple to use proxy that can be used to make HTTP requests.
 
-A request proxy is available as a second parameter on the view function. The proxy currently only supports RPC actions, but REST functionality is in development. A function returned when activating the get traps on the request proxy in the following order:
+A request proxy is available as a third parameter on the view function. The proxy currently only supports RPC actions, but REST functionality is in development. A function returned when activating the get traps on the request proxy in the following order:
 
 __requestProxy.serviceName.actionName.httpVerb__
 
@@ -933,7 +961,7 @@ module.exports = (service, server, willcore) => {
 To call the get action and return data:
 
 ```javascript
-let view = async (model, requests) => {
+let view = async (model,uiProxy, requests) => {
     console.log(await requests.products.getData.get({ id: 0 }));//Will return an object: {result: [{name:"Item One"},{name:"Item two"}]}
     console.log(await requests.products.getData.get({ id: 1 }));//Will return an array {result: []}
 
