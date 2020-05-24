@@ -435,12 +435,12 @@ model.categories = [
 model.$categoryCard.repeat = () => model.categories;
 //Initiate the repeat binding
  model.$categoryCard.repeat = (elements, rowIndex) => {
-        elements.$title.innerHTML = () => model.categories[rowIndex].name;
-        elements.$description.innerHTML = () => model.categories[rowIndex].description;
-        elements.$editCategory.event.onclick = () => {
+        elements.$title.bind = () => model.categories[rowIndex].name;
+        elements.$description.bind = () => model.categories[rowIndex].description;
+        elements.$editCategory.onclick.event = () => {
             alert(`Item with ID ${model.categories[rowIndex].id} clicked!`);
         };
-    );
+ };
 ```
 
 <br/>

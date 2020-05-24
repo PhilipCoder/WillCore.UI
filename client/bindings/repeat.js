@@ -40,10 +40,10 @@ class component extends bindable {
 
     getCopyOfElements(nodes) {
         var result = [];
-        var tmpDiv = document.createElement("div");
+      //  var tmpDiv = document.createElement("div");
         for (var i = 0; i < nodes.length; i++) {
             tmpDiv.innerHTML = nodes[i].outerHTML;
-            result.push(tmpDiv.firstElementChild);
+            result.push(nodes[i].cloneNode(true));
         }
         return result;
     }
