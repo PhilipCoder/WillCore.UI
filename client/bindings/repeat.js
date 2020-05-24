@@ -4,6 +4,7 @@ import { elementProxy } from "../proxies/elementProxy/elementProxy.js";
 class component extends bindable {
     constructor() {
         super({ function: 2 }, 0);
+        this.parentElement = null;
     }
 
     static get noValues() {
@@ -11,6 +12,7 @@ class component extends bindable {
     }
 
     beforeBind() {
+        this.parentElement = this.element.parentElement;
         this.originalChildren = this.clearIds(this.getCopyOfElements([this.element]));
     }
 
@@ -23,7 +25,7 @@ class component extends bindable {
         values.forEach((value) => {
             let model = this.getModel();
             if (typeof model.model !== "object") throw "Repeats can only bind to array of objects!";
-            model.elements.forEach((element) => this.element.appendChild(element));
+            model.elements.forEach((element) => this.parentElement.appendChild(element));
             this.bindedValues.function[1](model.model, valueIndex);
             valueIndex++;
         });
@@ -32,17 +34,25 @@ class component extends bindable {
     getModel() {
         let elements = this.getCopyOfElements(this.originalChildren);
         let model = {};
-        elements.forEach((element) => {
-            model[`$${element.id}`] = elementProxy.new(element);
-        });
+        this.getModelLevel(elements, model);
         return { model: model, elements: elements };
+    }
+
+    getModelLevel(elements, model) {
+        elements.forEach((element) => {
+            if (element.id) {
+                model[`$${element.id}`] = elementProxy.new(element);
+            }
+            let children = Array.from(element.childNodes);
+            if (children.length > 0) {
+                this.getModelLevel(children, model);
+            }
+        });
     }
 
     getCopyOfElements(nodes) {
         var result = [];
-      //  var tmpDiv = document.createElement("div");
         for (var i = 0; i < nodes.length; i++) {
-            tmpDiv.innerHTML = nodes[i].outerHTML;
             result.push(nodes[i].cloneNode(true));
         }
         return result;

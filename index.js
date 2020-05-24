@@ -1,4 +1,4 @@
-let view = async (model,ui, requests) => {
+let view = async (model, ui, requests) => {
     console.log("home hit");
     model.myData = {
         name: "John",
@@ -7,6 +7,22 @@ let view = async (model,ui, requests) => {
         gender: "",
         list: [{ value: "ItemA" }, { value: "ItemB" }, { value: "ItemC" }]
     };
+    model.loopData = {
+        items: [
+            { title: "First", description: "One" },
+            { title: "Second", description: "Two" },
+            { title: "Third", description: "Three" },
+            { title: "Fourth", description: "Four" },
+        ]
+    };
+
+    model.$itemRow.repeat = () => model.loopData.items;
+    //Initiate the repeat binding
+    model.$itemRow.repeat = (elements, rowIndex) => {
+        elements.$itemRowTitle.bind = () => model.loopData.items[rowIndex].title;
+        elements.$itemRowDescription.bind = () => model.loopData.items[rowIndex].description;
+    };
+
     console.log(await requests.product.getData.get({ resultCount: 8, value: "Hello world" }));
     console.log(await requests.product.postData.post({ resultCount: 8, value: "Hello world" }));
 
@@ -41,7 +57,7 @@ let view = async (model,ui, requests) => {
         console.log(model.myData.name);
     };
     model.$input.invalid.class = () => model.myData.name.length === 0;
-  //  await model.$customElement.viewModel;
+    //  await model.$customElement.viewModel;
     //model.$customElement.viewModel.data.clickCount = 100;
 };
 
