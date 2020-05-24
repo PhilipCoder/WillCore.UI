@@ -20,7 +20,7 @@ class component extends bindable {
     updateDOM(values) {
         if (!values) return;
         if (!Array.isArray(values)) throw "Only arrays are allowed to be bound by the repeat bindable.";
-        this.element.innerHTML = "";
+        this.element.parentElement.innerHTML = "";
         let valueIndex = 0;
         values.forEach((value) => {
             let model = this.getModel();
