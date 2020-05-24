@@ -4,7 +4,7 @@ class dataSetProxyHandler {
     constructor(value) {
         if (typeof value === "object") {
             for (let key in value) {
-                if (typeof value[key] === "object" && !value[key]._isDataSet) {
+                if (typeof value[key] === "object" && value[key] !== null && !value[key]._isDataSet) {
                     value[key] = dataSetProxyFactory(value[key]);
                 }
             }
