@@ -57,6 +57,16 @@ let view = async (model, ui, requests) => {
         console.log(model.myData.name);
     };
     model.$input.invalid.class = () => model.myData.name.length === 0;
+    model.$reassignBtn.onclick.event = () =>{
+        model.loopData.items = [
+            { title: "FirstA", description: "One" },
+            { title: "SecondB", description: new Date().getTime() },
+            { title: "ThirdD", description: "Three" },
+            { title: "FourthV", description: "Four" },
+            { title: "Five", description: "5" },
+
+        ];
+    };
     //  await model.$customElement.viewModel;
     //model.$customElement.viewModel.data.clickCount = 100;
 };

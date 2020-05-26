@@ -37,7 +37,7 @@ class dataSetProxyHandler {
         this.bindings[property].forEach((binding) => {
             binding.bind();
         });
-        if (typeof previousValue === "object" &&  previousValue._handler){
+        if (typeof previousValue === "object" && previousValue._handler) {
             previousValue._handler.rebindAll(previousValue._target);
         }
     }
@@ -48,11 +48,18 @@ class dataSetProxyHandler {
                 this.bindings[bindings].forEach((binding) => {
                     binding.bind();
                 });
-                if (typeof target[bindings] === "object" && target[bindings]._handler){
-                    target[bindings]._handler.rebindAll();
+                if (typeof target[bindings] === "object" && target[bindings] !== null && target[bindings]._handler) {
+                    target[bindings]._handler.rebindAll(target[bindings]._target);
                 }
             }
         );
+        Object.keys(this.bindings).forEach((key) => {
+            this.bindings[key] = this.bindings[key].filter((binding) =>
+            (binding.element && binding.element.isConnected) || !binding.element);
+            if (this.bindings[key].length === 0) {
+                delete this.bindings[key];
+            }
+        });
     }
 
     ensureBindingArray(property) {
