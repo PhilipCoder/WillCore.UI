@@ -460,12 +460,12 @@ _An even binding needs the following assignments to complete assignment:_
 Type | Description
 ------------ | -------------
 string | The event name. For a list of events, see JavaScript HTML events by means of using Google.
-event (assignable) | The event assignable exported from the main willCore module. 
-function | The function will be executed when the event is detected.
+event (assignable) | The event assignable exported from the main willCore module.
+function | The function will be executed when the event is detected. The function has one parameter that will be the javascript event.
 
 _Using the model binding:_
 ```javascript
-model.$elementId.onclick.event= () => alert("The item was clicked!");
+model.$elementId.onclick.event= (event) => alert("The item was clicked!");
 ```
 
 <br/>
