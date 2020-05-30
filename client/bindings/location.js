@@ -1,5 +1,6 @@
 import { assignable } from "/willcore/assignable/assignable.js"
 import { viewModelProxy } from "../proxies/viewModel/viewModelProxy.js";
+import {getHashValues} from "../helpers/hashURLParser.js";
 
 class component extends assignable {
     constructor() {
@@ -16,7 +17,9 @@ class component extends assignable {
     }
 
     completionResult() {
-        let parameterObj = { _noIntermediateProxy: true, navigate: this.navigate };
+        let parameterObj = getHashValues();
+        parameterObj._noIntermediateProxy = true;
+        parameterObj.navigate = this.navigate;
         this.getURLParameters(parameterObj);
         this.parentProxy.location = parameterObj;
         return this.parentProxy.location;

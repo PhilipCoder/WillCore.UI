@@ -1,5 +1,4 @@
-let view = async (model, ui, requests) => {
-    console.log("home hit");
+let view = async (model, ui, requests, events) => {
     model.myData = {
         name: "John",
         surname: "Doe",

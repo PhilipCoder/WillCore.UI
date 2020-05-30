@@ -1,4 +1,7 @@
-let viewFunction = async (model) => {
+let view = async (model) => {
+    console.log(model);
 };
 
-export let view = viewFunction, access = async (willcore, server) => (await server.product.hasAccess.get()).hasAccess;
+let layout = "/zTestLayouts/layout"
+
+export {view, layout} ;//, access = async (willcore, server) => (await server.product.hasAccess.get()).hasAccess;

@@ -4,6 +4,8 @@ import { lazyImport } from "/willcore/helpers/lazyImport.js";
 import { viewModelProxy } from "../proxies/viewModel/viewModelProxy.js";
 import { baseRequestProxy } from "../proxies/requestProxy/baseRequestProxy.js";
 import { willcoreUIInstance } from "../assignables/uiAssignable.js";
+import { viewContainer } from "./viewContainer.js";
+import { eventProxy } from "../proxies/event/eventProxy.js";
 
 class view {
     constructor(url) {
@@ -19,6 +21,8 @@ class view {
         this.access = true;
         this._children = {};
         this.parentProxy = null;
+        this.viewIndicator = null;
+        this.eventProxyInstance = eventProxy.new(this.viewId);
     }
 
     async init(parentProxy) {
@@ -33,23 +37,30 @@ class view {
         }
     }
 
-    async unload() {
-        //unload code goes here
+    unload() {
+        this.eventProxyInstance.unsubscribe();
+        this.viewModel._unload();
     }
 
     async render(layoutView) {
+        //   debugger
         //code to append the html and execute the view function
         if (!layoutView) {
             document.getElementsByTagName('body')[0].innerHTML = this.html;
+            document.getElementsByTagName('body')[0].appendChild(this.createViewIndicator());
         } else {
             layoutView.viewModel["$" + layoutView.containerId]._element.innerHTML = this.html;
+            layoutView.viewModel["$" + layoutView.containerId]._element.appendChild(this.createViewIndicator());
         }
-        await this.viewFunction(this.viewModel, willcoreUIInstance, baseRequestProxy.new());
+        viewContainer.addView(this);
+        await this.executeViewFunction(this.viewFunction);
     }
 
     async renderIntoElement(element, viewFunction) {
         element.innerHTML = this.html;
-        await (viewFunction || this.viewFunction)(this.viewModel, willcoreUIInstance, baseRequestProxy.new());
+        element.appendChild(this.createViewIndicator());
+        viewContainer.addView(this);
+        await this.executeViewFunction(viewFunction || this.viewFunction);
         return this.viewModel;
     }
 
@@ -60,6 +71,18 @@ class view {
 
     addChild(view) {
         this._children[view.viewId] = view;
+    }
+
+    async executeViewFunction(viewFunction) {
+        await viewFunction(this.viewModel, willcoreUIInstance, baseRequestProxy.new(), this.eventProxyInstance);
+    }
+
+    createViewIndicator() {
+        let viewIndicator = document.createElement("div");
+        viewIndicator.style.display = "none";
+        viewIndicator.id = `${this.viewId}.viewIndicator`;
+        this.viewIndicator = viewIndicator;
+        return viewIndicator;
     }
 
     get isLayout() {
@@ -73,6 +96,8 @@ class view {
     get hasLayout() {
         return !!this.layoutViewUrl;
     }
+
+
 }
 
 export { view };

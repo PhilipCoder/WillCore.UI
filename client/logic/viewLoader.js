@@ -15,7 +15,6 @@ class viewLoader {
         let viewToLoad = new view(viewUrl);
         await viewToLoad.init(this.parentProxy);
         if (viewToLoad.access !== true) return viewToLoad.access;
-        await this._unloadViews(viewToLoad);
         let access = await this._renderLayout(viewToLoad);
         if (access === true) {
             await viewToLoad.render(this.loadedLayout);
@@ -32,16 +31,10 @@ class viewLoader {
                 await this.loadedLayout.render();
             }
             return this.loadedLayout.access;
+        }else if(!viewToLoad.layoutViewUrl){
+            this.loadedLayout = null;
         }
         return true;
-    }
-
-    async _unloadViews(viewToLoad) {
-        if (viewToLoad.hasLayout && (this.loadedLayout && this.loadedLayout.url !== viewToLoad.layoutViewUrl)) {
-            await this.loadedLayout.unload();
-        } else if (this.loadedView) {
-            await this.loadedView.unload();
-        }
     }
 }
 

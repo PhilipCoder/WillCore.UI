@@ -1,5 +1,6 @@
 import { viewModelProxyHandler } from "./viewModelProxyHandler.js";
 import { baseProxy } from "/willcore/proxies/base/baseProxy.js";
+import {getHashValues} from "../../helpers/hashURLParser.js";
 
 /**
  * Proxy class for the main intermediate assignable instanciation.

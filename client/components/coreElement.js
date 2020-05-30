@@ -1,4 +1,5 @@
 import { view } from "../logic/view.js";
+import { viewContainer } from "../logic/viewContainer.js";;
 
 class coreElement extends HTMLElement {
     /**
@@ -27,6 +28,8 @@ class coreElement extends HTMLElement {
             this.viewInstance.init().then(async () => {
                 this.viewInstance.viewModel._noIntermediateProxy = true;
                 this.innerHTML = this.viewInstance.html;//by setting the html first, the children will render first
+                this.appendChild(this.viewInstance.createViewIndicator());
+                viewContainer.addView(this.viewInstance);
                 let slot = this.viewInstance.viewModel.$slot;
                 if (slot._element) {
                     slot._element.parentCoreElement = this;
@@ -35,11 +38,11 @@ class coreElement extends HTMLElement {
                 if (this.onLoaded) {
                     this.onLoaded();
                 }
-                await this.view(this.viewInstance.viewModel);
+                await this.viewInstance.executeViewFunction(this.view);
                 resolve(this.viewInstance.viewModel);
             });
         });
-        this.model.then((value)=>{
+        this.model.then((value) => {
             this.model = value;
         });
     }

@@ -1,15 +1,16 @@
 import { dataScope } from "./dataScope.js";
 
 class dataSetProxyHandler {
-    constructor(value) {
+    constructor(value, viewElement) {
         if (typeof value === "object") {
             for (let key in value) {
                 if (typeof value[key] === "object" && value[key] !== null && !value[key]._isDataSet) {
-                    value[key] = dataSetProxyFactory(value[key]);
+                    value[key] = dataSetProxyFactory(value[key], this.viewElement);
                 }
             }
         }
         this.bindings = {};
+        this.viewElement = viewElement;
     }
     //Set
     set(target, property, value, proxy) {
@@ -33,7 +34,7 @@ class dataSetProxyHandler {
 
     handleObjectAssignment(target, property, value) {
         let previousValue = target[property];
-        target[property] = dataSetProxyFactory(value._isDataSet ? value._target : value);
+        target[property] = dataSetProxyFactory(value._isDataSet ? value._target : value, this.viewElement);
         this.bindings[property].forEach((binding) => {
             binding.bind();
         });
@@ -55,7 +56,7 @@ class dataSetProxyHandler {
         );
         Object.keys(this.bindings).forEach((key) => {
             this.bindings[key] = this.bindings[key].filter((binding) =>
-            (binding.element && binding.element.isConnected) || !binding.element);
+                (binding.element && binding.element.isConnected) || !binding.element);
             if (this.bindings[key].length === 0) {
                 delete this.bindings[key];
             }
@@ -70,7 +71,29 @@ class dataSetProxyHandler {
 
     //Get
     get(target, property, proxy) {
-        if (property === "_target") {
+        if (property === "_unbind") {//memory management
+            return () => {
+                Object.keys(this.bindings).forEach(
+                    key => {
+                        this.bindings[key].forEach((binding) => {
+                            if (binding.unbind) {
+                                binding.unbind();
+                            }
+                        })
+                    });
+                this.bindings = {};
+                for (let key in target) {
+                    if (target[key]._unbind) {
+                        target[key]._unbind();
+                    }
+                }
+            };
+        }
+        else if (this.viewElement && !this.viewElement.isConnected) {
+            proxy._unbind();
+            return target[property];
+        }
+        else if (property === "_target") {
             return target;
         }
         else if (property === "_isDataSet") {
@@ -99,9 +122,9 @@ class dataSetProxyHandler {
     }
 }
 
-let dataSetProxyFactory = (target) => {
+let dataSetProxyFactory = (target, viewElement) => {
     target = target || {};
-    return new Proxy(target, new dataSetProxyHandler(target))
+    return new Proxy(target, new dataSetProxyHandler(target, viewElement))
 };
 
 export { dataSetProxyFactory };

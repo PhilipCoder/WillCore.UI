@@ -43,6 +43,11 @@ class bindable extends assignable {
         }
     }
 
+    unbind(){
+        this._element = null;
+        this.boundValueObject = null;
+    }
+
     completed() {
         if (this.beforeBind) this.beforeBind();
         this.bind();

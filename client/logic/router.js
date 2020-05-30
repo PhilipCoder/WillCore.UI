@@ -19,7 +19,6 @@ class router {
         if (this.routeOverWrite[url]) {
             url = this.routeOverWrite[url];
         }
-        console.log("Navigated " + url);
         let fullURL = this.getUrl(true);
         let renderResult = await this._viewLoader.renderView(url);
         if (typeof renderResult === "string") this.navigate(renderResult);
