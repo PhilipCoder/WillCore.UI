@@ -44,6 +44,9 @@ ___
 7. [Custom Components](#7-Custom-Components)
 8. [Making Server Requests From The Front-End](#8-Making-Server-Requests-From-The-Front-End)
 9. [View Access](#9-View-Access)
+10. [Global Events](#10-Global-Events)
+11. [Built In Events](#11-Built-In-Events)
+    1. [Navigate Event](#Navigate-Event)
 
 <br/>
 
@@ -210,7 +213,17 @@ export {view};
 
 Routing is done via the hash URL of the site. By default the home hash route "/" will load the index view in the root directory. To load a view about in the root directory the hash URL will be '/about'. Views can be multiple directories deep. For instance to load a view named register in the /views/account folder, the URL will be "/views/account/register". Views will load when the hash URL changes. 
 
-Views can have parameters in their hash URLs. "/account?id=90&action=delete" will have two parameters id with value 90 and action with value "delete". View parameters can be accessed via the location assignable on the model.
+Views can have parameters in their hash URLs. "/account?id=90&action=delete" will have two parameters id with value 90 and action with value "delete". View parameters can be accessed via the parameters object on the location assignable on the model.
+
+#### The location object on the model contains the following fields:
+
+
+name | Type | Description
+------------ | ------------ | -------------
+url | string | The full path to the loaded view, excluding the parameters.
+name | string | The name of the current view in the hash URL.
+parameters | object | Object containing the parameters for the current hash URL.
+navigate | function(viewPath, viewParameters) | A navigation function that can be used to navigate to a view.
 
 #### Accessing view parameters
 
@@ -218,7 +231,7 @@ Views can have parameters in their hash URLs. "/account?id=90&action=delete" wil
 //The view function
 let view = async (model) => {
     //Alert the view parameters
-    alert(`The id parameter is ${model.location.id} and the action parameter is ${model.location.action}.`);
+    alert(`The id parameter is ${model.location.parameters.id} and the action parameter is ${model.location.parameters.action}.`);
 };
 //Exports the view function
 export {view};
@@ -244,7 +257,7 @@ By default views are appended to the body of the HTML page. There are cases wher
 
  When a layout is assigned to a view, it will be activated when the router activates the view using the layout.
 
-Unlike the default index.html layout, layouts supports all the functionality normal views support like model binding and events.
+Layouts supports all the functionality normal views support like model binding and events.
 
 When a view module also export an container ID, the view module will be treated as a layout view. The containerId is the element ID the layout's child view will be rendered into.
 
@@ -274,8 +287,6 @@ let containerId = "container";
 
 export {view, containerId};
 ```
-
-**A layout view can be created via the CLI's template engine by just creating a HTML file with a name starting with an underscore (example: _layout.html).**
 
 <br/>
 
@@ -1011,4 +1022,67 @@ let viewFunction = async (model, requestProxy) => {
 };
 
 export  let view = viewFunction, access = async (willcore, requestProxy) => "/views/accessDenied";
+```
+
+___
+>## 10 Global Events
+___
+
+WillCore.UI has a built in event system that allows you to send messages and trigger events between views. An event is referenced by name, and a view can subscribe to an event. When a view is unloaded, for instance when the URL changes and a user navigates away from the view, all events associated with that view will be unsubscribed.
+
+An event proxy is available as a fourth parameter in a view function. You can subscribe to an event by assigning a function to a property with the name of the event on the event proxy. An event can be emitted by assigning a value other than a function to the event property. All event subscribers that are subscribed to the event will be executed on all active views.
+
+#### Subscribing To An Event
+
+```javascript
+//Defining a view function
+let view = async (model, ui, requests, events) => {
+    //Subscribing to an event
+    events.accessChanged = (eventData) =>{
+        alert(`Event accessChanged was fired with data ${JSON.stringify(eventData)}`);
+    };
+}
+export { view };
+```
+
+#### Emitting An Event
+
+```javascript
+//Defining a view function
+let view = async (model, ui, requests, events) => {
+    //Subscribing to an event
+    events.accessChanged = {message:"This value can be anything!"};
+}
+export { view };
+```
+
+___
+>## 11 Built In Events
+___
+
+### Navigate Event
+
+By default an event "navigate" is available that will be fired when the hash URL changes of the view. The event data is an object with the following fields:
+
+name | Type | Description
+------------ | ------------ | -------------
+url | string | The full path to the loaded view, excluding the parameters.
+name | string | The name of the current view in the hash URL.
+parameters | object | Object containing the parameters for the current hash URL.
+
+#### Keep the location data proxy updated in a layout view:
+
+```javascript
+let view = async (model, ui, requests, events) => {
+    //Bind an element to the current view name
+    model.$currentPage.bind = () => model.location.name;
+    //Updates the view name when the url changes
+    events.navigate = (values) => {
+        model.location.name = values.name;
+    };
+};
+
+let containerId = "container";
+
+export { view, containerId };
 ```
