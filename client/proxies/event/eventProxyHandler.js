@@ -34,6 +34,7 @@ class eventProxyProxyHandler extends baseProxyHandler {
             target[property] = unsubscribeMethod;
             return { value: unsubscribeMethod, status: true }
         }
+        return { value: false, status: false }
     }
 
 }
