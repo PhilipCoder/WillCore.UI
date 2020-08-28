@@ -1,6 +1,6 @@
 {
     "name": "willcore.ui",
-    "version": "1.1.8",
+    "version": "1.2.0",
     "description": "Simple, Fast And Powerful Client-Side HTML UI Framework.",
     "main": "moduleContainer/willCoreModules.js",
     "_moduleAliases": {
@@ -32,6 +32,7 @@
     "files": [
         "/client",
         "/moduleContainer",
+        "/intellisense",
         "/server"
     ]
 }

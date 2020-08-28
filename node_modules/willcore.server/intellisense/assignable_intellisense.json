@@ -1,0 +1,83 @@
+{
+    "initFiles": [],
+    "server": {
+        "parentType": "core",
+        "description": "WillCore server instance.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"Root directory of directory." },
+            {"type":"number", "description":"Port the server should listen on." }
+        ]
+    },
+    "https": {
+        "parentType": "server",
+        "description": "Creates a secured https (SSL) server.",
+        "hasName": false,
+        "assignmentValues":[]
+    },
+    "http": {
+        "parentType": "server",
+        "description": "Creates an unsecured http server.",
+        "hasName": false,
+        "assignmentValues": []
+    },
+    "file": {
+        "parentType": "server",
+        "description": "Single file server.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"Relative path of the file to be hosted." }
+        ]
+    },
+    "files": {
+        "parentType": "server",
+        "description": "Server to serve files in directory.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"Relative path of the directory to be hosted." }
+        ]
+    },
+    "service": {
+        "parentType": "server",
+        "description": "WillCore service instance.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"Relative path to the service js module." }
+        ]
+    },
+    "action": {
+        "parentType": "service",
+        "description": "Creates a RPC action.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"Action verb. post, get, put, patch or delete." },
+            {"type":"function", "description":"Action function." }
+        ]
+    },
+    "actionREST": {
+        "parentType": "service",
+        "description": "Creates a REST action.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"URL Parameter Template." },
+            {"type":"string", "description":"Action verb. post, get, put, patch or delete." },
+            {"type":"function", "description":"Action function." }
+        ]
+    },
+    "alias": {
+        "parentType": "actionREST",
+        "description": "Specifies an alias for an anction.",
+        "hasName": true,
+        "assignmentValues": [
+          
+        ]
+    },
+    "interceptor": {
+        "parentType": "action",
+        "description": "Creates an action interceptor. Name should be 'before' or 'after'.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"function", "description":"Interceptor function." }
+        ]
+    }
+}

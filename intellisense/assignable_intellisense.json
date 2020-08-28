@@ -1,0 +1,139 @@
+{
+    "initFiles": [],
+    "location": {
+        "parentType": "viewModel",
+        "description": "Location proxy.",
+        "hasName": false,
+        "assignmentValues": [
+        ]
+    },
+    "navigate": {
+        "parentType": "location",
+        "description": "Function to navigate to a URL: navigate(url, parameterObject).",
+        "hasName": false,
+        "assignmentValues":[]
+    },
+    "model": {
+        "parentType": "element",
+        "description": "Element bidirectional binding.",
+        "hasName": false,
+        "assignmentValues":[
+            {"type":"function", "description":"Binding function." }
+        ]
+    },
+    "bind": {
+        "parentType": "element",
+        "description": "The bind binding binds an element's inner HTML to a field or function result. It a one way binding..",
+        "hasName": false,
+        "assignmentValues":[
+            {"type":"function", "description":"Binding function." }
+        ]
+    },
+    "repeat": {
+        "parentType": "element",
+        "description": "The repeat binding binds an element to an array.",
+        "hasName": false,
+        "assignmentValues":[
+            {"type":"function", "description":"The binding function that should return the value of the property or properties the binding is binded to." },
+            {"type":"function", "description":"Repeat iterator function. (elements, rowIndex) => {}" }
+
+        ]
+    },
+    "event": {
+        "parentType": "element",
+        "description": "Binds an event to an element. The events have the same name than in vanilla JavaScript. For example, onclick.",
+        "hasName": true,
+        "assignmentValues":[
+            {"type":"function", "description":"The function will be executed when the event is detected. The function has one parameter that will be the javascript event." }
+        ]
+    },
+    "attribute": {
+        "parentType": "element",
+        "description": "Binds an element to an element. All attributes on a HTML element can be binded to values. Attribute bindings like, class, href, disabled etc. are all supported.",
+        "hasName": true,
+        "assignmentValues":[
+            {"type":"function", "description":"The binding function used to get the values of the attribute. The function should return a string value that will be applied to the attribute." }
+        ]
+    },
+    "options": {
+        "parentType": "element",
+        "description": "Binds an element's options. The options in a select dropdown can be bound to a data proxy with the options binding. The data proxy values can be either an object or multidimensional array.",
+        "hasName": false,
+        "assignmentValues":[
+            {"type":"function", "description":"The function that can return either an object or multi dimensional array." }
+        ]
+    },
+    "disabled": {
+        "parentType": "element",
+        "description": "The disabled binding binds an element's disabled attribute to a field or function result. It a one way binding.",
+        "hasName": false,
+        "assignmentValues":[
+            {"type":"function", "description":"The binding function that should return the value of the property or properties the binding is bound to. The result should translate to true or false." }
+        ]
+    },
+    "hide": {
+        "parentType": "element",
+        "description": "The hide binding binds an element's hidden status to a field or function result. It a one way binding.",
+        "hasName": false,
+        "assignmentValues":[
+            {"type":"function", "description":"The binding function that should return the value of the property or properties the binding is bound to. The result should translate to true or false." }
+        ]
+    },
+    "show": {
+        "parentType": "element",
+        "description": "The show binding binds an element's hidden status to a field or function result. It a one way binding.",
+        "hasName": false,
+        "assignmentValues":[
+            {"type":"function", "description":"The binding function that should return the value of the property or properties the binding is bound to. The result should translate to true or false." }
+        ]
+    },
+    "style": {
+        "parentType": "element",
+        "description": "The style binding binds an element's css style to a field or function result. It a one way binding.",
+        "hasName": true,
+        "assignmentValues":[
+            {"type":"function", "description":"The binding function that should return the value of the property or properties the binding is bound to." }
+        ]
+    },
+    "class": {
+        "parentType": "element",
+        "description": "The class binding binds an element's css class to a field or function result. It a one way binding.",
+        "hasName": true,
+        "assignmentValues":[
+            {"type":"function", "description":"The binding function that should return the value of the property or properties the binding is bound to. The result should translate to true or false." }
+        ]
+    },
+    "view": {
+        "parentType": "element",
+        "description": "Loads a partial into an element as partial views. Data proxies can be assigned to a partial view from the parent view. After a partial view is loaded, it's model can be accessed via the callback function.",
+        "hasName": false,
+        "assignmentValues":[
+            {"type":"string", "description":"Path to the view." },
+            {"type":"function", "description":"Callback for when the partial view is done loading. It takes one parameter that will be the model of the partial view." }
+        ]
+    },
+    "script": {
+        "parentType": "server",
+        "description": "Assignes JS file to the server to be loaded into HTML.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"The file's path relative to the server's executing directory." }
+        ]
+    },
+    "scriptModule": {
+        "parentType": "server",
+        "description": "Assignes JS module file to the server to be loaded into HTML.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"The file's path relative to the server's executing directory." }
+        ]
+    },
+    "metaTag": {
+        "parentType": "server",
+        "description": "Assignes a metatag to the HTML view.",
+        "hasName": true,
+        "assignmentValues": [
+            {"type":"string", "description":"The metatag string." }
+        ]
+    }
+}
