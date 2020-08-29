@@ -29,7 +29,7 @@ class view {
         this.html = await this._viewDomLoader.loadView(this.url, this.viewId, this.html);
         this.viewModel = viewModelProxy.new(this.viewId);
         if (!this.skipFunctionImport) {
-            let viewModule = await lazyImport(`/views/${this.url}.js`);
+            let viewModule = await lazyImport(`/root/${this.url}.js`);
             this.layoutViewUrl = viewModule.layout;
             this.containerId = viewModule.containerId;
             this.viewFunction = viewModule.view;

@@ -5,7 +5,7 @@ class viewDomLoader {
     }
 
     async loadView(viewURL, viewId, html) {
-        html = html || await loadHTML(`/views/${viewURL}.html`);
+        html = html || await loadHTML(`/root/${viewURL}.html`);
         html = this.getCleanedIdHTML(html, viewId);
         return html;
     }

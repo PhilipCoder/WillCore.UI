@@ -211,7 +211,7 @@ export {view};
 >### 3.3) Routing
 
 
-Routing is done via the hash URL of the site. By default the home hash route "/" will load the index view in the root directory. To load a view about in the root directory the hash URL will be '/about'. Views can be multiple directories deep. For instance to load a view named register in the /views/account folder, the URL will be "/views/account/register". Views will load when the hash URL changes. 
+Routing is done via the hash URL of the site. By default the home hash route "/" will load the index view in the root directory. To load a view about in the root directory the hash URL will be '/about'. Views can be multiple directories deep. For instance to load a view named register in the /root/account folder, the URL will be "/root/account/register". Views will load when the hash URL changes. 
 
 Views can have parameters in their hash URLs. "/account?id=90&action=delete" will have two parameters id with value 90 and action with value "delete". View parameters can be accessed via the parameters object on the location assignable on the model.
 
@@ -845,7 +845,7 @@ export { loaderButton };
 To add the module to the included modules, it needs to be added to the list of script files __server-side__.
 
 ```javascript
-willCoreInstance.serverName.clickerButton.scriptModule = "/views/elements/clickerButton.js";
+willCoreInstance.serverName.clickerButton.scriptModule = "/root/elements/clickerButton.js";
 ```
 
 _The component can be registered by an assignable in an WillCore.UI extension module._
@@ -1021,7 +1021,7 @@ export  let view = viewFunction, access = async (willcore, requestProxy) => fals
 let viewFunction = async (model, requestProxy) => {
 };
 
-export  let view = viewFunction, access = async (willcore, requestProxy) => "/views/accessDenied";
+export  let view = viewFunction, access = async (willcore, requestProxy) => "/root/accessDenied";
 ```
 
 ___

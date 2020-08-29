@@ -13,7 +13,7 @@ describe('models-test', function () {
         core.testServer.server[viewDir] = 8580;
         core.testServer.http;
         core.testServer.ui;
-        core.testServer.loaderButton.scriptModule = "/views/zElement/loaderButton.js";
+        core.testServer.loaderButton.scriptModule = "/root/zElement/loaderButton.js";
         core.testServer.product.service = "/zService/product.js";
         core.testServer.ui.open();
         exec('start chrome http://localhost:8580', function (err) { });

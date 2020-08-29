@@ -35,7 +35,7 @@ class uiAssignable extends coreUIAssignable {
     }
 
     completionResult() {
-        this.parentProxy.views.files = "/";
+        this.parentProxy.root.files = "/";
         return uiProxy.new(this);
     }
 }
