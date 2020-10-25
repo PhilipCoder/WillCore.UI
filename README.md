@@ -46,6 +46,7 @@ ___
 10. [Global Events](#10-Global-Events)
 11. [Built In Events](#11-Built-In-Events)
     1. [Navigate Event](#Navigate-Event)
+12. [View Sub-Modules](#12-Multiple-View-Functions)
 
 <br/>
 
@@ -1087,7 +1088,7 @@ export { view, containerId };
 ```
 
 ___
->## 12 View Sub-Modules
+>## 12 Multiple View Functions
 ___
 
 View functions van be split over multiple functions. For example, if you want to separate a view's bindings into a separate function you can create a JS file "view_name.sub_module_name.js". Like the view's main function module, the sub-module files need to be in the same directory as the view. 
