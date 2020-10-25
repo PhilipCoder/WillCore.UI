@@ -29,10 +29,26 @@ class view {
         this.html = await this._viewDomLoader.loadView(this.url, this.viewId, this.html);
         this.viewModel = viewModelProxy.new(this.viewId);
         if (!this.skipFunctionImport) {
-            let viewModule = await lazyImport(`/root/${this.url}.js`);
+            let viewModule = await lazyImport(`/root${this.url}.js`);
             this.layoutViewUrl = viewModule.layout;
             this.containerId = viewModule.containerId;
             this.viewFunction = viewModule.view;
+            this.viewModules = [];
+            if (parentProxy && parentProxy._viewModuleNames && Array.isArray(parentProxy._viewModuleNames))
+                for (let moduleIndex = 0; moduleIndex < parentProxy._viewModuleNames.length; moduleIndex++) {
+                    let subModulePath = `/root${this.url}.${parentProxy._viewModuleNames[moduleIndex]}.js`;
+                    try {
+                        let viewSubModule = await lazyImport(subModulePath);
+                        if (viewSubModule.view && typeof viewSubModule.view === "function") {
+                            this.viewModules.push(viewSubModule.view);
+                        } else {
+                            console.warn(`View sub-module does not provide a view function export : ${subModulePath}`);
+                        }
+                    }
+                    catch (e) {
+                        console.warn(`Error in loading sub-module : ${subModulePath}`);
+                    }
+                }
             this.access = viewModule.access && typeof viewModule.access === "function" ? await viewModule.access(parentProxy, baseRequestProxy.new()) : this.access;
         }
     }
@@ -64,6 +80,16 @@ class view {
         return this.viewModel;
     }
 
+    async executeViewSubModules() {
+        if (this.viewModules) {
+            for (var moduleIndex = 0; moduleIndex < this.viewModules.length; moduleIndex++) {
+                if (typeof this.viewModules[moduleIndex] === "function") {
+                    await this.viewModules[moduleIndex](this.viewModel, willcoreUIInstance, baseRequestProxy.new(), this.eventProxyInstance);
+                }
+            }
+        }
+    }
+
     async deleteChild(viewId) {
         await this._children[viewId].unload();
         delete this._children[viewId];
@@ -74,6 +100,7 @@ class view {
     }
 
     async executeViewFunction(viewFunction) {
+        await this.executeViewSubModules();
         await viewFunction(this.viewModel, willcoreUIInstance, baseRequestProxy.new(), this.eventProxyInstance);
     }
 

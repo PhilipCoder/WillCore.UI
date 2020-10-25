@@ -1,8 +1,7 @@
 <p align="center">
-<img src="res/WillCoreLogo.png"  />
+<img src="res/UI.png" height="300" />
 <h1 align="center">WillCore.UI</h1>
 <h5 align="center">Simple, Fast And Powerful Client-Side HTML UI Framework - By Philip Schoeman</h5>
-<h5 align="center" style="color:red">DOCUMENTATION IS A WORK IN  PROGRESS.</h5>
 </p>
 
 ___
@@ -397,7 +396,7 @@ Type | Description
 bind (assignable) | The bind assignable exported from the main willCore module. 
 function | The binding function that should return the value of the property or properties the binding is bound to.
 
-_Using the model binding:_
+_Using the bind binding:_
 ```javascript
 model.$elementId.bind = () => model.dataProxy.someProperty;
 ```
@@ -466,7 +465,7 @@ ___
 
 HTML events are all handled via the event assignable. The events have the same name than in vanilla JavaScript. For example, onclick.
 
-_An even binding needs the following assignments to complete assignment:_
+_An event binding needs the following assignments to complete assignment:_
 
 Type | Description
 ------------ | -------------
@@ -474,7 +473,7 @@ string | The event name. For a list of events, see JavaScript HTML events by mea
 event (assignable) | The event assignable exported from the main willCore module.
 function | The function will be executed when the event is detected. The function has one parameter that will be the javascript event.
 
-_Using the model binding:_
+_Using the event binding:_
 ```javascript
 model.$elementId.onclick.event= (event) => alert("The item was clicked!");
 ```
@@ -555,7 +554,7 @@ Type | Description
 disabled (assignable) | The disabled assignable. 
 function | The binding function that should return the value of the property or properties the binding is bound to. The result should translate to true or false.
 
-_Using the model binding:_
+_Using the disabled binding:_
 ```javascript
 model.$submitButton.disabled = () => model.myData.name.length > 10;
 ```
@@ -573,7 +572,7 @@ Type | Description
 hide (assignable) | The hide assignable. 
 function | The binding function that should return the value of the property or properties the binding is bound to. The result should translate to true or false.
 
-_Using the model binding:_
+_Using the hide binding:_
 ```javascript
 model.$submitButton.hide = () => model.myData.name.length > 10;
 ```
@@ -590,7 +589,7 @@ Type | Description
 show (assignable) | The show assignable. 
 function | The binding function that should return the value of the property or properties the binding is bound to. The result should translate to true or false.
 
-_Using the model binding:_
+_Using the show binding:_
 ```javascript
 model.$submitButton.show = () => model.myData.name.length > 10;
 ```
@@ -647,7 +646,7 @@ view (assignable) | The view assignable.
 string | Path to the view.
 function | Callback for when the partial view is done loading. It takes one parameter that will be the model of the partial view.
 
-_Using the model binding:_
+_Using the view binding:_
 ```javascript
 model.$partialDiv.view = "/zView/partial";
 //Callback for when the view is done loading
@@ -667,7 +666,7 @@ ___
 
 WillCore.UI builds up the HTML header tag, so it is not possible to include HTML and CSS files directly in the HTML. The header is built using the script and style cache in the server-side assignable.
 
->#### 6.1) Adding A CSS Style File To The Page
+>#### 6.1) Adding A HTML Meta Tags To The Page
 
 HTML meta tags can be added to the page via the metaTag assignable. There are 2 default meta tags, as soon as a meta tag is assigned, the default assignables will be cleared. Default meta tags:
 
@@ -1085,4 +1084,44 @@ let view = async (model, ui, requests, events) => {
 let containerId = "container";
 
 export { view, containerId };
+```
+
+___
+>## 12 View Sub-Modules
+___
+
+View functions van be split over multiple functions. For example, if you want to separate a view's bindings into a separate function you can create a JS file "view_name.sub_module_name.js". Like the view's main function module, the sub-module files need to be in the same directory as the view. 
+
+Sub-modules can be registered via the "subModule" on the UI proxy instance client-side. The best place to do the is in the app.js module.
+
+Sub-modules will execute in the same order as what they were defined on the UI proxy. The main view function will execute last.
+
+### subModule Assignable
+
+Has Name | Assignable values | Assignable result | Can assign to
+-------- | ----------------- | ----------------- | -------------
+   ✔    | None          |  none     | UIProxy
+
+#### Register a bindings sub-module:
+
+```javascript
+//app.js
+let init = (willcore, service) => {
+    willcore.ui;
+    willcore.ui.bindings.subModule;
+};
+
+export { init };
+```
+
+After the bindings sub-module is registered, every view will need a bindings sub-module. Like a view module, the sub-modules have to export a "view" function with the same parameters as a view function:
+
+```javascript
+//index.bindings.js
+let view = async (model, ui, requests, events) => {
+  
+};
+
+
+export { view };
 ```

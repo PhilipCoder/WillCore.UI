@@ -16,6 +16,6 @@ describe('models-test', function () {
         core.testServer.loaderButton.scriptModule = "/root/zElement/loaderButton.js";
         core.testServer.product.service = "/zService/product.js";
         core.testServer.ui.open();
-        exec('start chrome http://localhost:8580', function (err) { });
+       // exec('start chrome http://localhost:8580', function (err) { });
     });
 });
